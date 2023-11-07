@@ -1,4 +1,4 @@
-package thuviensach.entity;
+package quanlythuvien.entity;
 
 /**
  *
