@@ -11,6 +11,12 @@
             <artifactId>AbsoluteLayout</artifactId>
             <version>RELEASE190</version>
         </dependency>
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>9.4.0.jre8</version>
+        </dependency>
+
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,4 +24,5 @@
         <maven.compiler.target>20</maven.compiler.target>
         <exec.mainClass>com.mycompany.quanlythuvien.QuanLyThuVien</exec.mainClass>
     </properties>
+
 </project>

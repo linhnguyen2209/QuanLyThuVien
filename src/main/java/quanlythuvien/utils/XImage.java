@@ -24,10 +24,10 @@ import javax.swing.JFrame;
  */
 public class XImage {
     public static Image getAppIcon(){
-        URL url = XImage.class.getResource("/com/mycompany/icon/fpt.png");
+        URL url = XImage.class.getResource("/quanlythuvien/icon/logo.png");
         return new ImageIcon(url).getImage();       
     }
-     public static boolean save(File src){
+    public static boolean save(File src){
         File dst = new File("src\\main\\resources\\com\\mycompany\\logos", src.getName());
         if (!dst.getParentFile().exists()) {
             dst.getParentFile().mkdir(); // Tạo thư mục nếu chưa tồn tại
