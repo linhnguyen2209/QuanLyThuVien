@@ -126,7 +126,7 @@ public class DangKyJDialog extends javax.swing.JDialog {
             }
         }
         if (!ChkDieuKhoan.isSelected()) {
-            MsgBox.alert(this, "Bạn chưa đồng ý vói điều khoản & điều kiện của thư viện!");
+            MsgBox.alert(this, "Bạn chưa đồng ý với điều khoản & điều kiện của thư viện!");
             return false;
         }
         return true;

@@ -68,6 +68,7 @@ public class SachDAO extends ThuVienDAO<Sach, Integer>{
                 entity.setNgayNhapKho(rs.getDate("NgayNhapKho"));
                 entity.setViTriSach(rs.getString("ViTriDatSach"));
                 entity.setMaLoaiSach(rs.getString("MaLoaiSach"));
+                list.add(entity);
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
