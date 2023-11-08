@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
+
 package quanlythuvien.ui;
 
 import java.awt.Color;
@@ -100,6 +97,11 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         getContentPane().add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 320, 310, 40));
 
         btnQuenMatKhau.setContentAreaFilled(false);
+        btnQuenMatKhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuenMatKhauActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnQuenMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 380, 130, 20));
 
         btnDangNhap.setContentAreaFilled(false);
@@ -158,6 +160,11 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         this.dispose();
         tvfr.openDangKy();
     }//GEN-LAST:event_lblDangKyMouseClicked
+
+    private void btnQuenMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuenMatKhauActionPerformed
+        this.dispose();
+        tvfr.openXacThuc();
+    }//GEN-LAST:event_btnQuenMatKhauActionPerformed
 
     /**
      * @param args the command line arguments

@@ -6,6 +6,7 @@ package quanlythuvien.ui;
 
 import java.awt.Color;
 import quanlythuvien.ui.*;
+import quanlythuvien.utils.MsgBox;
 import quanlythuvien.utils.XImage;
 
 /**
@@ -27,14 +28,22 @@ public class ThuVienJFrame extends javax.swing.JFrame {
         this.setTitle("Quản lý thư viện");
         this.setIconImage(XImage.getAppIcon());
     }
-    
-    void openDangNhap(){
+
+    void openDangNhap() {
         new DangNhapJDialog(this, true).setVisible(true);
     }
 
-        void openDangKy(){
+    void openDangKy() {
         new DangKyJDialog(this, true).setVisible(true);
     }
+
+    void openXacThuc() {
+        new XacThucJDialog(this, true).setVisible(true);
+    }
+    void openDoiMatKhau() {
+        new DoiMatKhauJDialog(this, true).setVisible(true);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

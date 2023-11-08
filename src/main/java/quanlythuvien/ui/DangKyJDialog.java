@@ -15,14 +15,16 @@ import quanlythuvien.utils.XImage;
 public class DangKyJDialog extends javax.swing.JDialog {
 
     ThuVienJFrame tvfr;
+    String reTenDangNhap = "^[a-zA-Z0-9_-]{2,10}$";
 
     public DangKyJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         tvfr = (ThuVienJFrame) parent;
         btnDangKy.setContentAreaFilled(false);
- init();
+        init();
     }
+
     void init() {
         this.setLocationRelativeTo(null);
         this.setTitle("Đăng ký");
@@ -35,6 +37,12 @@ public class DangKyJDialog extends javax.swing.JDialog {
         txtMatKhau.setBackground(new Color(236, 238, 238, 0));
         ChkDieuKhoan.setBackground(new Color(236, 238, 238, 0));
     }
+
+    public static boolean isValidEmail(String email) {
+        String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        return email.matches(regex);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
