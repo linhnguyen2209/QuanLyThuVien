@@ -15,7 +15,7 @@ import quanlythuvien.utils.jdbcHelper;
  * @author Dino
  * Create and edit by Dino
  */
-public class SachDAO extends ThuVienDAO<Sach, String>{
+public class SachDAO extends ThuVienDAO<Sach, Integer>{
     final String INSERT_SQL = "INSERT INTO Sach (TieuDe, NhaXuatBan, TacGia, SoTrang, SoLuongSach, GiaTien, NgayNhapKho, ViTriDatSach, MaLoaiSach) VALUES (?,?,?,?,?,?,?,?,?)";
     final String UPDATE_SQL ="UPDATE Sach SET TieuDe = ?, NhaXuatBan = ?, TacGia = ?, SoTrang = ?, SoLuongSach = ?, GiaTien = ?, NgayNhapKho = ?, ViTriDatSach = ?, MaLoaiSach = ? WHERE MaSach = ?";
     final String DELETE_SQL ="delete from Sach where MaSach = ?";
@@ -33,7 +33,7 @@ public class SachDAO extends ThuVienDAO<Sach, String>{
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
         jdbcHelper.update(DELETE_SQL, id);
     }
 
@@ -43,7 +43,7 @@ public class SachDAO extends ThuVienDAO<Sach, String>{
     }
 
     @Override
-    public Sach selectById(String id) {
+    public Sach selectById(Integer id) {
         List <Sach> list = selectBySql(SELECT_BY_ID_SQL, id);
         if (list.isEmpty()){
             return null;

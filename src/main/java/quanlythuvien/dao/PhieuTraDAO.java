@@ -10,7 +10,7 @@ import quanlythuvien.utils.jdbcHelper;
  *
  * @author thuon
  */
-public class PhieuTraDAO extends ThuVienDAO<PhieuTra, String>{
+public class PhieuTraDAO extends ThuVienDAO<PhieuTra, Integer>{
     final String INSERT_SQL = "INSERT INTO PhieuTra (MaPhieuMuon, NgayTra, TrangThai, MaNguoiDung, GhiChu) VALUES (?,?,?,?,?)";
     final String UPDATE_SQL = "UPDATE PhieuTra set MaPhieuMuon = ?, NgayTra = ?, TrangThai = ?, MaNguoiDung = ?, GhiChu = ? where MaPhieuTra = ?";
     final String DELETE_SQL = "DELETE FROM PhieuTra where MaNguoiDung = ?";
@@ -28,7 +28,7 @@ public class PhieuTraDAO extends ThuVienDAO<PhieuTra, String>{
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
         jdbcHelper.update(DELETE_SQL, id);
     }
 
@@ -38,7 +38,7 @@ public class PhieuTraDAO extends ThuVienDAO<PhieuTra, String>{
     }
 
     @Override
-    public PhieuTra selectById(String id) {
+    public PhieuTra selectById(Integer id) {
         List<PhieuTra> list = selectBySql(SELECT_BY_ID_SQL, id);
         if (list.isEmpty()) {
             return null;
