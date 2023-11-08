@@ -2,6 +2,7 @@ package quanlythuvien.ui;
 
 import java.awt.Color;
 import java.util.Properties;
+import java.util.Random;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -42,7 +43,7 @@ public class XacThucJDialog extends javax.swing.JDialog {
         txtTenDangNhap.setBackground(new Color(236, 238, 238, 0));
         txtMaXacThuc.setBackground(new Color(236, 238, 238, 0));
         pnlXacThuc2.setVisible(false);
-        if(Auth.isLogin()){ // kiểmm tra xem nếu đang login thì k cho sửa tên dn đề phòng đg đăng nhập tài khoản này mà sửa tài khoản khác
+        if (Auth.isLogin()) { // kiểmm tra xem nếu đang login thì k cho sửa tên dn đề phòng đg đăng nhập tài khoản này mà sửa tài khoản khác
             txtTenDangNhap.setText(Auth.user.getMaNguoiDung());
             txtTenDangNhap.setEditable(false);
         }
@@ -82,12 +83,13 @@ public class XacThucJDialog extends javax.swing.JDialog {
     }
 
     public void randomSo() {
-        int so1 = (int) (1 + Math.round(Math.random() * 8));
-        int so2 = (int) (1 + Math.round(Math.random() * 8));
-        int so3 = (int) (1 + Math.round(Math.random() * 8));
-        int so4 = (int) (1 + Math.round(Math.random() * 8));
-        int so5 = (int) (1 + Math.round(Math.random() * 8));
-        maXacThuc = so1 + "" + so2 + "" + so3 + "" + so4 + "" + so5 + "";
+//        int so1 = (int) (1 + Math.round(Math.random() * 8));
+//        int so2 = (int) (1 + Math.round(Math.random() * 8));
+//        int so3 = (int) (1 + Math.round(Math.random() * 8));
+//        int so4 = (int) (1 + Math.round(Math.random() * 8));
+//        int so5 = (int) (1 + Math.round(Math.random() * 8));
+//        maXacThuc = so1 + "" + so2 + "" + so3 + "" + so4 + "" + so5 + "";
+        maXacThuc = String.valueOf(10000 + new Random().nextInt(90000)); //nextInt lấy số nn từ 0-89999 cộng thêm 10000 = 99999
         System.out.println(maXacThuc);
         Thread thr = new Thread(new Runnable() {
             @Override

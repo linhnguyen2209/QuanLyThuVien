@@ -24,6 +24,7 @@ public class DoiMatKhauJDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         tvfr = (ThuVienJFrame) parent;
+        init();
     }
 
     void init() {
@@ -76,7 +77,13 @@ public class DoiMatKhauJDialog extends javax.swing.JDialog {
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtNhapLaiMatKhauMoi.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtNhapLaiMatKhauMoi.setBorder(null);
         getContentPane().add(txtNhapLaiMatKhauMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 330, 350, 40));
+
+        txtMatKhauMoi.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtMatKhauMoi.setBorder(null);
         getContentPane().add(txtMatKhauMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 200, 350, 40));
 
         lblDangNhap.setForeground(new java.awt.Color(51, 51, 255));
@@ -112,6 +119,12 @@ public class DoiMatKhauJDialog extends javax.swing.JDialog {
             }
         });
         getContentPane().add(lblDangKy, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 510, -1, -1));
+
+        btnXacNhan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXacNhanActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnXacNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 420, 340, 60));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -152,6 +165,10 @@ public class DoiMatKhauJDialog extends javax.swing.JDialog {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         Auth.userXacThuc = null;
     }//GEN-LAST:event_formWindowClosing
+
+    private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
+        doiMatKhau();
+    }//GEN-LAST:event_btnXacNhanActionPerformed
 
     /**
      * @param args the command line arguments
