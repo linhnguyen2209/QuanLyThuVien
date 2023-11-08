@@ -5,7 +5,11 @@
 package quanlythuvien.ui;
 
 import java.awt.Color;
+import java.util.List;
+import quanlythuvien.dao.NguoiDungDAO;
+import quanlythuvien.entity.NguoiDung;
 import quanlythuvien.ui.DangKyJDialog;
+import quanlythuvien.utils.Auth;
 import quanlythuvien.utils.MsgBox;
 import quanlythuvien.utils.XImage;
 
@@ -15,8 +19,12 @@ import quanlythuvien.utils.XImage;
  */
 public class DangKyJDialog extends javax.swing.JDialog {
 
+    static boolean checkSignUp = false;
+
     ThuVienJFrame tvfr;
     String reTenDangNhap = "^[a-zA-Z0-9_-]{2,10}$";
+    NguoiDungDAO ndDAO = new NguoiDungDAO();
+    List<NguoiDung> list = ndDAO.selectAll();
 
     public DangKyJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -39,17 +47,26 @@ public class DangKyJDialog extends javax.swing.JDialog {
         ChkDieuKhoan.setBackground(new Color(236, 238, 238, 0));
     }
 
+    void dangKy() {
+        if (validateForm()) {
+            checkSignUp = true;
+            Auth.nguoiDungDangKy = new NguoiDung(txtTenDangNhap.getText(), "LND003", txtHoTen.getText(), txtEmail.getText(), txtSoDienThoai.getText(), new String(txtMatKhau.getPassword()));
+            this.dispose();
+            tvfr.openXacThuc();
+        }
+    }
+
     boolean validateForm() {
         String reTen = "^[\\p{L}\\p{M}\\s]+$"; // tên có dấu.
-        String reHoten = "^[a-zA-Z]$";
+        String reSoDienThoai = "^(\\+84|0)[0-9]{9}$"; // tên có dấu.
         String reTenDangNhap = "^[a-zA-Z0-9_-]{2,10}$";
-        String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-        
+        String reEmail = "^[A-Za-z0-9+_.-]+@([A-Za-z0-9.-]+\\.[A-Za-z]{2,})$";
+
         if (txtHoTen.getText().equals("")) {
             MsgBox.alert(this, "Vui lòng nhập họ tên!");
             return false;
         }
-        if (!txtHoTen.getText().matches(reHoten)) {
+        if (!txtHoTen.getText().matches(reTen)) {
             MsgBox.alert(this, "Tên đăng nhập không hợp lệ!");
             return false;
         }
@@ -61,16 +78,55 @@ public class DangKyJDialog extends javax.swing.JDialog {
             MsgBox.alert(this, "Tên đăng nhập không hợp lệ!");
             return false;
         }
-        if(txtSoDienThoai.getText().equals("")){
+        if (txtSoDienThoai.getText().equals("")) {
             MsgBox.alert(this, "Vui lòng nhập số điện thoại!");
             return false;
         }
-        if(txtSoDienThoai.getText().equals("")){
-            MsgBox.alert(this, "Vui lòng nhập số điện thoại!");
+        if (!txtSoDienThoai.getText().matches(reSoDienThoai)) {
+            MsgBox.alert(this, "Số điện thoại không hợp lệ!");
+            return false;
+        }
+        if (txtSoDienThoai.getText().length() > 10) {
+            MsgBox.alert(this, "Số điện thoại không hợp lệ!");
             return false;
         }
         if (new String(txtMatKhau.getPassword()).equals("")) {
             MsgBox.alert(this, "Vui lòng nhập mật khẩu!");
+            return false;
+        }
+        if (new String(txtXacNhanMatKhau.getPassword()).equals("")) {
+            MsgBox.alert(this, "Vui lòng nhập lại mật khẩu!");
+            txtXacNhanMatKhau.requestFocus();
+            return false;
+        }
+        if (!new String(txtMatKhau.getPassword()).equals(new String(txtXacNhanMatKhau.getPassword()))) {
+            MsgBox.alert(this, "Mật khẩu không trùng khớp!");
+            return false;
+        }
+        if (txtEmail.getText().equals("")) {
+            MsgBox.alert(this, "Vui lòng nhập Email!");
+            return false;
+        }
+        if (!txtEmail.getText().matches(reEmail)) {
+            MsgBox.alert(this, "Email không hợp lệ!");
+            return false;
+        }
+        if (ndDAO.selectById(txtTenDangNhap.getText()) != null) {
+            MsgBox.alert(this, "Tên đăng nhập đã tồn tại!");
+            return false;
+        }
+        for (NguoiDung nguoiD : list) { // kiểm tra trùng sdt, email
+            if (nguoiD.getSdt().equals(txtSoDienThoai.getText())) {
+                MsgBox.alert(this, "Số điện thoại đã tồn tại!");
+                return false;
+            }
+            if (nguoiD.getEmail().equals(txtEmail.getText())) {
+                MsgBox.alert(this, "Email đã tồn tại!");
+                return false;
+            }
+        }
+        if (!ChkDieuKhoan.isSelected()) {
+            MsgBox.alert(this, "Bạn chưa đồng ý vói điều khoản & điều kiện của thư viện!");
             return false;
         }
         return true;
@@ -93,6 +149,11 @@ public class DangKyJDialog extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtSoDienThoai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -118,6 +179,12 @@ public class DangKyJDialog extends javax.swing.JDialog {
         txtHoTen.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtHoTen.setBorder(null);
         getContentPane().add(txtHoTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 140, 420, 30));
+
+        btnDangKy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangKyActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnDangKy, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 480, 340, 60));
 
         ChkDieuKhoan.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -165,6 +232,14 @@ public class DangKyJDialog extends javax.swing.JDialog {
     private void lblDangNhapMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDangNhapMouseExited
         lblDangNhap.setText("Đăng nhập");
     }//GEN-LAST:event_lblDangNhapMouseExited
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        checkSignUp = false;
+    }//GEN-LAST:event_formWindowClosing
+
+    private void btnDangKyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangKyActionPerformed
+        dangKy();
+    }//GEN-LAST:event_btnDangKyActionPerformed
 
     /**
      * @param args the command line arguments

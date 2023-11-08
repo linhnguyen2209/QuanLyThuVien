@@ -11,7 +11,9 @@ public class Auth {
     // Đối tượng chứa thông tin ng dùng sau khi đăng nhập
     public static NguoiDung user = null;
     public static NguoiDung userXacThuc = null;// khi người dùng xác thực quên mk thì lưu vào đây
+    public static NguoiDung nguoiDungDangKy = null;// khi người dùng nhấn đăng ký thì lưu tạm vào đây
 
+    
     // Xóa thông tin của ng sử dụng khi có yêu cầu đăng xuất   
     public static void clear() {
         Auth.user = null;

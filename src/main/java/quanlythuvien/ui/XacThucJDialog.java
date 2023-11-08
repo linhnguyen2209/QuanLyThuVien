@@ -42,7 +42,15 @@ public class XacThucJDialog extends javax.swing.JDialog {
         btnTiepTheo2.setContentAreaFilled(false);
         txtTenDangNhap.setBackground(new Color(236, 238, 238, 0));
         txtMaXacThuc.setBackground(new Color(236, 238, 238, 0));
-        pnlXacThuc2.setVisible(false);
+        if (DangKyJDialog.checkSignUp == true) { // kiểm tra có đang xác thực đăng ký hay khồn
+            pnlXacThuc1.setVisible(false);
+            pnlXacThuc2.setVisible(true);
+            email = Auth.nguoiDungDangKy.getEmail();
+            randomSo();// tạo và gửi mã xác thực
+        } else {
+            pnlXacThuc2.setVisible(false);
+        }
+
         if (Auth.isLogin()) { // kiểmm tra xem nếu đang login thì k cho sửa tên dn đề phòng đg đăng nhập tài khoản này mà sửa tài khoản khác
             txtTenDangNhap.setText(Auth.user.getMaNguoiDung());
             txtTenDangNhap.setEditable(false);
@@ -70,14 +78,27 @@ public class XacThucJDialog extends javax.swing.JDialog {
     }
 
     void xacThuc2() {
-        if (txtMaXacThuc.getText().equals("")) {
-            MsgBox.alert(this, "Vui lòng nhập mã xác thực!");
-        } else if (maXacThuc.equals(txtMaXacThuc.getText())) {
-            Auth.userXacThuc = nd;
-            this.dispose();
-            tvfr.openDoiMatKhau();
-        } else {
-            MsgBox.alert(this, "Mã xác thực không chính xác!");
+        if (DangKyJDialog.checkSignUp == false) {// của xác thực bình thường
+            if (txtMaXacThuc.getText().equals("")) {
+                MsgBox.alert(this, "Vui lòng nhập mã xác thực!");
+            } else if (maXacThuc.equals(txtMaXacThuc.getText())) {
+                Auth.userXacThuc = nd;
+                this.dispose();
+                tvfr.openDoiMatKhau();
+            } else {
+                MsgBox.alert(this, "Mã xác thực không chính xác!");
+
+            }
+        } else {// của xác thực đăng ký
+            if (maXacThuc.equals(txtMaXacThuc.getText())) {
+                ndDAO.insert(Auth.nguoiDungDangKy);
+                MsgBox.alert(this, "Đăng ký thành công!");
+                DangKyJDialog.checkSignUp = false;
+                this.dispose();
+                tvfr.openDangNhap();
+            } else {
+                MsgBox.alert(this, "Mã xác thực không chính xác!");
+            }
 
         }
     }
@@ -106,7 +127,7 @@ public class XacThucJDialog extends javax.swing.JDialog {
                         }
                         if (i == 0) {
                             maXacThuc = null;
-                            lblSoGiay.setText("Gủi lại");
+                            lblSoGiay.setText("Gửi lại");
                             checkGuiMail = false;
                             return;
                         }
@@ -153,6 +174,7 @@ public class XacThucJDialog extends javax.swing.JDialog {
             checkGuiMail = true;
         } catch (MessagingException e) {
             e.printStackTrace();
+            MsgBox.alert(this, "Lỗi gửi mail");
         }
     }
 
