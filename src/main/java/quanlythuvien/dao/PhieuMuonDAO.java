@@ -8,39 +8,40 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import quanlythuvien.entity.NguoiDung;
+import quanlythuvien.entity.PhieuMuon;
 import quanlythuvien.utils.jdbcHelper;
 
-public class PhieuMuonDAO extends ThuVienDAO<NguoiDung, String> {
+public class PhieuMuonDAO extends ThuVienDAO<PhieuMuon, Integer> {
 
-    final String INSERT_SQL = "INSERT INTO NguoiDung (MaNguoiDung, MaLoaiNguoiDung, TenNguoiDung, Email, SoDienThoai, MatKhau) VALUES (?,?,?,?,?,?)";
-    final String UPDATE_SQL = "update NguoiDung set MaLoaiNguoiDung = ?, TenNguoiDung = ?, Email = ?, SoDienThoai = ?, MatKhau = ? where MaNguoiDung = ?";
-    final String DELETE_SQL = "DELETE from NguoiDung where MaNguoiDung = ?";
-    final String SELECT_ALL_SQL = "select * from NguoiDung";
-    final String SELECT_BY_ID_SQL = "select * from NguoiDung where MaNguoiDung = ?";
+    final String INSERT_SQL = "INSERT INTO PhieuMuon (NgayMuon, NgayHenTra, TongSoLuongSachMuon, MaNguoiDung, GhiChu) VALUES (?,?,?,?,?)";
+    final String UPDATE_SQL = "update PhieuMuon set  NgayMuon = ? ,NgayHenTra =?, TongSoLuongSachMuon, MaNguoiDung = ?, GhiChu = ? where MaPhieuMuon = ?";
+    final String DELETE_SQL = "DELETE from PhieuMuon where MaPhieuMuon = ?";
+    final String SELECT_ALL_SQL = "select * from PhieuMuon";
+    final String SELECT_BY_ID_SQL = "select * from PhieuMuon where MaPhieuMuon = ?";
 
     @Override
-    public void insert(NguoiDung entity) {
-        jdbcHelper.update(INSERT_SQL, entity.getMaNguoiDung(), entity.getMaLoaiNguoiDung(), entity.getTenNguoiDung(), entity.getEmail(), entity.getSdt(), entity.getMatKhau());
+    public void insert(PhieuMuon entity) {
+        jdbcHelper.update(INSERT_SQL, entity.getNgayMuon(), entity.getNgayHenTra(), entity.getTongSoLuongSachMuon(), entity.getMaNguoiDung(), entity.getGhiChu());
     }
 
     @Override
-    public void update(NguoiDung entity) {
-        jdbcHelper.update(UPDATE_SQL, entity.getMaLoaiNguoiDung(), entity.getTenNguoiDung(), entity.getEmail(), entity.getSdt(), entity.getMatKhau(), entity.getMaNguoiDung());
+    public void update(PhieuMuon entity) {
+        jdbcHelper.update(UPDATE_SQL, entity.getNgayMuon(), entity.getNgayHenTra(), entity.getTongSoLuongSachMuon(), entity.getMaNguoiDung(), entity.getGhiChu(), entity.getMaPhieuMuon());
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
         jdbcHelper.update(DELETE_SQL, id);
     }
 
     @Override
-    public List<NguoiDung> selectAll() {
+    public List<PhieuMuon> selectAll() {
         return selectBySql(SELECT_ALL_SQL);
     }
 
     @Override
-    public NguoiDung selectById(String id) {
-        List<NguoiDung> list = selectBySql(SELECT_BY_ID_SQL, id);
+    public PhieuMuon selectById(Integer id) {
+        List<PhieuMuon> list = selectBySql(SELECT_BY_ID_SQL, id);
         if (list.isEmpty()) {
             return null;
         }
@@ -48,19 +49,18 @@ public class PhieuMuonDAO extends ThuVienDAO<NguoiDung, String> {
     }
 
     @Override
-    public List<NguoiDung> selectBySql(String sql, Object... args) {
-        List<NguoiDung> list = new ArrayList<>();
+    public List<PhieuMuon> selectBySql(String sql, Object... args) {
+        List<PhieuMuon> list = new ArrayList<>();
         try {
             ResultSet rs = jdbcHelper.query(sql, args);
             while (rs.next()) {
-                NguoiDung entity = new NguoiDung();
-
+                PhieuMuon entity = new PhieuMuon();
+                entity.setMaPhieuMuon(rs.getInt("MaPhieuMuon"));
+                entity.setNgayMuon(rs.getDate("NgayMuon"));
+                entity.setNgayHenTra(rs.getDate("NgayHenTra"));
+                entity.setTongSoLuongSachMuon(rs.getInt("TongSoLuongSachMuon"));
                 entity.setMaNguoiDung(rs.getString("MaNguoiDung"));
-                entity.setMaLoaiNguoiDung(rs.getString("MaLoaiNguoiDung"));
-                entity.setTenNguoiDung(rs.getString("TenNguoiDung"));
-                entity.setEmail(rs.getString("Email"));
-                entity.setSdt(rs.getString("SoDienThoai"));
-                entity.setMatKhau(rs.getString("MatKhau"));
+                entity.setGhiChu(rs.getString("GhiChu"));
                 list.add(entity);
             }
         } catch (Exception e) {
