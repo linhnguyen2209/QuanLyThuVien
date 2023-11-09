@@ -230,6 +230,11 @@ public class ThuVienJFrame extends javax.swing.JFrame {
         btnSearch.setForeground(new java.awt.Color(255, 255, 204));
         btnSearch.setText("Tìm kiếm");
         btnSearch.setBorder(null);
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/logoLibNgang.png"))); // NOI18N
@@ -362,6 +367,10 @@ public class ThuVienJFrame extends javax.swing.JFrame {
             txtSearch.setText("Tìm kiếm sách...");
         }
     }//GEN-LAST:event_txtSearchFocusLost
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     /**
      * @param args the command line arguments
