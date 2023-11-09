@@ -18,7 +18,7 @@ import quanlythuvien.utils.XImage;
 
 public class XacThucJDialog extends javax.swing.JDialog {
 
-    ThuVienJFrame tvfr;
+    ThuVienMainJFrame tvfr;
     NguoiDungDAO ndDAO = new NguoiDungDAO();
     NguoiDung nd;
     String tenDangNhap;
@@ -30,7 +30,7 @@ public class XacThucJDialog extends javax.swing.JDialog {
     public XacThucJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        tvfr = (ThuVienJFrame) parent;
+        tvfr = (ThuVienMainJFrame) parent;
         init();
     }
 
@@ -484,6 +484,14 @@ public class XacThucJDialog extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(XacThucJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

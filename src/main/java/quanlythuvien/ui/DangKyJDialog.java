@@ -21,7 +21,7 @@ public class DangKyJDialog extends javax.swing.JDialog {
 
     static boolean checkSignUp = false;
 
-    ThuVienJFrame tvfr;
+    ThuVienMainJFrame tvfr;
     String reTenDangNhap = "^[a-zA-Z0-9_-]{2,10}$";
     NguoiDungDAO ndDAO = new NguoiDungDAO();
     List<NguoiDung> list = ndDAO.selectAll();
@@ -29,7 +29,7 @@ public class DangKyJDialog extends javax.swing.JDialog {
     public DangKyJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        tvfr = (ThuVienJFrame) parent;
+        tvfr = (ThuVienMainJFrame) parent;
         btnDangKy.setContentAreaFilled(false);
         init();
     }
@@ -266,6 +266,8 @@ public class DangKyJDialog extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(DangKyJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
