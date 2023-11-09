@@ -41,6 +41,8 @@ public class DoiMatKhauJDialog extends javax.swing.JDialog {
             MsgBox.alert(this, "Vui lòng nhập mật khẩu mới!");
         } else if (new String(txtNhapLaiMatKhauMoi.getPassword()).equals("")) {
             MsgBox.alert(this, "Vui lòng nhập lại mật khẩu mới!");
+        } else if (!new String(txtMatKhauMoi.getPassword()).equals(new String(txtNhapLaiMatKhauMoi.getPassword()))) {
+            MsgBox.alert(this, "Mật khẩu không trùng khớp!");
         } else {
             NguoiDung nd = Auth.userXacThuc;
             NguoiDung nd1 = new NguoiDung(nd.getMaNguoiDung(), nd.getMaLoaiNguoiDung(), nd.getTenNguoiDung(), nd.getEmail(), nd.getSdt(), new String(txtMatKhauMoi.getPassword()));
