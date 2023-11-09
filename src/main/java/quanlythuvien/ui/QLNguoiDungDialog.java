@@ -20,13 +20,13 @@ import quanlythuvien.utils.XImage;
  *
  * @author Administrator
  */
-public class QLHeThongDialog extends javax.swing.JDialog {
+public class QLNguoiDungDialog extends javax.swing.JDialog {
     
     NguoiDungDAO ngDAO = new NguoiDungDAO();
     LoaiNguoiDungDAO lNDDao = new LoaiNguoiDungDAO();
     int row = -1;
     
-    public QLHeThongDialog(java.awt.Frame parent, boolean modal) {
+    public QLNguoiDungDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         init();
@@ -67,7 +67,7 @@ public class QLHeThongDialog extends javax.swing.JDialog {
         try {
             List<LoaiNguoiDung> list = lNDDao.selectAll();
             for (LoaiNguoiDung loaiNguoiDung : list) {
-                model.addElement(loaiNguoiDung.getTenLoaiNguoiDung());
+                model.addElement(loaiNguoiDung);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -81,6 +81,7 @@ public class QLHeThongDialog extends javax.swing.JDialog {
         txtSoDienThoai.setText(model.getSdt());
         txtMatKhau.setText(model.getMatKhau());
         txtXacNhanMK.setText(model.getMatKhau());
+
         if (model.getMaLoaiNguoiDung().equals("LND001")) {
             cboLoaiNgDung.setSelectedIndex(0);
         } else if (model.getMaLoaiNguoiDung().equals("LND002")) {
@@ -226,8 +227,8 @@ public class QLHeThongDialog extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 153, 255));
-        jLabel1.setText("Hệ thống");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 16, 130, -1));
+        jLabel1.setText("Quản lý người dùng");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 16, 180, -1));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm"));
 
@@ -516,21 +517,23 @@ public class QLHeThongDialog extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(QLHeThongDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QLNguoiDungDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(QLHeThongDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QLNguoiDungDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(QLHeThongDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QLNguoiDungDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(QLHeThongDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QLNguoiDungDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                QLHeThongDialog dialog = new QLHeThongDialog(new javax.swing.JFrame(), true);
+                QLNguoiDungDialog dialog = new QLNguoiDungDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -19,7 +19,7 @@ public class LoaiNguoiDungDAO extends ThuVienDAO<LoaiNguoiDung, String>{
     final String UPDATE_SQL = "update LoaiNguoiDung set TenLoaiNguoiDung = ? where MaLoaiNguoiDung = ?";
     final String DELETE_SQL = "DELETE from LoaiNguoiDung where MaLoaiNguoiDung = ?";
     final String SELECT_ALL_SQL = "select * from LoaiNguoiDung";
-    final String SELECT_BY_ID_SQL = "select * from NguoiDung where MaLoaiNguoiDung = ?";
+    final String SELECT_BY_ID_SQL = "select * from LoaiNguoiDung where MaLoaiNguoiDung = ?";
 
     @Override
     public void insert(LoaiNguoiDung entity) {
