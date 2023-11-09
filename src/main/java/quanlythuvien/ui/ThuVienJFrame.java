@@ -69,8 +69,8 @@ public class ThuVienJFrame extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         btnDangNhap = new javax.swing.JButton();
         btnDangKy = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtSearch = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         layerPnl = new javax.swing.JLayeredPane();
         jPanel1 = new javax.swing.JPanel();
@@ -211,17 +211,25 @@ public class ThuVienJFrame extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setBackground(new java.awt.Color(204, 255, 255));
-        jTextField1.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField1.setText("Tìm kiếm sách...");
-        jTextField1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 8, 1, 1, new java.awt.Color(204, 255, 255)));
-        jTextField1.setMinimumSize(new java.awt.Dimension(5, 20));
+        txtSearch.setBackground(new java.awt.Color(204, 255, 255));
+        txtSearch.setForeground(new java.awt.Color(153, 153, 153));
+        txtSearch.setText("Tìm kiếm sách...");
+        txtSearch.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 8, 1, 1, new java.awt.Color(204, 255, 255)));
+        txtSearch.setMinimumSize(new java.awt.Dimension(5, 20));
+        txtSearch.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtSearchFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSearchFocusLost(evt);
+            }
+        });
 
-        jButton1.setBackground(new java.awt.Color(153, 153, 153));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 204));
-        jButton1.setText("Tìm kiếm");
-        jButton1.setBorder(null);
+        btnSearch.setBackground(new java.awt.Color(153, 153, 153));
+        btnSearch.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSearch.setForeground(new java.awt.Color(255, 255, 204));
+        btnSearch.setText("Tìm kiếm");
+        btnSearch.setBorder(null);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/logoLibNgang.png"))); // NOI18N
@@ -273,9 +281,9 @@ public class ThuVienJFrame extends javax.swing.JFrame {
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(28, 28, 28)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(159, 159, 159)
                                 .addComponent(btnDangKy, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -290,8 +298,8 @@ public class ThuVienJFrame extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(btnDangKy, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDangNhap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -329,14 +337,31 @@ public class ThuVienJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
     private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
-        boolean choose = MsgBox.confirm(this, "Bạn chắc chắn muốn đăng xuất!");
-        if (choose) {
-            Auth.clear();
-            btnDangNhap.setText("Đăng nhập");
-            lblUser.setText("User name");
+        if (Auth.isLogin()) {
+            boolean choose = MsgBox.confirm(this, "Bạn chắc chắn muốn đăng xuất!");
+            if (choose) {
+                Auth.clear();
+                btnDangNhap.setText("Đăng nhập");
+                lblUser.setText("User name");
+                openDangNhap();
+            }
+        } else {
+            MsgBox.alert(this, "Vui lòng đăng nhập!");
             openDangNhap();
         }
     }//GEN-LAST:event_btnDangXuatActionPerformed
+
+    private void txtSearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchFocusGained
+        if(txtSearch.getText().equals("Tìm kiếm sách...")){
+            txtSearch.setText("");
+        }
+    }//GEN-LAST:event_txtSearchFocusGained
+
+    private void txtSearchFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchFocusLost
+        if(txtSearch.getText().equals("")){
+            txtSearch.setText("Tìm kiếm sách...");
+        }
+    }//GEN-LAST:event_txtSearchFocusLost
 
     /**
      * @param args the command line arguments
@@ -382,19 +407,19 @@ public class ThuVienJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnQuanLyMuonTra;
     private javax.swing.JButton btnQuanLyNguoiDung;
     private javax.swing.JButton btnQuanLyTaiLieu;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnThongKe;
     private javax.swing.JButton btnTraCuuSach;
     private javax.swing.JButton btnTrangChu;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLayeredPane layerPnl;
     private javax.swing.JLabel lblBgrTrangChu;
     private javax.swing.JLabel lblUser;
     private javax.swing.JPanel pnlMenu;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
