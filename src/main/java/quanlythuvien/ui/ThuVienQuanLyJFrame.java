@@ -242,7 +242,7 @@ public class ThuVienQuanLyJFrame extends javax.swing.JFrame {
 
         lblBgrTrangChu2.setBackground(new java.awt.Color(255, 255, 255));
         lblBgrTrangChu2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblBgrTrangChu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/bgrTrangChu2.png"))); // NOI18N
+        lblBgrTrangChu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/bgrTrangChuPhu.png"))); // NOI18N
         pnlTrangChuQuanLy.add(lblBgrTrangChu2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1100, 690));
 
         pnlGioiThieu.setBackground(new java.awt.Color(255, 255, 255));

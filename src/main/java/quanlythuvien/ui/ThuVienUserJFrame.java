@@ -201,7 +201,7 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         pnlTrangChuUser.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblBgrTrangChuUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblBgrTrangChuUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/bgrTrangChu2.png"))); // NOI18N
+        lblBgrTrangChuUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/bgrTrangChuPhu.png"))); // NOI18N
         pnlTrangChuUser.add(lblBgrTrangChuUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 680));
 
         pnlGioiThieu.setBackground(new java.awt.Color(255, 255, 255));

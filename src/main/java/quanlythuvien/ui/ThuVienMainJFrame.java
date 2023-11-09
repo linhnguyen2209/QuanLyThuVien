@@ -43,7 +43,9 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
 
     void openDangNhap() {
         new DangNhapJDialog(this, true).setVisible(true);
-        this.dispose();
+        if (Auth.isLogin()) {
+            this.dispose();
+        }
     }
 
     void openDangKy() {
@@ -64,7 +66,6 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
         pnlCurrent.setVisible(true);
         btnCurrent.setBackground(new Color(0, 153, 51));
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -196,7 +197,7 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
         pnlTrangChu.add(btnDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 410, 200, 70));
 
         lblBgrTrangChu1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblBgrTrangChu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/bgrTrangChu1.png"))); // NOI18N
+        lblBgrTrangChu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/bgrTrangChuMain.png"))); // NOI18N
         pnlTrangChu.add(lblBgrTrangChu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 680));
 
         pnlGioiThieu.setBackground(new java.awt.Color(255, 255, 255));
