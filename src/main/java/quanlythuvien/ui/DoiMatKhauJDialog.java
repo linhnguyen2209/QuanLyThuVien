@@ -17,13 +17,13 @@ import quanlythuvien.utils.XImage;
  */
 public class DoiMatKhauJDialog extends javax.swing.JDialog {
 
-    ThuVienJFrame tvfr;
+    ThuVienMainJFrame tvfr;
     NguoiDungDAO ndDAO = new NguoiDungDAO();
 
     public DoiMatKhauJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        tvfr = (ThuVienJFrame) parent;
+        tvfr = (ThuVienMainJFrame) parent;
         init();
     }
 
@@ -197,6 +197,7 @@ public class DoiMatKhauJDialog extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(DoiMatKhauJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */

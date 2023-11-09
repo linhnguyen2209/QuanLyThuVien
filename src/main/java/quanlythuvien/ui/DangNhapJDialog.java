@@ -1,7 +1,9 @@
-
 package quanlythuvien.ui;
 
 import java.awt.Color;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import quanlythuvien.dao.NguoiDungDAO;
 import quanlythuvien.entity.NguoiDung;
 import quanlythuvien.ui.DangNhapJDialog;
@@ -16,12 +18,12 @@ import quanlythuvien.utils.XImage;
 public class DangNhapJDialog extends javax.swing.JDialog {
 
     NguoiDungDAO dao = new NguoiDungDAO();
-    ThuVienJFrame tvfr;
+    ThuVienMainJFrame tvfr;
 
     public DangNhapJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        tvfr = (ThuVienJFrame) parent;
+        tvfr = (ThuVienMainJFrame) parent;
         init();
     }
 
@@ -45,6 +47,11 @@ public class DangNhapJDialog extends javax.swing.JDialog {
                 } else {
                     Auth.user = nd;
                     this.dispose();
+                    if (Auth.isManager() || Auth.isLibrarian()) {
+                        new ThuVienQuanLyJFrame().setVisible(true);
+                    } else {
+                        new ThuVienUserJFrame().setVisible(true);
+                    }
                 }
             }
         }
@@ -65,6 +72,15 @@ public class DangNhapJDialog extends javax.swing.JDialog {
             return false;
         }
         return true;
+    }
+
+    public void saveLoginInfo(String username, String password) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter("logininfo.txt"))) {
+            writer.println(username);
+            writer.println(password);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -191,6 +207,8 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(DangNhapJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
