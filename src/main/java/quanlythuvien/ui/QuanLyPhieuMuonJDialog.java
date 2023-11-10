@@ -71,6 +71,7 @@ public class QuanLyPhieuMuonJDialog extends javax.swing.JDialog {
         txtNgayMuon.setText(XDate.toString(ngayMuon, "yyyy/MM/dd"));
         Date ngayTra = model.getNgayHenTra();
         txtNgayHenTra.setText(XDate.toString(ngayTra, "yyyy/MM/dd"));
+        txtTongSoLuongSachMuon.setText(String.valueOf(model.getTongSoLuongSachMuon()));
         txtMaNguoiDung.setText(model.getMaNguoiDung());
         txtGhiChu.setText(model.getGhiChu());
     }
@@ -101,36 +102,45 @@ public class QuanLyPhieuMuonJDialog extends javax.swing.JDialog {
 
     void updateStatus() {
         boolean edit = this.row >= 0;
+        boolean first = this.row == 0;
+        boolean last = this.row == tblPhieuMuon.getRowCount() - 1;
+
         txtMaPhieuMuon.setEditable(!edit);
         txtMaNguoiDung.setEditable(!edit);
         //Khi insert thì không update, delete
         btn_Them.setEnabled(!edit);
         btn_Sua.setEnabled(edit);
         btn_Xoa.setEnabled(edit);
+
+        btn_first.setEnabled(edit && !first);
+        btn_prev.setEnabled(edit && !first);
+        btn_next.setEnabled(edit && !last);
+        btn_last.setEnabled(edit && !last);
+
     }
 
     private void first() {
         row = 0;
-		edit();
+        edit();
     }
 
     private void prev() {
         if (row > 0) {
             row--;
-			edit();
+            edit();
         }
     }
 
     private void next() {
-//		if (row < .getRowCount() - 1) {
-//			row++;
-			edit();
-//		}
+        if (row < tblPhieuMuon.getRowCount() - 1) {
+            row++;
+            edit();
+        }
     }
 
     private void last() {
-//		row = .getRowCount() - 1;
-		edit();
+        row = tblPhieuMuon.getRowCount() - 1;
+        edit();
     }
 
     @SuppressWarnings("unchecked")
