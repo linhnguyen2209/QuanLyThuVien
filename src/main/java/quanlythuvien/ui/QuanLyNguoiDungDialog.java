@@ -594,7 +594,7 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_rdoAllActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
-        // TODO add your handling code here:
+       this.dispose();
     }//GEN-LAST:event_btnThoatActionPerformed
 
     /**
