@@ -1,6 +1,5 @@
 package quanlythuvien.ui;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -8,6 +7,8 @@ import quanlythuvien.dao.PhieuMuonDAO;
 import quanlythuvien.dao.PhieuTraDAO;
 import quanlythuvien.entity.PhieuMuon;
 import quanlythuvien.entity.PhieuTra;
+import quanlythuvien.utils.Auth;
+import quanlythuvien.utils.MsgBox;
 import quanlythuvien.utils.XDate;
 import quanlythuvien.utils.XImage;
 
@@ -76,6 +77,18 @@ public class QuanLyPhieuMuonJDialog extends javax.swing.JDialog {
         txtGhiChu.setText(model.getGhiChu());
     }
 
+    PhieuMuon getForm() {
+        PhieuMuon model = new PhieuMuon();
+        model.setMaPhieuMuon(Integer.valueOf(txtMaPhieuMuon.getText()));
+        model.setNgayMuon(XDate.toDate(txtNgayMuon.getText(), "yyyy/MM/dd"));
+        model.setNgayHenTra(XDate.toDate(txtNgayHenTra.getText(), "yyyy/MM/dd"));
+        model.setTongSoLuongSachMuon(Integer.valueOf(txtTongSoLuongSachMuon.getText()));
+        model.setMaNguoiDung(txtMaNguoiDung.getText());
+        model.setGhiChu(txtGhiChu.getText());
+
+        return model;
+    }
+
     void clearForm() {
         txtMaPhieuMuon.setText("");
         txtNgayMuon.setText("");
@@ -108,14 +121,14 @@ public class QuanLyPhieuMuonJDialog extends javax.swing.JDialog {
         txtMaPhieuMuon.setEditable(!edit);
         txtMaNguoiDung.setEditable(!edit);
         //Khi insert thì không update, delete
-        btn_Them.setEnabled(!edit);
-        btn_Sua.setEnabled(edit);
-        btn_Xoa.setEnabled(edit);
+        btnThem.setEnabled(!edit);
+        btnSua.setEnabled(edit);
+        btnXoa.setEnabled(edit);
 
-        btn_first.setEnabled(edit && !first);
-        btn_prev.setEnabled(edit && !first);
-        btn_next.setEnabled(edit && !last);
-        btn_last.setEnabled(edit && !last);
+        btnFirst.setEnabled(edit && !first);
+        btnPrev.setEnabled(edit && !first);
+        btnNext.setEnabled(edit && !last);
+        btnLast.setEnabled(edit && !last);
 
     }
 
@@ -143,6 +156,51 @@ public class QuanLyPhieuMuonJDialog extends javax.swing.JDialog {
         edit();
     }
 
+    void insert() {
+        PhieuMuon pm = getForm();
+        try {
+            phieuMuonDAO.insert(pm);
+            fillTablePhieuMuon();
+            clearForm();
+            MsgBox.alert(this, "Thêm thành công");
+        } catch (Exception e) {
+            e.printStackTrace();
+            MsgBox.alert(this, "Thêm thất bại!");
+        }
+    }
+
+    void update() {
+        PhieuMuon pm = getForm();
+        try {
+            phieuMuonDAO.update(pm);
+            fillTablePhieuMuon();
+            MsgBox.alert(this, "Cập nhật thành công");
+        } catch (Exception e) {
+            e.printStackTrace();
+            MsgBox.alert(this, "Cập nhật thất bại!");
+        }
+    }
+
+    void delete() {
+        if (!Auth.isManager()) {
+            MsgBox.alert(this, "Bạn không có quyền xoá!");
+        } else {
+            try {
+                if (MsgBox.confirm(this, "Bạn thực sự muốn xoá người dùng này?")) {
+                    String maND = txtMaPhieuMuon.getText();
+                    Integer maNDintInteger = Integer.parseInt(maND);
+                    phieuMuonDAO.delete(maNDintInteger);
+                    this.fillTablePhieuMuon();
+                    this.clearForm();
+                    MsgBox.alert(this, "Xoá thành công!");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                MsgBox.alert(this, "Xoá thất bại!");
+            }
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -165,14 +223,14 @@ public class QuanLyPhieuMuonJDialog extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        btn_Them = new javax.swing.JButton();
-        btn_Sua = new javax.swing.JButton();
-        btn_Xoa = new javax.swing.JButton();
-        btn_Moi = new javax.swing.JButton();
-        btn_first = new javax.swing.JButton();
-        btn_prev = new javax.swing.JButton();
-        btn_next = new javax.swing.JButton();
-        btn_last = new javax.swing.JButton();
+        btnThem = new javax.swing.JButton();
+        btnSua = new javax.swing.JButton();
+        btnXoa = new javax.swing.JButton();
+        btnMoi = new javax.swing.JButton();
+        btnFirst = new javax.swing.JButton();
+        btnPrev = new javax.swing.JButton();
+        btnNext = new javax.swing.JButton();
+        btnLast = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtGhiChu = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
@@ -251,44 +309,59 @@ public class QuanLyPhieuMuonJDialog extends javax.swing.JDialog {
         jLabel16.setForeground(new java.awt.Color(51, 153, 255));
         jLabel16.setText("Chế độ chỉnh sửa");
 
-        btn_Them.setText("Thêm");
-
-        btn_Sua.setText("Sửa");
-
-        btn_Xoa.setText("Xóa");
-
-        btn_Moi.setText("Mới");
-        btn_Moi.addActionListener(new java.awt.event.ActionListener() {
+        btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_MoiActionPerformed(evt);
+                btnThemActionPerformed(evt);
             }
         });
 
-        btn_first.setText("|<<");
-        btn_first.addActionListener(new java.awt.event.ActionListener() {
+        btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_firstActionPerformed(evt);
+                btnSuaActionPerformed(evt);
             }
         });
 
-        btn_prev.setText("<<");
-        btn_prev.addActionListener(new java.awt.event.ActionListener() {
+        btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_prevActionPerformed(evt);
+                btnXoaActionPerformed(evt);
             }
         });
 
-        btn_next.setText(">>");
-        btn_next.addActionListener(new java.awt.event.ActionListener() {
+        btnMoi.setText("Mới");
+        btnMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_nextActionPerformed(evt);
+                btnMoiActionPerformed(evt);
             }
         });
 
-        btn_last.setText(">>|");
-        btn_last.addActionListener(new java.awt.event.ActionListener() {
+        btnFirst.setText("|<<");
+        btnFirst.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_lastActionPerformed(evt);
+                btnFirstActionPerformed(evt);
+            }
+        });
+
+        btnPrev.setText("<<");
+        btnPrev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrevActionPerformed(evt);
+            }
+        });
+
+        btnNext.setText(">>");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
+
+        btnLast.setText(">>|");
+        btnLast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLastActionPerformed(evt);
             }
         });
 
@@ -319,22 +392,22 @@ public class QuanLyPhieuMuonJDialog extends javax.swing.JDialog {
                         .addComponent(jScrollPane3))
                     .addComponent(txtTongSoLuongSachMuon)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btn_Them)
+                        .addComponent(btnThem)
                         .addGap(5, 5, 5)
-                        .addComponent(btn_Sua)
+                        .addComponent(btnSua)
                         .addGap(5, 5, 5)
-                        .addComponent(btn_Xoa)
+                        .addComponent(btnXoa)
                         .addGap(5, 5, 5)
-                        .addComponent(btn_Moi))
+                        .addComponent(btnMoi))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(362, 362, 362)
-                        .addComponent(btn_first)
+                        .addComponent(btnFirst)
                         .addGap(5, 5, 5)
-                        .addComponent(btn_prev)
+                        .addComponent(btnPrev)
                         .addGap(5, 5, 5)
-                        .addComponent(btn_next)
+                        .addComponent(btnNext)
                         .addGap(5, 5, 5)
-                        .addComponent(btn_last))
+                        .addComponent(btnLast))
                     .addComponent(txtMaNguoiDung)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(353, 353, 353)
@@ -381,14 +454,14 @@ public class QuanLyPhieuMuonJDialog extends javax.swing.JDialog {
                     .addComponent(jLabel8))
                 .addGap(25, 25, 25)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_Them)
-                    .addComponent(btn_Sua)
-                    .addComponent(btn_Xoa)
-                    .addComponent(btn_Moi)
-                    .addComponent(btn_first)
-                    .addComponent(btn_prev)
-                    .addComponent(btn_next)
-                    .addComponent(btn_last))
+                    .addComponent(btnThem)
+                    .addComponent(btnSua)
+                    .addComponent(btnXoa)
+                    .addComponent(btnMoi)
+                    .addComponent(btnFirst)
+                    .addComponent(btnPrev)
+                    .addComponent(btnNext)
+                    .addComponent(btnLast))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel11)
                 .addContainerGap(58, Short.MAX_VALUE))
@@ -465,32 +538,44 @@ public class QuanLyPhieuMuonJDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_MoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_MoiActionPerformed
+    private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
         clearForm();
-    }//GEN-LAST:event_btn_MoiActionPerformed
+    }//GEN-LAST:event_btnMoiActionPerformed
 
-    private void btn_firstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_firstActionPerformed
+    private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
         first();
-    }//GEN-LAST:event_btn_firstActionPerformed
+    }//GEN-LAST:event_btnFirstActionPerformed
 
-    private void btn_prevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_prevActionPerformed
+    private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
         prev();
-    }//GEN-LAST:event_btn_prevActionPerformed
+    }//GEN-LAST:event_btnPrevActionPerformed
 
-    private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         next();
-    }//GEN-LAST:event_btn_nextActionPerformed
+    }//GEN-LAST:event_btnNextActionPerformed
 
-    private void btn_lastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lastActionPerformed
+    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
         last();
-    }//GEN-LAST:event_btn_lastActionPerformed
+    }//GEN-LAST:event_btnLastActionPerformed
 
     private void tblPhieuMuonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhieuMuonMousePressed
-        if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 1) {
             this.row = tblPhieuMuon.rowAtPoint(evt.getPoint());
             edit();
         }
     }//GEN-LAST:event_tblPhieuMuonMousePressed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        update();
+    }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        delete();
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        insert();
+    }//GEN-LAST:event_btnThemActionPerformed
 
     public static void main(String args[]) {
 
@@ -509,14 +594,14 @@ public class QuanLyPhieuMuonJDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_Moi;
-    private javax.swing.JButton btn_Sua;
-    private javax.swing.JButton btn_Them;
-    private javax.swing.JButton btn_Xoa;
-    private javax.swing.JButton btn_first;
-    private javax.swing.JButton btn_last;
-    private javax.swing.JButton btn_next;
-    private javax.swing.JButton btn_prev;
+    private javax.swing.JButton btnFirst;
+    private javax.swing.JButton btnLast;
+    private javax.swing.JButton btnMoi;
+    private javax.swing.JButton btnNext;
+    private javax.swing.JButton btnPrev;
+    private javax.swing.JButton btnSua;
+    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnXoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel16;
