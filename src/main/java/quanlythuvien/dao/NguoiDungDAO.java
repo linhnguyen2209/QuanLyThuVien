@@ -18,6 +18,7 @@ public class NguoiDungDAO extends ThuVienDAO<NguoiDung, String> {
     final String SELECT_ALL_SQL = "select * from NguoiDung";
     final String SELECT_BY_ID_SQL = "select * from NguoiDung where MaNguoiDung = ?";
     final String SELECT_BY_NAME_OF_USER = "select * from NguoiDung where MaNguoiDung like ?";
+    final String SELECT_BY_NAME = "select * from NguoiDung where TenNguoiDung like ?";
 
     @Override
     public void insert(NguoiDung entity) {
@@ -69,8 +70,11 @@ public class NguoiDungDAO extends ThuVienDAO<NguoiDung, String> {
         }
         return list;
     }
-    public List<NguoiDung> selectByNamOfUser(String nameOfUser){
+    public List<NguoiDung> selectByNameOfUser(String nameOfUser){
         return selectBySql(SELECT_BY_NAME_OF_USER, "%"+nameOfUser +"%");
+    }
+    public List<NguoiDung> selectByTenNguoiDung(String name){
+        return selectBySql(SELECT_BY_NAME, "%"+name +"%");
     }
 
 }
