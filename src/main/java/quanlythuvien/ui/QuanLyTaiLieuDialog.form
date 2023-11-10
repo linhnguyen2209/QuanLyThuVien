@@ -17,7 +17,7 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+    <Component class="javax.swing.ButtonGroup" name="btn_timkiemRDO">
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadioButton1">
       <Properties>
@@ -385,7 +385,7 @@
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JTable" name="jTable3">
+                        <Component class="javax.swing.JTable" name="tbl_QLTL">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                               <Table columnCount="10" rowCount="1">
@@ -488,13 +488,13 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="rdoMaNguoiDung" min="-2" max="-2" attributes="0"/>
+                              <Component id="rdoTenSach" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="rdoTenNguoiDung" min="-2" max="-2" attributes="0"/>
+                              <Component id="rdoNXB" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                              <Component id="rdoTacgia" min="-2" max="-2" attributes="0"/>
+                              <Component id="rdoTacGia" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                              <Component id="rdoTacgia1" min="-2" max="-2" attributes="0"/>
+                              <Component id="rdoMaLoaiSach" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jToggleButton1" min="-2" pref="81" max="-2" attributes="0"/>
                               <EmptySpace pref="30" max="32767" attributes="0"/>
@@ -505,10 +505,10 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="rdoMaNguoiDung" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="rdoTenNguoiDung" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="rdoTacgia" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="rdoTacgia1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rdoTenSach" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rdoNXB" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rdoTacGia" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rdoMaLoaiSach" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jToggleButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="20" max="32767" attributes="0"/>
@@ -517,42 +517,42 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JRadioButton" name="rdoMaNguoiDung">
+                    <Component class="javax.swing.JRadioButton" name="rdoTenSach">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="buttonGroup1"/>
+                          <ComponentRef name="btn_timkiemRDO"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="T&#xea;n s&#xe1;ch"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdoTenNguoiDung">
+                    <Component class="javax.swing.JRadioButton" name="rdoNXB">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="buttonGroup1"/>
+                          <ComponentRef name="btn_timkiemRDO"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="NXB"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdoTacgia">
+                    <Component class="javax.swing.JRadioButton" name="rdoTacGia">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="buttonGroup1"/>
+                          <ComponentRef name="btn_timkiemRDO"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="T&#xe1;c gi&#x1ea3;"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoTacgiaActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoTacGiaActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JRadioButton" name="rdoTacgia1">
+                    <Component class="javax.swing.JRadioButton" name="rdoMaLoaiSach">
                       <Properties>
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                          <ComponentRef name="buttonGroup1"/>
+                          <ComponentRef name="btn_timkiemRDO"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="M&#xe3; lo&#x1ea1;i s&#xe1;ch"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoTacgia1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoMaLoaiSachActionPerformed"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JToggleButton" name="jToggleButton1">
@@ -813,12 +813,12 @@
                     <Property name="useNullLayout" type="boolean" value="false"/>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JButton" name="btnNew">
+                    <Component class="javax.swing.JButton" name="btn_last">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&gt;&gt;|"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNewActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_lastActionPerformed"/>
                       </Events>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -852,12 +852,12 @@
                         </Constraint>
                       </Constraints>
                     </Component>
-                    <Component class="javax.swing.JButton" name="btnDelete">
+                    <Component class="javax.swing.JButton" name="btnNext">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="&gt;&gt;"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNextActionPerformed"/>
                       </Events>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -890,7 +890,7 @@
                     <Property name="useNullLayout" type="boolean" value="false"/>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JButton" name="jButton1">
+                    <Component class="javax.swing.JButton" name="btn_Home">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Home"/>
                       </Properties>
