@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
+import quanlythuvien.dao.LoaiSachDao;
 import quanlythuvien.dao.SachDAO;
+import quanlythuvien.entity.LoaiSach;
 import quanlythuvien.entity.Sach;
 import quanlythuvien.utils.XImage;
 
@@ -19,6 +21,8 @@ import quanlythuvien.utils.XImage;
 public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
 
     SachDAO SDao = new SachDAO();
+    LoaiSachDao LSDao = new LoaiSachDao();
+    
     /**
      * Creates new form QuanLyTaiLieuDialog
      */
@@ -33,9 +37,11 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         this.setTitle("Quản lý tài liệu");
         this.setIconImage(XImage.getAppIcon());
          setLocationRelativeTo(null);
+         FillTable_QLTlieu();
+         fillComboBoxLoaiSach();
     }
     
-     List <Sach> list = new ArrayList<>();
+     List<Sach> list = new ArrayList<>();
      
      void FillTable_QLTlieu(){
          DefaultTableModel model  = (DefaultTableModel) tbl_QLTL.getModel();
@@ -49,6 +55,8 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
                  list =SDao.selectByTacGia(txtSearch.getText());
              }else if(rdoMaLoaiSach.isSelected()){
                  list = SDao.selectByMaLoaiSach(txtSearch.getText());
+             }else{
+                 list = SDao.selectAll();
              }
              if (list.size() <= 0) {
                 tbl_QLTL.setVisible(false);
@@ -61,6 +69,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
              System.out.println("List: " + list.size());
              for(Sach sach:list){
                  model.addRow(new Object[]{
+                     sach.getMaSach(),
                      sach.getTieuDe(),
                      sach.getNhaXuatBan(),
                      sach.getTacGia(),
@@ -77,18 +86,18 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
          }
      }
      
-//     void fillComboBoxTypeOfUser() {
-//        DefaultComboBoxModel model = (DefaultComboBoxModel) cboLoaiNgDung.getModel();
-//        model.removeAllElements();
-//        try {
-//            List<LoaiSach> list = lNDDao.selectAll();
-//            for (LoaiNguoiDung loaiNguoiDung : list) {
-//                model.addElement(loaiNguoiDung);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+     void fillComboBoxLoaiSach() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboLoaiSach1.getModel();
+        model.removeAllElements();
+        try {
+            List<LoaiSach> list = LSDao.selectAll();
+            for (LoaiSach ls : list) {
+                model.addElement(ls);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
      
      
      
@@ -690,7 +699,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_rdoTacGiaActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-
+        FillTable_QLTlieu();
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void txtNhaXuatBan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNhaXuatBan1ActionPerformed

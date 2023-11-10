@@ -34,6 +34,13 @@ public class LoaiSach {
     public void setTenLoaiSach(String TenLoaiSach) {
         this.TenLoaiSach = TenLoaiSach;
     }
+
+    @Override
+    public String toString() {
+       return  this.MaLoaiSach;
+                
+    }
+    
     
     
 }
