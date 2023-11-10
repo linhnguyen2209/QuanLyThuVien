@@ -7,6 +7,7 @@ package quanlythuvien.entity;
 /**
  *
  * @author Dino
+ * Create & Edit by Dino
  */
 public class LoaiSach {
     private  String MaLoaiSach, TenLoaiSach;

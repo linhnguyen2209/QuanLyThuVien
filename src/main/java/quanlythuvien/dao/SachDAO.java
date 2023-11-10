@@ -13,7 +13,7 @@ import quanlythuvien.utils.jdbcHelper;
 /**
  *
  * @author Dino
- * Create and edit by Dino
+ * Create and edit by Dino & Linh
  */
 public class SachDAO extends ThuVienDAO<Sach, Integer>{
     final String INSERT_SQL = "INSERT INTO Sach (TieuDe, NhaXuatBan, TacGia, SoTrang, SoLuongSach, GiaTien, NgayNhapKho, ViTriDatSach, MaLoaiSach) VALUES (?,?,?,?,?,?,?,?,?)";
