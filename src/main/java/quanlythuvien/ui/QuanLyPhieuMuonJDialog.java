@@ -559,7 +559,7 @@ public class QuanLyPhieuMuonJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnLastActionPerformed
 
     private void tblPhieuMuonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhieuMuonMousePressed
-        if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 1) {
             this.row = tblPhieuMuon.rowAtPoint(evt.getPoint());
             edit();
         }
