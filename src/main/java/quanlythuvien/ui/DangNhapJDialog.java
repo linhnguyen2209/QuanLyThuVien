@@ -28,7 +28,7 @@ public class DangNhapJDialog extends javax.swing.JDialog {
     }
 
     void init() {
-        this.setLocationRelativeTo(null);
+        this.setLocation(399,101);
         this.setTitle("Đăng nhập");
         this.setIconImage(XImage.getAppIcon());
         txtTenDangNhap.setBackground(new Color(236, 238, 238, 0));

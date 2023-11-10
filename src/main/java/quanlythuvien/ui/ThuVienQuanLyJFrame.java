@@ -47,6 +47,9 @@ public class ThuVienQuanLyJFrame extends javax.swing.JFrame {
     void openQuanLyNguoiDung() {
         new QuanLyNguoiDungDialog(this, true).setVisible(true);
     }
+    void openQuanLyTaiLieu() {
+        new QuanLyTaiLieuDialog(this, true).setVisible(true);
+    }
 
     void dangXuat() {
         boolean choose = MsgBox.confirm(this, "Bạn chắc chắn muốn đăng xuất!");
@@ -219,6 +222,11 @@ public class ThuVienQuanLyJFrame extends javax.swing.JFrame {
         btnQuanLyTaiLieu.setForeground(new java.awt.Color(102, 102, 102));
         btnQuanLyTaiLieu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/btnTaiLieu.png"))); // NOI18N
         btnQuanLyTaiLieu.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(255, 255, 255)));
+        btnQuanLyTaiLieu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuanLyTaiLieuActionPerformed(evt);
+            }
+        });
         pnlTrangChuQuanLy.add(btnQuanLyTaiLieu, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 380, 220, 220));
 
         btnQuanLyNguoiDung.setBackground(new java.awt.Color(255, 255, 240));
@@ -333,6 +341,10 @@ public class ThuVienQuanLyJFrame extends javax.swing.JFrame {
     private void btnQuanLyNguoiDungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuanLyNguoiDungActionPerformed
         openQuanLyNguoiDung();
     }//GEN-LAST:event_btnQuanLyNguoiDungActionPerformed
+
+    private void btnQuanLyTaiLieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuanLyTaiLieuActionPerformed
+        openQuanLyTaiLieu();
+    }//GEN-LAST:event_btnQuanLyTaiLieuActionPerformed
 
     /**
      * @param args the command line arguments
