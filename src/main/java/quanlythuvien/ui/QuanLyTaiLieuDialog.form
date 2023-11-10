@@ -388,7 +388,7 @@
                         <Component class="javax.swing.JTable" name="jTable3">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="10" rowCount="0">
+                              <Table columnCount="10" rowCount="1">
                                 <Column editable="false" title="M&#xe3; S&#xe1;ch" type="java.lang.Object"/>
                                 <Column editable="false" title="Ti&#xea;u &#x110;&#x1ec1;" type="java.lang.Object"/>
                                 <Column editable="false" title="Nh&#xe0; Xu&#x1ea5;t B&#x1ea3;n" type="java.lang.Object"/>
@@ -497,7 +497,7 @@
                               <Component id="rdoTacgia1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jToggleButton1" min="-2" pref="81" max="-2" attributes="0"/>
-                              <EmptySpace pref="28" max="32767" attributes="0"/>
+                              <EmptySpace pref="30" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -522,7 +522,7 @@
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="buttonGroup1"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="T&#x1eeb; kh&#xf3;a"/>
+                        <Property name="text" type="java.lang.String" value="T&#xea;n s&#xe1;ch"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JRadioButton" name="rdoTenNguoiDung">
@@ -530,7 +530,7 @@
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="buttonGroup1"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="T&#xea;n s&#xe1;ch"/>
+                        <Property name="text" type="java.lang.String" value="NXB"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JRadioButton" name="rdoTacgia">
@@ -549,7 +549,7 @@
                         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                           <ComponentRef name="buttonGroup1"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Lo&#x1ea1;i s&#xe1;ch"/>
+                        <Property name="text" type="java.lang.String" value="M&#xe3; lo&#x1ea1;i s&#xe1;ch"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoTacgia1ActionPerformed"/>

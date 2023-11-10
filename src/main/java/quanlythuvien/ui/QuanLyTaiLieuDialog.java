@@ -229,7 +229,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
                 "Mã Sách", "Tiêu Đề", "Nhà Xuất Bản", "Tác Giả", "Số Trang", "SL Sách", "Giá Tiền", "Ngày Nhập", "Vị Trí", "Mã Loại Sách"
@@ -273,10 +273,10 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         pnlLoaiTimKiem.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Theo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
         buttonGroup1.add(rdoMaNguoiDung);
-        rdoMaNguoiDung.setText("Từ khóa");
+        rdoMaNguoiDung.setText("Tên sách");
 
         buttonGroup1.add(rdoTenNguoiDung);
-        rdoTenNguoiDung.setText("Tên sách");
+        rdoTenNguoiDung.setText("NXB");
 
         buttonGroup1.add(rdoTacgia);
         rdoTacgia.setText("Tác giả");
@@ -287,7 +287,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         });
 
         buttonGroup1.add(rdoTacgia1);
-        rdoTacgia1.setText("Loại sách");
+        rdoTacgia1.setText("Mã loại sách");
         rdoTacgia1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rdoTacgia1ActionPerformed(evt);
@@ -311,7 +311,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
                 .addComponent(rdoTacgia1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         pnlLoaiTimKiemLayout.setVerticalGroup(
             pnlLoaiTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
