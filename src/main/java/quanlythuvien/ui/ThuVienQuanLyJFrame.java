@@ -6,6 +6,9 @@ package quanlythuvien.ui;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.JDialog;
 import quanlythuvien.ui.*;
 import quanlythuvien.utils.Auth;
@@ -341,6 +344,11 @@ public class ThuVienQuanLyJFrame extends javax.swing.JFrame {
         checkBtnFocus(btnTroGiup, pnlGioiThieu);
         btnClicked = btnTroGiup;
         pnlClicked = pnlGioiThieu;
+        try {
+            Desktop.getDesktop().browse(new File("Star_Library/index.html").toURI());
+        } catch (IOException ex) {
+            MsgBox.alert(this, "Không tìm thấy file hướng dẫn!");
+        }
     }//GEN-LAST:event_btnTroGiupActionPerformed
 
     private void btnQuanLyNguoiDungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuanLyNguoiDungActionPerformed

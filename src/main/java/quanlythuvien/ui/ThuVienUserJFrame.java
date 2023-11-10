@@ -6,6 +6,9 @@ package quanlythuvien.ui;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.JDialog;
 import quanlythuvien.ui.*;
 import quanlythuvien.utils.Auth;
@@ -138,6 +141,11 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         btnTroGiup.setForeground(new java.awt.Color(255, 255, 204));
         btnTroGiup.setText("TRỢ GIÚP");
         btnTroGiup.setBorder(null);
+        btnTroGiup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTroGiupActionPerformed(evt);
+            }
+        });
 
         btnLichSuMuonTra.setBackground(new java.awt.Color(0, 102, 153));
         btnLichSuMuonTra.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -281,6 +289,17 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         btnClicked = btnGioiThieu;
         pnlClicked = pnlGioiThieu;
     }//GEN-LAST:event_btnGioiThieuActionPerformed
+
+    private void btnTroGiupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTroGiupActionPerformed
+        checkBtnFocus(btnTroGiup, pnlGioiThieu);
+        btnClicked = btnTroGiup;
+        pnlClicked = pnlGioiThieu;
+        try {
+            Desktop.getDesktop().browse(new File("Star_Library/index.html").toURI());
+        } catch (IOException ex) {
+            MsgBox.alert(this, "Không tìm thấy file hướng dẫn!");
+        }
+    }//GEN-LAST:event_btnTroGiupActionPerformed
 
     /**
      * @param args the command line arguments

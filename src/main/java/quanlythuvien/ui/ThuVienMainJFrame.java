@@ -7,9 +7,13 @@ package quanlythuvien.ui;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Desktop;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Time;
 import javax.swing.JDialog;
+import javax.swing.Timer;
 import quanlythuvien.ui.*;
 import quanlythuvien.utils.Auth;
 import quanlythuvien.utils.MsgBox;
@@ -23,6 +27,9 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
 
     Component btnClicked; // lưu btn đã click trước
     Component pnlClicked;
+    int widthBtnDN = 200;
+    int HeightBtnDN = 70;
+    int ktTang = 1;
 
     public ThuVienMainJFrame() {
         initComponents();
@@ -195,6 +202,14 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
         btnDangNhap.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnDangNhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/login.png"))); // NOI18N
         btnDangNhap.setText("ĐĂNG NHẬP");
+        btnDangNhap.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDangNhapMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDangNhapMouseExited(evt);
+            }
+        });
         btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDangNhapActionPerformed(evt);
@@ -243,8 +258,11 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
     private void btnTroGiupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTroGiupActionPerformed
+        checkBtnFocus(btnTroGiup, pnlGioiThieu);
+        btnClicked = btnTroGiup;
+        pnlClicked = pnlGioiThieu;
         try {
-            Desktop.getDesktop().browse(new File("Star Library/index.html").toURI());
+            Desktop.getDesktop().browse(new File("Star_Library/index.html").toURI());
         } catch (IOException ex) {
             MsgBox.alert(this, "Không tìm thấy file hướng dẫn!");
         }
@@ -261,6 +279,14 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
         btnClicked = btnGioiThieu;
         pnlClicked = pnlGioiThieu;
     }//GEN-LAST:event_btnGioiThieuActionPerformed
+
+    private void btnDangNhapMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangNhapMouseEntered
+        
+    }//GEN-LAST:event_btnDangNhapMouseEntered
+
+    private void btnDangNhapMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangNhapMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDangNhapMouseExited
 
     /**
      * @param args the command line arguments
