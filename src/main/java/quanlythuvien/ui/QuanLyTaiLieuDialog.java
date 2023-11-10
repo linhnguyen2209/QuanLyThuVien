@@ -28,7 +28,6 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         this.setLocation(318,73);
         this.setTitle("Quản lý tài liệu");
         this.setIconImage(XImage.getAppIcon());
-         setLocationRelativeTo(null);
     }
     
      List <Sach> list = new ArrayList<>();
@@ -613,7 +612,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
-        // TODO add your handling code here:
+                this.dispose();
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed

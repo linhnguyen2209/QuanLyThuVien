@@ -25,7 +25,7 @@ public class SachDAO extends ThuVienDAO<Sach, Integer>{
     final String Select_By_TieuDE ="select * from Sach where TieuDe like ? "; 
     final String Select_By_TacGia ="select * from Sach where TacGia like ?";
     final String Select_By_ID_LoaiSach =" select * from Sach Where MaLoaiSach like ? ";
-    final String Select_By_NhaXB ="select * from Sach Where NhaXuatBan like?"; 
+    final String Select_By_NhaXB ="select * from Sach Where NhaXuatBan like ?"; 
 
     @Override
     public void insert(Sach entity) {

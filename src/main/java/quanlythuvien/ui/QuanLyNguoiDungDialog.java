@@ -523,7 +523,7 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         pnlChucNang2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng khác", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
         pnlChucNang2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("Home");
+        jButton1.setText("In danh sách");
         pnlChucNang2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 33, 150, 30));
 
         btnThoat.setText("Thoát");
@@ -562,10 +562,8 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void tblNguoiDungMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNguoiDungMousePressed
-        if (evt.getClickCount() == 2) {
             this.row = tblNguoiDung.rowAtPoint(evt.getPoint());
             edit();
-        }
     }//GEN-LAST:event_tblNguoiDungMousePressed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
