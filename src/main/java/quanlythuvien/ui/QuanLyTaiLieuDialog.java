@@ -54,7 +54,6 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         jLabel12 = new javax.swing.JLabel();
         txtViTri = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        txtMaLoaiSach = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         btn_first = new javax.swing.JButton();
         btn_prev = new javax.swing.JButton();
@@ -65,6 +64,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         btn_Sua = new javax.swing.JButton();
         btn_Xoa = new javax.swing.JButton();
         btn_Moi = new javax.swing.JButton();
+        cboLoaiSach = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         btn_ThemLoaiSach = new javax.swing.JButton();
@@ -164,7 +164,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
             }
         });
 
-        jLabel13.setText("Mã Loại Sách");
+        jLabel13.setText("Loại Sách");
 
         jPanel3.setLayout(new java.awt.GridLayout(1, 4, 5, 5));
 
@@ -193,6 +193,8 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
 
         btn_Moi.setText("Mới");
         jPanel4.add(btn_Moi);
+
+        cboLoaiSach.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -234,10 +236,10 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
                                                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(jLabel13))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(txtViTri, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtNgayNhapKho, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtMaLoaiSach, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(txtViTri, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                                                    .addComponent(txtNgayNhapKho, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                                                    .addComponent(cboLoaiSach, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(319, 319, 319)
@@ -276,11 +278,11 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txtViTri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
-                            .addComponent(txtMaLoaiSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(cboLoaiSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(9, 9, 9)
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -488,6 +490,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     private javax.swing.JButton btn_next;
     private javax.swing.JButton btn_prev;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cboLoaiSach;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -517,7 +520,6 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     private javax.swing.JTable jTable2;
     private javax.swing.JTabbedPane tabs;
     private javax.swing.JTextField txtGiaTien;
-    private javax.swing.JTextField txtMaLoaiSach;
     private javax.swing.JTextField txtNgayNhapKho;
     private javax.swing.JTextField txtNhaXuatBan;
     private javax.swing.JTextField txtSoTrang;
