@@ -1,6 +1,5 @@
 package quanlythuvien.ui;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -8,6 +7,8 @@ import quanlythuvien.dao.PhieuMuonDAO;
 import quanlythuvien.dao.PhieuTraDAO;
 import quanlythuvien.entity.PhieuMuon;
 import quanlythuvien.entity.PhieuTra;
+import quanlythuvien.utils.Auth;
+import quanlythuvien.utils.MsgBox;
 import quanlythuvien.utils.XDate;
 import quanlythuvien.utils.XImage;
 
@@ -76,6 +77,18 @@ public class QuanLyPhieuMuonJDialog extends javax.swing.JDialog {
         txtGhiChu.setText(model.getGhiChu());
     }
 
+    PhieuMuon getForm() {
+        PhieuMuon model = new PhieuMuon();
+        model.setMaPhieuMuon(Integer.valueOf(txtMaPhieuMuon.getText()));
+        model.setNgayMuon(XDate.toDate(txtNgayMuon.getText(), "yyyy/MM/dd"));
+        model.setNgayHenTra(XDate.toDate(txtNgayHenTra.getText(), "yyyy/MM/dd"));
+        model.setTongSoLuongSachMuon(Integer.valueOf(txtTongSoLuongSachMuon.getText()));
+        model.setMaNguoiDung(txtMaNguoiDung.getText());
+        model.setGhiChu(txtGhiChu.getText());
+
+        return model;
+    }
+
     void clearForm() {
         txtMaPhieuMuon.setText("");
         txtNgayMuon.setText("");
@@ -141,6 +154,51 @@ public class QuanLyPhieuMuonJDialog extends javax.swing.JDialog {
     private void last() {
         row = tblPhieuMuon.getRowCount() - 1;
         edit();
+    }
+
+    void insert() {
+        PhieuMuon pm = getForm();
+        try {
+            phieuMuonDAO.insert(pm);
+            fillTablePhieuMuon();
+            clearForm();
+            MsgBox.alert(this, "Thêm thành công");
+        } catch (Exception e) {
+            e.printStackTrace();
+            MsgBox.alert(this, "Thêm thất bại!");
+        }
+    }
+
+    void update() {
+        PhieuMuon pm = getForm();
+        try {
+            phieuMuonDAO.update(pm);
+            fillTablePhieuMuon();
+            MsgBox.alert(this, "Cập nhật thành công");
+        } catch (Exception e) {
+            e.printStackTrace();
+            MsgBox.alert(this, "Cập nhật thất bại!");
+        }
+    }
+
+    void delete() {
+        if (!Auth.isManager()) {
+            MsgBox.alert(this, "Bạn không có quyền xoá!");
+        } else {
+            try {
+                if (MsgBox.confirm(this, "Bạn thực sự muốn xoá người dùng này?")) {
+                    String maND = txtMaPhieuMuon.getText();
+                    Integer maNDintInteger = Integer.parseInt(maND);
+                    phieuMuonDAO.delete(maNDintInteger);
+                    this.fillTablePhieuMuon();
+                    this.clearForm();
+                    MsgBox.alert(this, "Xoá thành công!");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                MsgBox.alert(this, "Xoá thất bại!");
+            }
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -252,10 +310,25 @@ public class QuanLyPhieuMuonJDialog extends javax.swing.JDialog {
         jLabel16.setText("Chế độ chỉnh sửa");
 
         btn_Them.setText("Thêm");
+        btn_Them.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ThemActionPerformed(evt);
+            }
+        });
 
         btn_Sua.setText("Sửa");
+        btn_Sua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SuaActionPerformed(evt);
+            }
+        });
 
         btn_Xoa.setText("Xóa");
+        btn_Xoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_XoaActionPerformed(evt);
+            }
+        });
 
         btn_Moi.setText("Mới");
         btn_Moi.addActionListener(new java.awt.event.ActionListener() {
@@ -491,6 +564,18 @@ public class QuanLyPhieuMuonJDialog extends javax.swing.JDialog {
             edit();
         }
     }//GEN-LAST:event_tblPhieuMuonMousePressed
+
+    private void btn_SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaActionPerformed
+        update();
+    }//GEN-LAST:event_btn_SuaActionPerformed
+
+    private void btn_XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaActionPerformed
+        delete();
+    }//GEN-LAST:event_btn_XoaActionPerformed
+
+    private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
+        insert();
+    }//GEN-LAST:event_btn_ThemActionPerformed
 
     public static void main(String args[]) {
 
