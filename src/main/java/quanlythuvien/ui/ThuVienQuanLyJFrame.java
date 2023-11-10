@@ -47,8 +47,13 @@ public class ThuVienQuanLyJFrame extends javax.swing.JFrame {
     void openQuanLyNguoiDung() {
         new QuanLyNguoiDungDialog(this, true).setVisible(true);
     }
+
     void openQuanLyTaiLieu() {
         new QuanLyTaiLieuDialog(this, true).setVisible(true);
+    }
+
+    void openQuanLyMuonTra() {
+        new QuanLyPhieuMuonJDialog(this, true).setVisible(true);
     }
 
     void dangXuat() {
@@ -323,7 +328,7 @@ public class ThuVienQuanLyJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTrangChuActionPerformed
 
     private void btnQuanLyMuonTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuanLyMuonTraActionPerformed
-
+        openQuanLyMuonTra();
     }//GEN-LAST:event_btnQuanLyMuonTraActionPerformed
 
     private void btnGioiThieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGioiThieuActionPerformed
