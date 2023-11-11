@@ -19,6 +19,7 @@ import quanlythuvien.entity.LoaiSach;
 import quanlythuvien.entity.Sach;
 import quanlythuvien.utils.Auth;
 import quanlythuvien.utils.MsgBox;
+import quanlythuvien.utils.XDate;
 import quanlythuvien.utils.XImage;
 
 /**
@@ -146,11 +147,14 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         txtNgayNhapKho.setText("");
         txtViTri.setText("");
         cboLoaiSach.setSelectedIndex(0);
+        tbl_QLTL.clearSelection();
     }
 
     Sach getForm() {
         Sach model = new Sach();
-        model.setMaSach(Integer.parseInt(tbl_QLTL.getValueAt(row, 0) + ""));
+        if(row >= 0){
+            model.setMaSach(Integer.parseInt(tbl_QLTL.getValueAt(row, 0) + ""));
+        }
         model.setTieuDe(txtTieude.getText());
         model.setNhaXuatBan(txtNhaXuatBan.getText());
         model.setTacGia(txtTacGia.getText());
@@ -297,9 +301,21 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     }
 
     void insertSach() {
-        Sach sch = getForm();
+//        Sach sach = new Sach();
+//        if(ValidateSach()){
+//            sach.setTieuDe(txtTieude.getText());
+//            sach.setNhaXuatBan(txtNhaXuatBan.getText());
+//            sach.setTacGia(txtTacGia.getText());
+//            sach.setSoTrang(Integer.parseInt(txtSoTrang.getText()));
+//            sach.setSoLuongSach(Integer.parseInt(txt_SoLuongSach.getText()));
+//            sach.setGiaTien(Double.parseDouble(txtGiaTien.getText()));
+//            sach.setNgayNhapKho(XDate.toDate(txtNgayNhapKho.getText(), "yyyy-MM-dd"));
+//            sach.setViTriSach(txtViTri.getText());
+//            sach.setMaLoaiSach(cboLoaiSach.getSelectedItem()+"");
+//        }
+        Sach sach = getForm();
         try {
-            SDao.insert(sch);
+            SDao.insert(sach);
             FillTable_QLTlieu();
             clearForm();
             MsgBox.alert(this, "Thêm thành công !");
@@ -1308,22 +1324,24 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnNew1ActionPerformed
 
     private void btnAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd1ActionPerformed
-       if(ValidateSach()){
-        insertSach();}
+        if (ValidateSach()) {
+            insertSach();
+        }
     }//GEN-LAST:event_btnAdd1ActionPerformed
 
     private void btnUpdate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate1ActionPerformed
-       if(ValidateSach()){
-        updateSach();}
+        if (ValidateSach()) {
+            updateSach();
+        }
     }//GEN-LAST:event_btnUpdate1ActionPerformed
 
     private void btnDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete1ActionPerformed
-     int selectedRow = tbl_QLTL.getSelectedRow();
-    if (selectedRow == -1) {
-        JOptionPane.showMessageDialog(null, "Vui lòng chọn ít nhất một dòng để xóa", "Lỗi", JOptionPane.ERROR_MESSAGE);
-    } else {
-        deleteSach();
-    } 
+        int selectedRow = tbl_QLTL.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn ít nhất một dòng để xóa", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        } else {
+            deleteSach();
+        }
     }//GEN-LAST:event_btnDelete1ActionPerformed
 
     private void rdoMaLoaiSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoMaLoaiSachActionPerformed
@@ -1338,17 +1356,19 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_tbl_QLTLMousePressed
 
     private void btn_ThemLoaiSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemLoaiSachActionPerformed
-        if(validateLoaiSach()){
-        insertLS();}
+        if (validateLoaiSach()) {
+            insertLS();
+        }
     }//GEN-LAST:event_btn_ThemLoaiSachActionPerformed
 
     private void btn_SuaLoaiSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaLoaiSachActionPerformed
-        if(validateLoaiSach()){
-        updateLS();}
+        if (validateLoaiSach()) {
+            updateLS();
+        }
     }//GEN-LAST:event_btn_SuaLoaiSachActionPerformed
 
     private void btn_XoaLoaiSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaLoaiSachActionPerformed
-        
+
         deleteLS();
     }//GEN-LAST:event_btn_XoaLoaiSachActionPerformed
 
