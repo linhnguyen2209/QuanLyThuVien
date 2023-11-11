@@ -41,6 +41,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         fillTablePhieuMuon();
         fillTablePhieuTra();
         fillJlistSach();
+        updateStatus();
     }
     
     void fillTablePhieuMuon() {
@@ -86,10 +87,10 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     
     PhieuMuon getForm() {
         PhieuMuon model = new PhieuMuon();
-        model.setMaPhieuMuon(Integer.valueOf(txtMaPhieuMuon.getText()));
+        model.setMaPhieuMuon(Integer.parseInt(txtMaPhieuMuon.getText()));
         model.setNgayMuon(XDate.toDate(txtNgayMuon.getText(), "yyyy/MM/dd"));
         model.setNgayHenTra(XDate.toDate(txtNgayHenTra.getText(), "yyyy/MM/dd"));
-        model.setTongSoLuongSachMuon(Integer.valueOf(txtTongSoLuongSachMuon.getText()));
+        model.setTongSoLuongSachMuon(Integer.parseInt(txtTongSoLuongSachMuon.getText()));
         model.setMaNguoiDung(txtMaNguoiDung.getText());
         model.setGhiChu(txtGhiChu.getText());
         
@@ -97,6 +98,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     }
     
     void clearForm() {
+
         txtMaPhieuMuon.setText("");
         txtNgayMuon.setText("");
         txtNgayHenTra.setText("");
@@ -125,8 +127,8 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         boolean first = this.row == 0;
         boolean last = this.row == tblPhieuMuon.getRowCount() - 1;
         
-        txtMaPhieuMuon.setEditable(!edit);
-        txtMaNguoiDung.setEditable(!edit);
+        txtMaPhieuMuon.setEditable(edit);
+        txtMaNguoiDung.setEditable(edit);
         //Khi insert thì không update, delete
         btnThem.setEnabled(!edit);
         btnSua.setEnabled(edit);
@@ -165,6 +167,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     
     void insert() {
         PhieuMuon pm = getForm();
+        
         try {
             phieuMuonDAO.insert(pm);
             fillTablePhieuMuon();
@@ -255,6 +258,9 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPhieuMuon = new javax.swing.JTable();
+        pnlChucNang2 = new javax.swing.JPanel();
+        btn_Home = new javax.swing.JButton();
+        btnThoat = new javax.swing.JButton();
         pnlChiTietPM = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -266,10 +272,10 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         jLabel10 = new javax.swing.JLabel();
         txtNgayMuonCT = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        spNgayTra = new javax.swing.JSpinner();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         chkDaTra = new javax.swing.JCheckBox();
+        txtNgayTra = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         txtTimKiemMaSach = new javax.swing.JTextField();
@@ -348,30 +354,30 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
                 .addComponent(btnThem)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnSua)
-                .addGap(37, 37, 37)
+                .addGap(18, 18, 18)
                 .addComponent(btnXoa)
-                .addGap(39, 39, 39)
+                .addGap(18, 18, 18)
                 .addComponent(btnMoi)
-                .addGap(16, 16, 16))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(19, 19, 19)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMoi)
                     .addComponent(btnXoa)
                     .addComponent(btnSua)
                     .addComponent(btnThem))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        pnlPhieuMuon.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 438, -1, -1));
+        pnlPhieuMuon.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 438, 410, 80));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Điều hướng"));
 
@@ -408,29 +414,29 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(32, 32, 32)
                 .addComponent(btnFirst)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPrev)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnNext)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLast)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFirst)
                     .addComponent(btnPrev)
                     .addComponent(btnNext)
                     .addComponent(btnLast))
-                .addGap(16, 16, 16))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        pnlPhieuMuon.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 440, -1, -1));
+        pnlPhieuMuon.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 440, 380, 80));
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin"));
 
@@ -455,7 +461,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7)
                     .addComponent(jLabel3))
@@ -478,15 +484,15 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
                     .addComponent(jLabel6)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTongSoLuongSachMuon, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(74, 74, 74))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtTongSoLuongSachMuon)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE))
+                .addGap(73, 73, 73))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -508,16 +514,14 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtTongSoLuongSachMuon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel8)))))
-                .addGap(136, 136, 136))
+                            .addComponent(jLabel8)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
-        pnlPhieuMuon.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 258, 1053, 168));
+        pnlPhieuMuon.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 1080, 168));
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh Sách"));
 
@@ -555,8 +559,8 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1024, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1058, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -565,7 +569,28 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        pnlPhieuMuon.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 6, -1, -1));
+        pnlPhieuMuon.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 6, 1080, -1));
+
+        pnlChucNang2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng khác", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        pnlChucNang2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_Home.setText("Home");
+        btn_Home.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_HomeActionPerformed(evt);
+            }
+        });
+        pnlChucNang2.add(btn_Home, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 110, 30));
+
+        btnThoat.setText("Thoát");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
+        pnlChucNang2.add(btnThoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 100, 30));
+
+        pnlPhieuMuon.add(pnlChucNang2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 440, 290, 80));
 
         tabs.addTab("Quản lý Mượn", pnlPhieuMuon);
 
@@ -584,8 +609,6 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         jLabel10.setText("Mã Độc giả:");
 
         jLabel12.setText("Ngày mượn:");
-
-        spNgayTra.setModel(new javax.swing.SpinnerDateModel());
 
         jLabel13.setText("Ngày trả:");
 
@@ -608,13 +631,13 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
                     .addComponent(jLabel14))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(chkDaTra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(spNgayTra, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                    .addComponent(chkDaTra, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
                     .addComponent(txtMaPMChiTiet)
                     .addComponent(txtMaNhanVien)
                     .addComponent(txtMaDocGia)
-                    .addComponent(txtNgayMuonCT))
-                .addContainerGap(18, Short.MAX_VALUE))
+                    .addComponent(txtNgayMuonCT)
+                    .addComponent(txtNgayTra))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -637,8 +660,8 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
                     .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(spNgayTra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13))
+                    .addComponent(jLabel13)
+                    .addComponent(txtNgayTra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(chkDaTra)
@@ -661,17 +684,16 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(txtTimKiemMaSach, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtTimKiemMaSach, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(txtTimKiemMaSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 15, Short.MAX_VALUE))
         );
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 18, 350, 60));
@@ -721,8 +743,8 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         jPanel2.add(btnAllLeft, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 190, 65, -1));
 
         jLabel16.setText("Tổng số lượng:");
-        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, -1, -1));
-        jPanel2.add(txtTongSoLuongSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, 120, -1));
+        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, -1, -1));
+        jPanel2.add(txtTongSoLuongSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, 120, 30));
 
         listSachTrongKho.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -763,30 +785,29 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         pnChucNang.setLayout(pnChucNangLayout);
         pnChucNangLayout.setHorizontalGroup(
             pnChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnChucNangLayout.createSequentialGroup()
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addComponent(btnFirstCT, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPrevCT, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnNextCT, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnLastCT)
+                .addGap(20, 20, 20))
             .addGroup(pnChucNangLayout.createSequentialGroup()
+                .addGap(121, 121, 121)
                 .addGroup(pnChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnChucNangLayout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addGroup(pnChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnDelete)
-                            .addComponent(btnLuu)
-                            .addComponent(btnUpdate)
-                            .addComponent(btnHuy)))
-                    .addGroup(pnChucNangLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnFirstCT, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPrevCT, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnNextCT, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLastCT, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnDelete)
+                    .addComponent(btnLuu)
+                    .addComponent(btnUpdate)
+                    .addComponent(btnHuy))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnChucNangLayout.setVerticalGroup(
             pnChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnChucNangLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnHuy)
                 .addGap(18, 18, 18)
                 .addComponent(btnUpdate)
@@ -794,7 +815,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
                 .addComponent(btnLuu)
                 .addGap(18, 18, 18)
                 .addComponent(btnDelete)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(pnChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFirstCT)
                     .addComponent(btnNextCT)
@@ -828,8 +849,8 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlChiTietPMLayout = new javax.swing.GroupLayout(pnlChiTietPM);
@@ -839,34 +860,34 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             .addGroup(pnlChiTietPMLayout.createSequentialGroup()
                 .addGroup(pnlChiTietPMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlChiTietPMLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlChiTietPMLayout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addGroup(pnlChiTietPMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pnlChiTietPMLayout.createSequentialGroup()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(pnChucNang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 111, Short.MAX_VALUE))
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pnlChiTietPMLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(pnChucNang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlChiTietPMLayout.setVerticalGroup(
             pnlChiTietPMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlChiTietPMLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addContainerGap()
                 .addGroup(pnlChiTietPMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnlChiTietPMLayout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnChucNang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(276, 276, 276)
+                .addGap(256, 256, 256)
                 .addComponent(jLabel11)
                 .addContainerGap())
         );
@@ -1065,6 +1086,23 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         String key = txtTimKiemMaSach.getText();
         
     }//GEN-LAST:event_txtTimKiemMaSachKeyReleased
+
+    private void btn_HomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HomeActionPerformed
+        if (Auth.isManager()){
+            new ThuVienQuanLyJFrame().setVisible(true);
+            this.dispose();
+        }else{
+            new ThuVienUserJFrame().setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_btn_HomeActionPerformed
+
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        MsgBox.confirm(this, "Bạn thật sự muốn thoát !");{
+            this.dispose();
+        }
+
+    }//GEN-LAST:event_btnThoatActionPerformed
     
     public static void main(String args[]) {
         
@@ -1102,8 +1140,10 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnRight;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnThoat;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnXoa;
+    private javax.swing.JButton btn_Home;
     private javax.swing.JCheckBox chkDaTra;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
@@ -1144,9 +1184,9 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     private javax.swing.JList<String> listSachTrongKho;
     private javax.swing.JPanel pnChucNang;
     private javax.swing.JPanel pnlChiTietPM;
+    private javax.swing.JPanel pnlChucNang2;
     private javax.swing.JPanel pnlPhieuMuon;
     private javax.swing.JPanel pnlTraSach;
-    private javax.swing.JSpinner spNgayTra;
     private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tblDanhPMChiTiet;
     private javax.swing.JTable tblPhieuMuon;
@@ -1161,6 +1201,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     private javax.swing.JTextField txtNgayHenTra;
     private javax.swing.JTextField txtNgayMuon;
     private javax.swing.JTextField txtNgayMuonCT;
+    private javax.swing.JTextField txtNgayTra;
     private javax.swing.JTextField txtTimKiemMaSach;
     private javax.swing.JTextField txtTongSoLuongSach;
     private javax.swing.JTextField txtTongSoLuongSachMuon;
