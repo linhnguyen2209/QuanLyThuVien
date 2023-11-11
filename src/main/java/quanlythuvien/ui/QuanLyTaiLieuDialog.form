@@ -136,7 +136,7 @@
                                   </Group>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="txt_QL_MaLoaiSach" pref="274" max="32767" attributes="0"/>
-                                      <Component id="txt_LoaiSachQLi" max="32767" attributes="0"/>
+                                      <Component id="txt_TenLoaiSachQLi" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -162,7 +162,7 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="txt_LoaiSachQLi" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txt_TenLoaiSachQLi" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace pref="325" max="32767" attributes="0"/>
@@ -188,21 +188,33 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ThemLoaiSachActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btn_SuaLoaiSach">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_SuaLoaiSachActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btn_XoaLoaiSach">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_XoaLoaiSachActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btn_MoiLS">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="M&#x1edb;i"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_MoiLSActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -239,15 +251,18 @@
                           <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbl_loaisachMousePressed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
                 <Component class="javax.swing.JLabel" name="jLabel14">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Lo&#x1ea1;i S&#xe1;ch"/>
+                    <Property name="text" type="java.lang.String" value="T&#xea;n Lo&#x1ea1;i S&#xe1;ch"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txt_LoaiSachQLi">
+                <Component class="javax.swing.JTextField" name="txt_TenLoaiSachQLi">
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel15">
                   <Properties>

@@ -4,7 +4,11 @@
  */
 package quanlythuvien.ui;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
@@ -12,19 +16,20 @@ import quanlythuvien.dao.LoaiSachDao;
 import quanlythuvien.dao.SachDAO;
 import quanlythuvien.entity.LoaiSach;
 import quanlythuvien.entity.Sach;
+import quanlythuvien.utils.Auth;
+import quanlythuvien.utils.MsgBox;
 import quanlythuvien.utils.XImage;
 
 /**
  *
- * @author Dino
- * Disign By Linh
- * Edit By Dino
+ * @author Dino Disign By Linh Edit By Dino
  */
 public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
 
     SachDAO SDao = new SachDAO();
     LoaiSachDao LSDao = new LoaiSachDao();
     int row = -1;
+
     /**
      * Creates new form QuanLyTaiLieuDialog
      */
@@ -34,33 +39,33 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         init();
     }
 
-     void init() {
-        this.setLocation(318,73);
+    void init() {
+        this.setLocation(318, 73);
         this.setTitle("Quản lý tài liệu");
         this.setIconImage(XImage.getAppIcon());
-         FillTable_QLTlieu();
-         fillComboBoxLoaiSach();
-         fillTableLoaiSach();
+        FillTable_QLTlieu();
+        fillComboBoxLoaiSach();
+        fillTableLoaiSach();
     }
-    
-     List<Sach> list = new ArrayList<>();
-     
-     void FillTable_QLTlieu(){
-         DefaultTableModel model  = (DefaultTableModel) tbl_QLTL.getModel();
-         model.setRowCount(0);
-         try {
-             if(rdoTenSach.isSelected()){
-                 list =SDao.selectByTieuDe(txtSearch.getText());
-             }else if(rdoNXB.isSelected()){
-                 list = SDao.selectByNhaXB(txtSearch.getText());
-             }else if(rdoTacGia.isSelected()){
-                 list =SDao.selectByTacGia(txtSearch.getText());
-             }else if(rdoMaLoaiSach.isSelected()){
-                 list = SDao.selectByMaLoaiSach(txtSearch.getText());
-             }else{
-                 list = SDao.selectAll();
-             }
-             if (list.size() <= 0) {
+
+    List<Sach> list = new ArrayList<>();
+
+    void FillTable_QLTlieu() {
+        DefaultTableModel model = (DefaultTableModel) tbl_QLTL.getModel();
+        model.setRowCount(0);
+        try {
+            if (rdoTenSach.isSelected()) {
+                list = SDao.selectByTieuDe(txtSearch.getText());
+            } else if (rdoNXB.isSelected()) {
+                list = SDao.selectByNhaXB(txtSearch.getText());
+            } else if (rdoTacGia.isSelected()) {
+                list = SDao.selectByTacGia(txtSearch.getText());
+            } else if (rdoMaLoaiSach.isSelected()) {
+                list = SDao.selectByMaLoaiSach(txtSearch.getText());
+            } else {
+                list = SDao.selectAll();
+            }
+            if (list.size() <= 0) {
                 tbl_QLTL.setVisible(false);
                 lblKetQua.setText("Tổng số sách " + list.size());
                 clearForm();
@@ -68,27 +73,27 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
                 tbl_QLTL.setVisible(true);
                 lblKetQua.setText("Tổng số Sách " + list.size());
             }
-             System.out.println("List: " + list.size());
-             for(Sach sach:list){
-                 model.addRow(new Object[]{
-                     sach.getMaSach(),
-                     sach.getTieuDe(),
-                     sach.getNhaXuatBan(),
-                     sach.getTacGia(),
-                     sach.getSoTrang(),
-                     sach.getSoLuongSach(),
-                     sach.getGiaTien(),
-                     sach.getNgayNhapKho(),
-                     sach.getViTriSach(),
-                     sach.getMaLoaiSach()
-                 });
-             }
-         } catch (Exception e) {
-             e.printStackTrace();
-         }
-     }
-     
-     void fillComboBoxLoaiSach() {
+            System.out.println("List: " + list.size());
+            for (Sach sach : list) {
+                model.addRow(new Object[]{
+                    sach.getMaSach(),
+                    sach.getTieuDe(),
+                    sach.getNhaXuatBan(),
+                    sach.getTacGia(),
+                    sach.getSoTrang(),
+                    sach.getSoLuongSach(),
+                    sach.getGiaTien(),
+                    sach.getNgayNhapKho(),
+                    sach.getViTriSach(),
+                    sach.getMaLoaiSach()
+                });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    void fillComboBoxLoaiSach() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboLoaiSach.getModel();
         model.removeAllElements();
         try {
@@ -100,8 +105,8 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
             e.printStackTrace();
         }
     }
-     
-     void fillTableLoaiSach() {
+
+    void fillTableLoaiSach() {
         DefaultTableModel model = (DefaultTableModel) tbl_loaisach.getModel();
         model.setRowCount(0);
         try {
@@ -116,7 +121,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
             e.printStackTrace();
         }
     }
-    
+
     void setForm(Sach model) {
         txtTieude.setText(model.getTieuDe());
         txtNhaXuatBan.setText(model.getNhaXuatBan());
@@ -127,9 +132,9 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         txtNgayNhapKho.setText(String.valueOf(model.getNgayNhapKho()));
         txtViTri.setText(model.getViTriSach());
         cboLoaiSach.setSelectedItem(model.getMaLoaiSach().trim());
-        System.out.println("MLS"+model.getMaLoaiSach());
+        System.out.println("MLS" + model.getMaLoaiSach());
     }
-    
+
     void clearForm() {
         txtTieude.setText("");
         txtNhaXuatBan.setText("");
@@ -141,25 +146,202 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         txtViTri.setText("");
         cboLoaiSach.setSelectedIndex(0);
     }
-    
-    void edit() {
-    Integer MaSach = (Integer) tbl_QLTL.getValueAt(row, 0);
-    try {
-        Sach sh = SDao.selectById(MaSach);
-        if (sh != null) {
-            setForm(sh);
-            // updateStatus(); // You can uncomment this line if needed
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
 
-     
-     
-     
-     
-     
+    Sach getForm() {
+        Sach model = new Sach();
+        model.setTieuDe(txtTieude.getText());
+        model.setNhaXuatBan(txtNhaXuatBan.getText());
+        model.setTacGia(txtTacGia.getText());
+        try {
+            // Xử lý trường số trang
+            int soTrang = Integer.parseInt(txtSoTrang.getText());
+            model.setSoTrang(soTrang);
+        } catch (NumberFormatException e) {
+            // Xử lý nếu không thể chuyển đổi thành số nguyên
+            // Có thể thông báo lỗi hoặc thực hiện các xử lý khác tùy ý
+            e.printStackTrace();
+        }
+        try {
+            // Xử lý trường số lượng sách
+            int soLuongSach = Integer.parseInt(txt_SoLuongSach.getText());
+            model.setSoLuongSach(soLuongSach);
+        } catch (NumberFormatException e) {
+            // Xử lý nếu không thể chuyển đổi thành số nguyên
+            // Có thể thông báo lỗi hoặc thực hiện các xử lý khác tùy ý
+            e.printStackTrace();
+        }
+        try {
+            // Xử lý trường giá tiền
+            double giaTien = Double.parseDouble(txtGiaTien.getText());
+            model.setGiaTien(giaTien);
+        } catch (NumberFormatException e) {
+            // Xử lý nếu không thể chuyển đổi thành số thực
+            // Có thể thông báo lỗi hoặc thực hiện các xử lý khác tùy ý
+            e.printStackTrace();
+        }
+        try {
+            // Xử lý trường ngày nhập kho
+            String ngayNhapKhoStr = txtNgayNhapKho.getText();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date ngayNhapKho = dateFormat.parse(ngayNhapKhoStr);
+            model.setNgayNhapKho(ngayNhapKho);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        model.setViTriSach(txtViTri.getText());
+        // Lấy giá trị được chọn từ ComboBox
+        Object selectedLoaiSach = cboLoaiSach.getSelectedItem();
+        if (selectedLoaiSach != null) {
+            model.setMaLoaiSach(selectedLoaiSach.toString().trim());
+        }
+        return model;
+    }
+
+    void edit() {
+        Integer MaSach = (Integer) tbl_QLTL.getValueAt(row, 0);
+        try {
+            Sach sh = SDao.selectById(MaSach);
+            if (sh != null) {
+                setForm(sh);
+                // updateStatus(); // You can uncomment this line if needed
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+//    void updateStatus() {
+//        boolean edit = this.row >= 0;
+//        txtMaNgDung.setEditable(!edit);
+//        //Khi insert thì không update, delete
+//        btnAdd.setEnabled(!edit);
+//        btnUpdate.setEnabled(edit);
+//        btnDelete.setEnabled(edit);
+//    }
+    
+    
+    void insertSach(){
+        Sach sch = getForm();
+        try {
+            SDao.insert(sch);
+            FillTable_QLTlieu();
+            clearForm();
+            MsgBox.alert(this, "Thêm thành công !");
+        } catch (Exception e) {
+            e.printStackTrace();
+            MsgBox.alert(this, "Thêm mới thất bại !");
+        }
+    }
+    
+    void updateSach(){
+        Sach sch = getForm();
+        try {
+            SDao.update(sch);
+            FillTable_QLTlieu();
+            MsgBox.alert(this, "Update thành công !");
+            clearForm();
+        } catch (Exception e) {
+        e.printStackTrace();
+        MsgBox.alert(this, "Update thất bại !");
+        }
+    }
+    
+    void deleteSach(){
+        if(!Auth.isManager()){
+            MsgBox.alert(this, "Bạn không đủ quyền hạn để thực thi !");
+        }else{
+            try {
+                if(MsgBox.confirm(this, "Bạn thực xự muốn xóa ?")){
+                     int maSach = Integer.parseInt( tbl_QLTL.getValueAt(row, 0)+"");
+                     SDao.delete(maSach);
+                     MsgBox.alert(this, "Xóa thành công!");
+                     FillTable_QLTlieu();
+                     clearForm();
+                }
+                
+            } catch (Exception e) {
+                e.printStackTrace();
+                MsgBox.alert(this, "Xóa thất bại!");
+            }
+        }
+    }
+    
+    // QlLoaiSach
+    void setFormLS(LoaiSach model) {
+        txt_QL_MaLoaiSach.setText(model.getMaLoaiSach());
+        txt_TenLoaiSachQLi.setText(model.getTenLoaiSach());
+    }
+
+    void clearFormLoaiSach() {
+        txt_QL_MaLoaiSach.setText("");
+        txt_TenLoaiSachQLi.setText("");
+    }
+
+    void editLoaiSach() {
+        String Ls = (String) tbl_loaisach.getValueAt(row, 0);
+        try {
+            LoaiSach loaiS = LSDao.selectById(Ls);
+            if (loaiS != null) {
+                setFormLS(loaiS);
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    LoaiSach getFormLS(){
+        LoaiSach model = new LoaiSach();
+        model.setMaLoaiSach(txt_QL_MaLoaiSach.getText());
+        model.setTenLoaiSach(txt_TenLoaiSachQLi.getText());
+        return model;
+    }
+     void insertLS(){
+        LoaiSach lss = getFormLS();
+        try {
+            LSDao.insert(lss);
+            FillTable_QLTlieu();
+            clearForm();
+            MsgBox.alert(this, "Thêm thành công !");
+        } catch (Exception e) {
+            e.printStackTrace();
+            MsgBox.alert(this, "Thêm mới thất bại !");
+        }
+    }
+    
+    void updateLS(){
+        LoaiSach lss = getFormLS();
+        try {
+            LSDao.update(lss);
+            FillTable_QLTlieu();
+            MsgBox.alert(this, "Update thành công !");
+            clearFormLoaiSach();
+            
+        } catch (Exception e) {
+        e.printStackTrace();
+        MsgBox.alert(this, "Update thất bại !");
+        }
+    }
+    
+    void deleteLS(){
+        if(!Auth.isManager()){
+            MsgBox.alert(this, "Bạn không đủ quyền hạn để thực thi !");
+        }else{
+            try {
+                if(MsgBox.confirm(this, "Bạn thực xự muốn xóa ?")){
+                     String MaLoaiSach =txt_QL_MaLoaiSach.getText();
+                     LSDao.delete(MaLoaiSach);
+                     fillTableLoaiSach();
+                     clearFormLoaiSach();
+                     MsgBox.alert(this, "Xóa thành công!");
+                }
+                
+            } catch (Exception e) {
+                e.printStackTrace();
+                MsgBox.alert(this, "Xóa thất bại!");
+            }
+        }
+    }
+    
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -177,7 +359,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_loaisach = new javax.swing.JTable();
         jLabel14 = new javax.swing.JLabel();
-        txt_LoaiSachQLi = new javax.swing.JTextField();
+        txt_TenLoaiSachQLi = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         txt_QL_MaLoaiSach = new javax.swing.JTextField();
         pnlContain = new javax.swing.JPanel();
@@ -249,15 +431,35 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         jPanel6.setLayout(new java.awt.GridLayout(1, 4, 5, 5));
 
         btn_ThemLoaiSach.setText("Thêm");
+        btn_ThemLoaiSach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ThemLoaiSachActionPerformed(evt);
+            }
+        });
         jPanel6.add(btn_ThemLoaiSach);
 
         btn_SuaLoaiSach.setText("Sửa");
+        btn_SuaLoaiSach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SuaLoaiSachActionPerformed(evt);
+            }
+        });
         jPanel6.add(btn_SuaLoaiSach);
 
         btn_XoaLoaiSach.setText("Xóa");
+        btn_XoaLoaiSach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_XoaLoaiSachActionPerformed(evt);
+            }
+        });
         jPanel6.add(btn_XoaLoaiSach);
 
         btn_MoiLS.setText("Mới");
+        btn_MoiLS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_MoiLSActionPerformed(evt);
+            }
+        });
         jPanel6.add(btn_MoiLS);
 
         tbl_loaisach.setModel(new javax.swing.table.DefaultTableModel(
@@ -276,9 +478,14 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        tbl_loaisach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tbl_loaisachMousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbl_loaisach);
 
-        jLabel14.setText("Loại Sách");
+        jLabel14.setText("Tên Loại Sách");
 
         jLabel15.setText("Mã Loại Sách");
 
@@ -302,7 +509,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
                                 .addGap(38, 38, 38)))
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txt_QL_MaLoaiSach, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
-                            .addComponent(txt_LoaiSachQLi))))
+                            .addComponent(txt_TenLoaiSachQLi))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
@@ -321,7 +528,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
                             .addComponent(jLabel15))
                         .addGap(32, 32, 32)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_LoaiSachQLi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_TenLoaiSachQLi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel14))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 325, Short.MAX_VALUE)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -736,7 +943,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
-                this.dispose();
+        this.dispose();
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
@@ -772,19 +979,19 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_txtViTriActionPerformed
 
     private void btnNew1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNew1ActionPerformed
-        // TODO add your handling code here:
+        clearForm();
     }//GEN-LAST:event_btnNew1ActionPerformed
 
     private void btnAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd1ActionPerformed
-        // TODO add your handling code here:
+       insertSach();
     }//GEN-LAST:event_btnAdd1ActionPerformed
 
     private void btnUpdate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate1ActionPerformed
-        // TODO add your handling code here:
+        updateSach();
     }//GEN-LAST:event_btnUpdate1ActionPerformed
 
     private void btnDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete1ActionPerformed
-        // TODO add your handling code here:
+       deleteSach();
     }//GEN-LAST:event_btnDelete1ActionPerformed
 
     private void rdoMaLoaiSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoMaLoaiSachActionPerformed
@@ -792,11 +999,34 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_rdoMaLoaiSachActionPerformed
 
     private void tbl_QLTLMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_QLTLMousePressed
-         if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 2) {
             this.row = tbl_QLTL.rowAtPoint(evt.getPoint());
             edit();
         }
     }//GEN-LAST:event_tbl_QLTLMousePressed
+
+    private void btn_ThemLoaiSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemLoaiSachActionPerformed
+       insertLS();
+    }//GEN-LAST:event_btn_ThemLoaiSachActionPerformed
+
+    private void btn_SuaLoaiSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaLoaiSachActionPerformed
+        updateLS();
+    }//GEN-LAST:event_btn_SuaLoaiSachActionPerformed
+
+    private void btn_XoaLoaiSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaLoaiSachActionPerformed
+        deleteLS();
+    }//GEN-LAST:event_btn_XoaLoaiSachActionPerformed
+
+    private void btn_MoiLSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_MoiLSActionPerformed
+      clearFormLoaiSach();
+    }//GEN-LAST:event_btn_MoiLSActionPerformed
+
+    private void tbl_loaisachMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_loaisachMousePressed
+        if (evt.getClickCount() == 2) {
+            this.row = tbl_loaisach.rowAtPoint(evt.getPoint());
+            editLoaiSach();
+        }
+    }//GEN-LAST:event_tbl_loaisachMousePressed
 
     /**
      * @param args the command line arguments
@@ -903,8 +1133,8 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     private javax.swing.JTextField txtTacGia;
     private javax.swing.JTextField txtTieude;
     private javax.swing.JTextField txtViTri;
-    private javax.swing.JTextField txt_LoaiSachQLi;
     private javax.swing.JTextField txt_QL_MaLoaiSach;
     private javax.swing.JTextField txt_SoLuongSach;
+    private javax.swing.JTextField txt_TenLoaiSachQLi;
     // End of variables declaration//GEN-END:variables
 }
