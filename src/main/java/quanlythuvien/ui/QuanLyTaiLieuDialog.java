@@ -18,6 +18,7 @@ import quanlythuvien.entity.LoaiSach;
 import quanlythuvien.entity.Sach;
 import quanlythuvien.utils.Auth;
 import quanlythuvien.utils.MsgBox;
+import quanlythuvien.utils.XDate;
 import quanlythuvien.utils.XImage;
 
 /**
@@ -158,8 +159,6 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
             int soTrang = Integer.parseInt(txtSoTrang.getText());
             model.setSoTrang(soTrang);
         } catch (NumberFormatException e) {
-            // Xử lý nếu không thể chuyển đổi thành số nguyên
-            // Có thể thông báo lỗi hoặc thực hiện các xử lý khác tùy ý
             e.printStackTrace();
         }
         try {
@@ -167,8 +166,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
             int soLuongSach = Integer.parseInt(txt_SoLuongSach.getText());
             model.setSoLuongSach(soLuongSach);
         } catch (NumberFormatException e) {
-            // Xử lý nếu không thể chuyển đổi thành số nguyên
-            // Có thể thông báo lỗi hoặc thực hiện các xử lý khác tùy ý
+        
             e.printStackTrace();
         }
         try {
@@ -176,19 +174,15 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
             double giaTien = Double.parseDouble(txtGiaTien.getText());
             model.setGiaTien(giaTien);
         } catch (NumberFormatException e) {
-            // Xử lý nếu không thể chuyển đổi thành số thực
-            // Có thể thông báo lỗi hoặc thực hiện các xử lý khác tùy ý
+         
             e.printStackTrace();
         }
-        try {
-            // Xử lý trường ngày nhập kho
-            String ngayNhapKhoStr = txtNgayNhapKho.getText();
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date ngayNhapKho = dateFormat.parse(ngayNhapKhoStr);
-            model.setNgayNhapKho(ngayNhapKho);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        // Xử lý trường ngày nhập kho
+        Date ngayNhapKho = XDate.toDate(txtNgayNhapKho.getText(), "yyyy/MM/dd") ;
+        if(ngayNhapKho.compareTo(new Date())>0){
+            MsgBox.alert(this, "Ngày nhập kho vượt quá ngày hiện tại!");
         }
+        model.setNgayNhapKho(ngayNhapKho);
         model.setViTriSach(txtViTri.getText());
         // Lấy giá trị được chọn từ ComboBox
         Object selectedLoaiSach = cboLoaiSach.getSelectedItem();
