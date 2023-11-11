@@ -12,6 +12,7 @@ import quanlythuvien.entity.PhieuTra;
 import quanlythuvien.entity.Sach;
 import quanlythuvien.utils.Auth;
 import quanlythuvien.utils.MsgBox;
+import quanlythuvien.utils.ValidatorForm;
 import quanlythuvien.utils.XDate;
 import quanlythuvien.utils.XImage;
 
@@ -27,6 +28,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     
     DefaultListModel modelSachKho, modelSachChon;
     int row = -1;
+    int index = -1;
     
     public QuanLyMuonTraJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -127,6 +129,8 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         boolean first = this.row == 0;
         boolean last = this.row == tblPhieuMuon.getRowCount() - 1;
         
+        txtMaDocGia_Tra.setEditable(false);
+        txtPM_Tra.setEditable(false);
         txtMaPhieuMuon.setEditable(edit);
         txtMaNguoiDung.setEditable(edit);
         //Khi insert thì không update, delete
@@ -225,6 +229,47 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         listSachChon.setModel(modelSachChon);
     }
     
+    void showDetailPhieuTra(PhieuTra model) {
+        txtPM_Tra.setText(model.getMaPhieuMuon() + "");
+        txtMaDocGia_Tra.setText(model.getMaNguoiDung());
+        txtNgayTra_Tra.setText(XDate.toString(model.getNgayTra(), "yyyy-MM-dd"));
+        txaGhiChu_Tra.setText(model.getGhiChu());
+        chkDaTra_Tra.setSelected(model.isTrangThai());
+    }
+    Date now = new Date();
+
+    PhieuTra getForm_PhieuTra() {
+        PhieuTra ptr = new PhieuTra();
+        if (index >= 0) {
+            ptr.setMaPhieuTra(Integer.parseInt(tblPhieuTra.getValueAt(index, 0) + ""));
+        }
+        ptr.setMaPhieuMuon(Integer.parseInt(txtPM_Tra.getText()));
+        ptr.setMaNguoiDung(txtMaDocGia_Tra.getText());
+        ptr.setNgayTra(XDate.toDate(txtNgayTra_Tra.getText(), "yyyy-MM-dd"));
+        ptr.setGhiChu(txaGhiChu_Tra.getText());
+        ptr.setTrangThai(chkDaTra_Tra.isSelected());
+        return ptr;
+    }
+
+    boolean validateForm() {
+        StringBuilder sb = new StringBuilder();
+        ValidatorForm.isDate(txtNgayTra_Tra, sb, "Vui lòng nhập đúng định dạng ngày yyyy-MM-dd");
+        if (sb.length() > 0) {
+            MsgBox.alert(this, sb.toString());
+            return false;
+        }
+        return true;
+    }
+
+    void clearFormTra() {
+        txtPM_Tra.setText("");
+        txtNgayTra_Tra.setText("");
+        txtMaDocGia_Tra.setText("");
+        txaGhiChu_Tra.setText("");
+        chkDaTra_Tra.setSelected(false);
+        index = -1;
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -273,8 +318,6 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         txtNgayMuonCT = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        chkDaTra = new javax.swing.JCheckBox();
         txtNgayTra = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -305,12 +348,28 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         tblDanhPMChiTiet = new javax.swing.JTable();
         pnlTraSach = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        txtPM_Tra = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        txtNgayTra_Tra = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        txtMaDocGia_Tra = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        txaGhiChu_Tra = new javax.swing.JTextArea();
+        chkDaTra_Tra = new javax.swing.JCheckBox();
+        jLabel22 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblPhieuTra = new javax.swing.JTable();
-        jLabel17 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        tblPhieuTra1 = new javax.swing.JTable();
+        jPanel11 = new javax.swing.JPanel();
+        btnAdd_Tra = new javax.swing.JButton();
+        btnDelete_Tra = new javax.swing.JButton();
+        btnNew_Tra = new javax.swing.JButton();
+        btnUpdate_Tra = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        btnHome_Tra = new javax.swing.JButton();
+        btnThoat_Tra = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -592,27 +651,6 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
 
         pnlPhieuMuon.add(pnlChucNang2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 440, 290, 80));
 
-        pnlChucNang2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng khác", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
-        pnlChucNang2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btn_Home.setText("Home");
-        btn_Home.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_HomeActionPerformed(evt);
-            }
-        });
-        pnlChucNang2.add(btn_Home, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 90, 30));
-
-        btnThoat.setText("Thoát");
-        btnThoat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThoatActionPerformed(evt);
-            }
-        });
-        pnlChucNang2.add(btnThoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 80, 30));
-
-        pnlPhieuMuon.add(pnlChucNang2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 440, 230, 90));
-
         tabs.addTab("Quản lý Mượn", pnlPhieuMuon);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin mượn sách"));
@@ -633,10 +671,6 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
 
         jLabel13.setText("Ngày trả:");
 
-        jLabel14.setText("Trạng thái:");
-
-        chkDaTra.setText("Đã trả sách");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -648,12 +682,10 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
                     .addComponent(jLabel10)
                     .addComponent(jLabel9)
                     .addComponent(jLabel12)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel14))
+                    .addComponent(jLabel13))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(chkDaTra, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                    .addComponent(txtMaPMChiTiet)
+                    .addComponent(txtMaPMChiTiet, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
                     .addComponent(txtMaNhanVien)
                     .addComponent(txtMaDocGia)
                     .addComponent(txtNgayMuonCT)
@@ -683,10 +715,6 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(txtNgayTra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(chkDaTra)
-                    .addComponent(jLabel14))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -915,7 +943,80 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
 
         tabs.addTab("Chi tiết phiếu mượn", pnlChiTietPM);
 
+        pnlTraSach.setBackground(new java.awt.Color(255, 255, 255));
+        pnlTraSach.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jPanel6.setLayout(new java.awt.GridLayout(1, 4, 5, 5));
+        pnlTraSach.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 532, 401, -1));
+
+        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Chi tiết"));
+
+        jLabel19.setText("Mã Phiếu mượn:");
+
+        jLabel17.setText("Ngày trả:");
+
+        jLabel20.setText("Mã Độc giả:");
+
+        jLabel21.setText("Ghi chú:");
+
+        txaGhiChu_Tra.setColumns(20);
+        txaGhiChu_Tra.setRows(5);
+        jScrollPane7.setViewportView(txaGhiChu_Tra);
+
+        chkDaTra_Tra.setText("Đã trả sách");
+
+        jLabel22.setText("Trạng thái:");
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel22))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtPM_Tra)
+                    .addComponent(txtNgayTra_Tra)
+                    .addComponent(chkDaTra_Tra, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtMaDocGia_Tra)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(txtPM_Tra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20)
+                    .addComponent(txtMaDocGia_Tra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel17)
+                            .addComponent(txtNgayTra_Tra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel21))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(chkDaTra_Tra)
+                            .addComponent(jLabel22)))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(36, Short.MAX_VALUE))
+        );
+
+        pnlTraSach.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 670, 210));
 
         tblPhieuTra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -926,79 +1027,112 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, true, true, true
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblPhieuTra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPhieuTraMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(tblPhieuTra);
 
-        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(51, 153, 255));
-        jLabel17.setText("Danh Sách Mượn quá Hạn");
+        pnlTraSach.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 16, 1050, 280));
 
-        jButton5.setText("In danh sách");
+        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder("Chức năng"));
 
-        tblPhieuTra1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Mã phiếu trả", "Mã phiếu mượn", "Ngày trả", "Trạng thái", "Mã người dùng", "Ghi chú"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, true, true, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        btnAdd_Tra.setText("Add");
+        btnAdd_Tra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdd_TraActionPerformed(evt);
             }
         });
-        jScrollPane7.setViewportView(tblPhieuTra1);
 
-        javax.swing.GroupLayout pnlTraSachLayout = new javax.swing.GroupLayout(pnlTraSach);
-        pnlTraSach.setLayout(pnlTraSachLayout);
-        pnlTraSachLayout.setHorizontalGroup(
-            pnlTraSachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTraSachLayout.createSequentialGroup()
-                .addGap(390, 390, 390)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(309, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTraSachLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnlTraSachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTraSachLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTraSachLayout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addGap(158, 158, 158))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTraSachLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5)
-                .addContainerGap())
+        btnDelete_Tra.setText("Delete");
+        btnDelete_Tra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelete_TraActionPerformed(evt);
+            }
+        });
+
+        btnNew_Tra.setText("New");
+        btnNew_Tra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNew_TraActionPerformed(evt);
+            }
+        });
+
+        btnUpdate_Tra.setText("Update");
+        btnUpdate_Tra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdate_TraActionPerformed(evt);
+            }
+        });
+
+        btnHome_Tra.setText("Home");
+        btnHome_Tra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHome_TraActionPerformed(evt);
+            }
+        });
+
+        btnThoat_Tra.setText("Thoát");
+        btnThoat_Tra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoat_TraActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator1)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel11Layout.createSequentialGroup()
+                                .addComponent(btnUpdate_Tra, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnNew_Tra, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel11Layout.createSequentialGroup()
+                                .addComponent(btnAdd_Tra, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnDelete_Tra, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(btnHome_Tra, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnThoat_Tra, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
-        pnlTraSachLayout.setVerticalGroup(
-            pnlTraSachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTraSachLayout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
-                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdd_Tra)
+                    .addComponent(btnDelete_Tra))
                 .addGap(18, 18, 18)
-                .addGroup(pnlTraSachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlTraSachLayout.createSequentialGroup()
-                        .addComponent(jButton5)
-                        .addGap(217, 217, 217)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27))
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNew_Tra)
+                    .addComponent(btnUpdate_Tra))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnHome_Tra)
+                    .addComponent(btnThoat_Tra))
+                .addGap(25, 25, 25))
         );
+
+        pnlTraSach.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 320, 370, 210));
 
         tabs.addTab("Quản Lý Trả", pnlTraSach);
 
@@ -1124,6 +1258,63 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_btnThoatActionPerformed
+
+    private void tblPhieuTraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhieuTraMouseClicked
+        index = tblPhieuTra.getSelectedRow();
+        if (index >= 0) {
+            PhieuTra pTra = phieuTraDAO.selectById(Integer.parseInt(tblPhieuTra.getValueAt(index, 0) + ""));
+            showDetailPhieuTra(pTra);
+        }
+    }//GEN-LAST:event_tblPhieuTraMouseClicked
+
+    private void btnAdd_TraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd_TraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAdd_TraActionPerformed
+
+    private void btnDelete_TraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete_TraActionPerformed
+        if (Auth.isManager()) {
+            if (MsgBox.confirm(this, "Bạn thực sự muốn xoá?")) {
+                int maPhieuTra = Integer.parseInt(tblPhieuTra.getValueAt(index, 0) + "");
+                PhieuTra ptr = phieuTraDAO.selectById(maPhieuTra);
+                try {
+                    phieuTraDAO.delete(ptr.getMaPhieuTra());
+                    fillTablePhieuTra();
+                    MsgBox.alert(this, "Xoá thành công!");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    MsgBox.alert(this, "Xoá thất bại!");
+                }
+            }
+        }else{
+            MsgBox.alert(this, "Bạn không đủ quyền để xoá!");
+        }
+    }//GEN-LAST:event_btnDelete_TraActionPerformed
+
+    private void btnNew_TraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNew_TraActionPerformed
+        clearFormTra();
+    }//GEN-LAST:event_btnNew_TraActionPerformed
+
+    private void btnUpdate_TraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate_TraActionPerformed
+        if (validateForm()) {
+            PhieuTra ptr = getForm_PhieuTra();
+            try {
+                phieuTraDAO.update(ptr);
+                fillTablePhieuTra();
+                MsgBox.alert(this, "Cập nhật thành công!");
+            } catch (Exception e) {
+                e.printStackTrace();
+                MsgBox.alert(this, "Cập nhật thất bại!");
+            }
+        }
+    }//GEN-LAST:event_btnUpdate_TraActionPerformed
+
+    private void btnHome_TraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHome_TraActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnHome_TraActionPerformed
+
+    private void btnThoat_TraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoat_TraActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnThoat_TraActionPerformed
     
     public static void main(String args[]) {
         
@@ -1142,17 +1333,21 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd_Tra;
     private javax.swing.JButton btnAllLeft;
     private javax.swing.JButton btnAllRight;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnDelete_Tra;
     private javax.swing.JButton btnFirst;
     private javax.swing.JButton btnFirstCT;
+    private javax.swing.JButton btnHome_Tra;
     private javax.swing.JButton btnHuy;
     private javax.swing.JButton btnLast;
     private javax.swing.JButton btnLastCT;
     private javax.swing.JButton btnLeft;
     private javax.swing.JButton btnLuu;
     private javax.swing.JButton btnMoi;
+    private javax.swing.JButton btnNew_Tra;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnNextCT;
     private javax.swing.JButton btnPrev;
@@ -1162,22 +1357,26 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnThoat;
+    private javax.swing.JButton btnThoat_Tra;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton btnUpdate_Tra;
     private javax.swing.JButton btnXoa;
     private javax.swing.JButton btn_Home;
-    private javax.swing.JCheckBox chkDaTra;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JCheckBox chkDaTra_Tra;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1186,6 +1385,8 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1201,6 +1402,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JList<String> listSachChon;
     private javax.swing.JList<String> listSachTrongKho;
     private javax.swing.JPanel pnChucNang;
@@ -1212,9 +1414,10 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     private javax.swing.JTable tblDanhPMChiTiet;
     private javax.swing.JTable tblPhieuMuon;
     private javax.swing.JTable tblPhieuTra;
-    private javax.swing.JTable tblPhieuTra1;
+    private javax.swing.JTextArea txaGhiChu_Tra;
     private javax.swing.JTextArea txtGhiChu;
     private javax.swing.JTextField txtMaDocGia;
+    private javax.swing.JTextField txtMaDocGia_Tra;
     private javax.swing.JTextField txtMaNguoiDung;
     private javax.swing.JTextField txtMaNhanVien;
     private javax.swing.JTextField txtMaPMChiTiet;
@@ -1223,6 +1426,8 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     private javax.swing.JTextField txtNgayMuon;
     private javax.swing.JTextField txtNgayMuonCT;
     private javax.swing.JTextField txtNgayTra;
+    private javax.swing.JTextField txtNgayTra_Tra;
+    private javax.swing.JTextField txtPM_Tra;
     private javax.swing.JTextField txtTimKiemMaSach;
     private javax.swing.JTextField txtTongSoLuongSach;
     private javax.swing.JTextField txtTongSoLuongSachMuon;
