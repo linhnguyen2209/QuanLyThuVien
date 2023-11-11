@@ -67,9 +67,17 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
             }
             System.out.println("List: " + list.size());
             for (NguoiDung nguoiDung : list) {
+                String role = "";
+                if(nguoiDung.getMaLoaiNguoiDung().equals("LND001")){
+                    role = "Admin";
+                }else if(nguoiDung.getMaLoaiNguoiDung().equals("LND002")){
+                    role = "Librarian";
+                }else{
+                    role = "User";
+                }
                 model.addRow(new Object[]{
                     nguoiDung.getMaNguoiDung(),
-                    nguoiDung.getMaLoaiNguoiDung(),
+                    role,
                     nguoiDung.getTenNguoiDung(),
                     nguoiDung.getEmail(),
                     nguoiDung.getSdt(),
@@ -296,7 +304,7 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Mã Người Dùng", "Mã Loại NgD", "Họ Tên", "Email", "Số Điện Thoại", "Mật khẩu"
+                "Mã Người Dùng", "Vai trò", "Họ Tên", "Email", "Số Điện Thoại", "Mật khẩu"
             }
         ) {
             boolean[] canEdit = new boolean [] {

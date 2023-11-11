@@ -149,6 +149,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
 
     Sach getForm() {
         Sach model = new Sach();
+        model.setMaSach(Integer.parseInt(tbl_QLTL.getValueAt(row, 0)+""));
         model.setTieuDe(txtTieude.getText());
         model.setNhaXuatBan(txtNhaXuatBan.getText());
         model.setTacGia(txtTacGia.getText());
@@ -298,7 +299,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         LoaiSach lss = getFormLS();
         try {
             LSDao.insert(lss);
-            FillTable_QLTlieu();
+            fillTableLoaiSach();
             clearForm();
             MsgBox.alert(this, "Thêm thành công !");
         } catch (Exception e) {
@@ -311,7 +312,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         LoaiSach lss = getFormLS();
         try {
             LSDao.update(lss);
-            FillTable_QLTlieu();
+            fillTableLoaiSach();
             MsgBox.alert(this, "Update thành công !");
             clearFormLoaiSach();
             
