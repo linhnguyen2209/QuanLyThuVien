@@ -314,7 +314,7 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel7">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="M&#xe3; &#x110;&#x1ed9;c gi&#x1ea3;:"/>
+                    <Property name="text" type="java.lang.String" value="M&#xe3; &#x110;&#x1ecd;c gi&#x1ea3;:"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel8">

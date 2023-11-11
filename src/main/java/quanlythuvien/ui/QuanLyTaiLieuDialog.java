@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import quanlythuvien.dao.LoaiSachDao;
 import quanlythuvien.dao.SachDAO;
@@ -146,11 +147,14 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         txtNgayNhapKho.setText("");
         txtViTri.setText("");
         cboLoaiSach.setSelectedIndex(0);
+        tbl_QLTL.clearSelection();
     }
 
     Sach getForm() {
         Sach model = new Sach();
-        model.setMaSach(Integer.parseInt(tbl_QLTL.getValueAt(row, 0) + ""));
+        if(row >= 0){
+            model.setMaSach(Integer.parseInt(tbl_QLTL.getValueAt(row, 0) + ""));
+        }
         model.setTieuDe(txtTieude.getText());
         model.setNhaXuatBan(txtNhaXuatBan.getText());
         model.setTacGia(txtTacGia.getText());
@@ -216,10 +220,95 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         btn_last.setEnabled(edit && !last);
     }
 
-    void insertSach() {
-        Sach sch = getForm();
+    boolean ValidateSach() {
+        // Lấy giá trị từ các trường nhập liệu
+        String tieude = txtTieude.getText();
+        String nhaXuatBan = txtNhaXuatBan.getText();
+        String tacGia = txtTacGia.getText();
+        String soTrang = txtSoTrang.getText();
+        String soLuongSach = txt_SoLuongSach.getText();
+        String giaTien = txtGiaTien.getText();
+        String ngayNhapKho = txtNgayNhapKho.getText();
+        String viTri = txtViTri.getText();
+
+        // Kiểm tra xem các trường có trống hay không
+        if (tieude.isEmpty() || nhaXuatBan.isEmpty() || tacGia.isEmpty() || soTrang.isEmpty() || soLuongSach.isEmpty() || giaTien.isEmpty() || ngayNhapKho.isEmpty() || viTri.isEmpty()) {
+            // Hiển thị thông báo lỗi nếu có trường nào đó trống
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        // Kiểm tra số trang, số lượng sách, giá tiền có phải là số hay không
+        if (!isValidNumber(soTrang, "Số trang") || !isValidNumber(soLuongSach, "Số lượng sách") || !isValidNumber(giaTien, "Giá tiền")) {
+            return false;
+        }
+
+        // Kiểm tra tên tác giả không chứa số
+        if (!isValidAuthorName(tacGia)) {
+            return false;
+        }
+
+        // Kiểm tra định dạng ngày
+        if (!isValidDate(ngayNhapKho)) {
+            return false;
+        }
+
+        // Tiếp tục xử lý khi dữ liệu hợp lệ
+        // ...
+        return true;
+    }
+
+// Hàm kiểm tra xem một chuỗi có phải là số không
+    private boolean isValidNumber(String input, String fieldName) {
         try {
-            SDao.insert(sch);
+            Double.parseDouble(input);
+            return true;
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, fieldName + " phải là số", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
+
+// Hàm kiểm tra tên tác giả không chứa số
+    private boolean isValidAuthorName(String authorName) {
+        if (!authorName.matches(".*\\d.*")) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Tên tác giả không được chứa số", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
+
+// Hàm kiểm tra định dạng ngày
+    private boolean isValidDate(String date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setLenient(false);
+
+        try {
+            Date ngayNhapKhoValue = sdf.parse(date);
+            return true;
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(null, "Định dạng ngày không hợp lệ. Sử dụng định dạng yyyy-MM-dd", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
+
+    void insertSach() {
+//        Sach sach = new Sach();
+//        if(ValidateSach()){
+//            sach.setTieuDe(txtTieude.getText());
+//            sach.setNhaXuatBan(txtNhaXuatBan.getText());
+//            sach.setTacGia(txtTacGia.getText());
+//            sach.setSoTrang(Integer.parseInt(txtSoTrang.getText()));
+//            sach.setSoLuongSach(Integer.parseInt(txt_SoLuongSach.getText()));
+//            sach.setGiaTien(Double.parseDouble(txtGiaTien.getText()));
+//            sach.setNgayNhapKho(XDate.toDate(txtNgayNhapKho.getText(), "yyyy-MM-dd"));
+//            sach.setViTriSach(txtViTri.getText());
+//            sach.setMaLoaiSach(cboLoaiSach.getSelectedItem()+"");
+//        }
+        Sach sach = getForm();
+        try {
+            SDao.insert(sach);
             FillTable_QLTlieu();
             clearForm();
             MsgBox.alert(this, "Thêm thành công !");
@@ -243,9 +332,9 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     }
 
     void deleteSach() {
-//        if (!Auth.isManager()) {
-//            MsgBox.alert(this, "Bạn không đủ quyền hạn để thực thi !");
-//        } else {
+        if (!Auth.isManager()) {
+            MsgBox.alert(this, "Bạn không đủ quyền hạn để thực thi !");
+        } else {
             try {
                 if (MsgBox.confirm(this, "Bạn thực xự muốn xóa ?")) {
                     int maSach = Integer.parseInt(tbl_QLTL.getValueAt(row, 0) + "");
@@ -259,7 +348,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
                 e.printStackTrace();
                 MsgBox.alert(this, "Xóa thất bại!");
             }
-//        }
+        }
     }
 
     // QlLoaiSach
@@ -279,6 +368,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
             LoaiSach loaiS = LSDao.selectById(Ls);
             if (loaiS != null) {
                 setFormLS(loaiS);
+                updateStatusLS();
             }
         } catch (Exception e) {
         }
@@ -289,6 +379,38 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         model.setMaLoaiSach(txt_QL_MaLoaiSach.getText());
         model.setTenLoaiSach(txt_TenLoaiSachQLi.getText());
         return model;
+    }
+
+    boolean validateLoaiSach() {
+        // Lấy giá trị từ các trường nhập liệu
+        String maLoaiSach = txt_QL_MaLoaiSach.getText();
+        String tenLoaiSach = txt_TenLoaiSachQLi.getText();
+
+        // Kiểm tra xem các trường có trống hay không
+        if (maLoaiSach.isEmpty() || tenLoaiSach.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        // Kiểm tra định dạng mã loại sách
+        if (!isValidMaLoaiSach(maLoaiSach)) {
+            return false;
+        }
+
+        // Tiếp tục xử lý khi dữ liệu hợp lệ
+        // ...
+        return true;
+    }
+
+// Hàm kiểm tra định dạng mã loại sách
+    private boolean isValidMaLoaiSach(String maLoaiSach) {
+        // Kiểm tra nếu mã loại sách không rỗng và đúng định dạng mong muốn
+        if (!maLoaiSach.isEmpty() && maLoaiSach.matches("^[a-zA-Z0-9]+$")) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Mã loại sách không hợp lệ. Mã chỉ được chứa chữ cái và số", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
     }
 
     void insertLS() {
@@ -372,7 +494,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         row = tbl_QLTL.getRowCount() - 1;
         edit();
     }
-    
+
     void firstLS() {
         row = 0;
         editLoaiSach();
@@ -384,7 +506,6 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
             editLoaiSach();
         }
     }
-
 
     void nextLLS() {
         if (row < tbl_loaisach.getRowCount() - 1) {
@@ -1152,10 +1273,11 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
-       MsgBox.confirm(this, "Bạn thật sự muốn thoát !");{
-         this.dispose();
-    }
-       
+        MsgBox.confirm(this, "Bạn thật sự muốn thoát !");
+        {
+            this.dispose();
+        }
+
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
@@ -1195,15 +1317,24 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnNew1ActionPerformed
 
     private void btnAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd1ActionPerformed
-        insertSach();
+        if (ValidateSach()) {
+            insertSach();
+        }
     }//GEN-LAST:event_btnAdd1ActionPerformed
 
     private void btnUpdate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate1ActionPerformed
-        updateSach();
+        if (ValidateSach()) {
+            updateSach();
+        }
     }//GEN-LAST:event_btnUpdate1ActionPerformed
 
     private void btnDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete1ActionPerformed
-        deleteSach();
+        int selectedRow = tbl_QLTL.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn ít nhất một dòng để xóa", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        } else {
+            deleteSach();
+        }
     }//GEN-LAST:event_btnDelete1ActionPerformed
 
     private void rdoMaLoaiSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoMaLoaiSachActionPerformed
@@ -1218,14 +1349,19 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_tbl_QLTLMousePressed
 
     private void btn_ThemLoaiSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemLoaiSachActionPerformed
-        insertLS();
+        if (validateLoaiSach()) {
+            insertLS();
+        }
     }//GEN-LAST:event_btn_ThemLoaiSachActionPerformed
 
     private void btn_SuaLoaiSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaLoaiSachActionPerformed
-        updateLS();
+        if (validateLoaiSach()) {
+            updateLS();
+        }
     }//GEN-LAST:event_btn_SuaLoaiSachActionPerformed
 
     private void btn_XoaLoaiSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaLoaiSachActionPerformed
+
         deleteLS();
     }//GEN-LAST:event_btn_XoaLoaiSachActionPerformed
 
@@ -1257,27 +1393,28 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnNextLSActionPerformed
 
     private void btnThoatLSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatLSActionPerformed
-        MsgBox.confirm(this, "Bạn thật sự muốn thoát !");{
-        this.dispose();
-    }
-        
+        MsgBox.confirm(this, "Bạn thật sự muốn thoát !");
+        {
+            this.dispose();
+        }
+
     }//GEN-LAST:event_btnThoatLSActionPerformed
 
     private void btn_HomeLSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HomeLSActionPerformed
-        if (Auth.isManager()){
+        if (Auth.isManager()) {
             new ThuVienQuanLyJFrame().setVisible(true);
             this.dispose();
-        }else{
+        } else {
             new ThuVienUserJFrame().setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_btn_HomeLSActionPerformed
 
     private void btn_HomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HomeActionPerformed
-         if (Auth.isManager()){
+        if (Auth.isManager()) {
             new ThuVienQuanLyJFrame().setVisible(true);
             this.dispose();
-        }else{
+        } else {
             new ThuVienUserJFrame().setVisible(true);
             this.dispose();
         }

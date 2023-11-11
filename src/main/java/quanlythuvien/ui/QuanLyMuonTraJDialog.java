@@ -440,7 +440,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin"));
 
-        jLabel7.setText("Mã Độc giả:");
+        jLabel7.setText("Mã Đọc giả:");
 
         jLabel8.setText("Ghi chú");
 
@@ -591,6 +591,27 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         pnlChucNang2.add(btnThoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 100, 30));
 
         pnlPhieuMuon.add(pnlChucNang2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 440, 290, 80));
+
+        pnlChucNang2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng khác", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        pnlChucNang2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_Home.setText("Home");
+        btn_Home.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_HomeActionPerformed(evt);
+            }
+        });
+        pnlChucNang2.add(btn_Home, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 90, 30));
+
+        btnThoat.setText("Thoát");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
+        pnlChucNang2.add(btnThoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 80, 30));
+
+        pnlPhieuMuon.add(pnlChucNang2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 440, 230, 90));
 
         tabs.addTab("Quản lý Mượn", pnlPhieuMuon);
 
