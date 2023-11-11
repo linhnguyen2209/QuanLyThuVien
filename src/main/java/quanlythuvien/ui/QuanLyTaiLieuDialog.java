@@ -40,6 +40,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         this.setIconImage(XImage.getAppIcon());
          FillTable_QLTlieu();
          fillComboBoxLoaiSach();
+         fillTableLoaiSach();
     }
     
      List<Sach> list = new ArrayList<>();
@@ -93,7 +94,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         try {
             List<LoaiSach> list = LSDao.selectAll();
             for (LoaiSach ls : list) {
-                model.addElement(ls);
+                model.addElement(ls.getMaLoaiSach());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -125,7 +126,8 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         txtGiaTien.setText(Double.toString(model.getGiaTien()));
         txtNgayNhapKho.setText(String.valueOf(model.getNgayNhapKho()));
         txtViTri.setText(model.getViTriSach());
-        cboLoaiSach.setSelectedItem(model.getMaLoaiSach());
+        cboLoaiSach.setSelectedItem(model.getMaLoaiSach().trim());
+        System.out.println("MLS"+model.getMaLoaiSach());
     }
     
     void clearForm() {
