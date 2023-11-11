@@ -255,6 +255,9 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPhieuMuon = new javax.swing.JTable();
+        pnlChucNang2 = new javax.swing.JPanel();
+        btn_Home = new javax.swing.JButton();
+        btnThoat = new javax.swing.JButton();
         pnlChiTietPM = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -421,7 +424,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFirst)
                     .addComponent(btnPrev)
@@ -430,11 +433,11 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
                 .addGap(16, 16, 16))
         );
 
-        pnlPhieuMuon.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 440, -1, -1));
+        pnlPhieuMuon.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 440, -1, 90));
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin"));
 
-        jLabel7.setText("Mã Độc giả:");
+        jLabel7.setText("Mã Đọc giả:");
 
         jLabel8.setText("Ghi chú");
 
@@ -566,6 +569,27 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         );
 
         pnlPhieuMuon.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 6, -1, -1));
+
+        pnlChucNang2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng khác", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        pnlChucNang2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_Home.setText("Home");
+        btn_Home.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_HomeActionPerformed(evt);
+            }
+        });
+        pnlChucNang2.add(btn_Home, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 90, 30));
+
+        btnThoat.setText("Thoát");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
+        pnlChucNang2.add(btnThoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 80, 30));
+
+        pnlPhieuMuon.add(pnlChucNang2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 440, 230, 90));
 
         tabs.addTab("Quản lý Mượn", pnlPhieuMuon);
 
@@ -1065,6 +1089,23 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         String key = txtTimKiemMaSach.getText();
         
     }//GEN-LAST:event_txtTimKiemMaSachKeyReleased
+
+    private void btn_HomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HomeActionPerformed
+        if (Auth.isManager()) {
+            new ThuVienQuanLyJFrame().setVisible(true);
+            this.dispose();
+        } else {
+            new ThuVienUserJFrame().setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_btn_HomeActionPerformed
+
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        MsgBox.confirm(this, "Bạn thật sự muốn thoát !");
+        {
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnThoatActionPerformed
     
     public static void main(String args[]) {
         
@@ -1102,8 +1143,10 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnRight;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnThoat;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnXoa;
+    private javax.swing.JButton btn_Home;
     private javax.swing.JCheckBox chkDaTra;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
@@ -1144,6 +1187,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     private javax.swing.JList<String> listSachTrongKho;
     private javax.swing.JPanel pnChucNang;
     private javax.swing.JPanel pnlChiTietPM;
+    private javax.swing.JPanel pnlChucNang2;
     private javax.swing.JPanel pnlPhieuMuon;
     private javax.swing.JPanel pnlTraSach;
     private javax.swing.JSpinner spNgayTra;
