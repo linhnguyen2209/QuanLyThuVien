@@ -16,13 +16,13 @@ import quanlythuvien.utils.XImage;
  *
  * @author thuon
  */
-public class QuanLyPhieuMuonJDialog extends javax.swing.JDialog {
+public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
 
     PhieuMuonDAO phieuMuonDAO = new PhieuMuonDAO();
     PhieuTraDAO phieuTraDAO = new PhieuTraDAO();
     int row = -1;
 
-    public QuanLyPhieuMuonJDialog(java.awt.Frame parent, boolean modal) {
+    public QuanLyMuonTraJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         init();
@@ -581,7 +581,7 @@ public class QuanLyPhieuMuonJDialog extends javax.swing.JDialog {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                QuanLyPhieuMuonJDialog dialog = new QuanLyPhieuMuonJDialog(new javax.swing.JFrame(), true);
+                QuanLyMuonTraJDialog dialog = new QuanLyMuonTraJDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

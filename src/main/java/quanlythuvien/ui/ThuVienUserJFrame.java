@@ -36,6 +36,7 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("Quản lý thư viện");
         this.setIconImage(XImage.getAppIcon());
+        lblUser.setText(Auth.user.getMaNguoiDung());
     }
 
     void openMainFrame() {

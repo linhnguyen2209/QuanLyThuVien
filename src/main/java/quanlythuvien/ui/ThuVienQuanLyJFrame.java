@@ -56,7 +56,11 @@ public class ThuVienQuanLyJFrame extends javax.swing.JFrame {
     }
 
     void openQuanLyMuonTra() {
-        new QuanLyPhieuMuonJDialog(this, true).setVisible(true);
+        new QuanLyMuonTraJDialog(this, true).setVisible(true);
+    }
+
+    void openThongKe() {
+        new ThongKeDoanhThuJDialog(this, true).setVisible(true);
     }
 
     void dangXuat() {
@@ -254,6 +258,11 @@ public class ThuVienQuanLyJFrame extends javax.swing.JFrame {
         btnThongKe.setForeground(new java.awt.Color(102, 102, 102));
         btnThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/btnThongKe.png"))); // NOI18N
         btnThongKe.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(255, 255, 255)));
+        btnThongKe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThongKeActionPerformed(evt);
+            }
+        });
         pnlTrangChuQuanLy.add(btnThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 380, 220, 220));
 
         lblBgrTrangChu2.setBackground(new java.awt.Color(255, 255, 255));
@@ -358,6 +367,10 @@ public class ThuVienQuanLyJFrame extends javax.swing.JFrame {
     private void btnQuanLyTaiLieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuanLyTaiLieuActionPerformed
         openQuanLyTaiLieu();
     }//GEN-LAST:event_btnQuanLyTaiLieuActionPerformed
+
+    private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
+        openThongKe();
+    }//GEN-LAST:event_btnThongKeActionPerformed
 
     /**
      * @param args the command line arguments
