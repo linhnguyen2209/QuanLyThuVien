@@ -12,10 +12,11 @@ import quanlythuvien.utils.jdbcHelper;
 
 public class PhieuMuonChiTietDAO extends ThuVienDAO<PhieuMuonChiTiet, Integer> {
 
-    final String INSERT_SQL = "INSERT INTO ChiTietPhieuMuon (MaPhieuMuon, MaSach, SoLuongSachMuonMoiLoai) VALUES (?, ?, ?),";
-    final String UPDATE_SQL = "UPDATE ChiTietPhieuMuon SET MaPhieuMuon = ? ,MaSach = ?, SoLuongSachMuonMoiLoai = ?, WHERE MaChiTietPhieuMuon = ?";
+    final String INSERT_SQL = "INSERT INTO ChiTietPhieuMuon (MaPhieuMuon, MaSach, SoLuongSachMuonMoiLoai) VALUES (?, ?, ?)";
+    final String UPDATE_SQL = "UPDATE ChiTietPhieuMuon SET MaPhieuMuon = ?, MaSach = ?, SoLuongSachMuonMoiLoai = ? WHERE MaChiTietPhieuMuon = ?";
     final String DELETE_SQL = "DELETE FROM ChiTietPhieuMuon WHERE MaChiTietPhieuMuon = ?";
     final String SELECT_ALL_SQL = "SELECT * FROM ChiTietPhieuMuon";
+    final String SELECT_BY_IDPM_SQL = "SELECT * FROM ChiTietPhieuMuon where MaPhieuMuon = ?";
     final String SELECT_BY_ID_SQL = "SELECT * FROM ChiTietPhieuMuon WHERE MaChiTietPhieuMuon = ?";
 
     @Override
@@ -36,7 +37,7 @@ public class PhieuMuonChiTietDAO extends ThuVienDAO<PhieuMuonChiTiet, Integer> {
     @Override
     public List<PhieuMuonChiTiet> selectAll() {
         return selectBySql(SELECT_ALL_SQL);
-    }
+    }  
 
     @Override
     public PhieuMuonChiTiet selectById(Integer id) {
@@ -64,6 +65,10 @@ public class PhieuMuonChiTietDAO extends ThuVienDAO<PhieuMuonChiTiet, Integer> {
             throw new RuntimeException(e);
         }
         return list;
+    }
+    
+    public List<PhieuMuonChiTiet> selectBy_IDPM( int maPhieuMuon) {
+        return selectBySql(SELECT_BY_IDPM_SQL, maPhieuMuon);
     }
 
 }

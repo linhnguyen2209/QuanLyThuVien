@@ -106,4 +106,8 @@ private String viTriSach, maLoaiSach;
         this.maLoaiSach = maLoaiSach;
     }
 
+    @Override
+    public String toString() {
+        return maSach+"";
+    }
 }

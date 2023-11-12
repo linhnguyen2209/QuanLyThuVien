@@ -1,13 +1,18 @@
 package quanlythuvien.ui;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
+import quanlythuvien.dao.PhieuMuonChiTietDAO;
 import quanlythuvien.dao.PhieuMuonDAO;
 import quanlythuvien.dao.PhieuTraDAO;
 import quanlythuvien.dao.SachDAO;
 import quanlythuvien.entity.PhieuMuon;
+import quanlythuvien.entity.PhieuMuonChiTiet;
 import quanlythuvien.entity.PhieuTra;
 import quanlythuvien.entity.Sach;
 import quanlythuvien.utils.Auth;
@@ -21,21 +26,24 @@ import quanlythuvien.utils.XImage;
  * @author thuon
  */
 public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
-    
+
     PhieuMuonDAO phieuMuonDAO = new PhieuMuonDAO();
     PhieuTraDAO phieuTraDAO = new PhieuTraDAO();
     SachDAO sDAO = new SachDAO();
-    
+    PhieuMuonChiTietDAO phieuMuonChiTietDAO = new PhieuMuonChiTietDAO();
+    List<PhieuMuonChiTiet> listCTPM;
     DefaultListModel modelSachKho, modelSachChon;
+    DefaultTableModel tblModelPMCT;
     int row = -1;
     int index = -1;
-    
+    int indexPMCT = -1;
+
     public QuanLyMuonTraJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         init();
     }
-    
+
     void init() {
         this.setLocation(318, 73);
         this.setTitle("Quản lý phiếu mượn");
@@ -45,7 +53,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         fillJlistSach();
         updateStatus();
     }
-    
+
     void fillTablePhieuMuon() {
         DefaultTableModel model = (DefaultTableModel) tblPhieuMuon.getModel();
         model.setRowCount(0);
@@ -60,7 +68,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             e.printStackTrace();
         }
     }
-    
+
     void fillTablePhieuTra() {
         DefaultTableModel model = (DefaultTableModel) tblPhieuTra.getModel();
         model.setRowCount(0);
@@ -75,8 +83,11 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             e.printStackTrace();
         }
     }
-    
+
     void setForm(PhieuMuon model) {
+        // form pmct
+        txtMaPhieuMuon_PMCT.setText(String.valueOf((model.getMaPhieuMuon())));
+        // form p mượn
         txtMaPhieuMuon.setText(String.valueOf((model.getMaPhieuMuon())));
         Date ngayMuon = model.getNgayMuon();
         txtNgayMuon.setText(XDate.toString(ngayMuon, "yyyy/MM/dd"));
@@ -86,7 +97,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         txtMaNguoiDung.setText(model.getMaNguoiDung());
         txtGhiChu.setText(model.getGhiChu());
     }
-    
+
     PhieuMuon getForm() {
         PhieuMuon model = new PhieuMuon();
         model.setMaPhieuMuon(Integer.parseInt(txtMaPhieuMuon.getText()));
@@ -95,10 +106,10 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         model.setTongSoLuongSachMuon(Integer.parseInt(txtTongSoLuongSachMuon.getText()));
         model.setMaNguoiDung(txtMaNguoiDung.getText());
         model.setGhiChu(txtGhiChu.getText());
-        
+
         return model;
     }
-    
+
     void clearForm() {
 
         txtMaPhieuMuon.setText("");
@@ -110,7 +121,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         this.row = -1;
         updateStatus();
     }
-    
+
     void edit() {
         Integer maPM = (Integer) tblPhieuMuon.getValueAt(row, 0);
         try {
@@ -123,55 +134,59 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             e.printStackTrace();
         }
     }
-    
+
     void updateStatus() {
         boolean edit = this.row >= 0;
         boolean first = this.row == 0;
         boolean last = this.row == tblPhieuMuon.getRowCount() - 1;
-        
+
+        //form p mượn chi tiết
+        txtMaPhieuMuon_PMCT.setEditable(false);
+        //form p trả
         txtMaDocGia_Tra.setEditable(false);
         txtPM_Tra.setEditable(false);
+        //form p mượn
         txtMaPhieuMuon.setEditable(edit);
         txtMaNguoiDung.setEditable(edit);
         //Khi insert thì không update, delete
         btnThem.setEnabled(!edit);
         btnSua.setEnabled(edit);
         btnXoa.setEnabled(edit);
-        
+
         btnFirst.setEnabled(edit && !first);
         btnPrev.setEnabled(edit && !first);
         btnNext.setEnabled(edit && !last);
         btnLast.setEnabled(edit && !last);
-        
+
     }
-    
+
     private void first() {
         row = 0;
         edit();
     }
-    
+
     private void prev() {
         if (row > 0) {
             row--;
             edit();
         }
     }
-    
+
     private void next() {
         if (row < tblPhieuMuon.getRowCount() - 1) {
             row++;
             edit();
         }
     }
-    
+
     private void last() {
         row = tblPhieuMuon.getRowCount() - 1;
         edit();
     }
-    
+
     void insert() {
         PhieuMuon pm = getForm();
-        
+
         try {
             phieuMuonDAO.insert(pm);
             fillTablePhieuMuon();
@@ -182,7 +197,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             MsgBox.alert(this, "Thêm thất bại!");
         }
     }
-    
+
     void update() {
         PhieuMuon pm = getForm();
         try {
@@ -194,15 +209,15 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             MsgBox.alert(this, "Cập nhật thất bại!");
         }
     }
-    
+
     void delete() {
         if (!Auth.isManager()) {
             MsgBox.alert(this, "Bạn không có quyền xoá!");
         } else {
             try {
-                if (MsgBox.confirm(this, "Bạn thực sự muốn xoá người dùng này?")) {
-                    String maND = txtMaPhieuMuon.getText();
-                    Integer maNDintInteger = Integer.parseInt(maND);
+                if (MsgBox.confirm(this, "Bạn thực sự muốn xoá phiếu mượn này?")) {
+                    String maPM = txtMaPhieuMuon.getText();
+                    Integer maNDintInteger = Integer.parseInt(maPM);
                     phieuMuonDAO.delete(maNDintInteger);
                     this.fillTablePhieuMuon();
                     this.clearForm();
@@ -214,21 +229,191 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             }
         }
     }
-    
+
+    // form pmct
     void fillJlistSach() {
         modelSachKho = new DefaultListModel();
         modelSachKho.removeAllElements();
-        List<Sach> listSach = sDAO.selectAll();
+        List<Sach> listSach = new ArrayList<>();
+        String key = txtTimKiemMaSach.getText();
+        if (!key.equals("")) {
+            Sach s = sDAO.selectById(Integer.valueOf(key));
+            if (s != null) {
+                listSach.add(s);
+            } else {
+                listSach.clear();
+            }
+        } else {
+            listSach = sDAO.selectAll();
+        }
         for (Sach sach : listSach) {
             modelSachKho.addElement(sach.getMaSach());
         }
         listSachTrongKho.setModel(modelSachKho);
-        
         modelSachChon = new DefaultListModel();
-//        modelSachChon.removeAllElements();
         listSachChon.setModel(modelSachChon);
     }
-    
+
+    void chonSachMuon() {
+        if (listSachTrongKho.isSelectionEmpty()) {
+            MsgBox.alert(this, "Vui lòng chọn sách!");
+        } else {
+            Object[] values = listSachTrongKho.getSelectedValues();
+            for (Object value : values) {
+                if (sDAO.selectById(Integer.parseInt(value + "")).getSoLuongSach() != 0) {
+                    modelSachChon.addElement(value);
+                    txtTongSachChon.setText(modelSachChon.size() + "");
+                } else {
+                    MsgBox.alert(this, "Sách có mã " + value + "(đã hết)");
+                }
+            }
+            listSachTrongKho.clearSelection();
+        }
+    }
+
+    void huyChonSachMuon() {
+        if (listSachChon.isSelectionEmpty()) {
+            MsgBox.alert(this, "Vui lòng chọn sách hủy mượn!");
+        } else {
+            Object[] values = listSachChon.getSelectedValues();
+            for (Object value : values) {
+                modelSachChon.removeElement(value);
+            }
+        }
+    }
+
+    void huyChonTatCaSachMuon() {
+        modelSachChon.removeAllElements();
+    }
+
+    void fillTableChiTietPhieuMuon() {
+        tblModelPMCT = (DefaultTableModel) tblChiTietPhieuMuon.getModel();
+        tblModelPMCT.setRowCount(0);
+        listCTPM = phieuMuonChiTietDAO.selectBy_IDPM(Integer.parseInt(txtMaPhieuMuon_PMCT.getText()));
+        System.out.println(listCTPM.size());
+        for (PhieuMuonChiTiet pmct : listCTPM) {
+            Object[] row = {pmct.getMaChiTietPhieuMuon(), pmct.getMaPhieuMuon(), pmct.getMaSach(), pmct.getSlSachMuonMoiLoai()};
+            tblModelPMCT.addRow(row);
+        }
+    }
+
+    void showDetailPhieuMuonChiTiet(PhieuMuonChiTiet model) {
+        modelSachChon.removeAllElements();
+        for (int i = 1; i <= model.getSlSachMuonMoiLoai(); i++) {// nếu mượn 1 quyển với số lượng nhiều hơn 1 thì add nhiều
+            modelSachChon.addElement(model.getMaSach());
+        }
+        txtTongSachChon.setText(model.getSlSachMuonMoiLoai() + "");
+        txtMaPhieuMuonChiTiet_PMCT.setText(model.getMaChiTietPhieuMuon() + "");
+    }
+
+    PhieuMuonChiTiet checkMaSachDaTonTai(int maSach) { // kiểm tra xem sách này đã đc mượn để set lại số lượng nếu mượn r thì trả về pmct để tăng số lượng else trả về null
+        for (PhieuMuonChiTiet pmct : listCTPM) {
+            if (maSach == pmct.getMaSach()) {
+                return pmct;
+            }
+        }
+        return null;
+    }
+
+    void clearFormPMCT() {
+        txtMaPhieuMuonChiTiet_PMCT.setText("");
+        txtTongSachChon.setText("");
+        tblChiTietPhieuMuon.clearSelection();
+        listSachTrongKho.clearSelection();
+        listSachChon.clearSelection();
+        indexPMCT = -1;
+    }
+
+    void insertPMCT() {
+        PhieuMuonChiTiet pmct = new PhieuMuonChiTiet();
+        Object[] maSachMuonObject = modelSachChon.toArray();
+        // Chuyển đổi từ Object[] sang Integer[]
+        Integer[] maSachMuon = Arrays.copyOf(maSachMuonObject, maSachMuonObject.length, Integer[].class);
+        Arrays.sort(maSachMuon); // sắp xếp lại để lấy cho đúng số lượng sách giống nhau
+        if (maSachMuon.length > 0) {
+            try {
+                for (int i = 0; i < maSachMuon.length; i++) {
+                    pmct.setMaPhieuMuon(Integer.parseInt(txtMaPhieuMuon_PMCT.getText()));
+                    pmct.setMaSach(maSachMuon[i]);
+                    PhieuMuonChiTiet pMCT = checkMaSachDaTonTai(maSachMuon[i]);
+                    if (pMCT != null) { // nếu có trong bảng r thì tăng số lượng lên th
+                        pmct.setMaChiTietPhieuMuon(pMCT.getMaChiTietPhieuMuon());
+                        pmct.setSlSachMuonMoiLoai(pMCT.getSlSachMuonMoiLoai() + 1);
+                        phieuMuonChiTietDAO.update(pmct);
+                    } else {
+                        pmct.setSlSachMuonMoiLoai(1);
+                        phieuMuonChiTietDAO.insert(pmct);
+                    }
+                    fillTableChiTietPhieuMuon();
+                    // update số lượng sách trong kho
+                    Sach sach = sDAO.selectById(maSachMuon[i]);
+                    sach.setSoLuongSach(sach.getSoLuongSach() - 1);
+                    sDAO.update(sach);
+                }
+                MsgBox.alert(this, "Thêm thành công");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                MsgBox.alert(this, "Thêm thất bại!");
+            }
+        } else {
+            MsgBox.alert(this, "Vui lòng chọn sách muốn mượn!");
+        }
+    }
+
+    void updatePMCT() {
+        if (indexPMCT >= 0) {
+            PhieuMuonChiTiet pMCT = phieuMuonChiTietDAO.selectById(Integer.parseInt(tblChiTietPhieuMuon.getValueAt(indexPMCT, 0) + ""));
+            if (modelSachChon.size() <= 0) {
+                MsgBox.alert(this, "Vui lòng chọn sách muốn sửa!");
+            } else if (txtTongSachChon.getText().equals("")) {
+                MsgBox.alert(this, "Vui lòng nhập số lượng muốn sửa!");
+            } else {
+                if (modelSachChon.size() > 1) {
+                    MsgBox.alert(this, "Mỗi phiếu chỉ được update 1 sách!");
+                } else {
+                    try {
+                        pMCT.setSlSachMuonMoiLoai(Integer.parseInt(txtTongSachChon.getText()));
+                        pMCT.setMaSach((int) modelSachChon.get(0));
+                        phieuMuonChiTietDAO.update(pMCT);
+                        fillTableChiTietPhieuMuon();
+                        MsgBox.alert(this, "Cập nhật thành công");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        MsgBox.alert(this, "Cập nhật thất bại!");
+                    }
+                }
+            }
+        } else {
+            MsgBox.alert(this, "Vui lòng chọn dòng muốn sửa");
+        }
+    }
+
+    void deletePMCT() {
+        if (!Auth.isManager()) {
+            MsgBox.alert(this, "Bạn không có quyền xoá!");
+        } else {
+            if (indexPMCT < 0) {
+                MsgBox.alert(this, "Bạn chưa chọn dòng để xóa");
+            } else {
+                try {
+                    if (MsgBox.confirm(this, "Bạn thực sự muốn xoá phiếu này?")) {
+                        String maPMCT = txtMaPhieuMuonChiTiet_PMCT.getText();
+                        Integer maPMCT_Int = Integer.parseInt(maPMCT);
+                        phieuMuonChiTietDAO.delete(maPMCT_Int);
+                        this.fillTableChiTietPhieuMuon();
+                        this.clearFormPMCT();
+                        MsgBox.alert(this, "Xoá thành công!");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    MsgBox.alert(this, "Xoá thất bại!");
+                }
+            }
+        }
+    }
+
+    // form p trả
     void showDetailPhieuTra(PhieuTra model) {
         txtPM_Tra.setText(model.getMaPhieuMuon() + "");
         txtMaDocGia_Tra.setText(model.getMaNguoiDung());
@@ -269,7 +454,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         chkDaTra_Tra.setSelected(false);
         index = -1;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -281,11 +466,11 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         btnSua = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         btnMoi = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
         btnFirst = new javax.swing.JButton();
         btnPrev = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
         btnLast = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
         jPanel8 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -303,22 +488,18 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPhieuMuon = new javax.swing.JTable();
-        pnlChucNang2 = new javax.swing.JPanel();
-        btn_Home = new javax.swing.JButton();
-        btnThoat = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        txtSearch = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
+        btnXemPMChiTiet = new javax.swing.JButton();
         pnlChiTietPM = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        txtMaPMChiTiet = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        txtMaNhanVien = new javax.swing.JTextField();
-        txtMaDocGia = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        txtNgayMuonCT = new javax.swing.JTextField();
+        txtMaPhieuMuon_PMCT = new javax.swing.JTextField();
+        btnXemPhieuMuon = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        txtNgayTra = new javax.swing.JTextField();
+        txtMaPhieuMuonChiTiet_PMCT = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         txtTimKiemMaSach = new javax.swing.JTextField();
@@ -329,23 +510,24 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         btnRight = new javax.swing.JButton();
         btnLeft = new javax.swing.JButton();
         btnAllLeft = new javax.swing.JButton();
-        jLabel16 = new javax.swing.JLabel();
-        txtTongSoLuongSach = new javax.swing.JTextField();
         jScrollPane5 = new javax.swing.JScrollPane();
         listSachTrongKho = new javax.swing.JList<>();
         btnReset = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txtTongSachChon = new javax.swing.JTextField();
         pnChucNang = new javax.swing.JPanel();
-        btnHuy = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
-        btnLuu = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
+        btnThemPMCT = new javax.swing.JButton();
+        btnXoaPMCT = new javax.swing.JButton();
+        btnSuaPMCT = new javax.swing.JButton();
+        btnMoiPMCT = new javax.swing.JButton();
         btnFirstCT = new javax.swing.JButton();
         btnNextCT = new javax.swing.JButton();
         btnPrevCT = new javax.swing.JButton();
         btnLastCT = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        tblDanhPMChiTiet = new javax.swing.JTable();
+        tblChiTietPhieuMuon = new javax.swing.JTable();
         pnlTraSach = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
@@ -375,6 +557,12 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tabs.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabsMouseClicked(evt);
+            }
+        });
 
         pnlPhieuMuon.setBackground(new java.awt.Color(255, 255, 255));
         pnlPhieuMuon.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -409,37 +597,6 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             }
         });
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(btnThem)
-                .addGap(18, 18, 18)
-                .addComponent(btnSua)
-                .addGap(18, 18, 18)
-                .addComponent(btnXoa)
-                .addGap(18, 18, 18)
-                .addComponent(btnMoi)
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnMoi)
-                    .addComponent(btnXoa)
-                    .addComponent(btnSua)
-                    .addComponent(btnThem))
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
-
-        pnlPhieuMuon.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 438, 410, 80));
-
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Điều hướng"));
-
         btnFirst.setText("|<<");
         btnFirst.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -468,34 +625,53 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             }
         });
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(btnFirst)
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPrev)
+                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnNext)
+                .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLast)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addComponent(btnMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addComponent(btnFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPrev, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnFirst)
-                    .addComponent(btnPrev)
-                    .addComponent(btnNext)
-                    .addComponent(btnLast))
-                .addContainerGap(19, Short.MAX_VALUE))
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPrev, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        pnlPhieuMuon.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 440, 380, 80));
+        pnlPhieuMuon.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 1080, 80));
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin"));
 
@@ -577,10 +753,10 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        pnlPhieuMuon.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 1080, 168));
+        pnlPhieuMuon.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 318, 1080, 150));
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh Sách"));
 
@@ -612,44 +788,90 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             tblPhieuMuon.getColumnModel().getColumn(4).setPreferredWidth(40);
         }
 
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        txtSearch.setForeground(new java.awt.Color(153, 153, 153));
+        txtSearch.setText("Tìm kiếm phiếu...");
+        txtSearch.setBorder(null);
+        txtSearch.setMinimumSize(new java.awt.Dimension(5, 20));
+        txtSearch.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtSearchFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSearchFocusLost(evt);
+            }
+        });
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txtSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        btnSearch.setBackground(new java.awt.Color(0, 204, 204));
+        btnSearch.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSearch.setForeground(new java.awt.Color(255, 255, 204));
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/loupe.png"))); // NOI18N
+        btnSearch.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
+        btnXemPMChiTiet.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnXemPMChiTiet.setText("XEM PHIẾU MƯỢN CHI TIẾT");
+        btnXemPMChiTiet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXemPMChiTietActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1058, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1058, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnXemPMChiTiet, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnXemPMChiTiet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        pnlPhieuMuon.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 6, 1080, -1));
-
-        pnlChucNang2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng khác", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
-        pnlChucNang2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btn_Home.setText("Home");
-        btn_Home.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_HomeActionPerformed(evt);
-            }
-        });
-        pnlChucNang2.add(btn_Home, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 110, 30));
-
-        btnThoat.setText("Thoát");
-        btnThoat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThoatActionPerformed(evt);
-            }
-        });
-        pnlChucNang2.add(btnThoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 100, 30));
-
-        pnlPhieuMuon.add(pnlChucNang2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 440, 290, 80));
+        pnlPhieuMuon.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 6, 1080, 310));
 
         tabs.addTab("Quản lý Mượn", pnlPhieuMuon);
 
@@ -657,65 +879,59 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
 
         jLabel2.setText("Mã Phiếu mượn:");
 
-        txtMaPMChiTiet.addActionListener(new java.awt.event.ActionListener() {
+        txtMaPhieuMuon_PMCT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMaPMChiTietActionPerformed(evt);
+                txtMaPhieuMuon_PMCTActionPerformed(evt);
             }
         });
 
-        jLabel9.setText("Mã Thủ Thư:");
+        btnXemPhieuMuon.setText("Xem phiếu mượn");
+        btnXemPhieuMuon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXemPhieuMuonActionPerformed(evt);
+            }
+        });
 
-        jLabel10.setText("Mã Độc giả:");
+        jLabel12.setText("Mã Phiếu mượn chi tiết:");
 
-        jLabel12.setText("Ngày mượn:");
-
-        jLabel13.setText("Ngày trả:");
+        txtMaPhieuMuonChiTiet_PMCT.setEditable(false);
+        txtMaPhieuMuonChiTiet_PMCT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMaPhieuMuonChiTiet_PMCTActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel13))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtMaPMChiTiet, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                    .addComponent(txtMaNhanVien)
-                    .addComponent(txtMaDocGia)
-                    .addComponent(txtNgayMuonCT)
-                    .addComponent(txtNgayTra))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnXemPhieuMuon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtMaPhieuMuon_PMCT)
+                    .addComponent(txtMaPhieuMuonChiTiet_PMCT)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel12))
+                        .addGap(0, 211, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtMaPMChiTiet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMaNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMaDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNgayMuonCT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(txtNgayTra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtMaPhieuMuon_PMCT, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtMaPhieuMuonChiTiet_PMCT, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnXemPhieuMuon, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Chi Tiết Phiếu Mượn"));
@@ -733,7 +949,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(txtTimKiemMaSach, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
                 .addContainerGap())
@@ -760,6 +976,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         jPanel2.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 120, 110));
 
         btnAllRight.setText(">>|");
+        btnAllRight.setEnabled(false);
         btnAllRight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAllRightActionPerformed(evt);
@@ -791,10 +1008,6 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         });
         jPanel2.add(btnAllLeft, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 190, 65, -1));
 
-        jLabel16.setText("Tổng số lượng:");
-        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, -1, -1));
-        jPanel2.add(txtTongSoLuongSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, 120, 30));
-
         listSachTrongKho.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -812,15 +1025,37 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         });
         jPanel2.add(btnReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
 
+        jLabel9.setText("Sách mượn:");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, -1, -1));
+
+        jLabel10.setText("Tổng sách:");
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 70, 20));
+        jPanel2.add(txtTongSachChon, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, 120, -1));
+
         pnChucNang.setBorder(javax.swing.BorderFactory.createTitledBorder("Chức Năng"));
 
-        btnHuy.setText("Huỷ");
+        btnThemPMCT.setText("Thêm");
+        btnThemPMCT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemPMCTActionPerformed(evt);
+            }
+        });
 
-        btnUpdate.setText("Sửa");
+        btnXoaPMCT.setText("Xóa");
+        btnXoaPMCT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaPMCTActionPerformed(evt);
+            }
+        });
 
-        btnLuu.setText("Lưu");
+        btnSuaPMCT.setText("Sửa");
+        btnSuaPMCT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaPMCTActionPerformed(evt);
+            }
+        });
 
-        btnDelete.setText("Xoá");
+        btnMoiPMCT.setText("Mới");
 
         btnFirstCT.setText("|<");
 
@@ -834,56 +1069,70 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         pnChucNang.setLayout(pnChucNangLayout);
         pnChucNangLayout.setHorizontalGroup(
             pnChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnChucNangLayout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addComponent(btnFirstCT, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPrevCT, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnNextCT, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLastCT)
-                .addGap(20, 20, 20))
             .addGroup(pnChucNangLayout.createSequentialGroup()
-                .addGap(121, 121, 121)
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addGroup(pnChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnDelete)
-                    .addComponent(btnLuu)
-                    .addComponent(btnUpdate)
-                    .addComponent(btnHuy))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnChucNangLayout.createSequentialGroup()
+                        .addGroup(pnChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnMoiPMCT, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                            .addComponent(btnSuaPMCT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnXoaPMCT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnThemPMCT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(98, 98, 98))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnChucNangLayout.createSequentialGroup()
+                        .addComponent(btnFirstCT, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPrevCT, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnNextCT, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLastCT)
+                        .addGap(20, 20, 20))))
         );
         pnChucNangLayout.setVerticalGroup(
             pnChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnChucNangLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnHuy)
+                .addGap(14, 14, 14)
+                .addComponent(btnThemPMCT)
                 .addGap(18, 18, 18)
-                .addComponent(btnUpdate)
+                .addComponent(btnSuaPMCT)
                 .addGap(18, 18, 18)
-                .addComponent(btnLuu)
+                .addComponent(btnXoaPMCT)
                 .addGap(18, 18, 18)
-                .addComponent(btnDelete)
+                .addComponent(btnMoiPMCT)
                 .addGap(18, 18, 18)
                 .addGroup(pnChucNangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFirstCT)
                     .addComponent(btnNextCT)
                     .addComponent(btnPrevCT)
                     .addComponent(btnLastCT))
-                .addGap(18, 18, 18))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh sách"));
 
-        tblDanhPMChiTiet.setModel(new javax.swing.table.DefaultTableModel(
+        tblChiTietPhieuMuon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
                 "Mã Chi tiết PM", "Mã Phiếu Mượn", "Mã Sách", "Số lượng sách mượn"
             }
-        ));
-        jScrollPane6.setViewportView(tblDanhPMChiTiet);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblChiTietPhieuMuon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblChiTietPhieuMuonMouseClicked(evt);
+            }
+        });
+        jScrollPane6.setViewportView(tblChiTietPhieuMuon);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -1189,9 +1438,9 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         insert();
     }//GEN-LAST:event_btnThemActionPerformed
 
-    private void txtMaPMChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaPMChiTietActionPerformed
+    private void txtMaPhieuMuon_PMCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaPhieuMuon_PMCTActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtMaPMChiTietActionPerformed
+    }//GEN-LAST:event_txtMaPhieuMuon_PMCTActionPerformed
 
     private void btnAllRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllRightActionPerformed
         Object[] allRight = modelSachKho.toArray();
@@ -1202,62 +1451,25 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAllRightActionPerformed
 
     private void btnRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRightActionPerformed
-        if(listSachTrongKho.isSelectionEmpty()){
-            MsgBox.alert(this, "Vui lòng chọn sách!");
-        }else{
-            Object[] values = listSachTrongKho.getSelectedValues();
-            for (Object value : values) {
-                modelSachChon.addElement(value);
-                modelSachKho.removeElement(value);
-            }
-        }
+        chonSachMuon();
     }//GEN-LAST:event_btnRightActionPerformed
 
     private void btnLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeftActionPerformed
-        if(listSachChon.isSelectionEmpty()){
-            MsgBox.alert(this, "Vui lòng chọn sách!");
-        }else{
-            Object[] values = listSachChon.getSelectedValues();
-            for (Object value : values) {
-                modelSachKho.addElement(value);
-                modelSachChon.removeElement(value);
-            }
-        }
+        huyChonSachMuon();
     }//GEN-LAST:event_btnLeftActionPerformed
 
     private void btnAllLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllLeftActionPerformed
-       Object[] allLeft = modelSachChon.toArray();
-        for (Object object : allLeft) {
-            modelSachKho.addElement(object);
-        }
-        modelSachChon.removeAllElements();
+        huyChonTatCaSachMuon();
     }//GEN-LAST:event_btnAllLeftActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         fillJlistSach();
+        txtTongSachChon.setText("");
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void txtTimKiemMaSachKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemMaSachKeyReleased
-        String key = txtTimKiemMaSach.getText();
-        
+        fillJlistSach();
     }//GEN-LAST:event_txtTimKiemMaSachKeyReleased
-
-    private void btn_HomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HomeActionPerformed
-        if (Auth.isManager()){
-            new ThuVienQuanLyJFrame().setVisible(true);
-            this.dispose();
-        }else{
-            new ThuVienUserJFrame().setVisible(true);
-            this.dispose();
-        }
-    }//GEN-LAST:event_btn_HomeActionPerformed
-
-    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
-        MsgBox.confirm(this, "Bạn thật sự muốn thoát !");{
-            this.dispose();
-        }
-
-    }//GEN-LAST:event_btnThoatActionPerformed
 
     private void tblPhieuTraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhieuTraMouseClicked
         index = tblPhieuTra.getSelectedRow();
@@ -1285,7 +1497,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
                     MsgBox.alert(this, "Xoá thất bại!");
                 }
             }
-        }else{
+        } else {
             MsgBox.alert(this, "Bạn không đủ quyền để xoá!");
         }
     }//GEN-LAST:event_btnDelete_TraActionPerformed
@@ -1315,9 +1527,76 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     private void btnThoat_TraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoat_TraActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnThoat_TraActionPerformed
-    
+
+    private void txtSearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchFocusGained
+        if (txtSearch.getText().equals("Tìm kiếm phiếu...")) {
+            txtSearch.setText("");
+        }
+    }//GEN-LAST:event_txtSearchFocusGained
+
+    private void txtSearchFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchFocusLost
+        if (txtSearch.getText().equals("")) {
+            txtSearch.setText("Tìm kiếm phiếu...");
+        }
+    }//GEN-LAST:event_txtSearchFocusLost
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        //        if (cboLuaChon.getSelectedIndex() != 0) {
+        //            fillTableSach();
+        //        } else {
+        //            MsgBox.alert(this, "Vui lòng chọn loại tìm kiếm");
+        //        }
+    }//GEN-LAST:event_txtSearchKeyReleased
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnXemPMChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemPMChiTietActionPerformed
+        if (row < 0) {
+            MsgBox.alert(this, "Vui lòng chọn phiếu mượn muốn xem");
+        } else {
+            fillTableChiTietPhieuMuon();
+            tabs.setSelectedIndex(1);
+        }
+    }//GEN-LAST:event_btnXemPMChiTietActionPerformed
+
+    private void btnXemPhieuMuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemPhieuMuonActionPerformed
+        tabs.setSelectedIndex(0);
+    }//GEN-LAST:event_btnXemPhieuMuonActionPerformed
+
+    private void tabsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabsMouseClicked
+        if (tabs.getSelectedIndex() == 1 && txtMaPhieuMuon_PMCT.getText().equals("")) {
+            MsgBox.alert(this, "Vui lòng chọn phiếu mượn cần xem!");
+            tabs.setSelectedIndex(0);
+        }
+    }//GEN-LAST:event_tabsMouseClicked
+
+    private void tblChiTietPhieuMuonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietPhieuMuonMouseClicked
+        indexPMCT = tblChiTietPhieuMuon.getSelectedRow();
+        if (indexPMCT >= 0) {
+            showDetailPhieuMuonChiTiet(phieuMuonChiTietDAO.selectById(Integer.parseInt(tblChiTietPhieuMuon.getValueAt(indexPMCT, 0) + "")));
+        }
+    }//GEN-LAST:event_tblChiTietPhieuMuonMouseClicked
+
+    private void btnThemPMCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemPMCTActionPerformed
+        insertPMCT();
+    }//GEN-LAST:event_btnThemPMCTActionPerformed
+
+    private void btnXoaPMCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaPMCTActionPerformed
+        deletePMCT();
+    }//GEN-LAST:event_btnXoaPMCTActionPerformed
+
+    private void btnSuaPMCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaPMCTActionPerformed
+        updatePMCT();
+    }//GEN-LAST:event_btnSuaPMCTActionPerformed
+
+    private void txtMaPhieuMuonChiTiet_PMCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaPhieuMuonChiTiet_PMCTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMaPhieuMuonChiTiet_PMCTActionPerformed
+
     public static void main(String args[]) {
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 QuanLyMuonTraJDialog dialog = new QuanLyMuonTraJDialog(new javax.swing.JFrame(), true);
@@ -1336,17 +1615,15 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnAdd_Tra;
     private javax.swing.JButton btnAllLeft;
     private javax.swing.JButton btnAllRight;
-    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnDelete_Tra;
     private javax.swing.JButton btnFirst;
     private javax.swing.JButton btnFirstCT;
     private javax.swing.JButton btnHome_Tra;
-    private javax.swing.JButton btnHuy;
     private javax.swing.JButton btnLast;
     private javax.swing.JButton btnLastCT;
     private javax.swing.JButton btnLeft;
-    private javax.swing.JButton btnLuu;
     private javax.swing.JButton btnMoi;
+    private javax.swing.JButton btnMoiPMCT;
     private javax.swing.JButton btnNew_Tra;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnNextCT;
@@ -1354,22 +1631,23 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnPrevCT;
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnRight;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSua;
+    private javax.swing.JButton btnSuaPMCT;
     private javax.swing.JButton btnThem;
-    private javax.swing.JButton btnThoat;
+    private javax.swing.JButton btnThemPMCT;
     private javax.swing.JButton btnThoat_Tra;
-    private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnUpdate_Tra;
+    private javax.swing.JButton btnXemPMChiTiet;
+    private javax.swing.JButton btnXemPhieuMuon;
     private javax.swing.JButton btnXoa;
-    private javax.swing.JButton btn_Home;
+    private javax.swing.JButton btnXoaPMCT;
     private javax.swing.JCheckBox chkDaTra_Tra;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -1403,33 +1681,31 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JList<String> listSachChon;
     private javax.swing.JList<String> listSachTrongKho;
     private javax.swing.JPanel pnChucNang;
     private javax.swing.JPanel pnlChiTietPM;
-    private javax.swing.JPanel pnlChucNang2;
     private javax.swing.JPanel pnlPhieuMuon;
     private javax.swing.JPanel pnlTraSach;
     private javax.swing.JTabbedPane tabs;
-    private javax.swing.JTable tblDanhPMChiTiet;
+    private javax.swing.JTable tblChiTietPhieuMuon;
     private javax.swing.JTable tblPhieuMuon;
     private javax.swing.JTable tblPhieuTra;
     private javax.swing.JTextArea txaGhiChu_Tra;
     private javax.swing.JTextArea txtGhiChu;
-    private javax.swing.JTextField txtMaDocGia;
     private javax.swing.JTextField txtMaDocGia_Tra;
     private javax.swing.JTextField txtMaNguoiDung;
-    private javax.swing.JTextField txtMaNhanVien;
-    private javax.swing.JTextField txtMaPMChiTiet;
     private javax.swing.JTextField txtMaPhieuMuon;
+    private javax.swing.JTextField txtMaPhieuMuonChiTiet_PMCT;
+    private javax.swing.JTextField txtMaPhieuMuon_PMCT;
     private javax.swing.JTextField txtNgayHenTra;
     private javax.swing.JTextField txtNgayMuon;
-    private javax.swing.JTextField txtNgayMuonCT;
-    private javax.swing.JTextField txtNgayTra;
     private javax.swing.JTextField txtNgayTra_Tra;
     private javax.swing.JTextField txtPM_Tra;
+    private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtTimKiemMaSach;
-    private javax.swing.JTextField txtTongSoLuongSach;
+    private javax.swing.JTextField txtTongSachChon;
     private javax.swing.JTextField txtTongSoLuongSachMuon;
     // End of variables declaration//GEN-END:variables
 }
