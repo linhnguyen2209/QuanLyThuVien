@@ -16,6 +16,7 @@ public class PhieuTraDAO extends ThuVienDAO<PhieuTra, Integer>{
     final String DELETE_SQL = "DELETE FROM PhieuTra where MaPhieuTra = ?";
     final String SELECT_ALL_SQL = "SELECT * FROM PhieuTra";
     final String SELECT_BY_ID_SQL = "SELECT * FROM PhieuTra where MaPhieuTra = ?";
+    final String SELECT_BY_IDPM_SQL = "SELECT * FROM PhieuTra where MaPhieuMuon = ?";
 
     @Override
     public void insert(PhieuTra entity) {
@@ -65,5 +66,13 @@ public class PhieuTraDAO extends ThuVienDAO<PhieuTra, Integer>{
             throw new RuntimeException(e);
         }
         return list;
+    }
+    
+    public PhieuTra selectByIdPM(Integer id) {
+        List<PhieuTra> list = selectBySql(SELECT_BY_IDPM_SQL, id);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
     }
 }
