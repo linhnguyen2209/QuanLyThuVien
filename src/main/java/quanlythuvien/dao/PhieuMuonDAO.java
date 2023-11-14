@@ -13,6 +13,7 @@ public class PhieuMuonDAO extends ThuVienDAO<PhieuMuon, Integer> {
     final String DELETE_SQL = "DELETE from PhieuMuon where MaPhieuMuon = ?";
     final String SELECT_ALL_SQL = "select * from PhieuMuon";
     final String SELECT_BY_ID_SQL = "select * from PhieuMuon where MaPhieuMuon = ?";
+    final String SELECT_BY_NAM = "select Distinct(Year(NgayMuon)) as Nam from PhieuMuon ORDER BY Nam DESC ";
 
     @Override
     public void insert(PhieuMuon entity) {
@@ -62,6 +63,19 @@ public class PhieuMuonDAO extends ThuVienDAO<PhieuMuon, Integer> {
             throw new RuntimeException(e);
         }
         return list;
+    }
+    public List<Integer> selectYear(){
+        List<Integer> list = new ArrayList<>();
+        try {
+            ResultSet rs = jdbcHelper.query(SELECT_BY_NAM);
+            while (rs.next()) {
+                list.add(rs.getInt(1));
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

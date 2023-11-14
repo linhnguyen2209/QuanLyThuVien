@@ -195,7 +195,7 @@ VALUES
 (8, '2023-10-14', 1, 'ND005', null),
 (9, null, 0, 'ND004', null),
 (10, null, 0,'ND001', NULL),
-(11, null, 0,'ND001', NULL);
+(11, null, 0,'ND006', NULL)
 GO 
 select * from PhieuTra
 select * from PhieuMuon
@@ -255,5 +255,96 @@ BEGIN
     WHERE MaPhieuMuon IN (SELECT MaPhieuMuon FROM deleted);
 END;
 
+-- STORE PROC
+Create proc sp_muonTraTheoLoai(@Year int,@MonthStart int, @MonthEnd int, @TrangThai nvarchar(200), @MaDocGia varchar(10))
+as begin
+	SELECT
+		pm.MaPhieuMuon,
+		pm.MaNguoiDung,
+		ngd.TenNguoiDung,
+		pm.NgayMuon,
+		pm.NgayHenTra,
+		ptr.NgayTra,
+		CASE
+			WHEN DATEDIFF(DAY, NgayHenTra, NgayTra) > 0 THEN DATEDIFF(DAY, NgayHenTra, NgayTra)
+			ELSE 0
+		END AS SoNgayMuonQuaHan,
+		CASE
+			WHEN DATEDIFF(DAY, NgayHenTra, NgayTra) > 0 THEN DATEDIFF(DAY, NgayHenTra, NgayTra) * 1000
+			ELSE 0
+		END AS TienPhat,
+		CASE
+			WHEN DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) > 0 
+			THEN N'Trả Quá hạn'
+			WHEN DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) is null and DateDiff(Day, pm.NgayHenTra, GETDATE()) = 0
+			THEN N'Đến hạn mà chưa trả sách'
+			WHEN DATEDIFF(day, pm.NgayHenTra, ptr.NgayTra) is null and DateDiff(Day, pm.NgayHenTra, GETDATE()) > 0
+			THEN N'Quá hạn nhưng Chưa trả sách'
+			WHEN DATEDIFF(day, pm.NgayHenTra, ptr.NgayTra) is null and DateDiff(Day, pm.NgayHenTra, GETDATE()) < 0
+			THEN N'Chưa đến hạn trả sách'
+			ELSE N'Trả Đúng hạn'
+		END AS TinhTrangTraSach
+	FROM
+		PhieuTra ptr
+		INNER JOIN PhieuMuon pm ON pm.MaPhieuMuon = ptr.MaPhieuMuon
+		INNER JOIN NguoiDung ngd ON ptr.MaNguoiDung = ngd.MaNguoiDung
+	WHERE
+		Year(pm.NgayMuon) = @Year
+		AND (MONTH(pm.NgayMuon) BETWEEN @MonthStart AND @MonthEnd)
+		AND CASE
+			WHEN DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) > 0 
+			THEN N'Trả Quá hạn'
+			WHEN DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) is null and DateDiff(Day, pm.NgayHenTra, GETDATE()) = 0
+			THEN N'Đến hạn mà chưa trả sách'
+			WHEN DATEDIFF(day, pm.NgayHenTra, ptr.NgayTra) is null and DateDiff(Day, pm.NgayHenTra, GETDATE()) > 0
+			THEN N'Quá hạn nhưng Chưa trả sách'
+			WHEN DATEDIFF(day, pm.NgayHenTra, ptr.NgayTra) is null and DateDiff(Day, pm.NgayHenTra, GETDATE()) < 0
+			THEN N'Chưa đến hạn trả sách'
+			ELSE N'Trả Đúng hạn'
+		END like @TrangThai
+		AND pm.MaNguoiDung like @MaDocGia
+end
+-- drop proc sp_muonTraTheoLoai;
+-- tất cả trong năm đó theo tháng
+-- exec sp_muonTraTheoLoai 2023, 10, 12, N'%%', 'ND001'; 
+-- exec sp_muonTraTheoLoai 2023, 1, 12, N'%%', N'%%';
 
+-- Tất cả các năm
+Create proc sp_muonTraALLYears
+as begin
+	SELECT
+		pm.MaPhieuMuon,
+		ngd.MaNguoiDung,
+		ngd.TenNguoiDung,
+		pm.NgayMuon,
+		pm.NgayHenTra,
+		ptr.NgayTra,
+		CASE
+			WHEN DATEDIFF(DAY, NgayHenTra, NgayTra) > 0 THEN DATEDIFF(DAY, NgayHenTra, NgayTra)
+			ELSE 0
+		END AS SoNgayMuonQuaHan,
+		CASE
+			WHEN DATEDIFF(DAY, NgayHenTra, NgayTra) > 0 THEN DATEDIFF(DAY, NgayHenTra, NgayTra) * 1000
+			ELSE 0
+		END AS TienPhat,
+		
+		CASE
+			WHEN DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) > 0 THEN N'Trả Quá hạn'
+			WHEN DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) is null and DateDiff(Day, pm.NgayHenTra, GETDATE()) = 0
+			THEN N'Đến hạn mà chưa trả sách'
+			WHEN DATEDIFF(day, pm.NgayHenTra, ptr.NgayTra) is null and DateDiff(Day, pm.NgayHenTra, GETDATE()) > 0
+			THEN N'Quá hạn nhưng Chưa trả sách'
+			WHEN DATEDIFF(day, pm.NgayHenTra, ptr.NgayTra) is null and DateDiff(Day, pm.NgayHenTra, GETDATE()) < 0
+			THEN N'Chưa đến hạn trả sách'
+			ELSE N'Trả Đúng hạn'
+		END AS TinhTrangTraSach
+	FROM
+		PhieuTra ptr
+		INNER JOIN PhieuMuon pm ON pm.MaPhieuMuon = ptr.MaPhieuMuon
+		INNER JOIN NguoiDung ngd ON ptr.MaNguoiDung = ngd.MaNguoiDung
+end
+--drop proc sp_muonTraALLYears;
+-- exec sp_muonTraALLYears
+
+-- select Distinct(Year(NgayMuon)) as Nam from PhieuMuon ORDER BY Nam DESC
 

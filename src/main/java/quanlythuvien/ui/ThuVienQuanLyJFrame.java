@@ -60,7 +60,7 @@ public class ThuVienQuanLyJFrame extends javax.swing.JFrame {
     }
 
     void openThongKe() {
-        new ThongKeDoanhThuJDialog(this, true).setVisible(true);
+        new ThongKeJDialog(this, true).setVisible(true);
     }
 
     void dangXuat() {
