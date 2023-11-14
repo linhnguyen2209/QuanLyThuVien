@@ -295,18 +295,6 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     }
 
     void insertSach() {
-//        Sach sach = new Sach();
-//        if(ValidateSach()){
-//            sach.setTieuDe(txtTieude.getText());
-//            sach.setNhaXuatBan(txtNhaXuatBan.getText());
-//            sach.setTacGia(txtTacGia.getText());
-//            sach.setSoTrang(Integer.parseInt(txtSoTrang.getText()));
-//            sach.setSoLuongSach(Integer.parseInt(txt_SoLuongSach.getText()));
-//            sach.setGiaTien(Double.parseDouble(txtGiaTien.getText()));
-//            sach.setNgayNhapKho(XDate.toDate(txtNgayNhapKho.getText(), "yyyy-MM-dd"));
-//            sach.setViTriSach(txtViTri.getText());
-//            sach.setMaLoaiSach(cboLoaiSach.getSelectedItem()+"");
-//        }
         Sach sach = getForm();
         try {
             SDao.insert(sach);
