@@ -52,6 +52,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
 
     List<Sach> list = new ArrayList<>();
 
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     void FillTable_QLTlieu() {
         DefaultTableModel model = (DefaultTableModel) tbl_QLTL.getModel();
         model.setRowCount(0);
@@ -85,7 +86,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
                     sach.getSoTrang(),
                     sach.getSoLuongSach(),
                     sach.getGiaTien(),
-                    sach.getNgayNhapKho(),
+                    dateFormat.format(sach.getNgayNhapKho()),
                     sach.getViTriSach(),
                     sach.getMaLoaiSach()
                 });
@@ -182,7 +183,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
             e.printStackTrace();
         }
         // Xử lý trường ngày nhập kho
-        Date ngayNhapKho = XDate.toDate(txtNgayNhapKho.getText(), "yyyy/MM/dd") ;
+        Date ngayNhapKho = XDate.toDate(txtNgayNhapKho.getText(), "dd/MM/yyyy") ;
         if(ngayNhapKho.compareTo(new Date())>0){
             MsgBox.alert(this, "Ngày nhập kho vượt quá ngày hiện tại!");
         }
@@ -281,14 +282,14 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
 
 // Hàm kiểm tra định dạng ngày
     private boolean isValidDate(String date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
         sdf.setLenient(false);
 
         try {
             Date ngayNhapKhoValue = sdf.parse(date);
             return true;
         } catch (ParseException e) {
-            JOptionPane.showMessageDialog(null, "Định dạng ngày không hợp lệ. Sử dụng định dạng yyyy-MM-dd", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Định dạng ngày không hợp lệ. Sử dụng định dạng dd/MM/yyyy", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return false;
         }
     }
