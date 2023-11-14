@@ -1332,7 +1332,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_rdoMaLoaiSachActionPerformed
 
     private void tbl_QLTLMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_QLTLMousePressed
-        if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 1) {
             this.row = tbl_QLTL.rowAtPoint(evt.getPoint());
             edit();
         }
