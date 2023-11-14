@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import quanlythuvien.dao.PhieuMuonChiTietDAO;
 import quanlythuvien.dao.PhieuMuonDAO;
@@ -16,6 +18,7 @@ import quanlythuvien.entity.PhieuMuonChiTiet;
 import quanlythuvien.entity.PhieuTra;
 import quanlythuvien.entity.Sach;
 import quanlythuvien.utils.Auth;
+import quanlythuvien.utils.ExportFile;
 import quanlythuvien.utils.MsgBox;
 import quanlythuvien.utils.ValidatorForm;
 import quanlythuvien.utils.XDate;
@@ -64,9 +67,16 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
                     listPM = phieuMuonDAO.selectAll();
                     break;
                 case 1:
+                    try {
+                    int idPM = Integer.parseInt(txtSearch.getText());
                     listPM.clear();
-                    listPM.add(phieuMuonDAO.selectById(Integer.valueOf(txtSearch.getText())));
+                    listPM.add(phieuMuonDAO.selectById(idPM));
                     break;
+                } catch (Exception e) {
+                    MsgBox.alert(this, "Mã phiếu mượn phải là số!");
+                    return;
+                }
+
                 case 2:
                     listPM = phieuMuonDAO.selectByIDND(txtSearch.getText());
                     break;
@@ -76,15 +86,15 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             if (txtSearch.getText().equals("Tìm kiếm phiếu...")) {
                 listPM = phieuMuonDAO.selectAll();
             }
-                for (PhieuMuon phieuMuon : listPM) {
-                    if(phieuMuon==null){ // đề phòng tìm kiếm nhưng không có kết quả
-                        model.setRowCount(0);
-                    }else{
+            for (PhieuMuon phieuMuon : listPM) {
+                if (phieuMuon == null) { // đề phòng tìm kiếm nhưng không có kết quả
+                    model.setRowCount(0);
+                } else {
                     Object[] row = {phieuMuon.getMaPhieuMuon(), XDate.toString(phieuMuon.getNgayMuon(), "yyyy/MM/dd"),
                         XDate.toString(phieuMuon.getNgayHenTra(), "yyyy/MM/dd"), phieuMuon.getTongSoLuongSachMuon(), phieuMuon.getMaNguoiDung(), phieuMuon.getGhiChu()};
                     model.addRow(row);
-                    }
                 }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -827,6 +837,11 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         jButton1.setBackground(new java.awt.Color(0, 204, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setText("Xuất danh sách");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(0, 255, 153));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -1079,6 +1094,11 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
 
         cboLuaChon.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cboLuaChon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Mã phiếu mượn", "Mã đọc giả", " " }));
+        cboLuaChon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboLuaChonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -1888,6 +1908,20 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     private void btnLastPMCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastPMCTActionPerformed
         lastCTPM();
     }//GEN-LAST:event_btnLastPMCTActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (tblPhieuMuon.getRowCount() == 0) {
+            MsgBox.alert(this, "Không có dữ liệu để xuất!");
+        } else {     
+            ExportFile.exportToExcel(this,tblPhieuMuon, "Danh sách phiếu mượn");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cboLuaChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLuaChonActionPerformed
+        if (cboLuaChon.getSelectedIndex() == 0) {
+            fillTablePhieuMuon();
+        }
+    }//GEN-LAST:event_cboLuaChonActionPerformed
 
     public static void main(String args[]) {
 
