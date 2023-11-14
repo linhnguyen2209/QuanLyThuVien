@@ -104,6 +104,7 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
 
         pnlMenu.setBackground(new java.awt.Color(0, 102, 153));
         pnlMenu.setForeground(new java.awt.Color(255, 255, 255));
+        pnlMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnTrangChu.setBackground(new java.awt.Color(0, 153, 51));
         btnTrangChu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -115,6 +116,8 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
                 btnTrangChuActionPerformed(evt);
             }
         });
+        pnlMenu.add(btnTrangChu, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 174, 202, 37));
+        pnlMenu.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 165, 214, -1));
 
         lblUser.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblUser.setForeground(new java.awt.Color(255, 255, 204));
@@ -124,6 +127,7 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
         lblUser.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         lblUser.setIconTextGap(10);
         lblUser.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        pnlMenu.add(lblUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 202, 153));
 
         btnTroGiup.setBackground(new java.awt.Color(0, 102, 153));
         btnTroGiup.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -135,6 +139,7 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
                 btnTroGiupActionPerformed(evt);
             }
         });
+        pnlMenu.add(btnTroGiup, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 264, 202, 40));
 
         btnGioiThieu.setBackground(new java.awt.Color(0, 102, 153));
         btnGioiThieu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -146,42 +151,11 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
                 btnGioiThieuActionPerformed(evt);
             }
         });
+        pnlMenu.add(btnGioiThieu, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 217, 202, 41));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/logoLibNgang.png"))); // NOI18N
-
-        javax.swing.GroupLayout pnlMenuLayout = new javax.swing.GroupLayout(pnlMenu);
-        pnlMenu.setLayout(pnlMenuLayout);
-        pnlMenuLayout.setHorizontalGroup(
-            pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1)
-            .addGroup(pnlMenuLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-                    .addComponent(btnTrangChu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTroGiup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnGioiThieu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        pnlMenuLayout.setVerticalGroup(
-            pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMenuLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnTrangChu, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnGioiThieu, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnTroGiup, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 309, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        pnlMenu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 613, 214, 71));
 
         jPanel5.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, 690));
 

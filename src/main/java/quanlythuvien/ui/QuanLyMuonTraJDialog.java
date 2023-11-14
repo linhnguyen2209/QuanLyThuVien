@@ -139,8 +139,6 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         txtNgayHenTra.setEditable(false);
         txtNgayMuon.setEditable(false);
         txtTongSoLuongSachMuon.setEditable(false);
-        txtMaPhieuMuon.setEditable(false);
-        txtMaNguoiDung.setEditable(edit);
         //Khi insert thì không update, delete
         btnThem.setEnabled(!edit);
         btnSua.setEnabled(edit);
