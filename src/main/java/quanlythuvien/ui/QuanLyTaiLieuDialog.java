@@ -24,8 +24,7 @@ import quanlythuvien.utils.XImage;
 
 /**
  *
- * @author Dino Disign By Linh Edit By Dino 
- * Edit Lần N
+ * @author Dino Disign By Linh Edit By Dino Edit Lần N
  */
 public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
 
@@ -53,7 +52,6 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
 
     List<Sach> list = new ArrayList<>();
 
-    
     void FillTable_QLTlieu() {
         DefaultTableModel model = (DefaultTableModel) tbl_QLTL.getModel();
         model.setRowCount(0);
@@ -154,7 +152,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
 
     Sach getForm() {
         Sach model = new Sach();
-        if(row >= 0){
+        if (row >= 0) {
             model.setMaSach(Integer.parseInt(tbl_QLTL.getValueAt(row, 0) + ""));
         }
         model.setTieuDe(txtTieude.getText());
@@ -172,7 +170,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
             int soLuongSach = Integer.parseInt(txt_SoLuongSach.getText());
             model.setSoLuongSach(soLuongSach);
         } catch (NumberFormatException e) {
-        
+
             e.printStackTrace();
         }
         try {
@@ -180,12 +178,12 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
             double giaTien = Double.parseDouble(txtGiaTien.getText());
             model.setGiaTien(giaTien);
         } catch (NumberFormatException e) {
-         
+
             e.printStackTrace();
         }
         // Xử lý trường ngày nhập kho
-        Date ngayNhapKho = XDate.toDate(txtNgayNhapKho.getText(), "yyyy-MM-dd") ;
-        if(ngayNhapKho.compareTo(new Date())>0){
+        Date ngayNhapKho = XDate.toDate(txtNgayNhapKho.getText(), "yyyy-MM-dd");
+        if (ngayNhapKho.compareTo(new Date()) > 0) {
             MsgBox.alert(this, "Ngày nhập kho vượt quá ngày hiện tại!");
         }
         model.setNgayNhapKho(ngayNhapKho);
@@ -255,9 +253,49 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
             return false;
         }
 
+        double giaTienValue;
+        try {
+            giaTienValue = Double.parseDouble(giaTien);
+            if (giaTienValue < 0) {
+                JOptionPane.showMessageDialog(null, "Giá tiền không được là số âm", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Giá tiền không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        // Kiểm tra số lượng trang không phải là số âm
+        int soTrangValue;
+        try {
+            soTrangValue = Integer.parseInt(soTrang);
+            if (soTrangValue < 0) {
+                JOptionPane.showMessageDialog(null, "Số trang không được là số âm", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Số trang không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        // Kiểm tra số lượng sách không phải là số âm
+        int soLuongSachValue;
+        try {
+            soLuongSachValue = Integer.parseInt(soLuongSach);
+            if (soLuongSachValue < 0) {
+                JOptionPane.showMessageDialog(null, "Số lượng sách không được là số âm", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Số lượng sách không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        // ... (các dòng code sau đó)
+        return true;
         // Tiếp tục xử lý khi dữ liệu hợp lệ
         // ...
-        return true;
+
     }
 
 // Hàm kiểm tra xem một chuỗi có phải là số không
@@ -270,17 +308,15 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
             return false;
         }
     }
-
 // Hàm kiểm tra tên tác giả không chứa số
     private boolean isValidAuthorName(String authorName) {
-        if (!authorName.matches(".*\\d.*")) {
-            return true;
-        } else {
-            JOptionPane.showMessageDialog(null, "Tên tác giả không được chứa số", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
+        if (authorName.matches("^[\\p{L}\\p{M}\\s]+$")) {
+        return true;
+    } else {
+        JOptionPane.showMessageDialog(null, "Tên tác giả không được chứa số và ký tự đặc biệt", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        return false;
     }
-
+    }
 // Hàm kiểm tra định dạng ngày
     private boolean isValidDate(String date) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
