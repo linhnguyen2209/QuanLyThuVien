@@ -254,7 +254,7 @@ BEGIN
     DELETE FROM PhieuMuon
     WHERE MaPhieuMuon IN (SELECT MaPhieuMuon FROM deleted);
 END;
-
+GO
 -- STORE PROC
 Create proc sp_muonTraTheoLoai(@Year int,@MonthStart int, @MonthEnd int, @TrangThai nvarchar(200), @MaDocGia varchar(10))
 as begin
@@ -308,7 +308,7 @@ end
 -- tất cả trong năm đó theo tháng
 -- exec sp_muonTraTheoLoai 2023, 10, 12, N'%%', 'ND001'; 
 -- exec sp_muonTraTheoLoai 2023, 1, 12, N'%%', N'%%';
-
+GO
 -- Tất cả các năm
 Create proc sp_muonTraALLYears
 as begin

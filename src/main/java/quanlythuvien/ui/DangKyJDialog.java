@@ -58,7 +58,7 @@ public class DangKyJDialog extends javax.swing.JDialog {
 
     boolean validateForm() {
         String reTen = "^[\\p{L}\\p{M}\\s]+$"; // tên có dấu.
-        String reSoDienThoai = "^(\\+84|0)[0-9]{9}$"; // tên có dấu.
+        String reSoDienThoai = "^(\\+84|0)[0-9]{9}$";
         String reTenDangNhap = "^[a-zA-Z0-9_-]{2,10}$";
         String reEmail = "^[A-Za-z0-9+_.-]+@([A-Za-z0-9.-]+\\.[A-Za-z]{2,})$";
 
