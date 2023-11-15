@@ -55,8 +55,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         fillTablePhieuMuon();
         fillTablePhieuTra();
         fillJlistSach();
-        updateStatus();
-        txtTongSoLuongSachMuon.setText(0 + "");
+        clearForm();
     }
 
     void fillTablePhieuMuon() {
@@ -122,7 +121,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             model.setMaPhieuMuon(Integer.parseInt(tblPhieuMuon.getValueAt(row, 0) + ""));
         }
         model.setNgayMuon(XDate.toDate(txtNgayMuon.getText(), "yyyy/MM/dd"));
-        model.setNgayHenTra(XDate.add(3));
+        model.setNgayHenTra(XDate.toDate(txtNgayHenTra.getText(), "yyyy/MM/dd"));
         model.setTongSoLuongSachMuon(Integer.parseInt(txtTongSoLuongSachMuon.getText()));
         model.setMaNguoiDung(txtMaNguoiDung.getText());
         model.setGhiChu(txtGhiChu.getText());
@@ -133,8 +132,8 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     void clearForm() {
         tblPhieuMuon.clearSelection();
         txtMaPhieuMuon.setText("");
-        txtNgayMuon.setText("");
-        txtNgayHenTra.setText("");
+        txtNgayMuon.setText(XDate.toString(new Date(), "yyyy/MM/dd"));
+        txtNgayHenTra.setText(XDate.toString(XDate.add(3), "yyyy/MM/dd"));
         txtTongSoLuongSachMuon.setText(0 + "");
         txtMaNguoiDung.setText("");
         txtGhiChu.setText("");
