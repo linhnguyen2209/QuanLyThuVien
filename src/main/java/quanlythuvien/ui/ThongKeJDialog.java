@@ -39,6 +39,8 @@ public class ThongKeJDialog extends javax.swing.JDialog {
         fillComboxThang();
         txtTongTienPhatCacNam.setEditable(false);
         txtTongTienPhatTheoNam.setEditable(false);
+        cboThangKetThuc.setSelectedItem(12);
+        filter();
     }
 
     void fillComboboxNam() {
@@ -405,7 +407,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 

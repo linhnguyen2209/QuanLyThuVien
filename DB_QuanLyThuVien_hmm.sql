@@ -292,16 +292,16 @@ as begin
 		Year(pm.NgayMuon) = @Year
 		AND (MONTH(pm.NgayMuon) BETWEEN @MonthStart AND @MonthEnd)
 		AND CASE
-			WHEN DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) > 0 
-			THEN N'Trả Quá hạn'
-			WHEN DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) is null and DateDiff(Day, pm.NgayHenTra, GETDATE()) = 0
-			THEN N'Đến hạn mà chưa trả sách'
-			WHEN DATEDIFF(day, pm.NgayHenTra, ptr.NgayTra) is null and DateDiff(Day, pm.NgayHenTra, GETDATE()) > 0
-			THEN N'Quá hạn nhưng Chưa trả sách'
-			WHEN DATEDIFF(day, pm.NgayHenTra, ptr.NgayTra) is null and DateDiff(Day, pm.NgayHenTra, GETDATE()) < 0
-			THEN N'Chưa đến hạn trả sách'
-			ELSE N'Trả Đúng hạn'
-		END like @TrangThai
+				WHEN DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) > 0 
+				THEN N'Trả Quá hạn'
+				WHEN DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) is null and DateDiff(Day, pm.NgayHenTra, GETDATE()) = 0
+				THEN N'Đến hạn mà chưa trả sách'
+				WHEN DATEDIFF(day, pm.NgayHenTra, ptr.NgayTra) is null and DateDiff(Day, pm.NgayHenTra, GETDATE()) > 0
+				THEN N'Quá hạn nhưng Chưa trả sách'
+				WHEN DATEDIFF(day, pm.NgayHenTra, ptr.NgayTra) is null and DateDiff(Day, pm.NgayHenTra, GETDATE()) < 0
+				THEN N'Chưa đến hạn trả sách'
+				ELSE N'Trả Đúng hạn'
+		    END like @TrangThai
 		AND pm.MaNguoiDung like @MaDocGia
 end
 -- drop proc sp_muonTraTheoLoai;
@@ -347,4 +347,3 @@ end
 -- exec sp_muonTraALLYears
 
 -- select Distinct(Year(NgayMuon)) as Nam from PhieuMuon ORDER BY Nam DESC
-

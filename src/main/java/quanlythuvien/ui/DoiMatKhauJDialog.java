@@ -18,17 +18,29 @@ import quanlythuvien.utils.XImage;
 public class DoiMatKhauJDialog extends javax.swing.JDialog {
 
     ThuVienMainJFrame tvfr;
+    ThuVienQuanLyJFrame tvqlfr;
+    ThuVienUserJFrame tvufr;
     NguoiDungDAO ndDAO = new NguoiDungDAO();
 
     public DoiMatKhauJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        tvfr = (ThuVienMainJFrame) parent;
+        if (!Auth.isLogin()) {
+            tvfr = (ThuVienMainJFrame) parent;
+        } else {
+            if (Auth.isLibrarian() || Auth.isManager()) {
+                tvqlfr = (ThuVienQuanLyJFrame) parent;
+            } else {
+                tvufr = (ThuVienUserJFrame) parent;
+            }
+            lblDangKy.setVisible(false);
+            lblDangNhap.setVisible(false);
+        }
         init();
     }
 
     void init() {
-        this.setLocationRelativeTo(null);
+        this.setLocation(399, 101);
         this.setTitle("Đổi mật khẩu");
         this.setIconImage(XImage.getAppIcon());
         btnXacNhan.setContentAreaFilled(false);
@@ -44,15 +56,20 @@ public class DoiMatKhauJDialog extends javax.swing.JDialog {
         } else if (!new String(txtMatKhauMoi.getPassword()).equals(new String(txtNhapLaiMatKhauMoi.getPassword()))) {
             MsgBox.alert(this, "Mật khẩu không trùng khớp!");
         } else {
-            NguoiDung nd = Auth.userXacThuc;
-            NguoiDung nd1 = new NguoiDung(nd.getMaNguoiDung(), nd.getMaLoaiNguoiDung(), nd.getTenNguoiDung(), nd.getEmail(), nd.getSdt(), new String(txtMatKhauMoi.getPassword()));
-            ndDAO.update(nd1);
-            MsgBox.alert(this, "Đổi mật khẩu thành công!");
-            if (Auth.isLogin()) {// nếu login thí set lại auth và đóng ng lại qua login
+
+            if (Auth.isLogin()) {// nếu login rồi thí set lại auth và đóng ng lại qua login
+                NguoiDung nd = Auth.user;
+                NguoiDung nd1 = new NguoiDung(nd.getMaNguoiDung(), nd.getMaLoaiNguoiDung(), nd.getTenNguoiDung(), nd.getEmail(), nd.getSdt(), new String(txtMatKhauMoi.getPassword()));
+                ndDAO.update(nd1);
+                MsgBox.alert(this, "Đổi mật khẩu thành công!");
                 Auth.user = nd1;
                 Auth.userXacThuc = null; // reset
                 this.dispose();
-            } else {
+            } else { // chưa login
+                NguoiDung nd = Auth.userXacThuc;
+                NguoiDung nd1 = new NguoiDung(nd.getMaNguoiDung(), nd.getMaLoaiNguoiDung(), nd.getTenNguoiDung(), nd.getEmail(), nd.getSdt(), new String(txtMatKhauMoi.getPassword()));
+                ndDAO.update(nd1);
+                MsgBox.alert(this, "Đổi mật khẩu thành công!");
                 Auth.userXacThuc = null;
                 this.dispose();
                 tvfr.openDangNhap();

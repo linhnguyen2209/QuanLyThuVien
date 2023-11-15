@@ -35,7 +35,7 @@ public class XacThucJDialog extends javax.swing.JDialog {
     }
 
     void init() {
-        this.setLocationRelativeTo(null);
+        this.setLocation(399,101);
         this.setTitle("Xác thực");
         this.setIconImage(XImage.getAppIcon());
         btnTiepTheo1.setContentAreaFilled(false);
