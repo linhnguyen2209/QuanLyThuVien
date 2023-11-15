@@ -56,7 +56,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         fillTablePhieuTra();
         fillJlistSach();
         updateStatus();
-        txtTongSoLuongSachMuon.setText(0+"");
+        txtTongSoLuongSachMuon.setText(0 + "");
     }
 
     void fillTablePhieuMuon() {
@@ -121,7 +121,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         if (row >= 0) {
             model.setMaPhieuMuon(Integer.parseInt(tblPhieuMuon.getValueAt(row, 0) + ""));
         }
-        model.setNgayMuon(new Date());
+        model.setNgayMuon(XDate.toDate(txtNgayMuon.getText(), "yyyy/MM/dd"));
         model.setNgayHenTra(XDate.add(3));
         model.setTongSoLuongSachMuon(Integer.parseInt(txtTongSoLuongSachMuon.getText()));
         model.setMaNguoiDung(txtMaNguoiDung.getText());
@@ -241,15 +241,19 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     }
 
     void update() {
-        PhieuMuon pm = getForm();
-        try {
-            phieuMuonDAO.update(pm);
-            fillTablePhieuMuon();
-            fillTablePhieuTra();
-            MsgBox.alert(this, "Cập nhật thành công");
-        } catch (Exception e) {
-            e.printStackTrace();
-            MsgBox.alert(this, "Cập nhật thất bại!");
+        if (row >= 0) {
+            PhieuMuon pm = getForm();
+            try {
+                phieuMuonDAO.update(pm);
+                fillTablePhieuMuon();
+                fillTablePhieuTra();
+                MsgBox.alert(this, "Cập nhật thành công");
+            } catch (Exception e) {
+                e.printStackTrace();
+                MsgBox.alert(this, "Cập nhật thất bại!");
+            }
+        } else {
+            MsgBox.alert(this, "Vui lòng chọn dòng muốn cập nhật");
         }
     }
 
@@ -933,6 +937,8 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         jLabel4.setText("Ngày mượn");
 
         jLabel3.setText("Mã Phiếu mượn");
+
+        txtMaPhieuMuon.setEditable(false);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -1913,8 +1919,8 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (tblPhieuMuon.getRowCount() == 0) {
             MsgBox.alert(this, "Không có dữ liệu để xuất!");
-        } else {     
-            ExportFile.exportToExcel(this,tblPhieuMuon, "Danh sách phiếu mượn");
+        } else {
+            ExportFile.exportToExcel(this, tblPhieuMuon, "Danh sách phiếu mượn");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
