@@ -17,6 +17,7 @@ import quanlythuvien.utils.XImage;
 /**
  *
  * @author NGUYENDINHNGHI
+ * @author TRANTHITHUHA
  *
  */
 public class ThongKeJDialog extends javax.swing.JDialog {
@@ -131,7 +132,6 @@ public class ThongKeJDialog extends javax.swing.JDialog {
         txtMaDocGiaTimKiem = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         btnXuatFile = new javax.swing.JButton();
-        btnInBaoCao = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -315,8 +315,6 @@ public class ThongKeJDialog extends javax.swing.JDialog {
             }
         });
 
-        btnInBaoCao.setText("In Báo Cáo");
-
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel6.setText("Tổng tiền phạt theo năm:");
@@ -376,8 +374,6 @@ public class ThongKeJDialog extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addComponent(btnXuatFile)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnInBaoCao)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel10)
@@ -401,9 +397,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnXuatFile)
-                    .addComponent(btnInBaoCao))
+                .addComponent(btnXuatFile)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -512,7 +506,6 @@ public class ThongKeJDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFilter;
-    private javax.swing.JButton btnInBaoCao;
     private javax.swing.JButton btnXuatFile;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
