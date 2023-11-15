@@ -10,6 +10,8 @@ import javax.swing.table.DefaultTableModel;
 import quanlythuvien.dao.PhieuMuonDAO;
 import quanlythuvien.dao.ThongKeDAO;
 import quanlythuvien.entity.PhieuMuon;
+import quanlythuvien.utils.ExportFile;
+import quanlythuvien.utils.MsgBox;
 import quanlythuvien.utils.XImage;
 
 /**
@@ -91,13 +93,13 @@ public class ThongKeJDialog extends javax.swing.JDialog {
             tinhTrang = "Đến hạn mà chưa trả sách";
         } else if (rdoQuaHanVaChuaTra.isSelected()) {
             tinhTrang = "Quá hạn nhưng Chưa trả sách";
-        } else if(rdoChuaDenHan.isSelected()) {
+        } else if (rdoChuaDenHan.isSelected()) {
             tinhTrang = "Chưa đến hạn trả sách";
-        }else{
+        } else {
             tinhTrang = "";
         }
         List<Object[]> list = tkDao.getMuonTraTheoLoai(nam, thangBD, thangKT, tinhTrang, maDocGia);
-        System.out.println("listsizefilter:" +list.size());
+        System.out.println("listsizefilter:" + list.size());
         fillTable(list);
     }
 
@@ -126,7 +128,6 @@ public class ThongKeJDialog extends javax.swing.JDialog {
         rdoQuaHanVaChuaTra = new javax.swing.JRadioButton();
         txtMaDocGiaTimKiem = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        btnTimKiem = new javax.swing.JButton();
         btnXuatFile = new javax.swing.JButton();
         btnInBaoCao = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -305,9 +306,12 @@ public class ThongKeJDialog extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btnTimKiem.setText("Tìm Kiếm :");
-
         btnXuatFile.setText("Xuất FIle ");
+        btnXuatFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXuatFileActionPerformed(evt);
+            }
+        });
 
         btnInBaoCao.setText("In Báo Cáo");
 
@@ -346,10 +350,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
 
         tblThongKeMuonTra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Mã PM", "Mã Đọc giả", "Tên Đọc giả", "Ngày mượn", "Ngày hẹn trả", "Ngày trả", "Số ngày trễ", "Tiền phạt", "Tình trạng trả sách"
@@ -371,11 +372,9 @@ public class ThongKeJDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(btnTimKiem)
-                        .addGap(273, 273, 273)
+                        .addGap(32, 32, 32)
                         .addComponent(btnXuatFile)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnInBaoCao)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -401,7 +400,6 @@ public class ThongKeJDialog extends javax.swing.JDialog {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTimKiem)
                     .addComponent(btnXuatFile)
                     .addComponent(btnInBaoCao))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -441,6 +439,29 @@ public class ThongKeJDialog extends javax.swing.JDialog {
     private void rdoDenHanVaChuaTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoDenHanVaChuaTraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rdoDenHanVaChuaTraActionPerformed
+
+    private void btnXuatFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatFileActionPerformed
+        if (tblThongKeMuonTra.getRowCount() == 0) {
+            MsgBox.alert(this, "Không có dữ liệu để xuất!");
+        } else {
+            String tieuDe = "";
+            if (rdoDungHan.isSelected()) {
+                tieuDe = "Trả sách đúng hạn";
+            } else if (rdoQuaHan.isSelected()) {
+                tieuDe = "Trả sách quá hạn";
+            } else if (rdoChuaDenHan.isSelected()) {
+                tieuDe = "Chưa đến hạn trả sách";
+            } else if (rdoDenHanVaChuaTra.isSelected()) {
+                tieuDe = "Đến hạn và chưa trả";
+            } else if (rdoQuaHanVaChuaTra.isSelected()) {
+                tieuDe = "Quá hạn và chưa trả sách";
+            } else {
+                tieuDe = "Tình hình mượn trả";
+            }
+            ExportFile.exportToExcel(this, tblThongKeMuonTra, tieuDe);
+        }
+
+    }//GEN-LAST:event_btnXuatFileActionPerformed
 
     /**
      * @param args the command line arguments
@@ -490,7 +511,6 @@ public class ThongKeJDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFilter;
     private javax.swing.JButton btnInBaoCao;
-    private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton btnXuatFile;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;

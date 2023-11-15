@@ -39,11 +39,9 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                      <Component id="btnTimKiem" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="273" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="btnXuatFile" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnInBaoCao" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -77,7 +75,6 @@
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnTimKiem" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnXuatFile" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnInBaoCao" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -372,15 +369,13 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="btnTimKiem">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="T&#xec;m Ki&#x1ebf;m :"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="btnXuatFile">
       <Properties>
         <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t FIle "/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXuatFileActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnInBaoCao">
       <Properties>
@@ -454,7 +449,7 @@
         <Component class="javax.swing.JTable" name="tblThongKeMuonTra">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="9" rowCount="4">
+              <Table columnCount="9" rowCount="0">
                 <Column editable="true" title="M&#xe3; PM" type="java.lang.Object"/>
                 <Column editable="true" title="M&#xe3; &#x110;&#x1ecd;c gi&#x1ea3;" type="java.lang.Object"/>
                 <Column editable="true" title="T&#xea;n &#x110;&#x1ecd;c gi&#x1ea3;" type="java.lang.Object"/>

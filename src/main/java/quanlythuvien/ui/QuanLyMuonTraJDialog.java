@@ -56,6 +56,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         fillTablePhieuTra();
         fillJlistSach();
         updateStatus();
+        txtTongSoLuongSachMuon.setText(0+"");
     }
 
     void fillTablePhieuMuon() {
