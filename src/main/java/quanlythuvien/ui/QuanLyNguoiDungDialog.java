@@ -242,25 +242,25 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblNguoiDung = new javax.swing.JTable();
         lblKetQua = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblQLND = new javax.swing.JLabel();
         pnlLoaiTimKiem = new javax.swing.JPanel();
         rdoMaNguoiDung = new javax.swing.JRadioButton();
         rdoTenNguoiDung = new javax.swing.JRadioButton();
         rdoAll = new javax.swing.JRadioButton();
         pnlThongTin = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        lblMaND = new javax.swing.JLabel();
         txtMaNgDung = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        lblVaiTro = new javax.swing.JLabel();
         cboLoaiNgDung = new javax.swing.JComboBox<>();
         txtHoTen = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        lblTen = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
         txtSoDienThoai = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
+        lblSDT = new javax.swing.JLabel();
         txtMatKhau = new javax.swing.JPasswordField();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        lblPass = new javax.swing.JLabel();
+        lblXacNhanMK = new javax.swing.JLabel();
         txtXacNhanMK = new javax.swing.JPasswordField();
         pnlChucNang1 = new javax.swing.JPanel();
         btnNew = new javax.swing.JButton();
@@ -357,10 +357,10 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
 
         pnlContain.add(pnlDanhSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 1080, 300));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 153, 255));
-        jLabel1.setText("Quản lý người dùng");
-        pnlContain.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 230, 30));
+        lblQLND.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblQLND.setForeground(new java.awt.Color(51, 153, 255));
+        lblQLND.setText("Quản lý người dùng");
+        pnlContain.add(lblQLND, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 230, 30));
 
         pnlLoaiTimKiem.setBackground(new java.awt.Color(204, 255, 255));
         pnlLoaiTimKiem.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Theo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
@@ -408,9 +408,9 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         pnlThongTin.setBackground(new java.awt.Color(204, 255, 255));
         pnlThongTin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
-        jLabel3.setText("Mã người dùng:");
+        lblMaND.setText("Mã người dùng:");
 
-        jLabel4.setText("Vai trò");
+        lblVaiTro.setText("Vai trò");
 
         cboLoaiNgDung.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cboLoaiNgDung.addActionListener(new java.awt.event.ActionListener() {
@@ -419,15 +419,15 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
             }
         });
 
-        jLabel5.setText("Họ Tên:");
+        lblTen.setText("Họ Tên:");
 
-        jLabel6.setText("Email:");
+        lblEmail.setText("Email:");
 
-        jLabel7.setText("Số điện thoại:");
+        lblSDT.setText("Số điện thoại:");
 
-        jLabel8.setText("Mật khẩu:");
+        lblPass.setText("Mật khẩu:");
 
-        jLabel9.setText("Xác nhận mật khẩu:");
+        lblXacNhanMK.setText("Xác nhận mật khẩu:");
 
         javax.swing.GroupLayout pnlThongTinLayout = new javax.swing.GroupLayout(pnlThongTin);
         pnlThongTin.setLayout(pnlThongTinLayout);
@@ -437,15 +437,15 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
                 .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlThongTinLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel7)
+                        .addComponent(lblSDT)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtSoDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlThongTinLayout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
+                            .addComponent(lblTen)
+                            .addComponent(lblMaND, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblEmail))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
@@ -453,9 +453,9 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
                             .addComponent(txtMaNgDung, javax.swing.GroupLayout.Alignment.LEADING))))
                 .addGap(18, 18, 18)
                 .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel4))
+                    .addComponent(lblPass)
+                    .addComponent(lblXacNhanMK)
+                    .addComponent(lblVaiTro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtXacNhanMK, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -468,25 +468,25 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
             .addGroup(pnlThongTinLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(lblMaND)
                     .addComponent(txtMaNgDung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
+                    .addComponent(lblPass)
                     .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
+                    .addComponent(lblTen)
                     .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
+                    .addComponent(lblXacNhanMK)
                     .addComponent(txtXacNhanMK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
+                    .addComponent(lblEmail)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
+                    .addComponent(lblVaiTro)
                     .addComponent(cboLoaiNgDung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
+                    .addComponent(lblSDT)
                     .addComponent(txtSoDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(57, Short.MAX_VALUE))
         );
@@ -693,16 +693,16 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cboLoaiNgDung;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblKetQua;
+    private javax.swing.JLabel lblMaND;
+    private javax.swing.JLabel lblPass;
+    private javax.swing.JLabel lblQLND;
+    private javax.swing.JLabel lblSDT;
+    private javax.swing.JLabel lblTen;
+    private javax.swing.JLabel lblVaiTro;
+    private javax.swing.JLabel lblXacNhanMK;
     private javax.swing.ButtonGroup loaiTimKiem;
     private javax.swing.JPanel pnlChucNang1;
     private javax.swing.JPanel pnlChucNang2;
