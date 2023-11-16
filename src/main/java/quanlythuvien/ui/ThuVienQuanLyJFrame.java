@@ -218,6 +218,7 @@ public class ThuVienQuanLyJFrame extends javax.swing.JFrame {
         btnTrangChu.setForeground(new java.awt.Color(255, 255, 204));
         btnTrangChu.setText("TRANG CHỦ");
         btnTrangChu.setBorder(null);
+        btnTrangChu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTrangChu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTrangChuActionPerformed(evt);
@@ -229,6 +230,7 @@ public class ThuVienQuanLyJFrame extends javax.swing.JFrame {
         lblUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/user.png"))); // NOI18N
         lblUser.setText("USER NAME");
+        lblUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblUser.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         lblUser.setIconTextGap(10);
         lblUser.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -243,6 +245,7 @@ public class ThuVienQuanLyJFrame extends javax.swing.JFrame {
         btnDangXuat.setForeground(new java.awt.Color(255, 255, 204));
         btnDangXuat.setText("ĐĂNG XUẤT");
         btnDangXuat.setBorder(null);
+        btnDangXuat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDangXuatActionPerformed(evt);
@@ -254,6 +257,7 @@ public class ThuVienQuanLyJFrame extends javax.swing.JFrame {
         btnGioiThieu.setForeground(new java.awt.Color(255, 255, 204));
         btnGioiThieu.setText("GIỚI THIỆU");
         btnGioiThieu.setBorder(null);
+        btnGioiThieu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGioiThieu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGioiThieuActionPerformed(evt);
@@ -268,6 +272,7 @@ public class ThuVienQuanLyJFrame extends javax.swing.JFrame {
         btnTroGiup.setForeground(new java.awt.Color(255, 255, 204));
         btnTroGiup.setText("TRỢ GIÚP");
         btnTroGiup.setBorder(null);
+        btnTroGiup.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTroGiup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTroGiupActionPerformed(evt);
@@ -320,6 +325,7 @@ public class ThuVienQuanLyJFrame extends javax.swing.JFrame {
         btnTraCuuSach.setForeground(new java.awt.Color(102, 102, 102));
         btnTraCuuSach.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/btnTraCuu.png"))); // NOI18N
         btnTraCuuSach.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(255, 255, 255)));
+        btnTraCuuSach.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTraCuuSach.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTraCuuSachActionPerformed(evt);
@@ -332,6 +338,7 @@ public class ThuVienQuanLyJFrame extends javax.swing.JFrame {
         btnQuanLyMuonTra.setForeground(new java.awt.Color(102, 102, 102));
         btnQuanLyMuonTra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/btnMuonTra.png"))); // NOI18N
         btnQuanLyMuonTra.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(255, 255, 255)));
+        btnQuanLyMuonTra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnQuanLyMuonTra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnQuanLyMuonTraActionPerformed(evt);
@@ -344,6 +351,7 @@ public class ThuVienQuanLyJFrame extends javax.swing.JFrame {
         btnQuanLyTaiLieu.setForeground(new java.awt.Color(102, 102, 102));
         btnQuanLyTaiLieu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/btnTaiLieu.png"))); // NOI18N
         btnQuanLyTaiLieu.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(255, 255, 255)));
+        btnQuanLyTaiLieu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnQuanLyTaiLieu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnQuanLyTaiLieuActionPerformed(evt);
@@ -356,6 +364,7 @@ public class ThuVienQuanLyJFrame extends javax.swing.JFrame {
         btnQuanLyNguoiDung.setForeground(new java.awt.Color(102, 102, 102));
         btnQuanLyNguoiDung.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/btnNguoiDung.png"))); // NOI18N
         btnQuanLyNguoiDung.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(255, 255, 255)));
+        btnQuanLyNguoiDung.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnQuanLyNguoiDung.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnQuanLyNguoiDungActionPerformed(evt);
@@ -368,6 +377,7 @@ public class ThuVienQuanLyJFrame extends javax.swing.JFrame {
         btnThongKe.setForeground(new java.awt.Color(102, 102, 102));
         btnThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/btnThongKe.png"))); // NOI18N
         btnThongKe.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(255, 255, 255)));
+        btnThongKe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnThongKe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThongKeActionPerformed(evt);

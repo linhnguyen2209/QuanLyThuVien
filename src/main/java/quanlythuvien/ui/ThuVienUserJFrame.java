@@ -55,8 +55,6 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
     }
 
     void showSlider() {
-        btnPrevSlide.setBackground(new Color(153, 153, 153, 5));
-        btnNextSlide.setBackground(new Color(153, 153, 153, 5));
         listPanelTrangChu.add(pnlTrangChuCon1);
         listPanelTrangChu.add(pnlTrangChuCon2);
         listPanelTrangChu.add(pnlTrangChuCon3);
@@ -222,6 +220,7 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         btnNextSlide = new javax.swing.JButton();
         btnPrevSlide = new javax.swing.JButton();
         pnlTrangChuCon1 = new javax.swing.JPanel();
+        btnKhamPha = new javax.swing.JButton();
         lblBgrTrangChuUser1 = new javax.swing.JLabel();
         pnlTrangChuCon2 = new javax.swing.JPanel();
         lblBgrTrangChuUser2 = new javax.swing.JLabel();
@@ -262,6 +261,7 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         btnTrangChu.setForeground(new java.awt.Color(255, 255, 204));
         btnTrangChu.setText("TRANG CHỦ");
         btnTrangChu.setBorder(null);
+        btnTrangChu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTrangChu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTrangChuActionPerformed(evt);
@@ -273,6 +273,7 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         lblUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/user.png"))); // NOI18N
         lblUser.setText("USER NAME");
+        lblUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblUser.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         lblUser.setIconTextGap(10);
         lblUser.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -287,6 +288,7 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         btnDangXuat.setForeground(new java.awt.Color(255, 255, 204));
         btnDangXuat.setText("ĐĂNG XUẤT");
         btnDangXuat.setBorder(null);
+        btnDangXuat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDangXuatActionPerformed(evt);
@@ -298,6 +300,7 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         btnTraCuu.setForeground(new java.awt.Color(255, 255, 204));
         btnTraCuu.setText("TRA CỨU SÁCH");
         btnTraCuu.setBorder(null);
+        btnTraCuu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTraCuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTraCuuActionPerformed(evt);
@@ -312,6 +315,7 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         btnTroGiup.setForeground(new java.awt.Color(255, 255, 204));
         btnTroGiup.setText("TRỢ GIÚP");
         btnTroGiup.setBorder(null);
+        btnTroGiup.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTroGiup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTroGiupActionPerformed(evt);
@@ -323,12 +327,14 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         btnLichSuMuonTra.setForeground(new java.awt.Color(255, 255, 204));
         btnLichSuMuonTra.setText("LỊCH SỬ MƯỢN TRẢ");
         btnLichSuMuonTra.setBorder(null);
+        btnLichSuMuonTra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         btnGioiThieu.setBackground(new java.awt.Color(0, 102, 153));
         btnGioiThieu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnGioiThieu.setForeground(new java.awt.Color(255, 255, 204));
         btnGioiThieu.setText("GIỚI THIỆU");
         btnGioiThieu.setBorder(null);
+        btnGioiThieu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGioiThieu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGioiThieuActionPerformed(evt);
@@ -426,30 +432,40 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         });
         pnlTrangChuUser.add(btnPrevSlide, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 330, 50, 90));
 
+        pnlTrangChuCon1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnKhamPha.setBackground(new java.awt.Color(255, 153, 102));
+        btnKhamPha.setFont(new java.awt.Font("Unispace", 1, 29)); // NOI18N
+        btnKhamPha.setText("KHÁM PHÁ NGAY");
+        btnKhamPha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnKhamPhaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnKhamPhaMouseExited(evt);
+            }
+        });
+        btnKhamPha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKhamPhaActionPerformed(evt);
+            }
+        });
+        pnlTrangChuCon1.add(btnKhamPha, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 410, 300, 80));
+
         lblBgrTrangChuUser1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBgrTrangChuUser1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/bgrTrangChuUser.png"))); // NOI18N
-
-        javax.swing.GroupLayout pnlTrangChuCon1Layout = new javax.swing.GroupLayout(pnlTrangChuCon1);
-        pnlTrangChuCon1.setLayout(pnlTrangChuCon1Layout);
-        pnlTrangChuCon1Layout.setHorizontalGroup(
-            pnlTrangChuCon1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTrangChuCon1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblBgrTrangChuUser1)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        pnlTrangChuCon1Layout.setVerticalGroup(
-            pnlTrangChuCon1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTrangChuCon1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblBgrTrangChuUser1)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        pnlTrangChuCon1.add(lblBgrTrangChuUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 690));
 
         pnlTrangChuUser.add(pnlTrangChuCon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, -1));
 
         lblBgrTrangChuUser2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBgrTrangChuUser2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/bgrGame.png"))); // NOI18N
+        lblBgrTrangChuUser2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblBgrTrangChuUser2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBgrTrangChuUser2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlTrangChuCon2Layout = new javax.swing.GroupLayout(pnlTrangChuCon2);
         pnlTrangChuCon2.setLayout(pnlTrangChuCon2Layout);
@@ -476,6 +492,7 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
 
         lblBgrTrangChuUser3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBgrTrangChuUser3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/bgrDoremon.png"))); // NOI18N
+        lblBgrTrangChuUser3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout pnlTrangChuCon3Layout = new javax.swing.GroupLayout(pnlTrangChuCon3);
         pnlTrangChuCon3.setLayout(pnlTrangChuCon3Layout);
@@ -502,6 +519,7 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
 
         lblBgrTrangChuUser4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBgrTrangChuUser4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/bgrSGK.png"))); // NOI18N
+        lblBgrTrangChuUser4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout pnlTrangChuCon4Layout = new javax.swing.GroupLayout(pnlTrangChuCon4);
         pnlTrangChuCon4.setLayout(pnlTrangChuCon4Layout);
@@ -740,8 +758,10 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
     private void btnTraCuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraCuuActionPerformed
         JDialog dl = new TraCuuSachJDialog(this, true);
         checkBtnFocus(btnTraCuu, pnlTrangChuUser, dl);
-        pnlClicked = pnlTrangChuUser;
         btnClicked = btnTraCuu;
+        checkBtnFocus(btnTrangChu, pnlTrangChuUser);// khi thoát dialog thì quay về lại trang chủ
+        pnlClicked = pnlTrangChuUser;
+        btnClicked = btnTrangChu;
     }//GEN-LAST:event_btnTraCuuActionPerformed
 
     private void btnGioiThieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGioiThieuActionPerformed
@@ -824,6 +844,27 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         CheckBtnSlider();
     }//GEN-LAST:event_btnNextSlideMousePressed
 
+    private void btnKhamPhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhamPhaActionPerformed
+        JDialog dl = new TraCuuSachJDialog(this, true);
+        checkBtnFocus(btnTraCuu, pnlTrangChuUser, dl);
+        btnClicked = btnTraCuu;
+        checkBtnFocus(btnTrangChu, pnlTrangChuUser);// khi thoát dialog thì quay về lại trang chủ
+        pnlClicked = pnlTrangChuUser;
+        btnClicked = btnTrangChu;
+    }//GEN-LAST:event_btnKhamPhaActionPerformed
+
+    private void btnKhamPhaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhamPhaMouseEntered
+        btnKhamPha.setBackground(new Color(255,102,0));
+    }//GEN-LAST:event_btnKhamPhaMouseEntered
+
+    private void btnKhamPhaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhamPhaMouseExited
+                btnKhamPha.setBackground(new Color(255,153,102));
+    }//GEN-LAST:event_btnKhamPhaMouseExited
+
+    private void lblBgrTrangChuUser2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBgrTrangChuUser2MouseClicked
+        
+    }//GEN-LAST:event_lblBgrTrangChuUser2MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -893,6 +934,7 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDangXuat;
     private javax.swing.JButton btnGioiThieu;
+    private javax.swing.JButton btnKhamPha;
     private javax.swing.JButton btnLichSuMuonTra;
     private javax.swing.JButton btnNextSlide;
     private javax.swing.JButton btnPrevSlide;

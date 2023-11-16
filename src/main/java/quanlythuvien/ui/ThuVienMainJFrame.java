@@ -111,6 +111,7 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
         btnTrangChu.setForeground(new java.awt.Color(255, 255, 204));
         btnTrangChu.setText("TRANG CHỦ");
         btnTrangChu.setBorder(null);
+        btnTrangChu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTrangChu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTrangChuActionPerformed(evt);
@@ -124,6 +125,7 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
         lblUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/user.png"))); // NOI18N
         lblUser.setText("USER NAME");
+        lblUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblUser.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         lblUser.setIconTextGap(10);
         lblUser.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -134,6 +136,7 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
         btnTroGiup.setForeground(new java.awt.Color(255, 255, 204));
         btnTroGiup.setText("TRỢ GIÚP");
         btnTroGiup.setBorder(null);
+        btnTroGiup.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTroGiup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTroGiupActionPerformed(evt);
@@ -146,6 +149,7 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
         btnGioiThieu.setForeground(new java.awt.Color(255, 255, 204));
         btnGioiThieu.setText("GIỚI THIỆU");
         btnGioiThieu.setBorder(null);
+        btnGioiThieu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGioiThieu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGioiThieuActionPerformed(evt);
@@ -165,6 +169,7 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
         btnDangKy.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnDangKy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/signUp.png"))); // NOI18N
         btnDangKy.setText("ĐĂNG KÝ");
+        btnDangKy.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDangKy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDangKyActionPerformed(evt);
@@ -176,6 +181,7 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
         btnDangNhap.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnDangNhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/login.png"))); // NOI18N
         btnDangNhap.setText("ĐĂNG NHẬP");
+        btnDangNhap.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDangNhap.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnDangNhapMouseEntered(evt);
