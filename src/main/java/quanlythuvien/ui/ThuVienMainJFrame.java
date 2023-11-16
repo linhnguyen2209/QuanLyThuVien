@@ -88,7 +88,7 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
         lblUser = new javax.swing.JLabel();
         btnTroGiup = new javax.swing.JButton();
         btnGioiThieu = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblLogo = new javax.swing.JLabel();
         pnlTrangChu = new javax.swing.JPanel();
         btnDangKy = new javax.swing.JButton();
         btnDangNhap = new javax.swing.JButton();
@@ -157,9 +157,9 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
         });
         pnlMenu.add(btnGioiThieu, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 217, 202, 41));
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/logoLibNgang.png"))); // NOI18N
-        pnlMenu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 613, 214, 71));
+        lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/logoLibNgang.png"))); // NOI18N
+        pnlMenu.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 613, 214, 71));
 
         jPanel5.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, 690));
 
@@ -316,11 +316,11 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnGioiThieu;
     private javax.swing.JButton btnTrangChu;
     private javax.swing.JButton btnTroGiup;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblBgrGioiThieu;
     private javax.swing.JLabel lblBgrTrangChu1;
+    private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblUser;
     private javax.swing.JPanel pnlGioiThieu;
     private javax.swing.JPanel pnlMenu;
