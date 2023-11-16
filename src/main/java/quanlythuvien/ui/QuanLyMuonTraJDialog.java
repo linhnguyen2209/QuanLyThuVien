@@ -668,7 +668,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         btnLast = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        inPhieuMuon = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
         jPanel8 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -851,9 +851,14 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(0, 255, 153));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton2.setText("In phiếu");
+        inPhieuMuon.setBackground(new java.awt.Color(0, 255, 153));
+        inPhieuMuon.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        inPhieuMuon.setText("In phiếu");
+        inPhieuMuon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inPhieuMuonActionPerformed(evt);
+            }
+        });
 
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -875,7 +880,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inPhieuMuon, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
@@ -908,7 +913,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
                                 .addGap(20, 20, 20)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(inPhieuMuon, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -1949,6 +1954,22 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnThoat1ActionPerformed
 
+    private void inPhieuMuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inPhieuMuonActionPerformed
+        if (row < 0) {
+            MsgBox.alert(this, "Vui lòng chọn phiếu muốn in!");
+        } else {
+            String[] listTitle = {"Mã phiếu mượn", "Mã đọc giả", "Ngày mượn", "Ngày hẹn trả", "Tổng số lượng", "Ghi chú"};
+            String[] listData = {
+                txtMaPhieuMuon.getText(), 
+                txtMaNguoiDung.getText(),
+                txtNgayMuon.getText(), 
+                txtNgayHenTra.getText(),
+                txtTongSoLuongSachMuon.getText(),
+                txtGhiChu.getText()};
+            ExportFile.exportToWord(this, listTitle, listData, "PHIẾU MƯỢN", tblChiTietPhieuMuon);
+        }
+    }//GEN-LAST:event_inPhieuMuonActionPerformed
+
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1999,8 +2020,8 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnXoaPMCT;
     private javax.swing.JComboBox<String> cboLuaChon;
     private javax.swing.JCheckBox chkDaTra_Tra;
+    private javax.swing.JButton inPhieuMuon;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -33,16 +33,10 @@
             <version>5.2.4</version>
         </dependency>
         <dependency>
-            <groupId>org.pushing-pixels</groupId>
-            <artifactId>trident</artifactId>
-            <version>1.2</version>
-        </dependency>
-        <dependency>
             <groupId>AnimationClass</groupId>
             <artifactId>AnimationClass</artifactId>
             <version>1.2</version>
         </dependency>
-
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
