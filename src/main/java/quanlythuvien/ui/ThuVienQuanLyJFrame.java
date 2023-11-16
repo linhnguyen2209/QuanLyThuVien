@@ -305,7 +305,7 @@ public class ThuVienQuanLyJFrame extends javax.swing.JFrame {
                 .addComponent(btnTroGiup, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -378,7 +378,7 @@ public class ThuVienQuanLyJFrame extends javax.swing.JFrame {
         lblBgrTrangChu2.setBackground(new java.awt.Color(255, 255, 255));
         lblBgrTrangChu2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBgrTrangChu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/bgrTrangChuPhu.png"))); // NOI18N
-        pnlTrangChuQuanLy.add(lblBgrTrangChu2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1100, 690));
+        pnlTrangChuQuanLy.add(lblBgrTrangChu2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 690));
 
         pnlContainer.add(pnlTrangChuQuanLy, "card2");
 
@@ -388,7 +388,7 @@ public class ThuVienQuanLyJFrame extends javax.swing.JFrame {
         lblBgrGioiThieu.setBackground(new java.awt.Color(255, 255, 255));
         lblBgrGioiThieu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBgrGioiThieu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/bgrGioiThieu.png"))); // NOI18N
-        pnlGioiThieu.add(lblBgrGioiThieu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1100, 690));
+        pnlGioiThieu.add(lblBgrGioiThieu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 690));
 
         pnlContainer.add(pnlGioiThieu, "card3");
 
@@ -537,7 +537,7 @@ public class ThuVienQuanLyJFrame extends javax.swing.JFrame {
                     .addComponent(lblDoiMatKhau))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addContainerGap(223, Short.MAX_VALUE))
         );
 
         pnlContainer.add(pnlThongTinCaNhan, "card4");
@@ -557,8 +557,8 @@ public class ThuVienQuanLyJFrame extends javax.swing.JFrame {
             .addComponent(pnlMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pnlContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -193,7 +193,7 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
 
         lblBgrTrangChu1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBgrTrangChu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/bgrTrangChuMain.png"))); // NOI18N
-        pnlTrangChu.add(lblBgrTrangChu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 680));
+        pnlTrangChu.add(lblBgrTrangChu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 670));
 
         jPanel5.add(pnlTrangChu, new org.netbeans.lib.awtextra.AbsoluteConstraints(226, 12, -1, -1));
 
@@ -203,7 +203,7 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
         lblBgrGioiThieu.setBackground(new java.awt.Color(255, 255, 255));
         lblBgrGioiThieu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBgrGioiThieu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/bgrGioiThieu.png"))); // NOI18N
-        pnlGioiThieu.add(lblBgrGioiThieu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1100, 690));
+        pnlGioiThieu.add(lblBgrGioiThieu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1100, 680));
 
         jPanel5.add(pnlGioiThieu, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 12, -1, -1));
 

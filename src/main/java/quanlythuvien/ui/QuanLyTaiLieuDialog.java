@@ -42,7 +42,8 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     }
 
     void init() {
-        this.setLocation(318, 73);
+//        this.setLocation(318, 73);
+        this.setLocation(325, 74);
         this.setTitle("Quản lý tài liệu");
         this.setIconImage(XImage.getAppIcon());
         FillTable_QLTlieu();
@@ -566,7 +567,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         rdoNXB = new javax.swing.JRadioButton();
         rdoTacGia = new javax.swing.JRadioButton();
         rdoMaLoaiSach = new javax.swing.JRadioButton();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        btn_sapxep = new javax.swing.JToggleButton();
         pnlThongTin = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -639,6 +640,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         jRadioButton1.setText("jRadioButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(0, 204, 153));
 
@@ -661,7 +663,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         pnlContain.add(pnlTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 70));
 
         pnlDanhSach.setBackground(new java.awt.Color(204, 255, 255));
-        pnlDanhSach.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách người dùng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        pnlDanhSach.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách tài liệu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
         lblKetQua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblKetQua.setForeground(new java.awt.Color(0, 0, 102));
@@ -739,7 +741,12 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
             }
         });
 
-        jToggleButton1.setText("Sắp xếp");
+        btn_sapxep.setText("Sắp xếp");
+        btn_sapxep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_sapxepActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlLoaiTimKiemLayout = new javax.swing.GroupLayout(pnlLoaiTimKiem);
         pnlLoaiTimKiem.setLayout(pnlLoaiTimKiemLayout);
@@ -755,7 +762,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rdoMaLoaiSach)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_sapxep, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         pnlLoaiTimKiemLayout.setVerticalGroup(
@@ -766,7 +773,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
                     .addComponent(rdoNXB)
                     .addComponent(rdoTacGia)
                     .addComponent(rdoMaLoaiSach)
-                    .addComponent(jToggleButton1))
+                    .addComponent(btn_sapxep))
                 .addGap(0, 20, Short.MAX_VALUE))
         );
 
@@ -944,6 +951,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         pnlChucNang2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng khác", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
         pnlChucNang2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btn_Home.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_Home.setText("Home");
         btn_Home.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -952,6 +960,8 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         });
         pnlChucNang2.add(btn_Home, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 110, 30));
 
+        btnThoat.setBackground(new java.awt.Color(255, 0, 0));
+        btnThoat.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnThoat.setText("Thoát");
         btnThoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1243,7 +1253,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(pnlChucNang4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         tabs.addTab("Quản lí loại sách", jPanel5);
@@ -1273,11 +1283,13 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 16, Short.MAX_VALUE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tabs)
+                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -1446,6 +1458,10 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btn_HomeActionPerformed
 
+    private void btn_sapxepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sapxepActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_sapxepActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1510,6 +1526,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     private javax.swing.JButton btn_XoaLoaiSach;
     private javax.swing.JButton btn_last;
     private javax.swing.JButton btn_lastLS;
+    private javax.swing.JToggleButton btn_sapxep;
     private javax.swing.ButtonGroup btn_timkiemRDO;
     private javax.swing.JComboBox<String> cboLoaiSach;
     private javax.swing.JLabel jLabel1;
@@ -1535,7 +1552,6 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel lblKetQua;
     private javax.swing.JPanel pnlChucNang2;
     private javax.swing.JPanel pnlChucNang3;

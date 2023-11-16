@@ -35,7 +35,8 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
     }
 
     void init() {
-        this.setLocation(318,73);
+//        this.setLocation(318,73);
+        this.setLocation(325, 74);
         this.setTitle("Quản lý người dùng");
         this.setIconImage(XImage.getAppIcon());
         fillTableNgDung();
@@ -271,6 +272,9 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         btnThoat = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1100, 690));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1100, 690));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
@@ -294,7 +298,7 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         pnlTimKiem.add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 30, 120, -1));
         pnlTimKiem.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 452, -1));
 
-        pnlContain.add(pnlTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 620, 70));
+        pnlContain.add(pnlTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 620, 70));
 
         pnlDanhSach.setBackground(new java.awt.Color(204, 255, 255));
         pnlDanhSach.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách người dùng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
@@ -347,16 +351,16 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
             .addGroup(pnlDanhSachLayout.createSequentialGroup()
                 .addComponent(lblKetQua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        pnlContain.add(pnlDanhSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 1080, 300));
+        pnlContain.add(pnlDanhSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 1080, 300));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 153, 255));
         jLabel1.setText("Quản lý người dùng");
-        pnlContain.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 230, 30));
+        pnlContain.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 230, 30));
 
         pnlLoaiTimKiem.setBackground(new java.awt.Color(204, 255, 255));
         pnlLoaiTimKiem.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Theo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
@@ -385,8 +389,8 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rdoTenNguoiDung)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rdoAll, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addComponent(rdoAll, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(118, Short.MAX_VALUE))
         );
         pnlLoaiTimKiemLayout.setVerticalGroup(
             pnlLoaiTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -399,7 +403,7 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        pnlContain.add(pnlLoaiTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 50, 440, 70));
+        pnlContain.add(pnlLoaiTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 70, 440, 70));
 
         pnlThongTin.setBackground(new java.awt.Color(204, 255, 255));
         pnlThongTin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
@@ -484,10 +488,10 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
                 .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtSoDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
-        pnlContain.add(pnlThongTin, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 730, 220));
+        pnlContain.add(pnlThongTin, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 730, 230));
 
         pnlChucNang1.setBackground(new java.awt.Color(204, 255, 255));
         pnlChucNang1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
@@ -525,15 +529,19 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         });
         pnlChucNang1.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 140, 40));
 
-        pnlContain.add(pnlChucNang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 420, 340, 140));
+        pnlContain.add(pnlChucNang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 440, 340, 140));
 
         pnlChucNang2.setBackground(new java.awt.Color(204, 255, 255));
         pnlChucNang2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng khác", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
         pnlChucNang2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jButton1.setBackground(new java.awt.Color(0, 204, 204));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setText("In danh sách");
         pnlChucNang2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 33, 150, 30));
 
+        btnThoat.setBackground(new java.awt.Color(255, 51, 51));
+        btnThoat.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnThoat.setText("Thoát");
         btnThoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -542,9 +550,9 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         });
         pnlChucNang2.add(btnThoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 33, 140, 30));
 
-        pnlContain.add(pnlChucNang2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 560, 340, 80));
+        pnlContain.add(pnlChucNang2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 580, 340, 90));
 
-        getContentPane().add(pnlContain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 660));
+        getContentPane().add(pnlContain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 710));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
