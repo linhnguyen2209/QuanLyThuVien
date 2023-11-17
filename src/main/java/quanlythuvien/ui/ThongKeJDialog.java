@@ -356,7 +356,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Mã PM", "Mã Đọc giả", "Tên Đọc giả", "Ngày mượn", "Ngày hẹn trả", "Ngày trả", "Số ngày trễ", "Tiền phạt", "Tình trạng trả sách"
+                "Mã PM", "Mã Độc giả", "Tên Độc giả", "Ngày mượn", "Ngày hẹn trả", "Ngày trả", "Số ngày trễ", "Tiền phạt", "Tình trạng trả sách"
             }
         ));
         jScrollPane1.setViewportView(tblThongKeMuonTra);
