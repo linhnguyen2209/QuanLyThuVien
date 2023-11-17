@@ -141,28 +141,28 @@ public class TraCuuSachJDialog extends javax.swing.JDialog {
         txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel1 = new javax.swing.JLabel();
+        lblLogo = new javax.swing.JLabel();
         cboLuaChon = new javax.swing.JComboBox<>();
         pnlDanhSach = new javax.swing.JPanel();
         lblKetQua = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblSach = new javax.swing.JTable();
         pnlThongTin = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        lblMaSach = new javax.swing.JLabel();
+        lblViTri = new javax.swing.JLabel();
         txtNhaXuatBan = new javax.swing.JTextField();
         txtViTri = new javax.swing.JTextField();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
+        lblNXB = new javax.swing.JLabel();
+        lblLoaiSach = new javax.swing.JLabel();
+        lblTacGia = new javax.swing.JLabel();
         txtMaSach = new javax.swing.JTextField();
         txtTacGia = new javax.swing.JTextField();
-        jLabel23 = new javax.swing.JLabel();
+        lblTieDe = new javax.swing.JLabel();
         txtTieuDe = new javax.swing.JTextField();
-        jLabel24 = new javax.swing.JLabel();
+        lblSoTrang = new javax.swing.JLabel();
         txtLoaiSach = new javax.swing.JTextField();
         txtSoTrang = new javax.swing.JTextField();
-        jLabel18 = new javax.swing.JLabel();
+        lblSLSach = new javax.swing.JLabel();
         txtSoLuongSach = new javax.swing.JTextField();
         pnlDieuHuong = new javax.swing.JPanel();
         btnLast = new javax.swing.JButton();
@@ -172,7 +172,7 @@ public class TraCuuSachJDialog extends javax.swing.JDialog {
         jSeparator2 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
         btnThoat = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        lblTraCuuSach = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -225,8 +225,8 @@ public class TraCuuSachJDialog extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/logoLibNgang.png"))); // NOI18N
+        lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/logoLibNgang.png"))); // NOI18N
 
         cboLuaChon.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cboLuaChon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Theo tên", "NXB", "Theo tác giả", "Theo mã loại sách", " " }));
@@ -237,7 +237,7 @@ public class TraCuuSachJDialog extends javax.swing.JDialog {
         });
 
         pnlDanhSach.setBackground(new java.awt.Color(204, 255, 255));
-        pnlDanhSach.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách người dùng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        pnlDanhSach.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
         lblKetQua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblKetQua.setForeground(new java.awt.Color(0, 0, 102));
@@ -300,9 +300,9 @@ public class TraCuuSachJDialog extends javax.swing.JDialog {
         pnlThongTin.setBackground(new java.awt.Color(204, 255, 255));
         pnlThongTin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
-        jLabel17.setText("Mã sách");
+        lblMaSach.setText("Mã sách");
 
-        jLabel19.setText("Vị Trí Đặt Sách");
+        lblViTri.setText("Vị Trí Đặt Sách");
 
         txtNhaXuatBan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -316,17 +316,17 @@ public class TraCuuSachJDialog extends javax.swing.JDialog {
             }
         });
 
-        jLabel20.setText("Nhà Xuất Bản");
+        lblNXB.setText("Nhà Xuất Bản");
 
-        jLabel21.setText("Loại Sách");
+        lblLoaiSach.setText("Loại Sách");
 
-        jLabel22.setText("Tác giả");
+        lblTacGia.setText("Tác giả");
 
-        jLabel23.setText("Tiêu đề");
+        lblTieDe.setText("Tiêu đề");
 
-        jLabel24.setText("Số trang");
+        lblSoTrang.setText("Số trang");
 
-        jLabel18.setText("Số lượng sách");
+        lblSLSach.setText("Số lượng sách");
 
         javax.swing.GroupLayout pnlThongTinLayout = new javax.swing.GroupLayout(pnlThongTin);
         pnlThongTin.setLayout(pnlThongTinLayout);
@@ -336,26 +336,26 @@ public class TraCuuSachJDialog extends javax.swing.JDialog {
                 .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnlThongTinLayout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addComponent(jLabel17)
+                        .addComponent(lblMaSach)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtMaSach, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel23))
+                        .addComponent(lblTieDe))
                     .addGroup(pnlThongTinLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(pnlThongTinLayout.createSequentialGroup()
-                                .addComponent(jLabel20)
+                                .addComponent(lblNXB)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtNhaXuatBan, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pnlThongTinLayout.createSequentialGroup()
-                                .addComponent(jLabel22)
+                                .addComponent(lblTacGia)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtTacGia, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel24)
-                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(lblSoTrang)
+                            .addComponent(lblSLSach, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtTieuDe)
@@ -363,8 +363,8 @@ public class TraCuuSachJDialog extends javax.swing.JDialog {
                     .addComponent(txtSoLuongSach))
                 .addGap(26, 26, 26)
                 .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(lblLoaiSach, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblViTri, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(txtViTri, javax.swing.GroupLayout.Alignment.LEADING)
@@ -379,33 +379,33 @@ public class TraCuuSachJDialog extends javax.swing.JDialog {
                         .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtMaSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel17))
+                                .addComponent(lblMaSach))
                             .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtTieuDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel23)))
+                                .addComponent(lblTieDe)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel20)
+                                .addComponent(lblNXB)
                                 .addComponent(txtNhaXuatBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel24)
+                                .addComponent(lblSoTrang)
                                 .addComponent(txtSoTrang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtTacGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel22))
+                                .addComponent(lblTacGia))
                             .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtSoLuongSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel18))))
+                                .addComponent(lblSLSach))))
                     .addGroup(pnlThongTinLayout.createSequentialGroup()
                         .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtViTri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel19))
+                            .addComponent(lblViTri))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblLoaiSach, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtLoaiSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 27, Short.MAX_VALUE))
         );
@@ -464,10 +464,10 @@ public class TraCuuSachJDialog extends javax.swing.JDialog {
         });
         pnlDieuHuong.add(btnThoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 30, 100, 30));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(102, 102, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("TRA CỨU SÁCH");
+        lblTraCuuSach.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTraCuuSach.setForeground(new java.awt.Color(102, 102, 255));
+        lblTraCuuSach.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTraCuuSach.setText("TRA CỨU SÁCH");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -478,9 +478,9 @@ public class TraCuuSachJDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(87, 87, 87)
-                        .addComponent(jLabel2)
+                        .addComponent(lblTraCuuSach)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cboLuaChon, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -500,9 +500,9 @@ public class TraCuuSachJDialog extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(9, 9, 9)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblTraCuuSach, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                         .addComponent(cboLuaChon, javax.swing.GroupLayout.Alignment.TRAILING)))
@@ -659,16 +659,6 @@ public class TraCuuSachJDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnThoat;
     private javax.swing.JComboBox<String> cboLuaChon;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -676,6 +666,16 @@ public class TraCuuSachJDialog extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblKetQua;
+    private javax.swing.JLabel lblLoaiSach;
+    private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblMaSach;
+    private javax.swing.JLabel lblNXB;
+    private javax.swing.JLabel lblSLSach;
+    private javax.swing.JLabel lblSoTrang;
+    private javax.swing.JLabel lblTacGia;
+    private javax.swing.JLabel lblTieDe;
+    private javax.swing.JLabel lblTraCuuSach;
+    private javax.swing.JLabel lblViTri;
     private javax.swing.JPanel pnlDanhSach;
     private javax.swing.JPanel pnlDieuHuong;
     private javax.swing.JPanel pnlThongTin;
