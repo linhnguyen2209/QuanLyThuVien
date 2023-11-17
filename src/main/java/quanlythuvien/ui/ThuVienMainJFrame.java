@@ -159,9 +159,9 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
 
         lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/logoLibNgang.png"))); // NOI18N
-        pnlMenu.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 613, 214, 71));
+        pnlMenu.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 613, 214, 70));
 
-        jPanel5.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, 690));
+        jPanel5.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, -1));
 
         pnlTrangChu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

@@ -1,14 +1,13 @@
+package quanlythuvien.ui;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package quanlythuvien.ui;
-
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.Timer;
-import quanlythuvien.ui.*;
 import quanlythuvien.utils.XImage;
 
 /**
@@ -20,28 +19,44 @@ public class ChaoJDialog extends javax.swing.JDialog {
     /**
      * Creates new form ChaoJDialog
      */
+    int XIcon;
+    int YIcon;
+    String[] listNameIcon = {"src\\main\\resources\\quanlythuvien\\icon\\rsz_iconloading1.png","src\\main\\resources\\quanlythuvien\\icon\\rsz_iconloading1.png","src\\main\\resources\\quanlythuvien\\icon\\rsz_iconloading1.png", "src\\main\\resources\\quanlythuvien\\icon\\rsz_iconloading2.png","src\\main\\resources\\quanlythuvien\\icon\\rsz_iconloading2.png","src\\main\\resources\\quanlythuvien\\icon\\rsz_iconloading2.png", "src\\main\\resources\\quanlythuvien\\icon\\rsz_iconloading3.png","src\\main\\resources\\quanlythuvien\\icon\\rsz_iconloading3.png","src\\main\\resources\\quanlythuvien\\icon\\rsz_iconloading3.png"};
+    int count = 0;
+
     public ChaoJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         init();
     }
-    
+
     void init() {
         this.setLocationRelativeTo(null);
         this.setTitle("Loading");
         this.setIconImage(XImage.getAppIcon());
-        new Timer(40, new ActionListener() {
+        XIcon = lblIconLoad.getX();
+        YIcon = lblIconLoad.getY();
+        new Timer(20, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int value = prgLoad.getValue(); 
-                if(value<100){
-                prgLoad.setValue(value+2);
-                }else{
+                int value = prgLoad.getValue();
+                if (value < 100) {
+                    prgLoad.setValue(value + 1);
+                    XIcon = (int) ((value / 100.0) * prgLoad.getWidth());
+                    lblIconLoad.setLocation(XIcon, YIcon);
+                    lblIconLoad.setIcon(new ImageIcon(listNameIcon[count]));
+                    if(count== listNameIcon.length-1){
+                        count=0;
+                    }
+                    count++;
+                } else {
                     ChaoJDialog.this.dispose();
                 }
             }
         }).start();
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,6 +69,7 @@ public class ChaoJDialog extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         prgLoad = new javax.swing.JProgressBar();
         jLabel1 = new javax.swing.JLabel();
+        lblIconLoad = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -61,34 +77,39 @@ public class ChaoJDialog extends javax.swing.JDialog {
 
         prgLoad.setBackground(new java.awt.Color(153, 153, 255));
         prgLoad.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        prgLoad.setStringPainted(true);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/logoLib.png"))); // NOI18N
+
+        lblIconLoad.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIconLoad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/iconLoading__1.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(prgLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 802, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblIconLoad)
+                            .addComponent(prgLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 802, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 842, Short.MAX_VALUE)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 842, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblIconLoad)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(prgLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -137,6 +158,10 @@ public class ChaoJDialog extends javax.swing.JDialog {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -156,6 +181,7 @@ public class ChaoJDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblIconLoad;
     private javax.swing.JProgressBar prgLoad;
     // End of variables declaration//GEN-END:variables
 }

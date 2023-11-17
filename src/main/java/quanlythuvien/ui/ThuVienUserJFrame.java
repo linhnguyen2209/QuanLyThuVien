@@ -379,12 +379,12 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
                 .addComponent(btnTroGiup, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
                 .addComponent(lblLogo)
                 .addContainerGap())
         );
 
-        jPanel.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, -1));
+        jPanel.add(pnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, 690));
 
         pnlContainer.setLayout(new java.awt.CardLayout());
 
@@ -457,7 +457,7 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
 
         lblBgrTrangChuUser1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBgrTrangChuUser1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/bgrTrangChuUser.png"))); // NOI18N
-        pnlTrangChuCon1.add(lblBgrTrangChuUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 690));
+        pnlTrangChuCon1.add(lblBgrTrangChuUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 680));
 
         pnlTrangChuUser.add(pnlTrangChuCon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, -1));
 
@@ -474,24 +474,22 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         pnlTrangChuCon2.setLayout(pnlTrangChuCon2Layout);
         pnlTrangChuCon2Layout.setHorizontalGroup(
             pnlTrangChuCon2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1100, Short.MAX_VALUE)
+            .addGap(0, 1106, Short.MAX_VALUE)
             .addGroup(pnlTrangChuCon2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlTrangChuCon2Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblBgrTrangChuUser2)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(lblBgrTrangChuUser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         pnlTrangChuCon2Layout.setVerticalGroup(
             pnlTrangChuCon2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 690, Short.MAX_VALUE)
+            .addGap(0, 680, Short.MAX_VALUE)
             .addGroup(pnlTrangChuCon2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlTrangChuCon2Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblBgrTrangChuUser2)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(lblBgrTrangChuUser2, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 1, Short.MAX_VALUE)))
         );
 
-        pnlTrangChuUser.add(pnlTrangChuCon2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 690));
+        pnlTrangChuUser.add(pnlTrangChuCon2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 680));
 
         lblBgrTrangChuUser3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBgrTrangChuUser3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/bgrDoremon.png"))); // NOI18N
@@ -501,24 +499,22 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         pnlTrangChuCon3.setLayout(pnlTrangChuCon3Layout);
         pnlTrangChuCon3Layout.setHorizontalGroup(
             pnlTrangChuCon3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1100, Short.MAX_VALUE)
+            .addGap(0, 1106, Short.MAX_VALUE)
             .addGroup(pnlTrangChuCon3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlTrangChuCon3Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblBgrTrangChuUser3)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(lblBgrTrangChuUser3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         pnlTrangChuCon3Layout.setVerticalGroup(
             pnlTrangChuCon3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 690, Short.MAX_VALUE)
+            .addGap(0, 682, Short.MAX_VALUE)
             .addGroup(pnlTrangChuCon3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlTrangChuCon3Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblBgrTrangChuUser3)
+                    .addComponent(lblBgrTrangChuUser3, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        pnlTrangChuUser.add(pnlTrangChuCon3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 690));
+        pnlTrangChuUser.add(pnlTrangChuCon3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 680));
 
         lblBgrTrangChuUser4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBgrTrangChuUser4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/bgrSGK.png"))); // NOI18N
@@ -528,24 +524,20 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         pnlTrangChuCon4.setLayout(pnlTrangChuCon4Layout);
         pnlTrangChuCon4Layout.setHorizontalGroup(
             pnlTrangChuCon4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1100, Short.MAX_VALUE)
+            .addGap(0, 1106, Short.MAX_VALUE)
             .addGroup(pnlTrangChuCon4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pnlTrangChuCon4Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblBgrTrangChuUser4)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(lblBgrTrangChuUser4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         pnlTrangChuCon4Layout.setVerticalGroup(
             pnlTrangChuCon4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 690, Short.MAX_VALUE)
+            .addGap(0, 680, Short.MAX_VALUE)
             .addGroup(pnlTrangChuCon4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnlTrangChuCon4Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblBgrTrangChuUser4)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(lblBgrTrangChuUser4, javax.swing.GroupLayout.PREFERRED_SIZE, 680, Short.MAX_VALUE))
         );
 
-        pnlTrangChuUser.add(pnlTrangChuCon4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, -1));
+        pnlTrangChuUser.add(pnlTrangChuCon4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 680));
 
         pnlContainer.add(pnlTrangChuUser, "card2");
 
@@ -555,7 +547,7 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         lblBgrGioiThieu.setBackground(new java.awt.Color(255, 255, 255));
         lblBgrGioiThieu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBgrGioiThieu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/bgrGioiThieu.png"))); // NOI18N
-        pnlGioiThieu.add(lblBgrGioiThieu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, -1));
+        pnlGioiThieu.add(lblBgrGioiThieu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 680));
 
         pnlContainer.add(pnlGioiThieu, "card3");
 
@@ -706,22 +698,22 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
                     .addComponent(lblDoiMatKhau))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(223, Short.MAX_VALUE))
+                .addContainerGap(213, Short.MAX_VALUE))
         );
 
         pnlContainer.add(pnlThongTinCaNhan, "card4");
 
-        jPanel.add(pnlContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(226, 12, -1, -1));
+        jPanel.add(pnlContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(226, 12, -1, 680));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1339, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 704, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
