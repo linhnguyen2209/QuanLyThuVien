@@ -1,10 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package quanlythuvien.ui;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,9 +27,6 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     LoaiSachDao LSDao = new LoaiSachDao();
     int row = -1;
 
-    /**
-     * Creates new form QuanLyTaiLieuDialog
-     */
     public QuanLyTaiLieuDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -728,26 +720,11 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
 
         btn_timkiemRDO.add(rdoTacGia);
         rdoTacGia.setText("Tác giả");
-        rdoTacGia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoTacGiaActionPerformed(evt);
-            }
-        });
 
         btn_timkiemRDO.add(rdoMaLoaiSach);
         rdoMaLoaiSach.setText("Mã loại sách");
-        rdoMaLoaiSach.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoMaLoaiSachActionPerformed(evt);
-            }
-        });
 
         btn_sapxep.setText("Sắp xếp");
-        btn_sapxep.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_sapxepActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout pnlLoaiTimKiemLayout = new javax.swing.GroupLayout(pnlLoaiTimKiem);
         pnlLoaiTimKiem.setLayout(pnlLoaiTimKiemLayout);
@@ -792,18 +769,6 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         lblNgayNhapKho.setText("Ngày Nhập Kho");
 
         lblViTri.setText("Vị Trí Đặt Sách");
-
-        txtNhaXuatBan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNhaXuatBanActionPerformed(evt);
-            }
-        });
-
-        txtViTri.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtViTriActionPerformed(evt);
-            }
-        });
 
         lblNXB.setText("Nhà Xuất Bản");
 
@@ -952,6 +917,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         pnlChucNang2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng khác", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
         pnlChucNang2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btn_Home.setBackground(new java.awt.Color(0, 204, 204));
         btn_Home.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_Home.setText("Home");
         btn_Home.addActionListener(new java.awt.event.ActionListener() {
@@ -977,7 +943,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         pnlChucNang3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
         pnlChucNang3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnNew1.setText("New");
+        btnNew1.setText("Mới");
         btnNew1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNew1ActionPerformed(evt);
@@ -985,7 +951,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         });
         pnlChucNang3.add(btnNew1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, 90, 30));
 
-        btnAdd1.setText("Add");
+        btnAdd1.setText("Thêm");
         btnAdd1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdd1ActionPerformed(evt);
@@ -993,7 +959,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         });
         pnlChucNang3.add(btnAdd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 90, 30));
 
-        btnUpdate1.setText("Update");
+        btnUpdate1.setText("Sửa");
         btnUpdate1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdate1ActionPerformed(evt);
@@ -1001,7 +967,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         });
         pnlChucNang3.add(btnUpdate1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 90, 30));
 
-        btnDelete1.setText("Delete");
+        btnDelete1.setText("Xóa");
         btnDelete1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDelete1ActionPerformed(evt);
@@ -1311,21 +1277,9 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         last();
     }//GEN-LAST:event_btn_lastActionPerformed
 
-    private void rdoTacGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTacGiaActionPerformed
-
-    }//GEN-LAST:event_rdoTacGiaActionPerformed
-
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         FillTable_QLTlieu();
     }//GEN-LAST:event_btnSearchActionPerformed
-
-    private void txtNhaXuatBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNhaXuatBanActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNhaXuatBanActionPerformed
-
-    private void txtViTriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtViTriActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtViTriActionPerformed
 
     private void btnNew1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNew1ActionPerformed
         clearForm();
@@ -1352,10 +1306,6 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnDelete1ActionPerformed
 
-    private void rdoMaLoaiSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoMaLoaiSachActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdoMaLoaiSachActionPerformed
-
     private void tblQLTLMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQLTLMousePressed
         if (evt.getClickCount() == 1) {
             this.row = tblQLTL.rowAtPoint(evt.getPoint());
@@ -1376,7 +1326,6 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_SuaLoaiSachActionPerformed
 
     private void btn_XoaLoaiSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaLoaiSachActionPerformed
-
         deleteLS();
     }//GEN-LAST:event_btn_XoaLoaiSachActionPerformed
 
@@ -1434,10 +1383,6 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
             this.dispose();
         }
     }//GEN-LAST:event_btn_HomeActionPerformed
-
-    private void btn_sapxepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sapxepActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_sapxepActionPerformed
 
     /**
      * @param args the command line arguments

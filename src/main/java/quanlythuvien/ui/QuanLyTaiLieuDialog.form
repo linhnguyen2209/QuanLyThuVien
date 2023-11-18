@@ -367,9 +367,6 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="T&#xe1;c gi&#x1ea3;"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoTacGiaActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JRadioButton" name="rdoMaLoaiSach">
                       <Properties>
@@ -378,17 +375,11 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="M&#xe3; lo&#x1ea1;i s&#xe1;ch"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoMaLoaiSachActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JToggleButton" name="btn_sapxep">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="S&#x1eaf;p x&#x1ebf;p"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_sapxepActionPerformed"/>
-                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -576,14 +567,8 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtNhaXuatBan">
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNhaXuatBanActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtViTri">
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtViTriActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lblNXB">
                       <Properties>
@@ -722,6 +707,9 @@
                   <SubComponents>
                     <Component class="javax.swing.JButton" name="btn_Home">
                       <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="cc" green="cc" red="0" type="rgb"/>
+                        </Property>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Segoe UI" size="12" style="1"/>
                         </Property>
@@ -782,7 +770,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JButton" name="btnNew1">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="New"/>
+                        <Property name="text" type="java.lang.String" value="M&#x1edb;i"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNew1ActionPerformed"/>
@@ -795,7 +783,7 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="btnAdd1">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Add"/>
+                        <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdd1ActionPerformed"/>
@@ -808,7 +796,7 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="btnUpdate1">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Update"/>
+                        <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdate1ActionPerformed"/>
@@ -821,7 +809,7 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="btnDelete1">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Delete"/>
+                        <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDelete1ActionPerformed"/>
