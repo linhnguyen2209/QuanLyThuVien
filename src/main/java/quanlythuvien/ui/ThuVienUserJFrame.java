@@ -807,15 +807,19 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNextSlideMouseExited
 
     private void btnPrevSlideMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrevSlideMousePressed
-        currentIndex--;
-        updatePanelShow();
-        CheckBtnSlider();
+        if (currentIndex != 0) {
+            currentIndex--;
+            updatePanelShow();
+            CheckBtnSlider();
+        }
     }//GEN-LAST:event_btnPrevSlideMousePressed
 
     private void btnNextSlideMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNextSlideMousePressed
-        currentIndex++;
-        updatePanelShow();
-        CheckBtnSlider();
+        if (currentIndex != listPanelTrangChu.size() - 1) {
+            currentIndex++;
+            updatePanelShow();
+            CheckBtnSlider();
+        }
     }//GEN-LAST:event_btnNextSlideMousePressed
 
     private void btnKhamPhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhamPhaActionPerformed
@@ -828,15 +832,15 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnKhamPhaActionPerformed
 
     private void btnKhamPhaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhamPhaMouseEntered
-        btnKhamPha.setBackground(new Color(255,102,0));
+        btnKhamPha.setBackground(new Color(255, 102, 0));
     }//GEN-LAST:event_btnKhamPhaMouseEntered
 
     private void btnKhamPhaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKhamPhaMouseExited
-                btnKhamPha.setBackground(new Color(255,153,102));
+        btnKhamPha.setBackground(new Color(255, 153, 102));
     }//GEN-LAST:event_btnKhamPhaMouseExited
 
     private void lblBgrTrangChuUser2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBgrTrangChuUser2MouseClicked
-        
+
     }//GEN-LAST:event_lblBgrTrangChuUser2MouseClicked
 
     /**
