@@ -268,7 +268,7 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         pnlChucNang2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnHome = new javax.swing.JButton();
         btnThoat = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -497,7 +497,7 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         pnlChucNang1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
         pnlChucNang1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnNew.setText("New");
+        btnNew.setText("Mới");
         btnNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNewActionPerformed(evt);
@@ -505,7 +505,7 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         });
         pnlChucNang1.add(btnNew, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 150, 40));
 
-        btnAdd.setText("Add");
+        btnAdd.setText("Thêm");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
@@ -513,7 +513,7 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         });
         pnlChucNang1.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 140, 40));
 
-        btnUpdate.setText("Update");
+        btnUpdate.setText("Sửa");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateActionPerformed(evt);
@@ -521,7 +521,7 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         });
         pnlChucNang1.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 150, 40));
 
-        btnDelete.setText("Delete");
+        btnDelete.setText("Xóa");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
@@ -535,10 +535,10 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         pnlChucNang2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng khác", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
         pnlChucNang2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(0, 204, 204));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setText("In danh sách");
-        pnlChucNang2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 33, 150, 30));
+        btnHome.setBackground(new java.awt.Color(0, 204, 204));
+        btnHome.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnHome.setText("Home");
+        pnlChucNang2.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 33, 150, 30));
 
         btnThoat.setBackground(new java.awt.Color(255, 51, 51));
         btnThoat.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -687,12 +687,12 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnHome;
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnThoat;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cboLoaiNgDung;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblKetQua;
