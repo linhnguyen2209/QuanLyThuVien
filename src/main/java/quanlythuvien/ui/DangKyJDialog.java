@@ -1,14 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package quanlythuvien.ui;
 
 import java.awt.Color;
 import java.util.List;
 import quanlythuvien.dao.NguoiDungDAO;
 import quanlythuvien.entity.NguoiDung;
-import quanlythuvien.ui.DangKyJDialog;
 import quanlythuvien.utils.Auth;
 import quanlythuvien.utils.MsgBox;
 import quanlythuvien.utils.XImage;
