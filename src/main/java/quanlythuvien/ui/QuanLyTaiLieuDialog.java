@@ -35,9 +35,10 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
 
     void init() {
 //        this.setLocation(318, 73);
-        this.setLocation(325, 74);
+//        this.setLocation(325, 74);
         this.setTitle("Quản lý tài liệu");
         this.setIconImage(XImage.getAppIcon());
+        setLocationRelativeTo(null);
         FillTable_QLTlieu();
         fillComboBoxLoaiSach();
         fillTableLoaiSach();
@@ -653,7 +654,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         pnlTimKiem.add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 30, 120, -1));
         pnlTimKiem.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 452, -1));
 
-        pnlContain.add(pnlTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 70));
+        pnlContain.add(pnlTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 620, 70));
 
         pnlDanhSach.setBackground(new java.awt.Color(204, 255, 255));
         pnlDanhSach.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách tài liệu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
@@ -691,7 +692,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
             pnlDanhSachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDanhSachLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1068, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1058, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDanhSachLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -707,7 +708,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnlContain.add(pnlDanhSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 1090, 250));
+        pnlContain.add(pnlDanhSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 1080, 250));
 
         pnlLoaiTimKiem.setBackground(new java.awt.Color(204, 255, 255));
         pnlLoaiTimKiem.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Theo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
@@ -725,6 +726,11 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         rdoMaLoaiSach.setText("Mã loại sách");
 
         btn_sapxep.setText("Sắp xếp");
+        btn_sapxep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_sapxepActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlLoaiTimKiemLayout = new javax.swing.GroupLayout(pnlLoaiTimKiem);
         pnlLoaiTimKiem.setLayout(pnlLoaiTimKiemLayout);
@@ -834,7 +840,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
                     .addComponent(cboLoaiSach, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtNgayNhapKho, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
                     .addComponent(txtViTri, javax.swing.GroupLayout.Alignment.LEADING))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         pnlThongTinLayout.setVerticalGroup(
             pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -873,7 +879,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
                 .addGap(0, 43, Short.MAX_VALUE))
         );
 
-        pnlContain.add(pnlThongTin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 1090, 160));
+        pnlContain.add(pnlThongTin, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 1080, 160));
 
         pnlDieuHuong.setBackground(new java.awt.Color(204, 255, 255));
         pnlDieuHuong.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
@@ -975,7 +981,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         });
         pnlChucNang3.add(btnDelete1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 90, 30));
 
-        pnlContain.add(pnlChucNang3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 480, 440, 80));
+        pnlContain.add(pnlChucNang3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 430, 80));
 
         tabs.addTab("Quản lý tài liệu", pnlContain);
 
@@ -1121,6 +1127,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         pnlChucNang4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng khác", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
         pnlChucNang4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btn_HomeLS.setBackground(new java.awt.Color(0, 204, 204));
         btn_HomeLS.setText("Home");
         btn_HomeLS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1129,6 +1136,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         });
         pnlChucNang4.add(btn_HomeLS, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 140, 30));
 
+        btnThoatLS.setBackground(new java.awt.Color(255, 0, 0));
         btnThoatLS.setText("Thoát");
         btnThoatLS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1202,7 +1210,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
                                     .addComponent(pnlDieuHuong1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(pnlChucNang4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(pnlMaLoaiSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         pnlQLLoaiSachLayout.setVerticalGroup(
             pnlQLLoaiSachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1225,10 +1233,10 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
 
         tabs.addTab("Quản lí loại sách", pnlQLLoaiSach);
 
-        pnlQLTL.add(tabs, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 66, -1, 622));
+        pnlQLTL.add(tabs, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, 66, 1100, 622));
 
         lblQLTL.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblQLTL.setForeground(new java.awt.Color(0, 153, 0));
+        lblQLTL.setForeground(new java.awt.Color(255, 255, 0));
         lblQLTL.setText("Quản lý tài liệu");
         pnlQLTL.add(lblQLTL, new org.netbeans.lib.awtextra.AbsoluteConstraints(476, 6, -1, 54));
 
@@ -1383,6 +1391,10 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
             this.dispose();
         }
     }//GEN-LAST:event_btn_HomeActionPerformed
+
+    private void btn_sapxepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sapxepActionPerformed
+        
+    }//GEN-LAST:event_btn_sapxepActionPerformed
 
     /**
      * @param args the command line arguments

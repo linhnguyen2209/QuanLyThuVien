@@ -76,7 +76,7 @@
         <Container class="javax.swing.JTabbedPane" name="tabs">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="6" y="66" width="-1" height="622"/>
+              <AbsoluteConstraints x="-4" y="66" width="1100" height="622"/>
             </Constraint>
           </Constraints>
 
@@ -115,7 +115,7 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="0" y="0" width="620" height="70"/>
+                      <AbsoluteConstraints x="10" y="0" width="620" height="70"/>
                     </Constraint>
                   </Constraints>
 
@@ -160,7 +160,7 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="0" y="70" width="1090" height="250"/>
+                      <AbsoluteConstraints x="10" y="70" width="1080" height="250"/>
                     </Constraint>
                   </Constraints>
 
@@ -169,7 +169,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane4" pref="1068" max="32767" attributes="0"/>
+                              <Component id="jScrollPane4" pref="1058" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -380,6 +380,9 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="S&#x1eaf;p x&#x1ebf;p"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_sapxepActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -398,7 +401,7 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="0" y="320" width="1090" height="160"/>
+                      <AbsoluteConstraints x="10" y="320" width="1080" height="160"/>
                     </Constraint>
                   </Constraints>
 
@@ -472,7 +475,7 @@
                                   <Component id="txtNgayNhapKho" alignment="0" pref="253" max="32767" attributes="0"/>
                                   <Component id="txtViTri" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="33" max="32767" attributes="0"/>
+                              <EmptySpace pref="23" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -760,7 +763,7 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="0" y="480" width="440" height="80"/>
+                      <AbsoluteConstraints x="10" y="480" width="430" height="80"/>
                     </Constraint>
                   </Constraints>
 
@@ -863,7 +866,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="37" max="32767" attributes="0"/>
+                          <EmptySpace pref="47" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1145,6 +1148,9 @@
                   <SubComponents>
                     <Component class="javax.swing.JButton" name="btn_HomeLS">
                       <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="cc" green="cc" red="0" type="rgb"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Home"/>
                       </Properties>
                       <Events>
@@ -1158,6 +1164,9 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="btnThoatLS">
                       <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="0" green="0" red="ff" type="rgb"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Tho&#xe1;t"/>
                       </Properties>
                       <Events>
@@ -1263,7 +1272,7 @@
               <Font name="Segoe UI" size="24" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="99" red="0" type="rgb"/>
+              <Color blue="0" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; t&#xe0;i li&#x1ec7;u"/>
           </Properties>
