@@ -140,8 +140,8 @@ public class DangKyJDialog extends javax.swing.JDialog {
         btnDangKy = new javax.swing.JButton();
         ChkDieuKhoan = new javax.swing.JCheckBox();
         lblDangNhap = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblHoi = new javax.swing.JLabel();
+        lblBgr = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -204,13 +204,13 @@ public class DangKyJDialog extends javax.swing.JDialog {
         });
         getContentPane().add(lblDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 560, -1, -1));
 
-        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel2.setText("Bạn đã có tài khoản?");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 560, -1, -1));
+        lblHoi.setForeground(new java.awt.Color(102, 102, 102));
+        lblHoi.setText("Bạn đã có tài khoản?");
+        getContentPane().add(lblHoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 560, -1, -1));
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/bgrSìgnUp.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, -1));
+        lblBgr.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblBgr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/bgrSìgnUp.png"))); // NOI18N
+        getContentPane().add(lblBgr, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -284,9 +284,9 @@ public class DangKyJDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox ChkDieuKhoan;
     private javax.swing.JButton btnDangKy;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblBgr;
     private javax.swing.JLabel lblDangNhap;
+    private javax.swing.JLabel lblHoi;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtHoTen;
     private javax.swing.JPasswordField txtMatKhau;
