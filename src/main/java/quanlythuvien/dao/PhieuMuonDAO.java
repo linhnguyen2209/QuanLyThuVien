@@ -15,6 +15,9 @@ public class PhieuMuonDAO extends ThuVienDAO<PhieuMuon, Integer> {
     final String SELECT_BY_ID_SQL = "select * from PhieuMuon where MaPhieuMuon = ?";
     final String SELECT_BY_NAM = "select Distinct(Year(NgayMuon)) as Nam from PhieuMuon ORDER BY Nam DESC ";
     final String SELECT_BY_IDND_SQL = "select * from PhieuMuon where MaNguoiDung = ?";
+    final String SELECT_BY_NAM_SQL = "select * from PhieuMuon where MaNguoiDung = ? AND YEAR(NgayMuon) = ?";
+    final String SELECT_BY_NAM_AND_THANG_SQL = "select * from PhieuMuon where MaNguoiDung = ? AND YEAR(NgayMuon) = ? AND MONTH(NgayMuon) = ?";
+
     @Override
     public void insert(PhieuMuon entity) {
         jdbcHelper.update(INSERT_SQL, entity.getNgayMuon(), entity.getNgayHenTra(), entity.getTongSoLuongSachMuon(), entity.getMaNguoiDung(), entity.getGhiChu());
@@ -64,12 +67,12 @@ public class PhieuMuonDAO extends ThuVienDAO<PhieuMuon, Integer> {
         }
         return list;
     }
-    
-    public List<PhieuMuon> selectByIDND( String ID) {
-        return selectBySql(SELECT_BY_IDND_SQL,ID );
+
+    public List<PhieuMuon> selectByIDND(String ID) {
+        return selectBySql(SELECT_BY_IDND_SQL, ID);
     }
-    
-    public List<Integer> selectYear(){
+
+    public List<Integer> selectYear() {
         List<Integer> list = new ArrayList<>();
         try {
             ResultSet rs = jdbcHelper.query(SELECT_BY_NAM);
@@ -83,4 +86,19 @@ public class PhieuMuonDAO extends ThuVienDAO<PhieuMuon, Integer> {
         }
     }
 
+    public List<PhieuMuon> selectByYear(String idUser, Integer year) {
+        List<PhieuMuon> list = selectBySql(SELECT_BY_NAM_SQL, idUser, year);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list;
+    }
+
+    public List<PhieuMuon> selectByMonthYear(String idUser, Integer month, Integer year) {
+        List<PhieuMuon> list = selectBySql(SELECT_BY_NAM_AND_THANG_SQL, idUser, year, month);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list;
+    }
 }
