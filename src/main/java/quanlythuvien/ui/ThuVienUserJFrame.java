@@ -231,14 +231,14 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
     void fillTablePhieuMuon() {
         DefaultTableModel model = (DefaultTableModel) tblPhieuMuon.getModel();
         model.setRowCount(0);
-        if (cboNam.getSelectedIndex() != 0 && cboThang.getSelectedIndex()==0) {
+        if (cboNam.getSelectedIndex() != 0 && cboThang.getSelectedIndex() == 0) {
             listPM = phieuMuonDAO.selectByYear(Auth.user.getMaNguoiDung(), Integer.parseInt(cboNam.getSelectedItem() + ""));
         } else if (cboNam.getSelectedIndex() != 0 && cboThang.getSelectedIndex() != 0) {
             listPM = phieuMuonDAO.selectByMonthYear(Auth.user.getMaNguoiDung(), Integer.parseInt(cboThang.getSelectedItem() + ""), Integer.parseInt(cboNam.getSelectedItem() + ""));
         } else {
             listPM = phieuMuonDAO.selectByIDND(Auth.user.getMaNguoiDung());
         }
-        if (listPM!=null) {
+        if (listPM != null) {
             for (PhieuMuon phieuMuon : listPM) {
                 Object[] row = {phieuMuon.getMaPhieuMuon(), XDate.toString(phieuMuon.getNgayMuon(), "yyyy/MM/dd"),
                     XDate.toString(phieuMuon.getNgayHenTra(), "yyyy/MM/dd"), phieuMuon.getTongSoLuongSachMuon(), phieuMuon.getMaNguoiDung(), phieuMuon.getGhiChu()};
@@ -1469,12 +1469,13 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnXemPhieuMuon, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnFirstPMCT)
-                    .addComponent(btnNextPMCT)
-                    .addComponent(btnPrevPMCT)
-                    .addComponent(btnLastPMCT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnLastPMCT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnXemPhieuMuon, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnFirstPMCT)
+                        .addComponent(btnNextPMCT)
+                        .addComponent(btnPrevPMCT)))
                 .addGap(10, 10, 10))
         );
 
@@ -1585,8 +1586,8 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
                         .addGap(31, 31, 31)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel11Layout.createSequentialGroup()
-                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel20)
+                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(txtMaDocGia_Tra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1696,7 +1697,7 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
             .addGroup(pnlLichSuMuonTraLayout.createSequentialGroup()
                 .addGap(446, 446, 446)
                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(452, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pnlLichSuMuonTraLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -1976,8 +1977,12 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cboNamActionPerformed
 
     private void cboThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboThangActionPerformed
-        if (cboThang.getItemCount() > 0) {
-            fillTablePhieuMuon();
+        if (cboNam.getSelectedIndex() != 0) {
+            if (cboThang.getItemCount() > 0) {
+                fillTablePhieuMuon();
+            }
+        } else {
+            MsgBox.alert(this, "Vui lòng chọn năm muốn xem!");
         }
     }//GEN-LAST:event_cboThangActionPerformed
 
@@ -2086,11 +2091,8 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cboThang;
     private javax.swing.JCheckBox chkDaTra_Tra;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -2106,15 +2108,12 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
@@ -2165,11 +2164,7 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txtMaNguoiDung;
     private javax.swing.JTextField txtMaPhieuMuon;
     private javax.swing.JTextField txtMaPhieuMuonChiTiet_PMCT;
-    private javax.swing.JTextField txtMaPhieuMuonChiTiet_PMCT1;
-    private javax.swing.JTextField txtMaPhieuMuonChiTiet_PMCT2;
     private javax.swing.JTextField txtMaPhieuMuon_PMCT;
-    private javax.swing.JTextField txtMaPhieuMuon_PMCT1;
-    private javax.swing.JTextField txtMaPhieuMuon_PMCT2;
     private javax.swing.JTextField txtMaPhieuMuon_Tra;
     private javax.swing.JTextField txtMaPhieuTra_Tra;
     private javax.swing.JTextField txtMaSach;

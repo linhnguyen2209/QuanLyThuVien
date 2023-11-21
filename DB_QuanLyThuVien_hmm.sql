@@ -347,3 +347,6 @@ end
 -- exec sp_muonTraALLYears
 
 -- select Distinct(Year(NgayMuon)) as Nam from PhieuMuon ORDER BY Nam DESC
+
+select * from PhieuMuon where MaNguoiDung = 'ND001' AND YEAR(NgayMuon) = 2023
+select * from PhieuMuon where MaNguoiDung = 'ND001' AND YEAR(NgayMuon) = 2023 AND MONTH(NgayMuon) = 1

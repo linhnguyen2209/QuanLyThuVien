@@ -314,17 +314,15 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Component id="rdoTenSach" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="rdoNXB" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="rdoTacGia" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="rdoMaLoaiSach" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btn_sapxep" min="-2" pref="81" max="-2" attributes="0"/>
-                              <EmptySpace pref="30" max="32767" attributes="0"/>
+                              <EmptySpace pref="84" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -336,9 +334,8 @@
                                   <Component id="rdoNXB" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="rdoTacGia" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="rdoMaLoaiSach" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btn_sapxep" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="20" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="22" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -375,14 +372,6 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="M&#xe3; lo&#x1ea1;i s&#xe1;ch"/>
                       </Properties>
-                    </Component>
-                    <Component class="javax.swing.JToggleButton" name="btn_sapxep">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="S&#x1eaf;p x&#x1ebf;p"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_sapxepActionPerformed"/>
-                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>

@@ -560,7 +560,6 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         rdoNXB = new javax.swing.JRadioButton();
         rdoTacGia = new javax.swing.JRadioButton();
         rdoMaLoaiSach = new javax.swing.JRadioButton();
-        btn_sapxep = new javax.swing.JToggleButton();
         pnlThongTin = new javax.swing.JPanel();
         lblGiaTien = new javax.swing.JLabel();
         lblTieuDe = new javax.swing.JLabel();
@@ -725,29 +724,20 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         btn_timkiemRDO.add(rdoMaLoaiSach);
         rdoMaLoaiSach.setText("Mã loại sách");
 
-        btn_sapxep.setText("Sắp xếp");
-        btn_sapxep.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_sapxepActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout pnlLoaiTimKiemLayout = new javax.swing.GroupLayout(pnlLoaiTimKiem);
         pnlLoaiTimKiem.setLayout(pnlLoaiTimKiemLayout);
         pnlLoaiTimKiemLayout.setHorizontalGroup(
             pnlLoaiTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlLoaiTimKiemLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(27, 27, 27)
                 .addComponent(rdoTenSach)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(rdoNXB)
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addComponent(rdoTacGia)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(rdoMaLoaiSach)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_sapxep, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         pnlLoaiTimKiemLayout.setVerticalGroup(
             pnlLoaiTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -756,9 +746,8 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
                     .addComponent(rdoTenSach)
                     .addComponent(rdoNXB)
                     .addComponent(rdoTacGia)
-                    .addComponent(rdoMaLoaiSach)
-                    .addComponent(btn_sapxep))
-                .addGap(0, 20, Short.MAX_VALUE))
+                    .addComponent(rdoMaLoaiSach))
+                .addGap(0, 22, Short.MAX_VALUE))
         );
 
         pnlContain.add(pnlLoaiTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 0, 440, 70));
@@ -1392,10 +1381,6 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btn_HomeActionPerformed
 
-    private void btn_sapxepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sapxepActionPerformed
-        
-    }//GEN-LAST:event_btn_sapxepActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -1460,7 +1445,6 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     private javax.swing.JButton btn_XoaLoaiSach;
     private javax.swing.JButton btn_last;
     private javax.swing.JButton btn_lastLS;
-    private javax.swing.JToggleButton btn_sapxep;
     private javax.swing.ButtonGroup btn_timkiemRDO;
     private javax.swing.JComboBox<String> cboLoaiSach;
     private javax.swing.JLayeredPane jLayeredPane1;
