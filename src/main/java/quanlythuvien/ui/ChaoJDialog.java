@@ -1,4 +1,5 @@
 package quanlythuvien.ui;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
@@ -16,7 +17,7 @@ public class ChaoJDialog extends javax.swing.JDialog {
      */
     int XIcon;
     int YIcon;
-    String[] listNameIcon = {"src\\main\\resources\\quanlythuvien\\icon\\rsz_iconloading1.png","src\\main\\resources\\quanlythuvien\\icon\\rsz_iconloading1.png","src\\main\\resources\\quanlythuvien\\icon\\rsz_iconloading1.png", "src\\main\\resources\\quanlythuvien\\icon\\rsz_iconloading2.png","src\\main\\resources\\quanlythuvien\\icon\\rsz_iconloading2.png","src\\main\\resources\\quanlythuvien\\icon\\rsz_iconloading2.png", "src\\main\\resources\\quanlythuvien\\icon\\rsz_iconloading3.png","src\\main\\resources\\quanlythuvien\\icon\\rsz_iconloading3.png","src\\main\\resources\\quanlythuvien\\icon\\rsz_iconloading3.png"};
+    String[] listNameIcon = {"rsz_iconloading1.png", "rsz_iconloading1.png", "rsz_iconloading1.png", "rsz_iconloading2.png", "rsz_iconloading2.png", "rsz_iconloading2.png", "rsz_iconloading3.png", "rsz_iconloading3.png", "rsz_iconloading3.png"};
     int count = 0;
 
     public ChaoJDialog(java.awt.Frame parent, boolean modal) {
@@ -39,9 +40,9 @@ public class ChaoJDialog extends javax.swing.JDialog {
                     prgLoad.setValue(value + 1);
                     XIcon = (int) ((value / 100.0) * prgLoad.getWidth());
                     lblIconLoad.setLocation(XIcon, YIcon);
-                    lblIconLoad.setIcon(new ImageIcon(listNameIcon[count]));
-                    if(count== listNameIcon.length-1){
-                        count=0;
+                    lblIconLoad.setIcon(new ImageIcon("src\\main\\resources\\quanlythuvien\\icon\\" + listNameIcon[count]));
+                    if (count == listNameIcon.length - 1) {
+                        count = 0;
                     }
                     count++;
                 } else {

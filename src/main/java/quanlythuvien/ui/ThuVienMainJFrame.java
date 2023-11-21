@@ -9,7 +9,9 @@ import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Time;
 import javax.swing.JDialog;
@@ -52,9 +54,32 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
     }
 
     void openDangNhap() {
-        new DangNhapJDialog(this, true).setVisible(true);
+        File file = new File("src\\main\\resources\\Saved_User_Infor\\logininfo.txt");
+        // Kiểm tra xem file đã tồn tại chưa và có dữ liệu không
+        if (file.exists()) {
+            if (hasDataInFile(file)) {
+                new NhoMatKhau(this, true).setVisible(true);
+            } else {
+                new DangNhapJDialog(this, true).setVisible(true);
+            }
+        } else {
+            new DangNhapJDialog(this, true).setVisible(true);
+        }
         if (Auth.isLogin()) {
             this.dispose();
+        }
+    }
+
+    private boolean hasDataInFile(File file) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            // Đọc dòng đầu tiên từ file
+            String firstLine = reader.readLine();
+
+            // Kiểm tra xem dòng đầu tiên có dữ liệu hay không
+            return (firstLine != null && !firstLine.trim().isEmpty());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 
@@ -261,7 +286,7 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGioiThieuActionPerformed
 
     private void btnDangNhapMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangNhapMouseEntered
-        
+
     }//GEN-LAST:event_btnDangNhapMouseEntered
 
     private void btnDangNhapMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangNhapMouseExited

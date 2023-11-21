@@ -1,9 +1,14 @@
 package quanlythuvien.ui;
 
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import quanlythuvien.dao.NguoiDungDAO;
 import quanlythuvien.entity.NguoiDung;
 import quanlythuvien.ui.DangNhapJDialog;
@@ -17,6 +22,7 @@ import quanlythuvien.utils.XImage;
  */
 public class DangNhapJDialog extends javax.swing.JDialog {
 
+    List<String> listUserName = new ArrayList<>();
     NguoiDungDAO dao = new NguoiDungDAO();
     ThuVienMainJFrame tvfr;
 
@@ -28,7 +34,7 @@ public class DangNhapJDialog extends javax.swing.JDialog {
     }
 
     void init() {
-        this.setLocation(399,101);
+        this.setLocation(399, 101);
         this.setTitle("Đăng nhập");
         this.setIconImage(XImage.getAppIcon());
         txtTenDangNhap.setBackground(new Color(236, 238, 238, 0));
@@ -45,6 +51,9 @@ public class DangNhapJDialog extends javax.swing.JDialog {
                 if (!nd.getMatKhau().equals(new String(txtMatKhau.getPassword()))) {
                     MsgBox.alert(this, "Sai mật khẩu!");
                 } else {
+                    if (chkRemember.isSelected()) {
+                        saveLoginInfo(txtTenDangNhap.getText());
+                    }
                     Auth.user = nd;
                     this.dispose();
                     if (Auth.isManager() || Auth.isLibrarian()) {
@@ -74,10 +83,40 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         return true;
     }
 
-    public void saveLoginInfo(String username, String password) {
-        try (PrintWriter writer = new PrintWriter(new FileWriter("logininfo.txt"))) {
-            writer.println(username);
-            writer.println(password);
+    public void saveLoginInfo(String username) {
+        String filePath = "src\\main\\resources\\Saved_User_Infor\\logininfo.txt";
+        File file = new File(filePath);
+
+        try {
+            // Kiểm tra xem file đã tồn tại chưa
+            if (!file.exists()) {
+                // Nếu chưa tồn tại, tạo mới file
+                file.createNewFile();
+            } else {
+                readLoginInfo();
+            }
+            if (!listUserName.contains(username)) { // kiểm tra xem username đã có trong file chưa nếu ch có thì thêm
+                // Cập nhật dữ liệu vào file
+                try (PrintWriter writer = new PrintWriter(new FileWriter(file, true))) {
+                    writer.println(username);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void readLoginInfo() {
+        String filePath = "src\\main\\resources\\Saved_User_Infor\\logininfo.txt";
+        File file = new File(filePath);
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            // Đọc từng dòng trong file
+            while ((line = reader.readLine()) != null) {
+                listUserName.add(line);
+            }
+            System.out.println(listUserName.size());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -126,7 +165,7 @@ public class DangNhapJDialog extends javax.swing.JDialog {
                 btnDangNhapActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 430, 360, 60));
+        getContentPane().add(btnDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 430, 350, 60));
 
         chkRemember.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         chkRemember.setForeground(new java.awt.Color(102, 102, 102));
