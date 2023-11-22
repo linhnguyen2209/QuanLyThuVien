@@ -60,9 +60,20 @@ public class NhoMatKhau extends javax.swing.JDialog {
 
         for (int i = 0; i < listUserName.size(); i++) {
             final int index = i; // phải final mới truyền được vào sự kiện
-            JButton btnUser = new JButton(listUserName.get(i));
+            NguoiDung nd = dao.selectById(listUserName.get(i));
+            JButton btnUser = new JButton(nd.getMaNguoiDung());
+            switch (nd.getMaLoaiNguoiDung()) {
+                case "LND001":
+                    btnUser.setIcon(new ImageIcon("src\\main\\java\\quanlythuvien\\icon\\admin32px.png"));
+                    break;
+                case "LND002":
+                    btnUser.setIcon(new ImageIcon("src\\main\\java\\quanlythuvien\\icon\\librarian32px.png"));
+                    break;
+                default:
+                    btnUser.setIcon(new ImageIcon("src\\main\\java\\quanlythuvien\\icon\\user32px.png"));
+                    break;
+            }
             btnUser.setBackground(Color.white);
-            btnUser.setIcon(new ImageIcon("src\\main\\java\\quanlythuvien\\icon\\user32px.png"));
             btnUser.setIconTextGap(10);
             btnUser.setPreferredSize(new Dimension(230, 50));
             btnUser.setFont(new Font("Arial", Font.BOLD, 15));

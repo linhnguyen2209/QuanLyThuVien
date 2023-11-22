@@ -26,6 +26,7 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
 
     NguoiDungDAO ngDAO = new NguoiDungDAO();
     LoaiNguoiDungDAO lNDDao = new LoaiNguoiDungDAO();
+    List<NguoiDung> list = new ArrayList<>();
     int row = -1;
 
     public QuanLyNguoiDungDialog(java.awt.Frame parent, boolean modal) {
@@ -44,19 +45,17 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         firt();
 //        lblKetQua.setVisible(false);
     }
-    List<NguoiDung> list = new ArrayList<>();
 
     void fillTableNgDung() {
         DefaultTableModel model = (DefaultTableModel) tblNguoiDung.getModel();
         model.setRowCount(0);
         try {
             if (rdoTenNguoiDung.isSelected()) {
-                list = ngDAO.selectByTenNguoiDung(txtSearch.getText());
+                list = ngDAO.selectByTenNguoiDung(txtSearch.getText());               
             } else if (rdoMaNguoiDung.isSelected()) {
                 list = ngDAO.selectByNameOfUser(txtSearch.getText());
-            } 
-            else {
-                list = ngDAO.selectAll();
+            } else {
+                list = ngDAO.selectAll();             
             }
             if (list.size() <= 0) {
                 tblNguoiDung.setVisible(false);
@@ -66,15 +65,21 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
                 tblNguoiDung.setVisible(true);
                 lblKetQua.setText("Tổng số người dùng " + list.size());
             }
-            System.out.println("List: " + list.size());
+            if (Auth.isLibrarian()) { // đối với librarian thì chỉ lấy tài khoản user th
+                list = filterUser(list);
+            }
             for (NguoiDung nguoiDung : list) {
-                String role = "";
-                if(nguoiDung.getMaLoaiNguoiDung().equals("LND001")){
-                    role = "Admin";
-                }else if(nguoiDung.getMaLoaiNguoiDung().equals("LND002")){
-                    role = "Librarian";
-                }else{
-                    role = "User";
+                String role;
+                switch (nguoiDung.getMaLoaiNguoiDung()) {
+                    case "LND001":
+                        role = "Admin";
+                        break;
+                    case "LND002":
+                        role = "Librarian";
+                        break;
+                    default:
+                        role = "User";
+                        break;
                 }
                 model.addRow(new Object[]{
                     nguoiDung.getMaNguoiDung(),
@@ -89,16 +94,32 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         }
     }
 
+    List<NguoiDung> filterUser(List<NguoiDung> list) {
+        List<NguoiDung> listND = new ArrayList<>();
+        if (list != null) {
+            for (NguoiDung nd : list) {
+                if (nd.getMaLoaiNguoiDung().equals("LND003")) {
+                    listND.add(nd);
+                }
+            }
+        }
+        return listND;
+    }
+
     void fillComboBoxTypeOfUser() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboLoaiNgDung.getModel();
         model.removeAllElements();
-        try {
-            List<LoaiNguoiDung> list = lNDDao.selectAll();
-            for (LoaiNguoiDung loaiNguoiDung : list) {
-                model.addElement(loaiNguoiDung);
+        if (Auth.isLibrarian()) { // đối với thủ thư chỉ thêm tài khoản được cho người dùng thôi
+            model.addElement("User");
+        } else {
+            try {
+                List<LoaiNguoiDung> list = lNDDao.selectAll();
+                for (LoaiNguoiDung loaiNguoiDung : list) {
+                    model.addElement(loaiNguoiDung);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -110,24 +131,32 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         txtMatKhau.setText(model.getMatKhau());
         txtXacNhanMK.setText(model.getMatKhau());
 
-        if (model.getMaLoaiNguoiDung().equals("LND001")) {
-            cboLoaiNgDung.setSelectedIndex(0);
-        } else if (model.getMaLoaiNguoiDung().equals("LND002")) {
-            cboLoaiNgDung.setSelectedIndex(1);
-        } else {
-            cboLoaiNgDung.setSelectedIndex(2);
+        switch (model.getMaLoaiNguoiDung()) {
+            case "LND003":
+                cboLoaiNgDung.setSelectedIndex(0);
+                break;
+            case "LND002":
+                cboLoaiNgDung.setSelectedIndex(1);
+                break;
+            default:
+                cboLoaiNgDung.setSelectedIndex(2);
+                break;
         }
     }
 
     NguoiDung getForm() {
         NguoiDung model = new NguoiDung();
         model.setMaNguoiDung(txtMaNgDung.getText());
-        if (cboLoaiNgDung.getSelectedIndex() == 0) {
-            model.setMaLoaiNguoiDung("LND001");
-        } else if (cboLoaiNgDung.getSelectedIndex() == 1) {
-            model.setMaLoaiNguoiDung("LND002");
-        } else {
-            model.setMaLoaiNguoiDung("LND003");
+        switch (cboLoaiNgDung.getSelectedIndex()) {
+            case 0:
+                model.setMaLoaiNguoiDung("LND003");
+                break;
+            case 1:
+                model.setMaLoaiNguoiDung("LND002");
+                break;
+            default:
+                model.setMaLoaiNguoiDung("LND001");
+                break;
         }
         model.setTenNguoiDung(txtHoTen.getText());
         model.setEmail(txtEmail.getText());
@@ -578,8 +607,8 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void tblNguoiDungMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNguoiDungMousePressed
-            this.row = tblNguoiDung.rowAtPoint(evt.getPoint());
-            edit();
+        this.row = tblNguoiDung.rowAtPoint(evt.getPoint());
+        edit();
     }//GEN-LAST:event_tblNguoiDungMousePressed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -603,12 +632,11 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_formMouseClicked
 
     private void rdoAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoAllActionPerformed
-        list = ngDAO.selectAll();
         fillTableNgDung();
     }//GEN-LAST:event_rdoAllActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_btnThoatActionPerformed
 
     /**
