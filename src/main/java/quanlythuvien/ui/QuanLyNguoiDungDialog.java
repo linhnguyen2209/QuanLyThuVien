@@ -53,7 +53,7 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
             if (rdoTenNguoiDung.isSelected()) {
                 list = ngDAO.selectByTenNguoiDung(txtSearch.getText());               
             } else if (rdoMaNguoiDung.isSelected()) {
-                list = ngDAO.selectByNameOfUser(txtSearch.getText());
+                list = ngDAO.selectByMaOfUser(txtSearch.getText());
             } else {
                 list = ngDAO.selectAll();             
             }
