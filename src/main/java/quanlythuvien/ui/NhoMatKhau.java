@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import quanlythuvien.dao.NguoiDungDAO;
@@ -36,7 +37,6 @@ public class NhoMatKhau extends javax.swing.JDialog {
     ThuVienMainJFrame tvfr;
     List<String> listUserName = new ArrayList<>();
     NguoiDungDAO dao = new NguoiDungDAO();
-    JButton btnUser;
 
     public NhoMatKhau(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -57,25 +57,29 @@ public class NhoMatKhau extends javax.swing.JDialog {
 
     void addBtnTaiKhoan() {
         // Tạo các button và thêm vào panel
-        for (String userName : listUserName) {
-            btnUser = new JButton(userName);
-            btnUser.setBackground(Color.YELLOW);
+
+        for (int i = 0; i < listUserName.size(); i++) {
+            final int index = i; // phải final mới truyền được vào sự kiện
+            JButton btnUser = new JButton(listUserName.get(i));
+            btnUser.setBackground(Color.white);
+            btnUser.setIcon(new ImageIcon("src\\main\\java\\quanlythuvien\\icon\\user32px.png"));
+            btnUser.setIconTextGap(10);
             btnUser.setPreferredSize(new Dimension(230, 50));
             btnUser.setFont(new Font("Arial", Font.BOLD, 15));
             btnUser.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    dangNhap();
+                    dangNhap(index);
                 }
             });
             pnlBtnTaiKhoan.add(btnUser);
         }
-        btnUser = new JButton("XÓA TẤT CẢ");
-        btnUser.setBackground(Color.red);
-        btnUser.setPreferredSize(new Dimension(230, 50));
-        btnUser.setFont(new Font("Arial", Font.BOLD, 15));
-        btnUser.setForeground(Color.WHITE);
-        btnUser.addActionListener(new ActionListener() {
+        JButton btnRemoveAll = new JButton("XÓA TẤT CẢ");
+        btnRemoveAll.setBackground(Color.red);
+        btnRemoveAll.setPreferredSize(new Dimension(230, 50));
+        btnRemoveAll.setFont(new Font("Arial", Font.BOLD, 15));
+        btnRemoveAll.setForeground(Color.WHITE);
+        btnRemoveAll.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (MsgBox.confirm(NhoMatKhau.this, "Bạn có chắc chắn xoá!")) {
@@ -84,13 +88,13 @@ public class NhoMatKhau extends javax.swing.JDialog {
                 }
             }
         });
-        pnlBtnTaiKhoan.add(btnUser);
+        pnlBtnTaiKhoan.add(btnRemoveAll);
     }
 
-    void dangNhap() {
-        NguoiDung nd = dao.selectById(btnUser.getText());
+    void dangNhap(int index) {
+        NguoiDung nd = dao.selectById(listUserName.get(index));
         if (nd != null) {
-            Auth.user = dao.selectById(btnUser.getText());
+            Auth.user = nd;
             this.dispose();
             if (Auth.isManager() || Auth.isLibrarian()) {
                 new ThuVienQuanLyJFrame().setVisible(true);
@@ -135,7 +139,6 @@ public class NhoMatKhau extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         scrPnl = new javax.swing.JScrollPane();
         pnlBtnTaiKhoan = new javax.swing.JPanel();
@@ -153,7 +156,7 @@ public class NhoMatKhau extends javax.swing.JDialog {
         pnlBtnTaiKhoan.setLayout(new java.awt.GridLayout(0, 1));
         scrPnl.setViewportView(pnlBtnTaiKhoan);
 
-        getContentPane().add(scrPnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 140, 290, 200));
+        getContentPane().add(scrPnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 130, 290, 210));
 
         btnFormDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
