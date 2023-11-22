@@ -42,7 +42,7 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         this.setIconImage(XImage.getAppIcon());
         fillTableNgDung();
         fillComboBoxTypeOfUser();
-        firt();
+        updateStatus();
 //        lblKetQua.setVisible(false);
     }
 
@@ -57,6 +57,9 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
             } else {
                 list = ngDAO.selectAll();
             }
+            if (Auth.isLibrarian()) { // đối với librarian thì chỉ lấy tài khoản user th
+                list = filterUser(list);
+            }
             if (list.size() <= 0) {
                 tblNguoiDung.setVisible(false);
                 lblKetQua.setText("Tổng số người dùng " + list.size());
@@ -64,9 +67,6 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
             } else {
                 tblNguoiDung.setVisible(true);
                 lblKetQua.setText("Tổng số người dùng " + list.size());
-            }
-            if (Auth.isLibrarian()) { // đối với librarian thì chỉ lấy tài khoản user th
-                list = filterUser(list);
             }
             for (NguoiDung nguoiDung : list) {
                 String role;
@@ -133,34 +133,28 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         txtSoDienThoai.setText(model.getSdt());
         txtMatKhau.setText(model.getMatKhau());
         txtXacNhanMK.setText(model.getMatKhau());
-
-        switch (model.getMaLoaiNguoiDung()) {
-            case "LND001":
-                cboLoaiNgDung.setSelectedIndex(0);
-                break;
-            case "LND002":
-                cboLoaiNgDung.setSelectedIndex(1);
-                break;
-            default:
-                cboLoaiNgDung.setSelectedIndex(2);
-                break;
+        if (Auth.isLibrarian()) {
+            cboLoaiNgDung.setSelectedIndex(0);
+        } else {
+            switch (model.getMaLoaiNguoiDung()) {
+                case "LND001":
+                    cboLoaiNgDung.setSelectedIndex(0);
+                    break;
+                case "LND002":
+                    cboLoaiNgDung.setSelectedIndex(1);
+                    break;
+                default:
+                    cboLoaiNgDung.setSelectedIndex(2);
+                    break;
+            }
         }
     }
 
     NguoiDung getForm() {
         NguoiDung model = new NguoiDung();
         model.setMaNguoiDung(txtMaNgDung.getText());
-        switch (cboLoaiNgDung.getSelectedIndex()) {
-            case 0:
-                model.setMaLoaiNguoiDung("LND001");
-                break;
-            case 1:
-                model.setMaLoaiNguoiDung("LND002");
-                break;
-            default:
-                model.setMaLoaiNguoiDung("LND003");
-                break;
-        }
+        LoaiNguoiDung lnd = (LoaiNguoiDung) cboLoaiNgDung.getSelectedItem();
+        model.setMaLoaiNguoiDung(lnd.getMaLoaiNguoiDung());
         model.setTenNguoiDung(txtHoTen.getText());
         model.setEmail(txtEmail.getText());
         model.setSdt(txtSoDienThoai.getText());
@@ -182,6 +176,7 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
     }
 
     void clearForm() {
+        tblNguoiDung.clearSelection();
         txtMaNgDung.setText("");
         txtHoTen.setText("");
         txtEmail.setText("");
@@ -189,12 +184,12 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         txtMatKhau.setText("");
         txtXacNhanMK.setText("");
         cboLoaiNgDung.setSelectedIndex(0);
-        this.row = -1;
+        row = -1;
         updateStatus();
     }
 
     void updateStatus() {
-        boolean edit = this.row >= 0;
+        boolean edit = row >= 0;
         txtMaNgDung.setEditable(!edit);
         //Khi insert thì không update, delete
         btnAdd.setEnabled(!edit);
@@ -254,11 +249,6 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
                 MsgBox.alert(this, "Xoá thất bại!");
             }
         }
-    }
-
-    void firt() {
-        row = 0;
-        edit();
     }
 
     @SuppressWarnings("unchecked")
