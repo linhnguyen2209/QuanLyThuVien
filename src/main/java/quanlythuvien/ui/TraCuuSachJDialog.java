@@ -435,6 +435,11 @@ public class TraCuuSachJDialog extends javax.swing.JDialog {
         btnHome.setBackground(new java.awt.Color(0, 204, 204));
         btnHome.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnHome.setText("Home");
+        btnHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeActionPerformed(evt);
+            }
+        });
         pnlDieuHuong.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 30, 110, 30));
 
         btnThoat.setBackground(new java.awt.Color(255, 51, 51));
@@ -580,6 +585,10 @@ public class TraCuuSachJDialog extends javax.swing.JDialog {
     private void cboLuaChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLuaChonActionPerformed
         fillTableSach();
     }//GEN-LAST:event_cboLuaChonActionPerformed
+
+    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_btnHomeActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

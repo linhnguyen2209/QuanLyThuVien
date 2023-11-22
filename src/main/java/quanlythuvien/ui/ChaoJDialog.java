@@ -30,6 +30,7 @@ public class ChaoJDialog extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         this.setTitle("Loading");
         this.setIconImage(XImage.getAppIcon());
+//        this.setUndecorated(true); //ẩn titial 
         XIcon = lblIconLoad.getX();
         YIcon = lblIconLoad.getY();
         new Timer(20, new ActionListener() {
