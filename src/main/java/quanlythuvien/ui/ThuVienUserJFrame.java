@@ -96,7 +96,6 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
                 } else {
                     currentIndex--;
                 }
-
             }
         });
         timer.start();
@@ -133,7 +132,8 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         }
     }
 
-    void checkBtnFocus(Component btnCurrent, Component pnlCurrent, JDialog... dialog) {
+    void checkBtnFocus(Component btnCurrent, Component pnlCurrent, JDialog... dialog
+    ) {
         pnlClicked.setVisible(false);
         btnClicked.setBackground(new Color(0, 102, 153));
 
@@ -271,7 +271,8 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         }
     }
 
-    void setForm(PhieuMuon model) {
+    void setForm(PhieuMuon model
+    ) {
         // form pmct
         txtMaPhieuMuon_PMCT.setText(String.valueOf((model.getMaPhieuMuon())));
         fillTableChiTietPhieuMuon();
@@ -1818,7 +1819,7 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNextSlideMouseExited
 
     private void btnPrevSlideMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrevSlideMousePressed
-        if (currentIndex != 0) {
+        if (currentIndex > 0) {
             currentIndex--;
             updatePanelShow();
             CheckBtnSlider();

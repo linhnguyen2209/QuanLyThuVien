@@ -35,10 +35,9 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
 
     void init() {
 //        this.setLocation(318, 73);
-//        this.setLocation(325, 74);
+        this.setLocation(325, 74);
         this.setTitle("Quản lý tài liệu");
         this.setIconImage(XImage.getAppIcon());
-        setLocationRelativeTo(null);
         FillTable_QLTlieu();
         fillComboBoxLoaiSach();
         fillTableLoaiSach();

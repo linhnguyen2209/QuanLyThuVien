@@ -51,11 +51,11 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         model.setRowCount(0);
         try {
             if (rdoTenNguoiDung.isSelected()) {
-                list = ngDAO.selectByTenNguoiDung(txtSearch.getText());               
+                list = ngDAO.selectByTenNguoiDung(txtSearch.getText());
             } else if (rdoMaNguoiDung.isSelected()) {
                 list = ngDAO.selectByNameOfUser(txtSearch.getText());
             } else {
-                list = ngDAO.selectAll();             
+                list = ngDAO.selectAll();
             }
             if (list.size() <= 0) {
                 tblNguoiDung.setVisible(false);
@@ -109,17 +109,20 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
     void fillComboBoxTypeOfUser() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboLoaiNgDung.getModel();
         model.removeAllElements();
-        if (Auth.isLibrarian()) { // đối với thủ thư chỉ thêm tài khoản được cho người dùng thôi
-            model.addElement("User");
-        } else {
-            try {
-                List<LoaiNguoiDung> list = lNDDao.selectAll();
-                for (LoaiNguoiDung loaiNguoiDung : list) {
+        try {
+            List<LoaiNguoiDung> list = lNDDao.selectAll();
+            for (LoaiNguoiDung loaiNguoiDung : list) {
+                if (Auth.isLibrarian()) {
+                    if (loaiNguoiDung.getMaLoaiNguoiDung().equals("LND003")) {
+                        model.addElement(loaiNguoiDung);
+                        return;
+                    }
+                } else {
                     model.addElement(loaiNguoiDung);
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -132,7 +135,7 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         txtXacNhanMK.setText(model.getMatKhau());
 
         switch (model.getMaLoaiNguoiDung()) {
-            case "LND003":
+            case "LND001":
                 cboLoaiNgDung.setSelectedIndex(0);
                 break;
             case "LND002":
@@ -149,13 +152,13 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         model.setMaNguoiDung(txtMaNgDung.getText());
         switch (cboLoaiNgDung.getSelectedIndex()) {
             case 0:
-                model.setMaLoaiNguoiDung("LND003");
+                model.setMaLoaiNguoiDung("LND001");
                 break;
             case 1:
                 model.setMaLoaiNguoiDung("LND002");
                 break;
             default:
-                model.setMaLoaiNguoiDung("LND001");
+                model.setMaLoaiNguoiDung("LND003");
                 break;
         }
         model.setTenNguoiDung(txtHoTen.getText());
