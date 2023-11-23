@@ -34,8 +34,6 @@
   <SubComponents>
     <Container class="javax.swing.JTabbedPane" name="tabs">
       <Events>
-        <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="tabsAncestorAdded"/>
-        <EventHandler event="ancestorMoved" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="tabsAncestorMoved"/>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tabsMouseClicked"/>
       </Events>
       <Constraints>
@@ -485,7 +483,7 @@
                             <Column editable="false" title="Ng&#xe0;y m&#x1b0;&#x1ee3;n" type="java.lang.Object"/>
                             <Column editable="false" title="Ng&#xe0;y h&#x1eb9;n tr&#x1ea3;" type="java.lang.Object"/>
                             <Column editable="false" title="SL m&#x1b0;&#x1ee3;n" type="java.lang.Object"/>
-                            <Column editable="false" title="M&#xe3; &#x110;&#x1ecd;c gi&#x1ea3;" type="java.lang.Object"/>
+                            <Column editable="false" title="M&#xe3; &#x110;&#x1ed9;c gi&#x1ea3;" type="java.lang.Object"/>
                             <Column editable="false" title="Ghi ch&#xfa;" type="java.lang.Object"/>
                           </Table>
                         </Property>
@@ -772,9 +770,6 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtMaPhieuMuon_PMCT">
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMaPhieuMuon_PMCTActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnXemPhieuMuon">
                   <Properties>
@@ -796,9 +791,6 @@
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMaPhieuMuonChiTiet_PMCTActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
