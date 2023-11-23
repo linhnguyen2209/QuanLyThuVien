@@ -1,16 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package quanlythuvien.utils;
 
 import java.awt.Component;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
@@ -41,7 +33,7 @@ public class ExportFile {
 
         // Lấy model của table
         TableModel model = table.getModel();
-
+        
         // Tạo hàng tiêu đề
         Row rows = sheet.createRow(3); // tạo 1 dòng ở vị trí index 3 trong excel ( index bắt đầu từ 0), vì trừa lại 3 dòng để viết Tiêu đề bảng
         for (int i = 0; i < model.getColumnCount(); i++) {

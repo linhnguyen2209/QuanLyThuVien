@@ -1,11 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package quanlythuvien.ui;
 
-import java.awt.Color;
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -435,11 +429,6 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         lblVaiTro.setText("Vai trò");
 
         cboLoaiNgDung.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cboLoaiNgDung.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboLoaiNgDungActionPerformed(evt);
-            }
-        });
 
         lblTen.setText("Họ Tên:");
 
@@ -578,10 +567,6 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void cboLoaiNgDungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLoaiNgDungActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cboLoaiNgDungActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         if (!rdoMaNguoiDung.isSelected() && !rdoTenNguoiDung.isSelected() && !rdoAll.isSelected()) {

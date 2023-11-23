@@ -114,7 +114,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
         lblThangBatDau = new javax.swing.JLabel();
         cboNam = new javax.swing.JComboBox<>();
         cboThangBatDau = new javax.swing.JComboBox<>();
-        lblTatCaCac = new javax.swing.JLabel();
+        lblLocTatCa = new javax.swing.JLabel();
         lblThangKetThuc = new javax.swing.JLabel();
         cboThangKetThuc = new javax.swing.JComboBox<>();
         rdoTatCaCacNam = new javax.swing.JRadioButton();
@@ -161,7 +161,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
 
         cboThangBatDau.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        lblTatCaCac.setText("Lọc tất cả  :");
+        lblLocTatCa.setText("Lọc tất cả  :");
 
         lblThangKetThuc.setText("Tháng Kết Thúc :");
 
@@ -261,7 +261,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cboThangKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(88, 88, 88)
-                        .addComponent(lblTatCaCac)
+                        .addComponent(lblLocTatCa)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(rdoTatCaCacNam)
                         .addGap(117, 117, 117))))
@@ -272,7 +272,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
                 .addGap(15, 15, 15)
                 .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblTatCaCac)
+                        .addComponent(lblLocTatCa)
                         .addComponent(rdoTatCaCacNam))
                     .addGroup(pnlThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(cboNam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -472,11 +472,11 @@ public class ThongKeJDialog extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cboThangBatDau;
     private javax.swing.JComboBox<String> cboThangKetThuc;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblLocTatCa;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblMaDocGia;
     private javax.swing.JLabel lblNam;
     private javax.swing.JLabel lblTKVBC;
-    private javax.swing.JLabel lblTatCaCac;
     private javax.swing.JLabel lblThangBatDau;
     private javax.swing.JLabel lblThangKetThuc;
     private javax.swing.JLabel lblTongTienPhatCacNam;

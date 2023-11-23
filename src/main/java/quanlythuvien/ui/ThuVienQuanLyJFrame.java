@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package quanlythuvien.ui;
 
 import java.awt.Color;
@@ -13,7 +9,6 @@ import java.util.List;
 import javax.swing.JDialog;
 import quanlythuvien.dao.NguoiDungDAO;
 import quanlythuvien.entity.NguoiDung;
-import quanlythuvien.ui.*;
 import quanlythuvien.utils.Auth;
 import quanlythuvien.utils.MsgBox;
 import quanlythuvien.utils.XImage;
@@ -654,10 +649,6 @@ public class ThuVienQuanLyJFrame extends javax.swing.JFrame {
         pnlClicked = pnlThongTinCaNhan;
         showDetailTTTaiKhoan();
     }//GEN-LAST:event_lblUserMouseClicked
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

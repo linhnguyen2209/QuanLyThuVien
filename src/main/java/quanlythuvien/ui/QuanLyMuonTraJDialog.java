@@ -2,12 +2,9 @@ package quanlythuvien.ui;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultListModel;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import quanlythuvien.dao.PhieuMuonChiTietDAO;
 import quanlythuvien.dao.PhieuMuonDAO;
@@ -764,16 +761,6 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         setPreferredSize(new java.awt.Dimension(1100, 690));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tabs.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                tabsAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-                tabsAncestorMoved(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
         tabs.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabsMouseClicked(evt);
@@ -1022,7 +1009,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Mã PM", "Ngày mượn", "Ngày hẹn trả", "SL mượn", "Mã Đọc giả", "Ghi chú"
+                "Mã PM", "Ngày mượn", "Ngày hẹn trả", "SL mượn", "Mã Độc giả", "Ghi chú"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -1157,12 +1144,6 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
 
         lblMaPhieuMuon_PMCT.setText("Mã Phiếu mượn:");
 
-        txtMaPhieuMuon_PMCT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMaPhieuMuon_PMCTActionPerformed(evt);
-            }
-        });
-
         btnXemPhieuMuon.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnXemPhieuMuon.setText("Xem phiếu mượn");
         btnXemPhieuMuon.addActionListener(new java.awt.event.ActionListener() {
@@ -1174,11 +1155,6 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         lblMaPhieuMuonChiTiet_PMCT.setText("Mã Phiếu mượn chi tiết:");
 
         txtMaPhieuMuonChiTiet_PMCT.setEditable(false);
-        txtMaPhieuMuonChiTiet_PMCT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMaPhieuMuonChiTiet_PMCTActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout pnlThongTinMuonSachLayout = new javax.swing.GroupLayout(pnlThongTinMuonSach);
         pnlThongTinMuonSach.setLayout(pnlThongTinMuonSachLayout);
@@ -1751,10 +1727,6 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         insert();
     }//GEN-LAST:event_btnThemActionPerformed
 
-    private void txtMaPhieuMuon_PMCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaPhieuMuon_PMCTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMaPhieuMuon_PMCTActionPerformed
-
     private void btnAllRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllRightActionPerformed
         Object[] allRight = modelSachKho.toArray();
         for (Object object : allRight) {
@@ -1872,21 +1844,9 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         updatePMCT();
     }//GEN-LAST:event_btnSuaPMCTActionPerformed
 
-    private void txtMaPhieuMuonChiTiet_PMCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaPhieuMuonChiTiet_PMCTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMaPhieuMuonChiTiet_PMCTActionPerformed
-
     private void btnMoiPMCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiPMCTActionPerformed
         clearFormPMCT();
     }//GEN-LAST:event_btnMoiPMCTActionPerformed
-
-    private void tabsAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tabsAncestorAdded
-
-    }//GEN-LAST:event_tabsAncestorAdded
-
-    private void tabsAncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tabsAncestorMoved
-
-    }//GEN-LAST:event_tabsAncestorMoved
 
     private void btnXemPhieuTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemPhieuTraActionPerformed
         if (row < 0) {

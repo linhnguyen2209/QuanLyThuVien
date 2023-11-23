@@ -1,22 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package quanlythuvien.ui;
 
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Desktop;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Time;
-import javax.swing.JDialog;
-import javax.swing.Timer;
-import quanlythuvien.ui.*;
 import quanlythuvien.utils.Auth;
 import quanlythuvien.utils.MsgBox;
 import quanlythuvien.utils.XImage;
@@ -207,14 +197,6 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
         btnDangNhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/login.png"))); // NOI18N
         btnDangNhap.setText("ĐĂNG NHẬP");
         btnDangNhap.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnDangNhap.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnDangNhapMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnDangNhapMouseExited(evt);
-            }
-        });
         btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDangNhapActionPerformed(evt);
@@ -284,14 +266,6 @@ public class ThuVienMainJFrame extends javax.swing.JFrame {
         btnClicked = btnGioiThieu;
         pnlClicked = pnlGioiThieu;
     }//GEN-LAST:event_btnGioiThieuActionPerformed
-
-    private void btnDangNhapMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangNhapMouseEntered
-
-    }//GEN-LAST:event_btnDangNhapMouseEntered
-
-    private void btnDangNhapMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangNhapMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDangNhapMouseExited
 
     /**
      * @param args the command line arguments
