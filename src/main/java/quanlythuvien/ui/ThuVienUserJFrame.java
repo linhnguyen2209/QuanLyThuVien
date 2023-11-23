@@ -1982,8 +1982,6 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
             if (cboThang.getItemCount() > 0) {
                 fillTablePhieuMuon();
             }
-        } else {
-            MsgBox.alert(this, "Vui lòng chọn năm muốn xem!");
         }
     }//GEN-LAST:event_cboThangActionPerformed
 
