@@ -11,7 +11,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import quanlythuvien.dao.NguoiDungDAO;
 import quanlythuvien.entity.NguoiDung;
-import quanlythuvien.ui.*;
 import quanlythuvien.utils.Auth;
 import quanlythuvien.utils.MsgBox;
 import quanlythuvien.utils.XImage;
@@ -187,7 +186,7 @@ public class XacThucJDialog extends javax.swing.JDialog {
         pnlXacThuc1 = new javax.swing.JPanel();
         txtTenDangNhap = new javax.swing.JTextField();
         lblDangKy1 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblNganGiua = new javax.swing.JLabel();
         lblDangNhap1 = new javax.swing.JLabel();
         btnTiepTheo1 = new javax.swing.JButton();
         lblBgrBox1 = new javax.swing.JLabel();
@@ -196,11 +195,11 @@ public class XacThucJDialog extends javax.swing.JDialog {
         lblSoGiay = new javax.swing.JLabel();
         lblMessage = new javax.swing.JLabel();
         lblDangKy2 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblNganGiua2 = new javax.swing.JLabel();
         lblDangNhap2 = new javax.swing.JLabel();
         btnTiepTheo2 = new javax.swing.JButton();
         lblBgrBox2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblBgr = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -228,9 +227,9 @@ public class XacThucJDialog extends javax.swing.JDialog {
         });
         pnlXacThuc1.add(lblDangKy1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 390, -1, -1));
 
-        jLabel5.setForeground(new java.awt.Color(0, 0, 255));
-        jLabel5.setText("|");
-        pnlXacThuc1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, -1, -1));
+        lblNganGiua.setForeground(new java.awt.Color(0, 0, 255));
+        lblNganGiua.setText("|");
+        pnlXacThuc1.add(lblNganGiua, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, -1, -1));
 
         lblDangNhap1.setForeground(new java.awt.Color(51, 51, 255));
         lblDangNhap1.setText("Đăng nhập");
@@ -264,15 +263,7 @@ public class XacThucJDialog extends javax.swing.JDialog {
         txtMaXacThuc.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtMaXacThuc.setAlignmentX(2.0F);
         txtMaXacThuc.setBorder(null);
-        txtMaXacThuc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMaXacThucActionPerformed(evt);
-            }
-        });
         txtMaXacThuc.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtMaXacThucKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtMaXacThucKeyReleased(evt);
             }
@@ -310,9 +301,9 @@ public class XacThucJDialog extends javax.swing.JDialog {
         });
         pnlXacThuc2.add(lblDangKy2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 390, -1, -1));
 
-        jLabel6.setForeground(new java.awt.Color(0, 0, 255));
-        jLabel6.setText("|");
-        pnlXacThuc2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, -1, -1));
+        lblNganGiua2.setForeground(new java.awt.Color(0, 0, 255));
+        lblNganGiua2.setText("|");
+        pnlXacThuc2.add(lblNganGiua2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, -1, -1));
 
         lblDangNhap2.setForeground(new java.awt.Color(51, 51, 255));
         lblDangNhap2.setText("Đăng nhập");
@@ -369,9 +360,9 @@ public class XacThucJDialog extends javax.swing.JDialog {
 
         getContentPane().add(layer, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, 440, 450));
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/bgrDatLaiMatKhau0.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, -1));
+        lblBgr.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblBgr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/bgrDatLaiMatKhau0.png"))); // NOI18N
+        getContentPane().add(lblBgr, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -408,10 +399,6 @@ public class XacThucJDialog extends javax.swing.JDialog {
         lblDangNhap2.setText("Đăng nhập");
     }//GEN-LAST:event_lblDangNhap2MouseExited
 
-    private void txtMaXacThucKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMaXacThucKeyPressed
-
-    }//GEN-LAST:event_txtMaXacThucKeyPressed
-
     private void txtMaXacThucKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMaXacThucKeyReleased
         if (txtMaXacThuc.getText().equals("")) {
             lblMessage.setVisible(true);
@@ -423,10 +410,6 @@ public class XacThucJDialog extends javax.swing.JDialog {
     private void btnTiepTheo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTiepTheo1ActionPerformed
         xacThuc1();
     }//GEN-LAST:event_btnTiepTheo1ActionPerformed
-
-    private void txtMaXacThucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaXacThucActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMaXacThucActionPerformed
 
     private void lblDangNhap2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDangNhap2MouseClicked
         this.dispose();
@@ -519,11 +502,9 @@ public class XacThucJDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTiepTheo1;
     private javax.swing.JButton btnTiepTheo2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JLayeredPane layer;
+    private javax.swing.JLabel lblBgr;
     private javax.swing.JLabel lblBgrBox1;
     private javax.swing.JLabel lblBgrBox2;
     private javax.swing.JLabel lblDangKy1;
@@ -531,6 +512,8 @@ public class XacThucJDialog extends javax.swing.JDialog {
     private javax.swing.JLabel lblDangNhap1;
     private javax.swing.JLabel lblDangNhap2;
     private javax.swing.JLabel lblMessage;
+    private javax.swing.JLabel lblNganGiua;
+    private javax.swing.JLabel lblNganGiua2;
     private javax.swing.JLabel lblSoGiay;
     private javax.swing.JPanel pnlXacThuc1;
     private javax.swing.JPanel pnlXacThuc2;

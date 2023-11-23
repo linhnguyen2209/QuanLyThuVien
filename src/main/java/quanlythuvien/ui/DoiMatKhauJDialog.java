@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package quanlythuvien.ui;
 
 import java.awt.Color;
@@ -84,10 +80,10 @@ public class DoiMatKhauJDialog extends javax.swing.JDialog {
         txtNhapLaiMatKhauMoi = new javax.swing.JPasswordField();
         txtMatKhauMoi = new javax.swing.JPasswordField();
         lblDangNhap = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblNganGiua = new javax.swing.JLabel();
         lblDangKy = new javax.swing.JLabel();
         btnXacNhan = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblBgr = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -120,9 +116,9 @@ public class DoiMatKhauJDialog extends javax.swing.JDialog {
         });
         getContentPane().add(lblDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 510, -1, -1));
 
-        jLabel6.setForeground(new java.awt.Color(0, 0, 255));
-        jLabel6.setText("|");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 510, -1, -1));
+        lblNganGiua.setForeground(new java.awt.Color(0, 0, 255));
+        lblNganGiua.setText("|");
+        getContentPane().add(lblNganGiua, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 510, -1, -1));
 
         lblDangKy.setForeground(new java.awt.Color(51, 51, 255));
         lblDangKy.setText("Đăng Ký");
@@ -146,10 +142,10 @@ public class DoiMatKhauJDialog extends javax.swing.JDialog {
         });
         getContentPane().add(btnXacNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 420, 340, 60));
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/bgrChangePass.png"))); // NOI18N
-        jLabel1.setVerifyInputWhenFocusTarget(false);
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 600));
+        lblBgr.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblBgr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/bgrChangePass.png"))); // NOI18N
+        lblBgr.setVerifyInputWhenFocusTarget(false);
+        getContentPane().add(lblBgr, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -235,10 +231,10 @@ public class DoiMatKhauJDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnXacNhan;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel lblBgr;
     private javax.swing.JLabel lblDangKy;
     private javax.swing.JLabel lblDangNhap;
+    private javax.swing.JLabel lblNganGiua;
     private javax.swing.JPasswordField txtMatKhauMoi;
     private javax.swing.JPasswordField txtNhapLaiMatKhauMoi;
     // End of variables declaration//GEN-END:variables

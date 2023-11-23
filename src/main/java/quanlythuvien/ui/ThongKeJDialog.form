@@ -142,7 +142,7 @@
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
-                          <Component id="lblTatCaCac" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblLocTatCa" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="rdoTatCaCacNam" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
@@ -157,7 +157,7 @@
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="lblTatCaCac" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblLocTatCa" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="rdoTatCaCacNam" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -223,7 +223,7 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblTatCaCac">
+        <Component class="javax.swing.JLabel" name="lblLocTatCa">
           <Properties>
             <Property name="text" type="java.lang.String" value="L&#x1ecd;c t&#x1ea5;t c&#x1ea3;  :"/>
           </Properties>

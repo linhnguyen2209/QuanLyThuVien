@@ -1,10 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package quanlythuvien.ui;
 
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Desktop;
@@ -28,10 +23,8 @@ import quanlythuvien.entity.NguoiDung;
 import quanlythuvien.entity.PhieuMuon;
 import quanlythuvien.entity.PhieuMuonChiTiet;
 import quanlythuvien.entity.PhieuTra;
-import quanlythuvien.ui.*;
 import quanlythuvien.utils.Auth;
 import quanlythuvien.utils.MsgBox;
-import quanlythuvien.utils.ValidatorForm;
 import quanlythuvien.utils.XDate;
 import quanlythuvien.utils.XImage;
 
@@ -729,11 +722,6 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
                 btnNextSlideMousePressed(evt);
             }
         });
-        btnNextSlide.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNextSlideActionPerformed(evt);
-            }
-        });
         pnlTrangChuUser.add(btnNextSlide, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 330, 50, 90));
 
         btnPrevSlide.setBackground(new java.awt.Color(153, 153, 153));
@@ -749,11 +737,6 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnPrevSlideMousePressed(evt);
-            }
-        });
-        btnPrevSlide.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPrevSlideActionPerformed(evt);
             }
         });
         pnlTrangChuUser.add(btnPrevSlide, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 330, 50, 90));
@@ -787,11 +770,6 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         lblBgrTrangChuUser2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblBgrTrangChuUser2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/bgrGame.png"))); // NOI18N
         lblBgrTrangChuUser2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblBgrTrangChuUser2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblBgrTrangChuUser2MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout pnlTrangChuCon2Layout = new javax.swing.GroupLayout(pnlTrangChuCon2);
         pnlTrangChuCon2.setLayout(pnlTrangChuCon2Layout);
@@ -902,12 +880,6 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         lblDoiMatKhau.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblDoiMatKhauMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblDoiMatKhauMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblDoiMatKhauMouseExited(evt);
             }
         });
 
@@ -1026,16 +998,6 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
 
         pnlContainer.add(pnlThongTinCaNhan, "card4");
 
-        tabs.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                tabsAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-                tabsAncestorMoved(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
         tabs.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabsMouseClicked(evt);
@@ -1138,7 +1100,7 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin"));
 
-        jLabel7.setText("Mã Đọc giả:");
+        jLabel7.setText("Mã Độc giả:");
 
         jLabel8.setText("Ghi chú");
 
@@ -1239,7 +1201,7 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã PM", "Ngày mượn", "Ngày hẹn trả", "SL mượn", "Mã Đọc giả", "Ghi chú"
+                "Mã PM", "Ngày mượn", "Ngày hẹn trả", "SL mượn", "Mã Độc giả", "Ghi chú"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -1258,11 +1220,6 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblPhieuMuon);
 
         cboThang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cboThang.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cboThangMouseClicked(evt);
-            }
-        });
         cboThang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboThangActionPerformed(evt);
@@ -1270,11 +1227,6 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         });
 
         cboNam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cboNam.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cboNamMouseClicked(evt);
-            }
-        });
         cboNam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboNamActionPerformed(evt);
@@ -1316,20 +1268,10 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         jLabel2.setText("Mã Phiếu mượn:");
 
         txtMaPhieuMuon_PMCT.setEditable(false);
-        txtMaPhieuMuon_PMCT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMaPhieuMuon_PMCTActionPerformed(evt);
-            }
-        });
 
         jLabel12.setText("Mã Phiếu mượn chi tiết:");
 
         txtMaPhieuMuonChiTiet_PMCT.setEditable(false);
-        txtMaPhieuMuonChiTiet_PMCT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMaPhieuMuonChiTiet_PMCTActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("Mã sách:");
 
@@ -1460,7 +1402,7 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
                         .addComponent(btnNextPMCT, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLastPMCT, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 275, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnXemPhieuMuon, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -1772,14 +1714,6 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         showDetailTTTaiKhoan();
     }//GEN-LAST:event_lblDoiMatKhauMouseClicked
 
-    private void lblDoiMatKhauMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDoiMatKhauMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lblDoiMatKhauMouseEntered
-
-    private void lblDoiMatKhauMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDoiMatKhauMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lblDoiMatKhauMouseExited
-
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         updateTTTaiKhoan();
     }//GEN-LAST:event_btnUpdateActionPerformed
@@ -1789,14 +1723,6 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         pnlClicked = pnlThongTinCaNhan;
         showDetailTTTaiKhoan();
     }//GEN-LAST:event_lblUserMouseClicked
-
-    private void btnNextSlideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextSlideActionPerformed
-
-    }//GEN-LAST:event_btnNextSlideActionPerformed
-
-    private void btnPrevSlideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevSlideActionPerformed
-
-    }//GEN-LAST:event_btnPrevSlideActionPerformed
 
     private void btnPrevSlideMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrevSlideMouseEntered
         timer.stop();
@@ -1851,10 +1777,6 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         btnKhamPha.setBackground(new Color(255, 153, 102));
     }//GEN-LAST:event_btnKhamPhaMouseExited
 
-    private void lblBgrTrangChuUser2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBgrTrangChuUser2MouseClicked
-
-    }//GEN-LAST:event_lblBgrTrangChuUser2MouseClicked
-
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
         first();
     }//GEN-LAST:event_btnFirstActionPerformed
@@ -1897,17 +1819,9 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnXemPhieuTraActionPerformed
 
-    private void txtMaPhieuMuon_PMCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaPhieuMuon_PMCTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMaPhieuMuon_PMCTActionPerformed
-
     private void btnXemPhieuMuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemPhieuMuonActionPerformed
         tabs.setSelectedIndex(0);
     }//GEN-LAST:event_btnXemPhieuMuonActionPerformed
-
-    private void txtMaPhieuMuonChiTiet_PMCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaPhieuMuonChiTiet_PMCTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMaPhieuMuonChiTiet_PMCTActionPerformed
 
     private void btnFirstPMCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstPMCTActionPerformed
         firstCTPM();
@@ -1949,14 +1863,6 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnXemPhieuMuon_TraActionPerformed
 
-    private void tabsAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tabsAncestorAdded
-
-    }//GEN-LAST:event_tabsAncestorAdded
-
-    private void tabsAncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tabsAncestorMoved
-
-    }//GEN-LAST:event_tabsAncestorMoved
-
     private void tabsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabsMouseClicked
         if (tabs.getSelectedIndex() == 1 && txtMaPhieuMuon_PMCT.getText().equals("")) {
             MsgBox.alert(this, "Vui lòng chọn phiếu mượn cần xem!");
@@ -1984,14 +1890,6 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_cboThangActionPerformed
-
-    private void cboNamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboNamMouseClicked
-
-    }//GEN-LAST:event_cboNamMouseClicked
-
-    private void cboThangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboThangMouseClicked
-
-    }//GEN-LAST:event_cboThangMouseClicked
 
     /**
      * @param args the command line arguments
