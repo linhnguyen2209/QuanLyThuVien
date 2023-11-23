@@ -167,6 +167,8 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         txtMaDocGia_Tra.setEditable(false);
         txtMaPhieuMuon_Tra.setEditable(false);
         //form p mượn
+        lblMaPhieuMuon.setVisible(edit);
+        txtMaPhieuMuon.setVisible(edit);
         txtNgayHenTra.setEditable(true);
         txtNgayMuon.setEditable(false);
         txtTongSoLuongSachMuon.setEditable(false);
