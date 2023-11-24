@@ -28,7 +28,7 @@ CREATE TABLE LoaiNguoiDung(
 );
  go
  CREATE TABLE NguoiDung (
-    MaNguoiDung VARCHAR(10)  NOT NULL PRIMARY KEY,
+    MaNguoiDung VARCHAR(30)  NOT NULL PRIMARY KEY,
 	MaLoaiNguoiDung  VARCHAR(10) NOT NULL,
     TenNguoiDung  NVARCHAR(150) NOT NULL,
     Email  VARCHAR(50) NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE PhieuMuon (
     NgayMuon DATE NOT NULL,
     NgayHenTra DATE NOT NULL,
     TongSoLuongSachMuon INT NULL,
-    MaNguoiDung VARCHAR(10) NOT NULL,
+    MaNguoiDung VARCHAR(30) NOT NULL,
     GhiChu NVARCHAR(250) NULL,
     CONSTRAINT fk_Phieumuon_Nguoidung FOREIGN KEY (MaNguoiDung) REFERENCES NguoiDung(MaNguoiDung)
 );
@@ -63,7 +63,7 @@ CREATE TABLE PhieuTra (
 	MaPhieuMuon INT NOT NULL,
     NgayTra DATE NULL,
     TrangThai bit NOT NULL,
-    MaNguoiDung VARCHAR(10) NOT NULL,
+    MaNguoiDung VARCHAR(30) NOT NULL,
     GhiChu NVARCHAR(250) NULL,
     CONSTRAINT fk_Phieutra_Nguoidung FOREIGN KEY (MaNguoiDung) REFERENCES NguoiDung(MaNguoiDung),
 	CONSTRAINT FK_Phieutra_PhieuMuon FOREIGN KEY (MaPhieuMuon) REFERENCES PhieuMuon(MaPhieuMuon)
