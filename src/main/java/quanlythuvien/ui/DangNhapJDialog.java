@@ -14,6 +14,7 @@ import quanlythuvien.entity.NguoiDung;
 import quanlythuvien.ui.DangNhapJDialog;
 import quanlythuvien.utils.Auth;
 import quanlythuvien.utils.MsgBox;
+import quanlythuvien.utils.ValidationForm;
 import quanlythuvien.utils.XImage;
 
 /**
@@ -67,13 +68,7 @@ public class DangNhapJDialog extends javax.swing.JDialog {
     }
 
     boolean validateForm() {
-        String reTenDangNhap = "^[a-zA-Z0-9_-]{2,10}$";
-        if (txtTenDangNhap.getText().equals("")) {
-            MsgBox.alert(this, "Vui lòng nhập tên đăng nhập!");
-            return false;
-        }
-        if (!txtTenDangNhap.getText().matches(reTenDangNhap)) {
-            MsgBox.alert(this, "Tên đăng nhập không hợp lệ!");
+        if(!ValidationForm.isMa(this, txtTenDangNhap, "Tên đăng nhập")){
             return false;
         }
         if (new String(txtMatKhau.getPassword()).equals("")) {

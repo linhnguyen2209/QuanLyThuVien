@@ -352,7 +352,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
 
     void deleteSach() {
         if (!Auth.isManager()) {
-            MsgBox.alert(this, "Bạn không đủ quyền hạn để thực thi !");
+            MsgBox.alert(this, "Bạn không có quyền xóa !");
         } else {
             try {
                 if (MsgBox.confirm(this, "Bạn thực xự muốn xóa ?")) {

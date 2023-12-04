@@ -6,10 +6,12 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
+import quanlythuvien.dao.NguoiDungDAO;
 import quanlythuvien.dao.PhieuMuonChiTietDAO;
 import quanlythuvien.dao.PhieuMuonDAO;
 import quanlythuvien.dao.PhieuTraDAO;
 import quanlythuvien.dao.SachDAO;
+import quanlythuvien.entity.NguoiDung;
 import quanlythuvien.entity.PhieuMuon;
 import quanlythuvien.entity.PhieuMuonChiTiet;
 import quanlythuvien.entity.PhieuTra;
@@ -17,7 +19,7 @@ import quanlythuvien.entity.Sach;
 import quanlythuvien.utils.Auth;
 import quanlythuvien.utils.ExportFile;
 import quanlythuvien.utils.MsgBox;
-import quanlythuvien.utils.ValidatorForm;
+import quanlythuvien.utils.ValidationForm;
 import quanlythuvien.utils.XDate;
 import quanlythuvien.utils.XImage;
 
@@ -29,6 +31,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
 
     PhieuMuonDAO phieuMuonDAO = new PhieuMuonDAO();
     PhieuTraDAO phieuTraDAO = new PhieuTraDAO();
+    NguoiDungDAO nguoiDungDAO = new NguoiDungDAO();
     SachDAO sDAO = new SachDAO();
     PhieuMuonChiTietDAO phieuMuonChiTietDAO = new PhieuMuonChiTietDAO();
     List<PhieuMuonChiTiet> listCTPM;
@@ -88,8 +91,8 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
                 if (phieuMuon == null) { // đề phòng tìm kiếm nhưng không có kết quả
                     model.setRowCount(0);
                 } else {
-                    Object[] row = {phieuMuon.getMaPhieuMuon(), XDate.toString(phieuMuon.getNgayMuon(), "yyyy/MM/dd"),
-                        XDate.toString(phieuMuon.getNgayHenTra(), "yyyy/MM/dd"), phieuMuon.getTongSoLuongSachMuon(), phieuMuon.getMaNguoiDung(), phieuMuon.getGhiChu()};
+                    Object[] row = {phieuMuon.getMaPhieuMuon(), XDate.toString(phieuMuon.getNgayMuon(), "yyyy-MM-dd"),
+                        XDate.toString(phieuMuon.getNgayHenTra(), "yyyy-MM-dd"), phieuMuon.getTongSoLuongSachMuon(), phieuMuon.getMaNguoiDung(), phieuMuon.getGhiChu()};
                     model.addRow(row);
                 }
             }
@@ -105,9 +108,9 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         // form p mượn
         txtMaPhieuMuon.setText(String.valueOf((model.getMaPhieuMuon())));
         Date ngayMuon = model.getNgayMuon();
-        txtNgayMuon.setText(XDate.toString(ngayMuon, "yyyy/MM/dd"));
+        txtNgayMuon.setText(XDate.toString(ngayMuon, "yyyy-MM-dd"));
         Date ngayTra = model.getNgayHenTra();
-        txtNgayHenTra.setText(XDate.toString(ngayTra, "yyyy/MM/dd"));
+        txtNgayHenTra.setText(XDate.toString(ngayTra, "yyyy-MM-dd"));
         txtTongSoLuongSachMuon.setText(String.valueOf(model.getTongSoLuongSachMuon()));
         txtMaNguoiDung.setText(model.getMaNguoiDung());
         txtGhiChu.setText(model.getGhiChu());
@@ -118,8 +121,8 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         if (row >= 0) {
             model.setMaPhieuMuon(Integer.parseInt(tblPhieuMuon.getValueAt(row, 0) + ""));
         }
-        model.setNgayMuon(XDate.toDate(txtNgayMuon.getText(), "yyyy/MM/dd"));
-        model.setNgayHenTra(XDate.toDate(txtNgayHenTra.getText(), "yyyy/MM/dd"));
+        model.setNgayMuon(XDate.toDate(txtNgayMuon.getText(), "yyyy-MM-dd"));
+        model.setNgayHenTra(XDate.toDate(txtNgayHenTra.getText(), "yyyy-MM-dd"));
         model.setTongSoLuongSachMuon(Integer.parseInt(txtTongSoLuongSachMuon.getText()));
         model.setMaNguoiDung(txtMaNguoiDung.getText());
         model.setGhiChu(txtGhiChu.getText());
@@ -130,8 +133,8 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     void clearForm() {
         tblPhieuMuon.clearSelection();
         txtMaPhieuMuon.setText("");
-        txtNgayMuon.setText(XDate.toString(new Date(), "yyyy/MM/dd"));
-        txtNgayHenTra.setText(XDate.toString(XDate.add(3), "yyyy/MM/dd"));
+        txtNgayMuon.setText(XDate.toString(new Date(), "yyyy-MM-dd"));
+        txtNgayHenTra.setText(XDate.toString(XDate.add(3), "yyyy-MM-dd"));
         txtTongSoLuongSachMuon.setText(0 + "");
         txtMaNguoiDung.setText("");
         txtGhiChu.setText("");
@@ -217,39 +220,54 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         showDetailPhieuTra();
     }
 
+    boolean checkMaNguoiDungTonTai() {
+        NguoiDung nd = nguoiDungDAO.selectById(txtMaNguoiDung.getText());
+        if (nd == null) {
+            MsgBox.alert(this, "Độc giả này không tồn tại!");
+            return false;
+        }
+        return true;
+    }
+
     void insert() {
-        PhieuMuon pm = getForm();
+        if (ValidationForm.isMa(this, txtMaNguoiDung, "Mã độc giả")
+                && checkMaNguoiDungTonTai()
+                && ValidationForm.isSo(this, txtTongSoLuongSachMuon, "Tôngr số lượng")
+                && ValidationForm.isDate(txtNgayHenTra, this, "Vui lòng nhập đúng định dạng ngày yyyy-MM-dd")) {
+            PhieuMuon pm = getForm();
+            try {
+                phieuMuonDAO.insert(pm);
+                fillTablePhieuMuon();
+                clearForm();
+                MsgBox.alert(this, "Thêm thành công");
+                tblPhieuMuon.setRowSelectionInterval(listPM.size() - 1, listPM.size() - 1);
+                txtMaPhieuMuon_PMCT.setText(tblPhieuMuon.getValueAt(listPM.size() - 1, 0) + "");
+                fillTableChiTietPhieuMuon();
+                fillTablePhieuTra();
+                clearFormPMCT();
+                tabs.setSelectedIndex(1);
+                MsgBox.alert(this, "Vui lòng thêm phiếu mượn chi tiết!");
 
-        try {
-            phieuMuonDAO.insert(pm);
-            fillTablePhieuMuon();
-            clearForm();
-            MsgBox.alert(this, "Thêm thành công");
-            tblPhieuMuon.setRowSelectionInterval(listPM.size() - 1, listPM.size() - 1);
-            txtMaPhieuMuon_PMCT.setText(tblPhieuMuon.getValueAt(listPM.size() - 1, 0) + "");
-            fillTableChiTietPhieuMuon();
-            fillTablePhieuTra();
-            clearFormPMCT();
-            tabs.setSelectedIndex(1);
-            MsgBox.alert(this, "Vui lòng thêm phiếu mượn chi tiết!");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            MsgBox.alert(this, "Thêm thất bại!");
+            } catch (Exception e) {
+                e.printStackTrace();
+                MsgBox.alert(this, "Thêm thất bại!");
+            }
         }
     }
 
     void update() {
         if (row >= 0) {
-            PhieuMuon pm = getForm();
-            try {
-                phieuMuonDAO.update(pm);
-                fillTablePhieuMuon();
-                fillTablePhieuTra();
-                MsgBox.alert(this, "Cập nhật thành công");
-            } catch (Exception e) {
-                e.printStackTrace();
-                MsgBox.alert(this, "Cập nhật thất bại!");
+            if (ValidationForm.isMa(this, txtMaNguoiDung, "Mã độc giả") && ValidationForm.isSo(this, txtTongSoLuongSachMuon, "Tôngr số lượng") && ValidationForm.isDate(txtNgayHenTra, this, "Vui lòng nhập đúng định dạng ngày yyyy-MM-dd")) {
+                PhieuMuon pm = getForm();
+                try {
+                    phieuMuonDAO.update(pm);
+                    fillTablePhieuMuon();
+                    fillTablePhieuTra();
+                    MsgBox.alert(this, "Cập nhật thành công");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    MsgBox.alert(this, "Cập nhật thất bại!");
+                }
             }
         } else {
             MsgBox.alert(this, "Vui lòng chọn dòng muốn cập nhật");
@@ -357,7 +375,8 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         txtMaPhieuMuonChiTiet_PMCT.setText(model.getMaChiTietPhieuMuon() + "");
     }
 
-    PhieuMuonChiTiet checkMaSachDaTonTai(int maSach) { // kiểm tra xem sách này đã đc mượn để set lại số lượng nếu mượn r thì trả về pmct để tăng số lượng else trả về null
+    PhieuMuonChiTiet checkMaSachDaTonTai(int maSach
+    ) { // kiểm tra xem sách này đã đc mượn để set lại số lượng nếu mượn r thì trả về pmct để tăng số lượng else trả về null
         if (listCTPM == null) {
             return null;
         }
@@ -574,7 +593,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
                 } else {
                     date = phieuTra.getNgayTra();
                 }
-                Object[] row = {phieuTra.getMaPhieuTra(), phieuTra.getMaPhieuMuon(), XDate.toString(date, "yyyy/MM/dd"),
+                Object[] row = {phieuTra.getMaPhieuTra(), phieuTra.getMaPhieuMuon(), XDate.toString(date, "yyyy-MM-dd"),
                     phieuTra.isTrangThai() ? "Đã trả" : "Chưa trả", phieuTra.getMaNguoiDung(), phieuTra.getGhiChu()};
                 model.addRow(row);
             }
@@ -611,16 +630,6 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         return ptr;
     }
 
-    boolean validateForm() {
-        StringBuilder sb = new StringBuilder();
-        ValidatorForm.isDate(txtNgayTra_Tra, sb, "Vui lòng nhập đúng định dạng ngày yyyy-MM-dd");
-        if (sb.length() > 0) {
-            MsgBox.alert(this, sb.toString());
-            return false;
-        }
-        return true;
-    }
-
     void clearFormTra() {
         fillTablePhieuTra();
         txtMaPhieuMuon_Tra.setText("");
@@ -634,16 +643,14 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
 
     void updatePhieuTra() {
         if (row > 0) {
-            if (validateForm()) {
-                PhieuTra ptr = getForm_PhieuTra();
-                try {
-                    phieuTraDAO.update(ptr);
-                    fillTablePhieuTra();
-                    MsgBox.alert(this, "Cập nhật thành công!");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    MsgBox.alert(this, "Cập nhật thất bại!");
-                }
+            PhieuTra ptr = getForm_PhieuTra();
+            try {
+                phieuTraDAO.update(ptr);
+                fillTablePhieuTra();
+                MsgBox.alert(this, "Cập nhật thành công!");
+            } catch (Exception e) {
+                e.printStackTrace();
+                MsgBox.alert(this, "Cập nhật thất bại!");
             }
         } else {
             MsgBox.alert(this, "Vui lòng chọn phiếu trả muốn cập nhật!");
@@ -1904,9 +1911,9 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         } else {
             String[] listTitle = {"Mã phiếu mượn", "Mã đọc giả", "Ngày mượn", "Ngày hẹn trả", "Tổng số lượng", "Ghi chú"};
             String[] listData = {
-                txtMaPhieuMuon.getText(), 
+                txtMaPhieuMuon.getText(),
                 txtMaNguoiDung.getText(),
-                txtNgayMuon.getText(), 
+                txtNgayMuon.getText(),
                 txtNgayHenTra.getText(),
                 txtTongSoLuongSachMuon.getText(),
                 txtGhiChu.getText()};

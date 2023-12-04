@@ -6,6 +6,7 @@ import quanlythuvien.dao.NguoiDungDAO;
 import quanlythuvien.entity.NguoiDung;
 import quanlythuvien.utils.Auth;
 import quanlythuvien.utils.MsgBox;
+import quanlythuvien.utils.ValidationForm;
 import quanlythuvien.utils.XImage;
 
 /**
@@ -17,7 +18,6 @@ public class DangKyJDialog extends javax.swing.JDialog {
     static boolean checkSignUp = false;
 
     ThuVienMainJFrame tvfr;
-    String reTenDangNhap = "^[a-zA-Z0-9_-]{2,10}$";
     NguoiDungDAO ndDAO = new NguoiDungDAO();
     List<NguoiDung> list = ndDAO.selectAll();
 
@@ -30,7 +30,7 @@ public class DangKyJDialog extends javax.swing.JDialog {
     }
 
     void init() {
-        this.setLocation(399,101);
+        this.setLocation(399, 101);
         this.setTitle("Đăng ký");
         this.setIconImage(XImage.getAppIcon());
         txtTenDangNhap.setBackground(new Color(236, 238, 238, 0));
@@ -52,37 +52,13 @@ public class DangKyJDialog extends javax.swing.JDialog {
     }
 
     boolean validateForm() {
-        String reTen = "^[\\p{L}\\p{M}\\s]+$"; // tên có dấu.
-        String reSoDienThoai = "^(\\+84|0)[0-9]{9}$";
-        String reTenDangNhap = "^[a-zA-Z0-9_-]{2,10}$";
-        String reEmail = "^[A-Za-z0-9+_.-]+@([A-Za-z0-9.-]+\\.[A-Za-z]{2,})$";
-
-        if (txtHoTen.getText().equals("")) {
-            MsgBox.alert(this, "Vui lòng nhập họ tên!");
+        if (!ValidationForm.isTen(this, txtHoTen, "Họ tên")) {
             return false;
         }
-        if (!txtHoTen.getText().matches(reTen)) {
-            MsgBox.alert(this, "Tên đăng nhập không hợp lệ!");
+        if (!ValidationForm.isMa(this, txtTenDangNhap, "Tên đăng nhập")) {
             return false;
         }
-        if (txtTenDangNhap.getText().equals("")) {
-            MsgBox.alert(this, "Vui lòng nhập tên đăng nhập!");
-            return false;
-        }
-        if (!txtTenDangNhap.getText().matches(reTenDangNhap)) {
-            MsgBox.alert(this, "Tên đăng nhập không hợp lệ!");
-            return false;
-        }
-        if (txtSoDienThoai.getText().equals("")) {
-            MsgBox.alert(this, "Vui lòng nhập số điện thoại!");
-            return false;
-        }
-        if (!txtSoDienThoai.getText().matches(reSoDienThoai)) {
-            MsgBox.alert(this, "Số điện thoại không hợp lệ!");
-            return false;
-        }
-        if (txtSoDienThoai.getText().length() > 10) {
-            MsgBox.alert(this, "Số điện thoại không hợp lệ!");
+        if (!ValidationForm.isSDT(this, txtSoDienThoai, "Số điện thoại")) {
             return false;
         }
         if (new String(txtMatKhau.getPassword()).equals("")) {
@@ -98,12 +74,7 @@ public class DangKyJDialog extends javax.swing.JDialog {
             MsgBox.alert(this, "Mật khẩu không trùng khớp!");
             return false;
         }
-        if (txtEmail.getText().equals("")) {
-            MsgBox.alert(this, "Vui lòng nhập Email!");
-            return false;
-        }
-        if (!txtEmail.getText().matches(reEmail)) {
-            MsgBox.alert(this, "Email không hợp lệ!");
+        if (!ValidationForm.isEmail(this, txtEmail, "Email")) {
             return false;
         }
         if (ndDAO.selectById(txtTenDangNhap.getText()) != null) {

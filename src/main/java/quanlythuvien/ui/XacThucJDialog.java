@@ -13,6 +13,7 @@ import quanlythuvien.dao.NguoiDungDAO;
 import quanlythuvien.entity.NguoiDung;
 import quanlythuvien.utils.Auth;
 import quanlythuvien.utils.MsgBox;
+import quanlythuvien.utils.ValidationForm;
 import quanlythuvien.utils.XImage;
 
 public class XacThucJDialog extends javax.swing.JDialog {
@@ -34,7 +35,7 @@ public class XacThucJDialog extends javax.swing.JDialog {
     }
 
     void init() {
-        this.setLocation(399,101);
+        this.setLocation(399, 101);
         this.setTitle("Xác thực");
         this.setIconImage(XImage.getAppIcon());
         btnTiepTheo1.setContentAreaFilled(false);
@@ -60,11 +61,7 @@ public class XacThucJDialog extends javax.swing.JDialog {
         tenDangNhap = txtTenDangNhap.getText();
         nd = ndDAO.selectById(tenDangNhap);
         String reTenDangNhap = "^[a-zA-Z0-9_-]{2,10}$";
-        if (tenDangNhap.equals("")) {
-            MsgBox.alert(this, "Vui lòng nhập tên đăng nhập!");
-        } else if (!txtTenDangNhap.getText().matches(reTenDangNhap)) {
-            MsgBox.alert(this, "Tên đăng nhập không hợp lệ!");
-        } else {
+        if (ValidationForm.isMa(this, txtTenDangNhap, "Tên đăng nhập")) {
             if (nd == null) {
                 MsgBox.alert(this, "Sai tên người dùng!");
             } else {

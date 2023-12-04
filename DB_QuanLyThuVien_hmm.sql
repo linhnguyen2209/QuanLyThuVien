@@ -4,7 +4,7 @@ USE DB_QuanLyThuVien
 --drop database DB_QuanLyThuVien
 Go
 CREATE TABLE LoaiSach (
-    MaLoaiSach VARCHAR(10) NOT NULL PRIMARY KEY,
+    MaLoaiSach VARCHAR(30) NOT NULL PRIMARY KEY,
     TenLoaiSach NVARCHAR(250) NOT NULL
 );
  go
@@ -18,7 +18,7 @@ CREATE TABLE Sach (
     GiaTien FLOAT NULL,
     NgayNhapKho DATE NULL,
     ViTriDatSach NVARCHAR(250)  NOT NULL,
-    MaLoaiSach VARCHAR(10)  NOT NULL,
+    MaLoaiSach VARCHAR(30)  NOT NULL,
     CONSTRAINT fk_Sach_LoaiSach FOREIGN KEY (MaLoaiSach) REFERENCES LoaiSach(MaLoaiSach)
 );
 
