@@ -10,6 +10,7 @@ import quanlythuvien.entity.LoaiNguoiDung;
 import quanlythuvien.entity.NguoiDung;
 import quanlythuvien.utils.Auth;
 import quanlythuvien.utils.MsgBox;
+import quanlythuvien.utils.ValidationForm;
 import quanlythuvien.utils.XImage;
 
 /**
@@ -191,12 +192,37 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         btnDelete.setEnabled(edit);
     }
 
-    void insert() {
-        NguoiDung nd = getForm();
+    boolean validateForm() {
+        if (!ValidationForm.isMa(this, txtMaNgDung, "Mã người dùng")) {
+            return false;
+        }
+        if (!ValidationForm.isTen(this, txtHoTen, "Họ tên")) {
+            return false;
+        }
+        if (!ValidationForm.isEmail(this, txtEmail, "Email")) {
+            return false;
+        }
+        if (!ValidationForm.isSDT(this, txtSoDienThoai, "Số điện thoại")) {
+            return false;
+        }
         String matKhau_XN = new String(txtXacNhanMK.getPassword());
         if (!matKhau_XN.equals(new String(txtMatKhau.getPassword()))) {
             MsgBox.alert(this, "Xác nhận mật khẩu không chính xác!");
-        } else {
+            return false;
+        }
+        return true;
+    }
+
+    void insert() {
+        if (validateForm()) {
+            List<NguoiDung> listAll = ngDAO.selectAll();
+            for (NguoiDung nd : listAll) {
+                if (txtMaNgDung.getText().equals(nd.getMaNguoiDung())) {
+                    MsgBox.alert(this, "Mã người dùng đã tồn tại");
+                    return;
+                }
+            }
+            NguoiDung nd = getForm();
             try {
                 ngDAO.insert(nd);
                 fillTableNgDung();
@@ -210,11 +236,9 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
     }
 
     void update() {
-        NguoiDung nd = getForm();
-        String matKhau_XN = new String(txtXacNhanMK.getPassword());
-        if (!matKhau_XN.equals(new String(txtMatKhau.getPassword()))) {
-            MsgBox.alert(this, "Xác nhận mật khẩu không chính xác!");
-        } else {
+        if (validateForm()) {
+            NguoiDung nd = getForm();
+
             try {
                 ngDAO.update(nd);
                 fillTableNgDung();
