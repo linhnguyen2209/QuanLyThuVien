@@ -42,4 +42,24 @@ public class ThongKeDAO {
         String[] cols = {"MaPhieuMuon", "MaNguoiDung", "TenNguoiDung", "NgayMuon", "NgayHenTra", "NgayTra", "SoNgayMuonQuaHan", "TienPhat", "TinhTrangTraSach"};
         return getListOfArray(sql, cols);
     }
+    public List<Object[]> getSoLuongMuonSachTungNam(){
+        String sql ="{CALL sp_soLuotMuonSachTongCacNam}";
+        String[] cols = {"MaSach", "TieuDe", "SLSM"};
+        return getListOfArray(sql, cols);
+    }
+    public List<Object[]> getSoLuongMuonSachTrongNam(Integer nam){
+        String sql ="{CALL sp_soLuotMuonSachTrongNam(?)}";
+        String[] cols = {"MaSach", "TieuDe", "SLSM"};
+        return getListOfArray(sql, cols, nam);
+    }
+    public List<Object[]> getSoLuongMuonSachTheoNamThang(Integer nam, Integer thang){
+        String sql ="{CALL sp_soLuotMuonSachTheoNamThang(?, ?)}";
+        String[] cols = {"MaSach", "TieuDe", "SLSM"};
+        return getListOfArray(sql, cols, nam, thang);
+    }
+    public List<Object[]> getSoLuongMuonSachTheoNamThangNgay(Integer nam, Integer thang, Integer ngay){
+        String sql ="{CALL sp_soLuotMuonSachTheoNamThangNgay(?, ?, ?)}";
+        String[] cols = {"MaSach", "TieuDe", "SLSM"};
+        return getListOfArray(sql, cols, nam, thang, ngay);
+    }
 }
