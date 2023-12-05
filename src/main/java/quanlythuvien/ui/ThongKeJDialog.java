@@ -23,7 +23,6 @@ public class ThongKeJDialog extends javax.swing.JDialog {
 
     ThongKeDAO tkDao = new ThongKeDAO();
     PhieuMuonDAO pmDao = new PhieuMuonDAO();
-    PhieuTraDAO ptrDao = new PhieuTraDAO();
     boolean isBtnFilter = false;
 
     public ThongKeJDialog(java.awt.Frame parent, boolean modal) {
@@ -109,7 +108,9 @@ public class ThongKeJDialog extends javax.swing.JDialog {
         fillTable(list);
     }
 
-    void fillComboBoxNgaySachMuonTra(int nam, int thang, JComboBox cbo) {
+    void fillComboBoxNgaySachMuon() {
+        int nam = Integer.parseInt(cboNamSachMuon.getSelectedItem() + "");
+        int thang = Integer.parseInt(cboThangSachMuon.getSelectedItem() + "");
         int dMax = 0;
         switch (thang) {
             case 4:
@@ -130,7 +131,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
                 dMax = 31;
                 break;
         }
-        DefaultComboBoxModel model = (DefaultComboBoxModel) cbo.getModel();
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboNgaySachMuon.getModel();
         model.removeAllElements();
         for (int i = 1; i <= dMax; i++) {
             model.addElement(i);
@@ -138,7 +139,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
 
     }
 
-    void fillTableSoLuongSachMuonTra(List<Object[]> list) {
+    void fillTableSoLuongSachMuon(List<Object[]> list) {
         DefaultTableModel model = (DefaultTableModel) tblMuonSach.getModel();
         model.setRowCount(0);
         for (Object[] row : list) {
@@ -583,24 +584,22 @@ public class ThongKeJDialog extends javax.swing.JDialog {
         List<Object[]> list = new ArrayList<>();
         if (cboTheo.getSelectedIndex() == 1) {
             list = tkDao.getSoLuongMuonSachTungNam();
-            fillTableSoLuongSachMuonTra(list);
+            fillTableSoLuongSachMuon(list);
         } else {
             Integer nam = (Integer) cboNamSachMuon.getSelectedItem();
             list = tkDao.getSoLuongMuonSachTrongNam(nam);
         }
-        fillTableSoLuongSachMuonTra(list);
+        fillTableSoLuongSachMuon(list);
     }//GEN-LAST:event_cboTheoActionPerformed
 
     private void cboThangSachMuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboThangSachMuonActionPerformed
         if (cboThangSachMuon.getSelectedItem() != null) {
-            int nam = Integer.parseInt(cboNamSachMuon.getSelectedItem() + "");
-            int thang = Integer.parseInt(cboThangSachMuon.getSelectedItem() + "");
-            fillComboBoxNgaySachMuonTra(nam, thang, cboNgaySachMuon);
+            fillComboBoxNgaySachMuon();
         }
         Integer nam = (Integer) cboNam.getSelectedItem();
         Integer thang = (Integer) cboThangSachMuon.getSelectedItem();
         List<Object[]> list = tkDao.getSoLuongMuonSachTheoNamThang(nam, thang);
-        fillTableSoLuongSachMuonTra(list);
+        fillTableSoLuongSachMuon(list);
     }//GEN-LAST:event_cboThangSachMuonActionPerformed
 
     private void cboNgaySachMuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNgaySachMuonActionPerformed
@@ -608,7 +607,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
         Integer thang = (Integer) cboThangSachMuon.getSelectedItem();
         Integer ngay = (Integer) cboNgaySachMuon.getSelectedItem();
         List<Object[]> list = tkDao.getSoLuongMuonSachTheoNamThangNgay(nam, thang, ngay);
-        fillTableSoLuongSachMuonTra(list);
+        fillTableSoLuongSachMuon(list);
     }//GEN-LAST:event_cboNgaySachMuonActionPerformed
 
     private void cboNamSachMuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNamSachMuonActionPerformed
