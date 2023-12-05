@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -14,12 +15,13 @@ import quanlythuvien.entity.LoaiSach;
 import quanlythuvien.entity.Sach;
 import quanlythuvien.utils.Auth;
 import quanlythuvien.utils.MsgBox;
+import quanlythuvien.utils.ValidationForm;
 import quanlythuvien.utils.XDate;
 import quanlythuvien.utils.XImage;
 
 /**
  *
- * @author Dino Disign By Linh Edit By Dino Edit Lần N
+ * @author Dino Disign By Linh &Dino 
  */
 public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
 
@@ -195,7 +197,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
             Sach sh = SDao.selectById(MaSach);
             if (sh != null) {
                 setForm(sh);
-                updateStatusS(); // You can uncomment this line if needed
+                updateStatusS(); 
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -213,115 +215,47 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         btn_last.setEnabled(edit && !last);
     }
 
-    boolean ValidateSach() {
-        // Lấy giá trị từ các trường nhập liệu
-        String tieude = txtTieude.getText();
-        String nhaXuatBan = txtNhaXuatBan.getText();
-        String tacGia = txtTacGia.getText();
-        String soTrang = txtSoTrang.getText();
-        String soLuongSach = txt_SoLuongSach.getText();
-        String giaTien = txtGiaTien.getText();
-        String ngayNhapKho = txtNgayNhapKho.getText();
-        String viTri = txtViTri.getText();
+    boolean ValidateForm() {
+        String TIEU_DE_PATTERN = "^[\\p{L}\\p{M}\\p{N}\\s]+$";
+        String VI_TRI_PATTERN = "^[\\p{L}\\p{M}\\p{N}\\s]+$";
 
-        // Kiểm tra xem các trường có trống hay không
-        if (tieude.isEmpty() || nhaXuatBan.isEmpty() || tacGia.isEmpty() || soTrang.isEmpty() || soLuongSach.isEmpty() || giaTien.isEmpty() || ngayNhapKho.isEmpty() || viTri.isEmpty()) {
-            // Hiển thị thông báo lỗi nếu có trường nào đó trống
-            JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        if (!Pattern.matches(TIEU_DE_PATTERN, txtTieude.getText())) {
+            JOptionPane.showMessageDialog(this, "Tiêu đề không hợp lệ");
             return false;
         }
-
-        // Kiểm tra số trang, số lượng sách, giá tiền có phải là số hay không
-        if (!isValidNumber(soTrang, "Số trang") || !isValidNumber(soLuongSach, "Số lượng sách") || !isValidNumber(giaTien, "Giá tiền")) {
+        if (!ValidationForm.isTen(this, txtNhaXuatBan, "Nhà Xuất Bản")) {
             return false;
         }
-
-        // Kiểm tra tên tác giả không chứa số
-        if (!isValidAuthorName(tacGia)) {
+        if (!ValidationForm.isTen(this, txtTacGia, "Tác giả")) {
             return false;
         }
-
-        // Kiểm tra định dạng ngày
-        if (!isValidDate(ngayNhapKho)) {
+        if (!ValidationForm.isSo(this, txtSoTrang, "Số trang")) {
             return false;
         }
-
-        double giaTienValue;
+        if (!ValidationForm.isSo(this, txt_SoLuongSach, "Số lượng sách")) {
+            return false;
+        }
+        //giá tiền
         try {
-            giaTienValue = Double.parseDouble(giaTien);
-            if (giaTienValue < 0) {
-                JOptionPane.showMessageDialog(null, "Giá tiền không được là số âm", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            double giaTien = Double.parseDouble(txtGiaTien.getText());
+            if (giaTien <= 0) {
+                JOptionPane.showMessageDialog(this, "Giá tiền phải lớn hơn 0");
                 return false;
             }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Giá tiền không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Giá tiền phải là số");
+            return false;
+        }
+        if (!ValidationForm.isDate(txtNgayNhapKho, this, "Ngày Nhập Kho")) {
+            return false;
+        }
+        //vị trí đặt sách
+        if (!Pattern.matches(VI_TRI_PATTERN, txtViTri.getText())) {
+            JOptionPane.showMessageDialog(this, "Vị trí không hợp lệ");
             return false;
         }
 
-        // Kiểm tra số lượng trang không phải là số âm
-        int soTrangValue;
-        try {
-            soTrangValue = Integer.parseInt(soTrang);
-            if (soTrangValue < 0) {
-                JOptionPane.showMessageDialog(null, "Số trang không được là số âm", "Lỗi", JOptionPane.ERROR_MESSAGE);
-                return false;
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Số trang không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-
-        // Kiểm tra số lượng sách không phải là số âm
-        int soLuongSachValue;
-        try {
-            soLuongSachValue = Integer.parseInt(soLuongSach);
-            if (soLuongSachValue < 0) {
-                JOptionPane.showMessageDialog(null, "Số lượng sách không được là số âm", "Lỗi", JOptionPane.ERROR_MESSAGE);
-                return false;
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Số lượng sách không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-
-        // ... (các dòng code sau đó)
         return true;
-        // Tiếp tục xử lý khi dữ liệu hợp lệ
-        // ...
-
-    }
-
-// Hàm kiểm tra xem một chuỗi có phải là số không
-    private boolean isValidNumber(String input, String fieldName) {
-        try {
-            Double.parseDouble(input);
-            return true;
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, fieldName + " phải là số", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-    }
-// Hàm kiểm tra tên tác giả không chứa số
-    private boolean isValidAuthorName(String authorName) {
-        if (authorName.matches("^[\\p{L}\\p{M}\\s]+$")) {
-        return true;
-    } else {
-        JOptionPane.showMessageDialog(null, "Tên tác giả không được chứa số và ký tự đặc biệt", "Lỗi", JOptionPane.ERROR_MESSAGE);
-        return false;
-    }
-    }
-// Hàm kiểm tra định dạng ngày
-    private boolean isValidDate(String date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        sdf.setLenient(false);
-
-        try {
-            Date ngayNhapKhoValue = sdf.parse(date);
-            return true;
-        } catch (ParseException e) {
-            JOptionPane.showMessageDialog(null, "Định dạng ngày không hợp lệ. Sử dụng định dạng yyyy-MM-dd", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
     }
 
     void insertSach() {
@@ -369,7 +303,8 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
             }
         }
     }
-
+    
+     /************************************************************************************************************************** */
     // QlLoaiSach
     void setFormLS(LoaiSach model) {
         txtQL_MaLoaiSach.setText(model.getMaLoaiSach());
@@ -400,38 +335,17 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         return model;
     }
 
-    boolean validateLoaiSach() {
-        // Lấy giá trị từ các trường nhập liệu
-        String maLoaiSach = txtQL_MaLoaiSach.getText();
-        String tenLoaiSach = txtTenLoaiSachQLi.getText();
-
-        // Kiểm tra xem các trường có trống hay không
-        if (maLoaiSach.isEmpty() || tenLoaiSach.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin", "Lỗi", JOptionPane.ERROR_MESSAGE);
+    boolean ValidateLS() {
+        // loại sách
+        if (!ValidationForm.isMa(this, txtQL_MaLoaiSach, "Mã loại sách")) {
             return false;
         }
-
-        // Kiểm tra định dạng mã loại sách
-        if (!isValidMaLoaiSach(maLoaiSach)) {
+        if (!ValidationForm.isTen(this, txtTenLoaiSachQLi, "Tên Loại Sách")) {
             return false;
         }
-
-        // Tiếp tục xử lý khi dữ liệu hợp lệ
-        // ...
         return true;
     }
-
-// Hàm kiểm tra định dạng mã loại sách
-    private boolean isValidMaLoaiSach(String maLoaiSach) {
-        // Kiểm tra nếu mã loại sách không rỗng và đúng định dạng mong muốn
-        if (!maLoaiSach.isEmpty() && maLoaiSach.matches("^[a-zA-Z0-9]+$")) {
-            return true;
-        } else {
-            JOptionPane.showMessageDialog(null, "Mã loại sách không hợp lệ. Mã chỉ được chứa chữ cái và số", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-    }
-
+    
     void insertLS() {
         LoaiSach lss = getFormLS();
         try {
@@ -1282,13 +1196,13 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnNew1ActionPerformed
 
     private void btnAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd1ActionPerformed
-        if (ValidateSach()) {
+        if (ValidateForm()) {
             insertSach();
         }
     }//GEN-LAST:event_btnAdd1ActionPerformed
 
     private void btnUpdate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate1ActionPerformed
-        if (ValidateSach()) {
+        if (ValidateForm()) {
             updateSach();
         }
     }//GEN-LAST:event_btnUpdate1ActionPerformed
@@ -1310,13 +1224,20 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_tblQLTLMousePressed
 
     private void btn_ThemLoaiSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemLoaiSachActionPerformed
-        if (validateLoaiSach()) {
+        if (ValidateLS()) {
+            List<LoaiSach> listAll = LSDao.selectAll();
+            for (LoaiSach nd : listAll) {
+                if (txtQL_MaLoaiSach.getText().equals(nd.getMaLoaiSach())) {
+                    MsgBox.alert(this, "Mã loại sách đã tồn tại");
+                    return;
+                }
+            }
             insertLS();
         }
     }//GEN-LAST:event_btn_ThemLoaiSachActionPerformed
 
     private void btn_SuaLoaiSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaLoaiSachActionPerformed
-        if (validateLoaiSach()) {
+        if (ValidateLS()) {
             updateLS();
         }
     }//GEN-LAST:event_btn_SuaLoaiSachActionPerformed
