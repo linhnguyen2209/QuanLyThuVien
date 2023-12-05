@@ -10,7 +10,8 @@ import quanlythuvien.utils.jdbcHelper;
  *
  * @author thuon
  */
-public class PhieuTraDAO extends ThuVienDAO<PhieuTra, Integer>{
+public class PhieuTraDAO extends ThuVienDAO<PhieuTra, Integer> {
+
     final String INSERT_SQL = "INSERT INTO PhieuTra (MaPhieuMuon, NgayTra, TrangThai, MaNguoiDung, GhiChu) VALUES (?,?,?,?,?)";
     final String UPDATE_SQL = "UPDATE PhieuTra set MaPhieuMuon = ?, NgayTra = ?, TrangThai = ?, MaNguoiDung = ?, GhiChu = ? where MaPhieuTra = ?";
     final String DELETE_SQL = "DELETE FROM PhieuTra where MaPhieuTra = ?";
@@ -26,7 +27,7 @@ public class PhieuTraDAO extends ThuVienDAO<PhieuTra, Integer>{
 
     @Override
     public void update(PhieuTra entity) {
-        jdbcHelper.update(UPDATE_SQL,entity.getMaPhieuMuon(), entity.getNgayTra(), entity.isTrangThai(), entity.getMaNguoiDung(), entity.getGhiChu(), entity.getMaPhieuTra());
+        jdbcHelper.update(UPDATE_SQL, entity.getMaPhieuMuon(), entity.getNgayTra(), entity.isTrangThai(), entity.getMaNguoiDung(), entity.getGhiChu(), entity.getMaPhieuTra());
     }
 
     @Override
@@ -68,7 +69,7 @@ public class PhieuTraDAO extends ThuVienDAO<PhieuTra, Integer>{
         }
         return list;
     }
-    
+
     public PhieuTra selectByIdPM(Integer id) {
         List<PhieuTra> list = selectBySql(SELECT_BY_IDPM_SQL, id);
         if (list.isEmpty()) {
@@ -76,7 +77,7 @@ public class PhieuTraDAO extends ThuVienDAO<PhieuTra, Integer>{
         }
         return list.get(0);
     }
-    
+
     public List<PhieuTra> selectByIdUser(String id) {
         List<PhieuTra> list = selectBySql(SELECT_BY_ID_USER_SQL, id);
         if (list.isEmpty()) {

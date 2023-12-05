@@ -3,8 +3,11 @@ package quanlythuvien.ui;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import quanlythuvien.dao.PhieuMuonDAO;
+import quanlythuvien.dao.PhieuTraDAO;
 import quanlythuvien.dao.ThongKeDAO;
 import quanlythuvien.utils.ExportFile;
 import quanlythuvien.utils.MsgBox;
@@ -20,6 +23,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
 
     ThongKeDAO tkDao = new ThongKeDAO();
     PhieuMuonDAO pmDao = new PhieuMuonDAO();
+    PhieuTraDAO ptrDao = new PhieuTraDAO();
     boolean isBtnFilter = false;
 
     public ThongKeJDialog(java.awt.Frame parent, boolean modal) {
@@ -34,17 +38,18 @@ public class ThongKeJDialog extends javax.swing.JDialog {
         this.setTitle("Thống Kê - Báo Cáo");
         this.setIconImage(XImage.getAppIcon());
         fillComboboxNam();
-        fillComboxThang();
+        fillComboxThang(cboThangBatDau);
+        fillComboxThang(cboThangKetThuc);
         txtTongTienPhatCacNam.setEditable(false);
         txtTongTienPhatTheoNam.setEditable(false);
         cboThangKetThuc.setSelectedItem(12);
         filter();
-        fillComboBoxThangSach();
+        fillComboxThang(cboThangSachMuon);
     }
 
     void fillComboboxNam() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboNam.getModel();
-        DefaultComboBoxModel modelNamSach = (DefaultComboBoxModel) cboNamSach.getModel();
+        DefaultComboBoxModel modelNamSach = (DefaultComboBoxModel) cboNamSachMuon.getModel();
         modelNamSach.removeAllElements();
         model.removeAllElements();
         List<Integer> list = pmDao.selectYear();
@@ -54,19 +59,12 @@ public class ThongKeJDialog extends javax.swing.JDialog {
         }
     }
 
-    void fillComboxThang() {
-        DefaultComboBoxModel thangBD = (DefaultComboBoxModel) cboThangBatDau.getModel();
-        DefaultComboBoxModel thangKT = (DefaultComboBoxModel) cboThangKetThuc.getModel();
-        DefaultComboBoxModel thangSach = (DefaultComboBoxModel) cboThang.getModel();
-        thangBD.removeAllElements();
-        thangKT.removeAllElements();
-        thangSach.removeAllElements();
+    void fillComboxThang(JComboBox cbo) {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cbo.getModel();
+        model.removeAllElements();
         for (int i = 1; i <= 12; i++) {
-            thangBD.addElement(i);
-            thangKT.addElement(i);
-            thangSach.addElement(i);
+            model.addElement(i);
         }
-        fillComboBoxThangSach();
     }
 
     void fillTable(List<Object[]> list) {
@@ -111,9 +109,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
         fillTable(list);
     }
 
-    void fillComboBoxThangSach() {
-        int nam = Integer.parseInt(cboNamSach.getSelectedItem() + "");
-        int thang = Integer.parseInt(cboThang.getSelectedItem() + "");
+    void fillComboBoxNgaySachMuonTra(int nam, int thang, JComboBox cbo) {
         int dMax = 0;
         switch (thang) {
             case 4:
@@ -134,15 +130,15 @@ public class ThongKeJDialog extends javax.swing.JDialog {
                 dMax = 31;
                 break;
         }
-        DefaultComboBoxModel modelNgay = (DefaultComboBoxModel) cboNgay.getModel();
-        modelNgay.removeAllElements();
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cbo.getModel();
+        model.removeAllElements();
         for (int i = 1; i <= dMax; i++) {
-            modelNgay.addElement(i);
+            model.addElement(i);
         }
 
     }
 
-    void fillTableSoLuongMuonSach(List<Object[]> list) {
+    void fillTableSoLuongSachMuonTra(List<Object[]> list) {
         DefaultTableModel model = (DefaultTableModel) tblMuonSach.getModel();
         model.setRowCount(0);
         for (Object[] row : list) {
@@ -189,17 +185,16 @@ public class ThongKeJDialog extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         muon = new javax.swing.JPanel();
-        cboNamSach = new javax.swing.JComboBox<>();
+        cboNamSachMuon = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        cboNgay = new javax.swing.JComboBox<>();
+        cboNgaySachMuon = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        cboThang = new javax.swing.JComboBox<>();
+        cboThangSachMuon = new javax.swing.JComboBox<>();
         cboTheo = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblMuonSach = new javax.swing.JTable();
-        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -351,7 +346,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
                     .addComponent(lblTongTienPhatCacNam)
                     .addComponent(txtTongTienPhatTheoNam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTongTienPhatCacNam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tblThongKeMuonTra.setModel(new javax.swing.table.DefaultTableModel(
@@ -439,21 +434,21 @@ public class ThongKeJDialog extends javax.swing.JDialog {
                     .addComponent(lblMaDocGia))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnXuatFile)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlTongTienPhat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Thống kê tình trạng mượn và trả sách", pnlThongTin);
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        cboNamSach.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cboNamSach.addActionListener(new java.awt.event.ActionListener() {
+        cboNamSachMuon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboNamSachMuon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboNamSachActionPerformed(evt);
+                cboNamSachMuonActionPerformed(evt);
             }
         });
 
@@ -461,24 +456,19 @@ public class ThongKeJDialog extends javax.swing.JDialog {
 
         jLabel2.setText("Ngày:");
 
-        cboNgay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cboNgay.addActionListener(new java.awt.event.ActionListener() {
+        cboNgaySachMuon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboNgaySachMuon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboNgayActionPerformed(evt);
+                cboNgaySachMuonActionPerformed(evt);
             }
         });
 
         jLabel3.setText("Tháng:");
 
-        cboThang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cboThang.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cboThangMouseClicked(evt);
-            }
-        });
-        cboThang.addActionListener(new java.awt.event.ActionListener() {
+        cboThangSachMuon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboThangSachMuon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboThangActionPerformed(evt);
+                cboThangSachMuonActionPerformed(evt);
             }
         });
 
@@ -522,10 +512,10 @@ public class ThongKeJDialog extends javax.swing.JDialog {
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(muonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cboThang, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cboNgay, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cboThangSachMuon, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cboNgaySachMuon, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cboTheo, javax.swing.GroupLayout.Alignment.TRAILING, 0, 125, Short.MAX_VALUE)
-                    .addComponent(cboNamSach, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cboNamSachMuon, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         muonLayout.setVerticalGroup(
@@ -535,15 +525,15 @@ public class ThongKeJDialog extends javax.swing.JDialog {
                     .addGroup(muonLayout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addGroup(muonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cboNamSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cboNamSachMuon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(muonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cboThang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cboThangSachMuon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
                         .addGap(15, 15, 15)
                         .addGroup(muonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cboNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cboNgaySachMuon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(muonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -569,45 +559,66 @@ public class ThongKeJDialog extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jTabbedPane2.addTab("Thống kê số lượng sách mượn", jPanel1);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1076, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 620, Short.MAX_VALUE)
-        );
-
-        jTabbedPane2.addTab("Thống kê số lượng sách trả", jPanel3);
-
-        getContentPane().add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 68, -1, -1));
+        getContentPane().add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, 630));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void rdoTatCaCacNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTatCaCacNamActionPerformed
-        List<Object[]> list = tkDao.getMuonTraTheoCacNam();
-        fillTable(list);
-        isBtnFilter = false;
-    }//GEN-LAST:event_rdoTatCaCacNamActionPerformed
-
-    private void btnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterActionPerformed
-        isBtnFilter = true;
-        filter();
-    }//GEN-LAST:event_btnFilterActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         buttonGroup1.clearSelection();
         buttonGroup2.clearSelection();
     }//GEN-LAST:event_formMouseClicked
+
+    private void btnThoat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoat1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnThoat1ActionPerformed
+
+    private void cboTheoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTheoActionPerformed
+        List<Object[]> list = new ArrayList<>();
+        if (cboTheo.getSelectedIndex() == 1) {
+            list = tkDao.getSoLuongMuonSachTungNam();
+            fillTableSoLuongSachMuonTra(list);
+        } else {
+            Integer nam = (Integer) cboNamSachMuon.getSelectedItem();
+            list = tkDao.getSoLuongMuonSachTrongNam(nam);
+        }
+        fillTableSoLuongSachMuonTra(list);
+    }//GEN-LAST:event_cboTheoActionPerformed
+
+    private void cboThangSachMuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboThangSachMuonActionPerformed
+        if (cboThangSachMuon.getSelectedItem() != null) {
+            int nam = Integer.parseInt(cboNamSachMuon.getSelectedItem() + "");
+            int thang = Integer.parseInt(cboThangSachMuon.getSelectedItem() + "");
+            fillComboBoxNgaySachMuonTra(nam, thang, cboNgaySachMuon);
+        }
+        Integer nam = (Integer) cboNam.getSelectedItem();
+        Integer thang = (Integer) cboThangSachMuon.getSelectedItem();
+        List<Object[]> list = tkDao.getSoLuongMuonSachTheoNamThang(nam, thang);
+        fillTableSoLuongSachMuonTra(list);
+    }//GEN-LAST:event_cboThangSachMuonActionPerformed
+
+    private void cboNgaySachMuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNgaySachMuonActionPerformed
+        Integer nam = (Integer) cboNam.getSelectedItem();
+        Integer thang = (Integer) cboThangSachMuon.getSelectedItem();
+        Integer ngay = (Integer) cboNgaySachMuon.getSelectedItem();
+        List<Object[]> list = tkDao.getSoLuongMuonSachTheoNamThangNgay(nam, thang, ngay);
+        fillTableSoLuongSachMuonTra(list);
+    }//GEN-LAST:event_cboNgaySachMuonActionPerformed
+
+    private void cboNamSachMuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNamSachMuonActionPerformed
+
+    }//GEN-LAST:event_cboNamSachMuonActionPerformed
+
+    private void pnlThongTinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongTinMouseClicked
+        buttonGroup1.clearSelection();
+        buttonGroup2.clearSelection();
+    }//GEN-LAST:event_pnlThongTinMouseClicked
 
     private void btnXuatFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatFileActionPerformed
         if (tblThongKeMuonTra.getRowCount() == 0) {
@@ -629,56 +640,18 @@ public class ThongKeJDialog extends javax.swing.JDialog {
             }
             ExportFile.exportToExcel(this, tblThongKeMuonTra, tieuDe);
         }
-
     }//GEN-LAST:event_btnXuatFileActionPerformed
 
-    private void btnThoat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoat1ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnThoat1ActionPerformed
+    private void btnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterActionPerformed
+        isBtnFilter = true;
+        filter();
+    }//GEN-LAST:event_btnFilterActionPerformed
 
-    private void pnlThongTinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongTinMouseClicked
-        buttonGroup1.clearSelection();
-        buttonGroup2.clearSelection();
-    }//GEN-LAST:event_pnlThongTinMouseClicked
-
-    private void cboThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboThangActionPerformed
-        if (cboThang.getSelectedItem() != null) {
-            fillComboBoxThangSach();
-        }
-        Integer nam = (Integer) cboNam.getSelectedItem();
-        Integer thang = (Integer) cboThang.getSelectedItem();
-        List<Object[]> list = tkDao.getSoLuongMuonSachTheoNamThang(nam, thang);
-        fillTableSoLuongMuonSach(list);
-    }//GEN-LAST:event_cboThangActionPerformed
-
-    private void cboThangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboThangMouseClicked
-        // TODO add your handling code here:
-//        fillComboBoxThangSach();
-    }//GEN-LAST:event_cboThangMouseClicked
-
-    private void cboNamSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNamSachActionPerformed
-
-    }//GEN-LAST:event_cboNamSachActionPerformed
-
-    private void cboTheoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTheoActionPerformed
-        List<Object[]> list = new ArrayList<>();
-        if (cboTheo.getSelectedIndex() == 1) {
-             list = tkDao.getSoLuongMuonSachTungNam();
-            fillTableSoLuongMuonSach(list);
-        } else {
-            Integer nam = (Integer) cboNamSach.getSelectedItem();
-            list = tkDao.getSoLuongMuonSachTrongNam(nam);
-        }
-            fillTableSoLuongMuonSach(list);
-    }//GEN-LAST:event_cboTheoActionPerformed
-
-    private void cboNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNgayActionPerformed
-        Integer nam = (Integer) cboNam.getSelectedItem();
-        Integer thang = (Integer) cboThang.getSelectedItem();
-        Integer ngay = (Integer) cboNgay.getSelectedItem();
-        List<Object[]> list = tkDao.getSoLuongMuonSachTheoNamThangNgay(nam, thang, ngay);
-        fillTableSoLuongMuonSach(list);
-    }//GEN-LAST:event_cboNgayActionPerformed
+    private void rdoTatCaCacNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTatCaCacNamActionPerformed
+        List<Object[]> list = tkDao.getMuonTraTheoCacNam();
+        fillTable(list);
+        isBtnFilter = false;
+    }//GEN-LAST:event_rdoTatCaCacNamActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -702,11 +675,11 @@ public class ThongKeJDialog extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox<String> cboNam;
-    private javax.swing.JComboBox<String> cboNamSach;
-    private javax.swing.JComboBox<String> cboNgay;
-    private javax.swing.JComboBox<String> cboThang;
+    private javax.swing.JComboBox<String> cboNamSachMuon;
+    private javax.swing.JComboBox<String> cboNgaySachMuon;
     private javax.swing.JComboBox<String> cboThangBatDau;
     private javax.swing.JComboBox<String> cboThangKetThuc;
+    private javax.swing.JComboBox<String> cboThangSachMuon;
     private javax.swing.JComboBox<String> cboTheo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -714,7 +687,6 @@ public class ThongKeJDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane2;
