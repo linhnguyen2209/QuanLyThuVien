@@ -348,5 +348,59 @@ end
 
 -- select Distinct(Year(NgayMuon)) as Nam from PhieuMuon ORDER BY Nam DESC
 
-select * from PhieuMuon where MaNguoiDung = 'ND001' AND YEAR(NgayMuon) = 2023
-select * from PhieuMuon where MaNguoiDung = 'ND001' AND YEAR(NgayMuon) = 2023 AND MONTH(NgayMuon) = 1
+--select * from PhieuMuon where MaNguoiDung = 'ND001' AND YEAR(NgayMuon) = 2023
+-- select * from PhieuMuon where MaNguoiDung = 'ND001' AND YEAR(NgayMuon) = 2023 AND MONTH(NgayMuon) = 1
+
+
+-- số lượt mượn sách tất cả các năm
+create proc sp_soLuotMuonSachTongCacNam
+as begin
+	select MaSach, TieuDe, SUM(SoLuotMuon) as SLSM from 
+		(select ctpm.MaSach, s.TieuDe,pm.NgayMuon, SUM(ctpm.SoLuongSachMuonMoiLoai) as SoLuotMuon 
+		from ChiTietPhieuMuon ctpm 
+		inner join Sach s on ctpm.MaSach = s.MaSach
+		inner join PhieuMuon pm on ctpm.MaPhieuMuon = pm.MaPhieuMuon
+		group by ctpm.MaSach, s.TieuDe, pm.NgayMuon) as tbl
+	group by MaSach, TieuDe
+end
+exec sp_soLuotMuonSachTongCacNam
+
+-- số lượt mượn sách theo năm
+drop proc sp_soLuotMuonSachTheoNam;
+create proc sp_soLuotMuonSachTrongNam(@year int)
+as begin
+	select MaSach, TieuDe, SUM(SoLuotMuon) as SLSM from 
+		(select ctpm.MaSach, s.TieuDe,pm.NgayMuon, SUM(ctpm.SoLuongSachMuonMoiLoai) as SoLuotMuon 
+		from ChiTietPhieuMuon ctpm 
+		inner join Sach s on ctpm.MaSach = s.MaSach
+		inner join PhieuMuon pm on ctpm.MaPhieuMuon = pm.MaPhieuMuon
+		where Year(pm.NgayMuon) = @year
+		group by ctpm.MaSach, s.TieuDe, pm.NgayMuon) as tbl
+	group by MaSach, TieuDe
+end
+exec sp_soLuotMuonSachTrongNam 2023
+-- số lượt mượn sách theo tháng trong năm
+create proc sp_soLuotMuonSachTheoNamThang(@year int, @month int)
+as begin
+	select MaSach, TieuDe, SUM(SoLuotMuon) as SLSM from 
+		(select ctpm.MaSach, s.TieuDe,pm.NgayMuon, SUM(ctpm.SoLuongSachMuonMoiLoai) as SoLuotMuon 
+		from ChiTietPhieuMuon ctpm 
+		inner join Sach s on ctpm.MaSach = s.MaSach
+		inner join PhieuMuon pm on ctpm.MaPhieuMuon = pm.MaPhieuMuon
+		where Year(pm.NgayMuon) = @year and MONTH(pm.NgayMuon) = @month
+		group by ctpm.MaSach, s.TieuDe, pm.NgayMuon) as tbl
+	group by MaSach, TieuDe
+end
+
+-- số lượt mượn sách theo ngày trong tháng của năm
+create proc sp_soLuotMuonSachTheoNamThangNgay(@year int, @month int, @day int)
+as begin
+	select MaSach, TieuDe, SUM(SoLuotMuon) as SLSM from 
+		(select ctpm.MaSach, s.TieuDe,pm.NgayMuon, SUM(ctpm.SoLuongSachMuonMoiLoai) as SoLuotMuon 
+		from ChiTietPhieuMuon ctpm 
+		inner join Sach s on ctpm.MaSach = s.MaSach
+		inner join PhieuMuon pm on ctpm.MaPhieuMuon = pm.MaPhieuMuon
+		where Year(pm.NgayMuon) = @year and MONTH(pm.NgayMuon) = @month and DAY(pm.NgayMuon) = @day
+		group by ctpm.MaSach, s.TieuDe, pm.NgayMuon) as tbl
+	group by MaSach, TieuDe
+end
