@@ -353,6 +353,7 @@ end
 
 
 -- số lượt mượn sách tất cả các năm
+go
 create proc sp_soLuotMuonSachTongCacNam
 as begin
 	select MaSach, TieuDe, SUM(SoLuotMuon) as SLSM from 
@@ -366,7 +367,8 @@ end
 exec sp_soLuotMuonSachTongCacNam
 
 -- số lượt mượn sách của năm
-drop proc sp_soLuotMuonSachTheoNam;
+--drop proc sp_soLuotMuonSachTheoNam;
+go
 create proc sp_soLuotMuonSachTrongNam(@year int)
 as begin
 	select MaSach, TieuDe, SUM(SoLuotMuon) as SLSM from 
@@ -380,6 +382,7 @@ as begin
 end
 exec sp_soLuotMuonSachTrongNam 2023
 -- số lượt mượn sách theo tháng của năm
+go
 create proc sp_soLuotMuonSachTheoNamThang(@year int, @month int)
 as begin
 	select MaSach, TieuDe, SUM(SoLuotMuon) as SLSM from 
@@ -393,6 +396,7 @@ as begin
 end
 
 -- số lượt mượn sách theo ngày trong tháng của năm
+go
 create proc sp_soLuotMuonSachTheoNamThangNgay(@year int, @month int, @day int)
 as begin
 	select MaSach, TieuDe, SUM(SoLuotMuon) as SLSM from 

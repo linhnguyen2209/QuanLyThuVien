@@ -21,7 +21,9 @@ import quanlythuvien.utils.XImage;
 
 /**
  *
- * @author Dino Disign By Linh &Dino 
+ * @author Dino 
+ * Design Linh 
+ * Code Dino
  */
 public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
 
