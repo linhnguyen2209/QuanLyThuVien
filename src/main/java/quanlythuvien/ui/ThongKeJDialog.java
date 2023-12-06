@@ -23,7 +23,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
 
     ThongKeDAO tkDao = new ThongKeDAO();
     PhieuMuonDAO pmDao = new PhieuMuonDAO();
-    boolean isBtnFilter = false;
+//    boolean isBtnFilter = false;
 
     public ThongKeJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -75,7 +75,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
                 tongTienPhat += Long.parseLong(row[7].toString());
                 txtTongTienPhatCacNam.setText(tongTienPhat + "");
                 txtTongTienPhatTheoNam.setText(0 + "");
-            } else if (isBtnFilter) {
+            } else{
                 tongTienPhat += Long.parseLong(row[7].toString());
                 txtTongTienPhatTheoNam.setText(tongTienPhat + "");
                 txtTongTienPhatCacNam.setText(0 + "");
@@ -151,7 +151,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        btnGAllYears = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         lblTKVBC = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
@@ -246,7 +246,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
 
         cboThangKetThuc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        buttonGroup1.add(rdoTatCaCacNam);
+        btnGAllYears.add(rdoTatCaCacNam);
         rdoTatCaCacNam.setText("Tất cả theo từng năm");
         rdoTatCaCacNam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -577,7 +577,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        buttonGroup1.clearSelection();
+        btnGAllYears.clearSelection();
         buttonGroup2.clearSelection();
     }//GEN-LAST:event_formMouseClicked
 
@@ -621,7 +621,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_cboNamSachMuonActionPerformed
 
     private void pnlThongTinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongTinMouseClicked
-        buttonGroup1.clearSelection();
+        btnGAllYears.clearSelection();
         buttonGroup2.clearSelection();
     }//GEN-LAST:event_pnlThongTinMouseClicked
 
@@ -648,14 +648,15 @@ public class ThongKeJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnXuatFileActionPerformed
 
     private void btnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterActionPerformed
-        isBtnFilter = true;
+//        isBtnFilter = true;
+        btnGAllYears.clearSelection();
         filter();
     }//GEN-LAST:event_btnFilterActionPerformed
 
     private void rdoTatCaCacNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTatCaCacNamActionPerformed
         List<Object[]> list = tkDao.getMuonTraTheoCacNam();
         fillTable(list);
-        isBtnFilter = false;
+//        isBtnFilter = false;
     }//GEN-LAST:event_rdoTatCaCacNamActionPerformed
 
     public static void main(String args[]) {
@@ -675,9 +676,9 @@ public class ThongKeJDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFilter;
+    private javax.swing.ButtonGroup btnGAllYears;
     private javax.swing.JButton btnThoat1;
     private javax.swing.JButton btnXuatFile;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox<String> cboNam;
     private javax.swing.JComboBox<String> cboNamSachMuon;
