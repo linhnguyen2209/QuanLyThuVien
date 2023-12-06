@@ -24,15 +24,15 @@ public class ValidationForm {
                 MsgBox.alert(parent, "Vui lòng nhập đúng định dạng yyyy-MM-dd!");
                 return false;
             } else {
-                StringBuilder strDate = new StringBuilder();
+//                StringBuilder strDate = new StringBuilder();
                 try {
                     year = Integer.parseInt(dob[0]);
                     if (year <= 0) {
                         MsgBox.alert(parent, "Vui lòng nhập năm lớn hơn 0!!");
                         return false;
                     }
-                    strDate.append(String.valueOf(year));
-                    strDate.append("-");
+//                    strDate.append(String.valueOf(year));
+//                    strDate.append("-");
                 } catch (Exception e) {
                     MsgBox.alert(parent, "Vui lòng nhập năm bằng số!");
                     return false;
@@ -43,8 +43,8 @@ public class ValidationForm {
                         MsgBox.alert(parent, "Vui lòng nhập tháng trong đoạn [1, 12]!");
                         return false;
                     }
-                    strDate.append(String.valueOf(month));
-                    strDate.append("-");
+//                    strDate.append(String.valueOf(month));
+//                    strDate.append("-");
                 } catch (Exception e) {
                     MsgBox.alert(parent, "Vui lòng nhập tháng bằng số!");
                     return false;
@@ -52,7 +52,7 @@ public class ValidationForm {
                 }
                 try {
                     day = Integer.parseInt(dob[2]);
-                    strDate.append(String.valueOf(day));
+//                    strDate.append(String.valueOf(day));
                 } catch (Exception e) {
                     MsgBox.alert(parent, "Vui lòng nhập ngày bằng số!");
                     return false;
@@ -91,7 +91,7 @@ public class ValidationForm {
                         MsgBox.alert(parent, "Vui lòng nhập ngày trong đoạn[1," + d + "]");
                         return false;
                     }
-                    strDate.append(String.valueOf(day));
+//                    strDate.append(String.valueOf(day));
                 } catch (Exception e) {
                     MsgBox.alert(parent, "Vui lòng nhập tháng bằng số");
                     return false;

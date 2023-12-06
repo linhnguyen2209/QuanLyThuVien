@@ -228,12 +228,11 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         }
         return true;
     }
-
+    //&& ValidationForm.isSo(this, txtTongSoLuongSachMuon, "Tổng số lượng")
     void insert() {
         if (ValidationForm.isMa(this, txtMaNguoiDung, "Mã độc giả")
                 && checkMaNguoiDungTonTai()
-                && ValidationForm.isSo(this, txtTongSoLuongSachMuon, "Tổng số lượng")
-                && ValidationForm.isDate(txtNgayHenTra, this, "Vui lòng nhập đúng định dạng ngày yyyy-MM-dd")) {
+                && ValidationForm.isDate(txtNgayHenTra, this, "Ngày hẹn trả")) {
             PhieuMuon pm = getForm();
             try {
                 phieuMuonDAO.insert(pm);
@@ -257,7 +256,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
 
     void update() {
         if (row >= 0) {
-            if (ValidationForm.isMa(this, txtMaNguoiDung, "Mã độc giả") && ValidationForm.isSo(this, txtTongSoLuongSachMuon, "Tổng số lượng") && ValidationForm.isDate(txtNgayHenTra, this, "Vui lòng nhập đúng định dạng ngày yyyy-MM-dd")) {
+            if (ValidationForm.isMa(this, txtMaNguoiDung, "Mã độc giả") && ValidationForm.isSo(this, txtTongSoLuongSachMuon, "Tổng số lượng") && ValidationForm.isDate(txtNgayHenTra, this, "Ngày hẹn trả")) {
                 PhieuMuon pm = getForm();
                 try {
                     phieuMuonDAO.update(pm);
