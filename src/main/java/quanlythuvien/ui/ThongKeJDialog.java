@@ -599,13 +599,13 @@ public class ThongKeJDialog extends javax.swing.JDialog {
     private void cboThangSachMuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboThangSachMuonActionPerformed
         if (cboThangSachMuon.getSelectedItem() != null) {
             fillComboBoxNgaySachMuon();
+            Integer nam = (Integer) cboNamSachMuon.getSelectedItem();
+            System.out.println("nam: " + nam);
+            Integer thang = (Integer) cboThangSachMuon.getSelectedItem();
+            System.out.println("thang " + thang);
+            List<Object[]> list = tkDao.getSoLuongMuonSachTheoNamThang(nam, thang);
+            fillTableSoLuongSachMuon(list);
         }
-        Integer nam = (Integer) cboNamSachMuon.getSelectedItem();
-        System.out.println("nam: "+ nam);
-        Integer thang = (Integer) cboThangSachMuon.getSelectedItem();
-        System.out.println("thang "+ thang);
-        List<Object[]> list = tkDao.getSoLuongMuonSachTheoNamThang(nam, thang);
-        fillTableSoLuongSachMuon(list);
     }//GEN-LAST:event_cboThangSachMuonActionPerformed
 
     private void cboNgaySachMuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNgaySachMuonActionPerformed

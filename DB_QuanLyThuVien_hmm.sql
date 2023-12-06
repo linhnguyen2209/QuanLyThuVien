@@ -182,7 +182,7 @@ VALUES
 (8, 5, 2),
 (9, 7, 1),
 (10, 10, 4);
-
+select * from ChiTietPhieuMuon
 INSERT INTO PhieuTra (MaPhieuMuon, NgayTra, TrangThai, MaNguoiDung, GhiChu)
 VALUES
 (1, '2022-11-10', 1, 'ND001', null),
@@ -197,8 +197,8 @@ VALUES
 (10, null, 0,'ND001', NULL),
 (11, null, 0,'ND006', NULL)
 GO 
-select * from PhieuTra
-select * from PhieuMuon
+-- select * from PhieuTra
+-- select * from PhieuMuon
 GO
 -- sau khi thêm phiếu mượn
 CREATE TRIGGER trg_SauKhiThemPhieuMuon
@@ -380,7 +380,7 @@ as begin
 		group by ctpm.MaSach, s.TieuDe, pm.NgayMuon) as tbl
 	group by MaSach, TieuDe
 end
-exec sp_soLuotMuonSachTrongNam 2023
+--exec sp_soLuotMuonSachTrongNam 2022
 -- số lượt mượn sách theo tháng của năm
 go
 create proc sp_soLuotMuonSachTheoNamThang(@year int, @month int)
@@ -394,7 +394,9 @@ as begin
 		group by ctpm.MaSach, s.TieuDe, pm.NgayMuon) as tbl
 	group by MaSach, TieuDe
 end
-
+-- exec sp_soLuotMuonSachTheoNamThang 2022, 10
+-- select * from ChiTietPhieuMuon
+-- select * from Sach
 -- số lượt mượn sách theo ngày trong tháng của năm
 go
 create proc sp_soLuotMuonSachTheoNamThangNgay(@year int, @month int, @day int)
@@ -408,3 +410,4 @@ as begin
 		group by ctpm.MaSach, s.TieuDe, pm.NgayMuon) as tbl
 	group by MaSach, TieuDe
 end
+
