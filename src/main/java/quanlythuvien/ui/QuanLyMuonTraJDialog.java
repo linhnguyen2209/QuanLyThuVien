@@ -141,6 +141,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         this.row = -1;
         updateStatus();
         clearFormTra();
+        clearFormPMCT();
     }
 
     void edit() {
@@ -372,10 +373,10 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         }
         txtTongSachChon.setText(model.getSlSachMuonMoiLoai() + "");
         txtMaPhieuMuonChiTiet_PMCT.setText(model.getMaChiTietPhieuMuon() + "");
+        updateStatusPMCT();
     }
 
-    PhieuMuonChiTiet checkMaSachDaTonTai(int maSach
-    ) { // kiểm tra xem sách này đã đc mượn để set lại số lượng nếu mượn r thì trả về pmct để tăng số lượng else trả về null
+    PhieuMuonChiTiet checkMaSachDaTonTai(int maSach) { // kiểm tra xem sách này đã đc mượn để set lại số lượng nếu mượn r thì trả về pmct để tăng số lượng else trả về null
         if (listCTPM == null) {
             return null;
         }
@@ -536,17 +537,17 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     void updateStatusPMCT() {
         boolean edit = this.indexPMCT >= 0;
         boolean first = this.indexPMCT == 0;
-        boolean last = this.indexPMCT == tblPhieuMuon.getRowCount() - 1;
+        boolean last = this.indexPMCT == tblChiTietPhieuMuon.getRowCount() - 1;
 
         //Khi insert thì không update, delete
         btnThem.setEnabled(!edit);
         btnSua.setEnabled(edit);
         btnXoa.setEnabled(edit);
 
-        btnFirst.setEnabled(edit && !first);
-        btnPrev.setEnabled(edit && !first);
-        btnNext.setEnabled(edit && !last);
-        btnLast.setEnabled(edit && !last);
+        btnFirstPMCT.setEnabled(edit && !first);
+        btnPrevPMCT.setEnabled(edit && !first);
+        btnNextPMCT.setEnabled(edit && !last);
+        btnLastPMCT.setEnabled(edit && !last);
 
     }
 
@@ -565,7 +566,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     }
 
     private void nextCTPM() {
-        if (indexPMCT < tblPhieuMuon.getRowCount() - 1) {
+        if (indexPMCT < tblChiTietPhieuMuon.getRowCount() - 1) {
             indexPMCT++;
             tblChiTietPhieuMuon.setRowSelectionInterval(indexPMCT, indexPMCT);
             showDetailPhieuMuonChiTiet();
@@ -573,7 +574,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     }
 
     private void lastCTPM() {
-        indexPMCT = tblPhieuMuon.getRowCount() - 1;
+        indexPMCT = tblChiTietPhieuMuon.getRowCount() - 1;
         tblChiTietPhieuMuon.setRowSelectionInterval(indexPMCT, indexPMCT);
         showDetailPhieuMuonChiTiet();
     }
