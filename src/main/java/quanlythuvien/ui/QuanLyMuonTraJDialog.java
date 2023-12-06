@@ -764,7 +764,6 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1100, 690));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1100, 690));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tabs.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1219,13 +1218,13 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             pnlTimKiemMaSachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTimKiemMaSachLayout.createSequentialGroup()
                 .addComponent(txtTimKiemMaSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 15, Short.MAX_VALUE))
+                .addGap(0, 25, Short.MAX_VALUE))
         );
 
-        pnlCTPM.add(pnlTimKiemMaSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 18, 350, 60));
+        pnlCTPM.add(pnlTimKiemMaSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 18, 350, 70));
 
         lblSachTrongKho.setText("Sách trong kho:");
-        pnlCTPM.add(lblSachTrongKho, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 81, -1, -1));
+        pnlCTPM.add(lblSachTrongKho, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
         listSachChon.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -1234,7 +1233,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         });
         jScrollPane4.setViewportView(listSachChon);
 
-        pnlCTPM.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 120, 110));
+        pnlCTPM.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 120, 110));
 
         btnAllRight.setText(">>|");
         btnAllRight.setEnabled(false);
@@ -1243,7 +1242,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
                 btnAllRightActionPerformed(evt);
             }
         });
-        pnlCTPM.add(btnAllRight, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 103, 63, -1));
+        pnlCTPM.add(btnAllRight, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 63, -1));
 
         btnRight.setText(">");
         btnRight.addActionListener(new java.awt.event.ActionListener() {
@@ -1251,7 +1250,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
                 btnRightActionPerformed(evt);
             }
         });
-        pnlCTPM.add(btnRight, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 132, 63, -1));
+        pnlCTPM.add(btnRight, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 63, -1));
 
         btnLeft.setText("<");
         btnLeft.addActionListener(new java.awt.event.ActionListener() {
@@ -1259,7 +1258,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
                 btnLeftActionPerformed(evt);
             }
         });
-        pnlCTPM.add(btnLeft, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 161, 63, -1));
+        pnlCTPM.add(btnLeft, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 63, -1));
 
         btnAllLeft.setText("|<<");
         btnAllLeft.addActionListener(new java.awt.event.ActionListener() {
@@ -1267,7 +1266,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
                 btnAllLeftActionPerformed(evt);
             }
         });
-        pnlCTPM.add(btnAllLeft, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 190, 65, -1));
+        pnlCTPM.add(btnAllLeft, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 65, -1));
 
         listSachTrongKho.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -1276,14 +1275,14 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         });
         jScrollPane5.setViewportView(listSachTrongKho);
 
-        pnlCTPM.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 103, 140, 110));
+        pnlCTPM.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 140, 110));
 
         lblSachMuon.setText("Sách mượn:");
-        pnlCTPM.add(lblSachMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, -1, -1));
+        pnlCTPM.add(lblSachMuon, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, -1, -1));
 
         lblTongSach.setText("Tổng sách:");
-        pnlCTPM.add(lblTongSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 70, 20));
-        pnlCTPM.add(txtTongSachChon, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, 120, -1));
+        pnlCTPM.add(lblTongSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 70, 20));
+        pnlCTPM.add(txtTongSachChon, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 120, -1));
 
         pnChucNang.setBorder(javax.swing.BorderFactory.createTitledBorder("Chức Năng"));
 

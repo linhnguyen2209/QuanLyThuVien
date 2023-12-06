@@ -24,15 +24,12 @@ public class ValidationForm {
                 MsgBox.alert(parent, "Vui lòng nhập đúng định dạng yyyy-MM-dd!");
                 return false;
             } else {
-//                StringBuilder strDate = new StringBuilder();
                 try {
                     year = Integer.parseInt(dob[0]);
                     if (year <= 0) {
                         MsgBox.alert(parent, "Vui lòng nhập năm lớn hơn 0!!");
                         return false;
                     }
-//                    strDate.append(String.valueOf(year));
-//                    strDate.append("-");
                 } catch (Exception e) {
                     MsgBox.alert(parent, "Vui lòng nhập năm bằng số!");
                     return false;
@@ -43,8 +40,6 @@ public class ValidationForm {
                         MsgBox.alert(parent, "Vui lòng nhập tháng trong đoạn [1, 12]!");
                         return false;
                     }
-//                    strDate.append(String.valueOf(month));
-//                    strDate.append("-");
                 } catch (Exception e) {
                     MsgBox.alert(parent, "Vui lòng nhập tháng bằng số!");
                     return false;
@@ -52,48 +47,39 @@ public class ValidationForm {
                 }
                 try {
                     day = Integer.parseInt(dob[2]);
-//                    strDate.append(String.valueOf(day));
                 } catch (Exception e) {
                     MsgBox.alert(parent, "Vui lòng nhập ngày bằng số!");
                     return false;
 
                 }
-                try {
-                    int d = 0;
+                int d = 0;
 
-                    if (month > 0 && month <= 12) {
-                        switch (month) {
-                            case 4:
-                            case 6:
-                            case 9:
-                            case 11:
-                                d = 30;
-                                break;
-                            case 2:
-                                year = Integer.parseInt(dob[0]);
-                                if (year > 0) {
-                                    boolean flag = ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0);
-                                    if (flag) {
-                                        d = 29;
-                                    } else {
-                                        d = 28;
-                                    }
+                if (month > 0 && month <= 12) {
+                    switch (month) {
+                        case 4:
+                        case 6:
+                        case 9:
+                        case 11:
+                            d = 30;
+                            break;
+                        case 2:
+                            year = Integer.parseInt(dob[0]);
+                            if (year > 0) {
+                                boolean flag = ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0);
+                                if (flag) {
+                                    d = 29;
+                                } else {
+                                    d = 28;
                                 }
-                                break;
-                            default:
-                                d = 31;
-                                break;
-                        }
-                    } else {
-                        d = 31;
+                            }
+                            break;
+                        default:
+                            d = 31;
+                            break;
                     }
-                    if (day <= 0 || day > d) {
-                        MsgBox.alert(parent, "Vui lòng nhập ngày trong đoạn[1," + d + "]");
-                        return false;
-                    }
-//                    strDate.append(String.valueOf(day));
-                } catch (Exception e) {
-                    MsgBox.alert(parent, "Vui lòng nhập tháng bằng số");
+                }
+                if (day <= 0 || day > d) {
+                    MsgBox.alert(parent, "Vui lòng nhập ngày trong đoạn[1," + d + "]");
                     return false;
                 }
             }
@@ -184,5 +170,5 @@ public class ValidationForm {
         }
         return true;
     }
-    
+
 }
