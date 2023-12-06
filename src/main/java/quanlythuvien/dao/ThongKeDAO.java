@@ -42,7 +42,7 @@ public class ThongKeDAO {
         String[] cols = {"MaPhieuMuon", "MaNguoiDung", "TenNguoiDung", "NgayMuon", "NgayHenTra", "NgayTra", "SoNgayMuonQuaHan", "TienPhat", "TinhTrangTraSach"};
         return getListOfArray(sql, cols);
     }
-    public List<Object[]> getSoLuongMuonSachTungNam(){
+    public List<Object[]> getSoLuongMuonSachTongCacNam(){
         String sql ="{CALL sp_soLuotMuonSachTongCacNam}";
         String[] cols = {"MaSach", "TieuDe", "SLSM"};
         return getListOfArray(sql, cols);

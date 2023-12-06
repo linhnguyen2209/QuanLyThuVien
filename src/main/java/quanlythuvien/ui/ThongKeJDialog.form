@@ -582,16 +582,14 @@
                               <Component id="jScrollPane2" min="-2" pref="830" max="-2" attributes="0"/>
                               <EmptySpace min="29" pref="29" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel4" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
+                                  <Component id="lblThangSachMuon" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
                                   <Component id="jLabel1" min="-2" pref="37" max="-2" attributes="0"/>
-                                  <Component id="jLabel2" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
+                                  <Component id="lblNgaySachMuon" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="cboThangSachMuon" max="32767" attributes="0"/>
+                                  <Component id="cboThangSachMuon" pref="125" max="32767" attributes="0"/>
                                   <Component id="cboNgaySachMuon" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="cboTheo" alignment="1" pref="125" max="32767" attributes="0"/>
                                   <Component id="cboNamSachMuon" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -611,17 +609,12 @@
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="cboThangSachMuon" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblThangSachMuon" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="cboNgaySachMuon" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="cboTheo" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblNgaySachMuon" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -658,7 +651,7 @@
                         <Property name="text" type="java.lang.String" value="N&#x103;m:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel2">
+                    <Component class="javax.swing.JLabel" name="lblNgaySachMuon">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Ng&#xe0;y:"/>
                       </Properties>
@@ -681,7 +674,7 @@
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel3">
+                    <Component class="javax.swing.JLabel" name="lblThangSachMuon">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Th&#xe1;ng:"/>
                       </Properties>
@@ -703,27 +696,6 @@
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
-                    </Component>
-                    <Component class="javax.swing.JComboBox" name="cboTheo">
-                      <Properties>
-                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="2">
-                            <StringItem index="0" value="T&#x1ed5;ng c&#xe1;c N&#x103;m"/>
-                            <StringItem index="1" value="Trong N&#x103;m"/>
-                          </StringArray>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboTheoActionPerformed"/>
-                      </Events>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                      </AuxValues>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel4">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Theo:"/>
-                      </Properties>
                     </Component>
                     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
                       <AuxValues>
