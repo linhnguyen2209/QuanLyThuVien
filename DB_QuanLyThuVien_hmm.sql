@@ -150,8 +150,8 @@ VALUES
 
 INSERT INTO PhieuMuon (NgayMuon, NgayHenTra, TongSoLuongSachMuon, MaNguoiDung, GhiChu)
 VALUES
-('2023-10-07', '2023-10-10', 3, 'ND001', N'Mượn sách cho học tập'),
-('2023-10-08', '2023-10-11', 2, 'ND002', N'Mượn sách cho giải trí'),
+('2022-10-07', '2022-10-10', 3, 'ND001', N'Mượn sách cho học tập'),
+('2022-10-08', '2022-10-11', 2, 'ND002', N'Mượn sách cho giải trí'),
 ('2023-10-09', '2023-10-12', 4, 'ND006', NULL),
 ('2023-10-10', '2023-10-13', 1, 'ND005', NULL),
 ('2023-10-11', '2023-10-14', 5, 'ND004', N'Mượn sách cho biên tập'),
@@ -185,8 +185,8 @@ VALUES
 
 INSERT INTO PhieuTra (MaPhieuMuon, NgayTra, TrangThai, MaNguoiDung, GhiChu)
 VALUES
-(1, '2023-11-10', 1, 'ND001', null),
-(2, '2023-10-11', 1, 'ND002', null),
+(1, '2022-11-10', 1, 'ND001', null),
+(2, '2022-10-11', 1, 'ND002', null),
 (3, null, 0, 'ND006', null),
 (4, '2023-11-13', 1, 'ND005', null),
 (5, null, 0, 'ND004', null),

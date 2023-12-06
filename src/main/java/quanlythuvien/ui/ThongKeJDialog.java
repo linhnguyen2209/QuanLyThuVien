@@ -484,15 +484,20 @@ public class ThongKeJDialog extends javax.swing.JDialog {
 
         tblMuonSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Mã Sách", "Tên sách", "Số lượng mượn"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(tblMuonSach);
         if (tblMuonSach.getColumnModel().getColumnCount() > 0) {
             tblMuonSach.getColumnModel().getColumn(0).setPreferredWidth(50);
@@ -582,9 +587,8 @@ public class ThongKeJDialog extends javax.swing.JDialog {
 
     private void cboTheoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTheoActionPerformed
         List<Object[]> list = new ArrayList<>();
-        if (cboTheo.getSelectedIndex() == 1) {
+        if (cboTheo.getSelectedIndex() == 0) {
             list = tkDao.getSoLuongMuonSachTungNam();
-            fillTableSoLuongSachMuon(list);
         } else {
             Integer nam = (Integer) cboNamSachMuon.getSelectedItem();
             list = tkDao.getSoLuongMuonSachTrongNam(nam);
@@ -596,14 +600,16 @@ public class ThongKeJDialog extends javax.swing.JDialog {
         if (cboThangSachMuon.getSelectedItem() != null) {
             fillComboBoxNgaySachMuon();
         }
-        Integer nam = (Integer) cboNam.getSelectedItem();
+        Integer nam = (Integer) cboNamSachMuon.getSelectedItem();
+        System.out.println("nam: "+ nam);
         Integer thang = (Integer) cboThangSachMuon.getSelectedItem();
+        System.out.println("thang "+ thang);
         List<Object[]> list = tkDao.getSoLuongMuonSachTheoNamThang(nam, thang);
         fillTableSoLuongSachMuon(list);
     }//GEN-LAST:event_cboThangSachMuonActionPerformed
 
     private void cboNgaySachMuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNgaySachMuonActionPerformed
-        Integer nam = (Integer) cboNam.getSelectedItem();
+        Integer nam = (Integer) cboNamSachMuon.getSelectedItem();
         Integer thang = (Integer) cboThangSachMuon.getSelectedItem();
         Integer ngay = (Integer) cboNgaySachMuon.getSelectedItem();
         List<Object[]> list = tkDao.getSoLuongMuonSachTheoNamThangNgay(nam, thang, ngay);
@@ -611,7 +617,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_cboNgaySachMuonActionPerformed
 
     private void cboNamSachMuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNamSachMuonActionPerformed
-
+        
     }//GEN-LAST:event_cboNamSachMuonActionPerformed
 
     private void pnlThongTinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongTinMouseClicked
