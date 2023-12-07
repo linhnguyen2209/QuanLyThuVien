@@ -350,6 +350,7 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
             Object[] row = {pmct.getMaChiTietPhieuMuon(), pmct.getMaPhieuMuon(), pmct.getMaSach(), pmct.getSlSachMuonMoiLoai()};
             tblModelPMCT.addRow(row);
         }
+        updateStatusPMCT();
     }
 
     void showDetailPhieuMuonChiTiet() {
@@ -357,12 +358,13 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         txtMaPhieuMuonChiTiet_PMCT.setText(model.getMaChiTietPhieuMuon() + "");
         txtMaSach.setText(model.getMaSach() + "");
         txtSoLuong.setText(model.getSlSachMuonMoiLoai() + "");
+        updateStatusPMCT();
     }
 
     void updateStatusPMCT() {
         boolean edit = this.indexPMCT >= 0;
         boolean first = this.indexPMCT == 0;
-        boolean last = this.indexPMCT == tblPhieuMuon.getRowCount() - 1;
+        boolean last = this.indexPMCT == tblChiTietPhieuMuon.getRowCount() - 1;
 
         btnFirst.setEnabled(edit && !first);
         btnPrev.setEnabled(edit && !first);
@@ -386,7 +388,7 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
     }
 
     private void nextCTPM() {
-        if (indexPMCT < tblPhieuMuon.getRowCount() - 1) {
+        if (indexPMCT < tblChiTietPhieuMuon.getRowCount() - 1) {
             indexPMCT++;
             tblChiTietPhieuMuon.setRowSelectionInterval(indexPMCT, indexPMCT);
             showDetailPhieuMuonChiTiet();
@@ -394,7 +396,7 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
     }
 
     private void lastCTPM() {
-        indexPMCT = tblPhieuMuon.getRowCount() - 1;
+        indexPMCT = tblChiTietPhieuMuon.getRowCount() - 1;
         tblChiTietPhieuMuon.setRowSelectionInterval(indexPMCT, indexPMCT);
         showDetailPhieuMuonChiTiet();
     }
@@ -405,17 +407,19 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         model.setRowCount(0);
         try {
             List<PhieuTra> list = phieuTraDAO.selectByIdUser(Auth.user.getMaNguoiDung());
-            for (PhieuTra phieuTra : list) {
-                // kiểm tra ngày trả nếu phiếu trả vừa được tạo hoặc chưa trả thì sẽ lấy ngày hiện tại là ngày trả để khi update trạng thái không cần update ngày và tránh lỗi null
-                String date;
-                if (phieuTra.getNgayTra() == null) {
-                    date = "";
-                } else {
-                    date = XDate.toString(phieuTra.getNgayTra(), "yyyy/MM/dd");
+            if (list != null) {
+                for (PhieuTra phieuTra : list) {
+                    // kiểm tra ngày trả nếu phiếu trả vừa được tạo hoặc chưa trả thì sẽ lấy ngày hiện tại là ngày trả để khi update trạng thái không cần update ngày và tránh lỗi null
+                    String date;
+                    if (phieuTra.getNgayTra() == null) {
+                        date = "";
+                    } else {
+                        date = XDate.toString(phieuTra.getNgayTra(), "yyyy/MM/dd");
+                    }
+                    Object[] row = {phieuTra.getMaPhieuTra(), phieuTra.getMaPhieuMuon(), date,
+                        phieuTra.isTrangThai() ? "Đã trả" : "Chưa trả", phieuTra.getMaNguoiDung(), phieuTra.getGhiChu()};
+                    model.addRow(row);
                 }
-                Object[] row = {phieuTra.getMaPhieuTra(), phieuTra.getMaPhieuMuon(), date,
-                    phieuTra.isTrangThai() ? "Đã trả" : "Chưa trả", phieuTra.getMaNguoiDung(), phieuTra.getGhiChu()};
-                model.addRow(row);
             }
         } catch (Exception e) {
             e.printStackTrace();

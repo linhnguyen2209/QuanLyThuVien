@@ -430,7 +430,7 @@ public class TraCuuSachJDialog extends javax.swing.JDialog {
         pnlDieuHuong.add(btnNext, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 70, 30));
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        pnlDieuHuong.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, 10, 80));
+        pnlDieuHuong.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, 10, 70));
 
         btnHome.setBackground(new java.awt.Color(0, 204, 204));
         btnHome.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -440,7 +440,7 @@ public class TraCuuSachJDialog extends javax.swing.JDialog {
                 btnHomeActionPerformed(evt);
             }
         });
-        pnlDieuHuong.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 30, 110, 30));
+        pnlDieuHuong.add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 20, 110, 30));
 
         btnThoat.setBackground(new java.awt.Color(255, 51, 51));
         btnThoat.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -450,7 +450,7 @@ public class TraCuuSachJDialog extends javax.swing.JDialog {
                 btnThoatActionPerformed(evt);
             }
         });
-        pnlDieuHuong.add(btnThoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 30, 100, 30));
+        pnlDieuHuong.add(btnThoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 100, 30));
 
         lblTraCuuSach.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblTraCuuSach.setForeground(new java.awt.Color(102, 102, 255));
@@ -501,7 +501,7 @@ public class TraCuuSachJDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlThongTin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlDieuHuong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlDieuHuong, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
