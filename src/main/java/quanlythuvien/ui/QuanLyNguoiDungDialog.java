@@ -597,14 +597,6 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
             MsgBox.alert(this, "Vui lòng chọn loại tìm kiếm!");
         } else {
             fillTableNgDung();
-            if (rdoMaNguoiDung.isSelected()) {
-                NguoiDung nd = ngDAO.selectById(txtSearch.getText());
-                if (nd != null) {
-                    setForm(nd);
-                } else {
-                    clearForm();
-                }
-            }
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 
