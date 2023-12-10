@@ -107,30 +107,23 @@
                               <Component id="jSeparator2" alignment="0" pref="71" max="32767" attributes="0"/>
                               <Component id="jSeparator3" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="btnThem" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                                              <Component id="btnSua" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                                              <Component id="btnXoa" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                                              <Component id="btnMoi" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                                          </Group>
+                                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                          <Component id="btnThem" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                          <Component id="btnSua" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                          <Component id="btnXoa" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                          <Component id="btnMoi" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                                  <Component id="btnXuatDS" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                                                  <Component id="btnInPhieuMuon" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                                  <Component id="btnFirst" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                                                  <Component id="btnPrev" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                                                  <Component id="btnNext" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                                                  <Component id="btnLast" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
+                                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                          <Component id="btnXuatDS" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                                          <Component id="btnInPhieuMuon" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                          <Component id="btnFirst" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                          <Component id="btnPrev" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                          <Component id="btnNext" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                          <Component id="btnLast" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>

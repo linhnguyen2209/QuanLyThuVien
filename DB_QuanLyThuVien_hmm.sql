@@ -255,6 +255,7 @@ BEGIN
     WHERE MaPhieuMuon IN (SELECT MaPhieuMuon FROM deleted);
 END;
 GO
+--DROP proc sp_muonTraTheoLoai
 -- STORE PROC
 Create proc sp_muonTraTheoLoai(@Year int,@MonthStart int, @MonthEnd int, @TrangThai nvarchar(200), @MaDocGia varchar(10))
 as begin
@@ -274,13 +275,13 @@ as begin
 			ELSE 0
 		END AS TienPhat,
 		CASE
-			WHEN DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) > 0 
+			WHEN DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) > 0  AND ptr.TrangThai =1
 			THEN N'Trả Quá hạn'
-			WHEN DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) is null and DateDiff(Day, pm.NgayHenTra, GETDATE()) = 0
+			WHEN (DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) is null OR DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) is not null) and DateDiff(Day, pm.NgayHenTra, GETDATE()) = 0 AND ptr.TrangThai =0
 			THEN N'Đến hạn mà chưa trả sách'
-			WHEN DATEDIFF(day, pm.NgayHenTra, ptr.NgayTra) is null and DateDiff(Day, pm.NgayHenTra, GETDATE()) > 0
+			WHEN (DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) is null OR DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) is not null) and DateDiff(Day, pm.NgayHenTra, GETDATE()) > 0 AND ptr.TrangThai =0
 			THEN N'Quá hạn nhưng Chưa trả sách'
-			WHEN DATEDIFF(day, pm.NgayHenTra, ptr.NgayTra) is null and DateDiff(Day, pm.NgayHenTra, GETDATE()) < 0
+			WHEN (DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) is null OR DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) is not null) and DateDiff(Day, pm.NgayHenTra, GETDATE()) < 0 AND ptr.TrangThai =0
 			THEN N'Chưa đến hạn trả sách'
 			ELSE N'Trả Đúng hạn'
 		END AS TinhTrangTraSach
@@ -292,13 +293,13 @@ as begin
 		Year(pm.NgayMuon) = @Year
 		AND (MONTH(pm.NgayMuon) BETWEEN @MonthStart AND @MonthEnd)
 		AND CASE
-				WHEN DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) > 0 
+				WHEN DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) > 0 AND ptr.TrangThai =1
 				THEN N'Trả Quá hạn'
-				WHEN DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) is null and DateDiff(Day, pm.NgayHenTra, GETDATE()) = 0
+				WHEN (DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) is null OR DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) is not null) and DateDiff(Day, pm.NgayHenTra, GETDATE()) = 0 AND ptr.TrangThai =0
 				THEN N'Đến hạn mà chưa trả sách'
-				WHEN DATEDIFF(day, pm.NgayHenTra, ptr.NgayTra) is null and DateDiff(Day, pm.NgayHenTra, GETDATE()) > 0
+				WHEN (DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) is null OR DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) is not null) and DateDiff(Day, pm.NgayHenTra, GETDATE()) > 0 AND ptr.TrangThai =0
 				THEN N'Quá hạn nhưng Chưa trả sách'
-				WHEN DATEDIFF(day, pm.NgayHenTra, ptr.NgayTra) is null and DateDiff(Day, pm.NgayHenTra, GETDATE()) < 0
+				WHEN (DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) is null OR DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) is not null) and DateDiff(Day, pm.NgayHenTra, GETDATE()) < 0 AND ptr.TrangThai =0
 				THEN N'Chưa đến hạn trả sách'
 				ELSE N'Trả Đúng hạn'
 		    END like @TrangThai
@@ -327,14 +328,14 @@ as begin
 			WHEN DATEDIFF(DAY, NgayHenTra, NgayTra) > 0 THEN DATEDIFF(DAY, NgayHenTra, NgayTra) * 1000
 			ELSE 0
 		END AS TienPhat,
-		
 		CASE
-			WHEN DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) > 0 THEN N'Trả Quá hạn'
-			WHEN DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) is null and DateDiff(Day, pm.NgayHenTra, GETDATE()) = 0
+			WHEN DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) > 0  AND ptr.TrangThai =1
+			THEN N'Trả Quá hạn'
+			WHEN (DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) is null OR DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) is not null) and DateDiff(Day, pm.NgayHenTra, GETDATE()) = 0 AND ptr.TrangThai =0
 			THEN N'Đến hạn mà chưa trả sách'
-			WHEN DATEDIFF(day, pm.NgayHenTra, ptr.NgayTra) is null and DateDiff(Day, pm.NgayHenTra, GETDATE()) > 0
+			WHEN (DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) is null OR DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) is not null) and DateDiff(Day, pm.NgayHenTra, GETDATE()) > 0 AND ptr.TrangThai =0
 			THEN N'Quá hạn nhưng Chưa trả sách'
-			WHEN DATEDIFF(day, pm.NgayHenTra, ptr.NgayTra) is null and DateDiff(Day, pm.NgayHenTra, GETDATE()) < 0
+			WHEN (DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) is null OR DATEDIFF(DAY, pm.NgayHenTra, ptr.NgayTra) is not null) and DateDiff(Day, pm.NgayHenTra, GETDATE()) < 0 AND ptr.TrangThai =0
 			THEN N'Chưa đến hạn trả sách'
 			ELSE N'Trả Đúng hạn'
 		END AS TinhTrangTraSach

@@ -28,7 +28,7 @@ import quanlythuvien.utils.XImage;
  * @author thuon
  */
 public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
-
+    
     PhieuMuonDAO phieuMuonDAO = new PhieuMuonDAO();
     PhieuTraDAO phieuTraDAO = new PhieuTraDAO();
     NguoiDungDAO nguoiDungDAO = new NguoiDungDAO();
@@ -41,13 +41,13 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
     int row = -1;
     int indexPMCT = -1;
     int soSachMuonBanDau = 0;
-
+    
     public QuanLyMuonTraJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         init();
     }
-
+    
     void init() {
 //        this.setLocation(318, 73);
         this.setLocation(325, 74);
@@ -58,7 +58,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         fillJlistSach();
         clearForm();
     }
-
+    
     void fillTablePhieuMuon() {
         DefaultTableModel model = (DefaultTableModel) tblPhieuMuon.getModel();
         model.setRowCount(0);
@@ -77,7 +77,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
                     MsgBox.alert(this, "Mã phiếu mượn phải là số!");
                     return;
                 }
-
+                
                 case 2:
                     listPM = phieuMuonDAO.selectByIDND(txtSearch.getText());
                     break;
@@ -100,7 +100,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             e.printStackTrace();
         }
     }
-
+    
     void setForm(PhieuMuon model) {
         // form pmct
         txtMaPhieuMuon_PMCT.setText(String.valueOf((model.getMaPhieuMuon())));
@@ -115,7 +115,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         txtMaNguoiDung.setText(model.getMaNguoiDung());
         txtGhiChu.setText(model.getGhiChu());
     }
-
+    
     PhieuMuon getForm() {
         PhieuMuon model = new PhieuMuon();
         if (row >= 0) {
@@ -126,10 +126,10 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         model.setTongSoLuongSachMuon(Integer.parseInt(txtTongSoLuongSachMuon.getText()));
         model.setMaNguoiDung(txtMaNguoiDung.getText());
         model.setGhiChu(txtGhiChu.getText());
-
+        
         return model;
     }
-
+    
     void clearForm() {
         tblPhieuMuon.clearSelection();
         txtMaPhieuMuon.setText("");
@@ -143,7 +143,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         clearFormTra();
         clearFormPMCT();
     }
-
+    
     void edit() {
         Integer maPM = (Integer) tblPhieuMuon.getValueAt(row, 0);
         try {
@@ -156,7 +156,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             e.printStackTrace();
         }
     }
-
+    
     void updateStatus() {
         boolean edit = this.row >= 0;
         boolean first = this.row == 0;
@@ -177,14 +177,14 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         btnThem.setEnabled(!edit);
         btnSua.setEnabled(edit);
         btnXoa.setEnabled(edit);
-
+        
         btnFirst.setEnabled(edit && !first);
         btnPrev.setEnabled(edit && !first);
         btnNext.setEnabled(edit && !last);
         btnLast.setEnabled(edit && !last);
-
+        
     }
-
+    
     private void first() {
         row = 0;
         tblPhieuMuon.setRowSelectionInterval(row, row);
@@ -192,7 +192,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         tblPhieuTra.setRowSelectionInterval(row, row);
         showDetailPhieuTra();
     }
-
+    
     private void prev() {
         if (row > 0) {
             row--;
@@ -202,7 +202,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             showDetailPhieuTra();
         }
     }
-
+    
     private void next() {
         if (row < tblPhieuMuon.getRowCount() - 1) {
             row++;
@@ -212,7 +212,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             showDetailPhieuTra();
         }
     }
-
+    
     private void last() {
         row = tblPhieuMuon.getRowCount() - 1;
         tblPhieuMuon.setRowSelectionInterval(row, row);
@@ -220,7 +220,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         tblPhieuTra.setRowSelectionInterval(row, row);
         showDetailPhieuTra();
     }
-
+    
     boolean checkMaNguoiDungTonTai() {
         NguoiDung nd = nguoiDungDAO.selectById(txtMaNguoiDung.getText());
         if (nd == null) {
@@ -229,6 +229,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         }
         return true;
     }
+
     //&& ValidationForm.isSo(this, txtTongSoLuongSachMuon, "Tổng số lượng")
     void insert() {
         if (ValidationForm.isMa(this, txtMaNguoiDung, "Mã độc giả")
@@ -247,14 +248,14 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
                 clearFormPMCT();
                 tabs.setSelectedIndex(1);
                 MsgBox.alert(this, "Vui lòng thêm phiếu mượn chi tiết!");
-
+                
             } catch (Exception e) {
                 e.printStackTrace();
                 MsgBox.alert(this, "Thêm thất bại!");
             }
         }
     }
-
+    
     void update() {
         if (row >= 0) {
             if (ValidationForm.isMa(this, txtMaNguoiDung, "Mã độc giả") && ValidationForm.isSo(this, txtTongSoLuongSachMuon, "Tổng số lượng") && ValidationForm.isDate(txtNgayHenTra, this, "Ngày hẹn trả")) {
@@ -273,7 +274,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             MsgBox.alert(this, "Vui lòng chọn dòng muốn cập nhật");
         }
     }
-
+    
     void delete() {
         if (!Auth.isManager()) {
             MsgBox.alert(this, "Bạn không có quyền xoá!");
@@ -321,7 +322,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         modelSachChon = new DefaultListModel();
         listSachChon.setModel(modelSachChon);
     }
-
+    
     void chonSachMuon() {
         if (listSachTrongKho.isSelectionEmpty()) {
             MsgBox.alert(this, "Vui lòng chọn sách!");
@@ -338,7 +339,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             listSachTrongKho.clearSelection();
         }
     }
-
+    
     void huyChonSachMuon() {
         if (listSachChon.isSelectionEmpty()) {
             MsgBox.alert(this, "Vui lòng chọn sách hủy mượn!");
@@ -349,11 +350,11 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             }
         }
     }
-
+    
     void huyChonTatCaSachMuon() {
         modelSachChon.removeAllElements();
     }
-
+    
     void fillTableChiTietPhieuMuon() {
         tblModelPMCT = (DefaultTableModel) tblChiTietPhieuMuon.getModel();
         tblModelPMCT.setRowCount(0);
@@ -364,7 +365,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             tblModelPMCT.addRow(row);
         }
     }
-
+    
     void showDetailPhieuMuonChiTiet() {
         PhieuMuonChiTiet model = phieuMuonChiTietDAO.selectById(Integer.parseInt(tblChiTietPhieuMuon.getValueAt(indexPMCT, 0) + ""));
         modelSachChon.removeAllElements();
@@ -375,7 +376,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         txtMaPhieuMuonChiTiet_PMCT.setText(model.getMaChiTietPhieuMuon() + "");
         updateStatusPMCT();
     }
-
+    
     PhieuMuonChiTiet checkMaSachDaTonTai(int maSach) { // kiểm tra xem sách này đã đc mượn để set lại số lượng nếu mượn r thì trả về pmct để tăng số lượng else trả về null
         if (listCTPM == null) {
             return null;
@@ -387,7 +388,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         }
         return null;
     }
-
+    
     void clearFormPMCT() {
         txtMaPhieuMuonChiTiet_PMCT.setText("");
         txtTongSachChon.setText("");
@@ -398,7 +399,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         indexPMCT = -1;
         updateStatusPMCT();
     }
-
+    
     void insertPMCT() {
         PhieuMuonChiTiet pmct = new PhieuMuonChiTiet();
         Object[] maSachMuonObject = modelSachChon.toArray();
@@ -436,7 +437,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
                 fillTablePhieuMuon();
                 updateStatusPMCT();
                 MsgBox.alert(this, "Thêm thành công");
-
+                
             } catch (Exception e) {
                 e.printStackTrace();
                 MsgBox.alert(this, "Thêm thất bại!");
@@ -445,7 +446,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             MsgBox.alert(this, "Vui lòng chọn sách muốn mượn!");
         }
     }
-
+    
     void updatePMCT() {
         if (indexPMCT >= 0) {
             PhieuMuonChiTiet pMCT = phieuMuonChiTietDAO.selectById(Integer.parseInt(tblChiTietPhieuMuon.getValueAt(indexPMCT, 0) + ""));
@@ -493,7 +494,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             MsgBox.alert(this, "Vui lòng chọn dòng muốn sửa");
         }
     }
-
+    
     void deletePMCT() {
         if (!Auth.isManager()) {
             MsgBox.alert(this, "Bạn không có quyền xoá!");
@@ -533,30 +534,31 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             }
         }
     }
-
+    
     void updateStatusPMCT() {
         boolean edit = this.indexPMCT >= 0;
         boolean first = this.indexPMCT == 0;
         boolean last = this.indexPMCT == tblChiTietPhieuMuon.getRowCount() - 1;
 
         //Khi insert thì không update, delete
-        btnThem.setEnabled(!edit);
-        btnSua.setEnabled(edit);
-        btnXoa.setEnabled(edit);
-
+        btnThemPMCT.setEnabled(!edit);
+        btnSuaPMCT.setEnabled(edit);
+        btnXoaPMCT.setEnabled(edit);
+        lblMaPhieuMuonChiTiet_PMCT.setVisible(edit);
+        txtMaPhieuMuon_PMCT.setVisible(edit);
         btnFirstPMCT.setEnabled(edit && !first);
         btnPrevPMCT.setEnabled(edit && !first);
         btnNextPMCT.setEnabled(edit && !last);
         btnLastPMCT.setEnabled(edit && !last);
-
+        
     }
-
+    
     private void firstCTPM() {
         indexPMCT = 0;
         tblChiTietPhieuMuon.setRowSelectionInterval(indexPMCT, indexPMCT);
         showDetailPhieuMuonChiTiet();
     }
-
+    
     private void prevCTPM() {
         if (indexPMCT > 0) {
             indexPMCT--;
@@ -564,7 +566,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             showDetailPhieuMuonChiTiet();
         }
     }
-
+    
     private void nextCTPM() {
         if (indexPMCT < tblChiTietPhieuMuon.getRowCount() - 1) {
             indexPMCT++;
@@ -572,7 +574,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             showDetailPhieuMuonChiTiet();
         }
     }
-
+    
     private void lastCTPM() {
         indexPMCT = tblChiTietPhieuMuon.getRowCount() - 1;
         tblChiTietPhieuMuon.setRowSelectionInterval(indexPMCT, indexPMCT);
@@ -601,7 +603,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             e.printStackTrace();
         }
     }
-
+    
     void showDetailPhieuTra() {
         PhieuTra model = phieuTraDAO.selectById(Integer.parseInt(tblPhieuTra.getValueAt(row, 0) + ""));
         txtMaPhieuTra_Tra.setText(model.getMaPhieuTra() + "");
@@ -618,7 +620,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         txaGhiChu_Tra.setText(model.getGhiChu());
         chkDaTra_Tra.setSelected(model.isTrangThai());
     }
-
+    
     PhieuTra getForm_PhieuTra() {
         PhieuTra ptr = new PhieuTra();
         ptr.setMaPhieuTra(Integer.parseInt(txtMaPhieuTra_Tra.getText()));
@@ -629,7 +631,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         ptr.setTrangThai(chkDaTra_Tra.isSelected());
         return ptr;
     }
-
+    
     void clearFormTra() {
         fillTablePhieuTra();
         txtMaPhieuMuon_Tra.setText("");
@@ -640,7 +642,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
         tblPhieuTra.clearSelection();
         row = -1;
     }
-
+    
     void updatePhieuTra() {
         if (row > 0) {
             PhieuTra ptr = getForm_PhieuTra();
@@ -656,7 +658,7 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             MsgBox.alert(this, "Vui lòng chọn phiếu trả muốn cập nhật!");
         }
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -1916,9 +1918,9 @@ public class QuanLyMuonTraJDialog extends javax.swing.JDialog {
             ExportFile.exportToWord(this, listTitle, listData, "PHIẾU MƯỢN", tblChiTietPhieuMuon);
         }
     }//GEN-LAST:event_btnInPhieuMuonActionPerformed
-
+    
     public static void main(String args[]) {
-
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 QuanLyMuonTraJDialog dialog = new QuanLyMuonTraJDialog(new javax.swing.JFrame(), true);

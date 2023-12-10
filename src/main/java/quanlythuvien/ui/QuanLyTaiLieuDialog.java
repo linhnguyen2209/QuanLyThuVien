@@ -21,15 +21,14 @@ import quanlythuvien.utils.XImage;
 
 /**
  *
- * @author Dino 
- * Design Linh 
- * Code Dino
+ * @author Dino Design Linh Code Dino
  */
 public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
 
     SachDAO SDao = new SachDAO();
     LoaiSachDao LSDao = new LoaiSachDao();
     int row = -1;
+    int rowLS = -1;
 
     public QuanLyTaiLieuDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -45,6 +44,8 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         FillTable_QLTlieu();
         fillComboBoxLoaiSach();
         fillTableLoaiSach();
+        updateStatusLS();
+        updateStatusS();
     }
 
     List<Sach> list = new ArrayList<>();
@@ -145,6 +146,9 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         txtViTri.setText("");
         cboLoaiSach.setSelectedIndex(0);
         tblQLTL.clearSelection();
+        tblQLTL.clearSelection();
+        row = -1;
+        updateStatusS();
     }
 
     Sach getForm() {
@@ -199,7 +203,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
             Sach sh = SDao.selectById(MaSach);
             if (sh != null) {
                 setForm(sh);
-                updateStatusS(); 
+                updateStatusS();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -210,7 +214,9 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         boolean edit = this.row >= 0;
         boolean first = this.row == 0;
         boolean last = this.row == tblQLTL.getRowCount() - 1;
-
+        btnAdd1.setEnabled(!edit);
+        btnUpdate1.setEnabled(edit);
+        btnDelete1.setEnabled(edit);
         btnFirst.setEnabled(edit && !first);
         btnPrev.setEnabled(edit && !first);
         btnNext.setEnabled(edit && !last);
@@ -305,8 +311,10 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
             }
         }
     }
-    
-     /************************************************************************************************************************** */
+
+    /**
+     * ************************************************************************************************************************
+     */
     // QlLoaiSach
     void setFormLS(LoaiSach model) {
         txtQL_MaLoaiSach.setText(model.getMaLoaiSach());
@@ -316,10 +324,13 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     void clearFormLoaiSach() {
         txtQL_MaLoaiSach.setText("");
         txtTenLoaiSachQLi.setText("");
+        tbl_loaisach.clearSelection();
+        rowLS = -1;
+        updateStatusLS();
     }
 
     void editLoaiSach() {
-        String Ls = (String) tbl_loaisach.getValueAt(row, 0);
+        String Ls = (String) tbl_loaisach.getValueAt(rowLS, 0);
         try {
             LoaiSach loaiS = LSDao.selectById(Ls);
             if (loaiS != null) {
@@ -347,7 +358,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         }
         return true;
     }
-    
+
     void insertLS() {
         LoaiSach lss = getFormLS();
         try {
@@ -396,61 +407,71 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     }
 
     void updateStatusLS() {
-        boolean edit = this.row >= 0;
-        boolean first = this.row == 0;
-        boolean last = this.row == tblQLTL.getRowCount() - 1;
-
+        boolean edit = this.rowLS >= 0;
+        boolean first = this.rowLS == 0;
+        boolean last = this.rowLS == tblQLTL.getRowCount() - 1;
+        btn_ThemLoaiSach.setEnabled(!edit);
+        btn_SuaLoaiSach.setEnabled(edit);
+        btn_XoaLoaiSach.setEnabled(edit);
         btnFirstLS.setEnabled(edit && !first);
         btnPrevLS.setEnabled(edit && !first);
         btnNextLS.setEnabled(edit && !last);
         btn_lastLS.setEnabled(edit && !last);
     }
 
-    void first() {
+    private void first() {
         row = 0;
+        tblQLTL.setRowSelectionInterval(row, row);
         edit();
     }
 
-    void prev() {
+    private void prev() {
         if (row > 0) {
             row--;
+            tblQLTL.setRowSelectionInterval(row, row);
             edit();
         }
     }
 
-    void next() {
+    private void next() {
         if (row < tblQLTL.getRowCount() - 1) {
             row++;
+            tblQLTL.setRowSelectionInterval(row, row);
             edit();
         }
     }
 
-    void last() {
+    private void last() {
         row = tblQLTL.getRowCount() - 1;
+        tblQLTL.setRowSelectionInterval(row, row);
         edit();
     }
 
     void firstLS() {
-        row = 0;
+        rowLS = 0;
+        tbl_loaisach.setRowSelectionInterval(rowLS, rowLS);
         editLoaiSach();
     }
 
     void prevLS() {
-        if (row > 0) {
-            row--;
+        if (rowLS > 0) {
+            rowLS--;
+            tbl_loaisach.setRowSelectionInterval(rowLS, rowLS);
             editLoaiSach();
         }
     }
 
-    void nextLLS() {
-        if (row < tbl_loaisach.getRowCount() - 1) {
-            row++;
+    void nextLS() {
+        if (rowLS < tbl_loaisach.getRowCount() - 1) {
+            rowLS++;
+            tbl_loaisach.setRowSelectionInterval(rowLS, rowLS);
             editLoaiSach();
         }
     }
 
     void lastLS() {
-        row = tbl_loaisach.getRowCount() - 1;
+        rowLS = tbl_loaisach.getRowCount() - 1;
+        tbl_loaisach.setRowSelectionInterval(rowLS, rowLS);
         editLoaiSach();
     }
 
@@ -1251,8 +1272,8 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_MoiLSActionPerformed
 
     private void tbl_loaisachMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_loaisachMousePressed
-        if (evt.getClickCount() == 2) {
-            this.row = tbl_loaisach.rowAtPoint(evt.getPoint());
+        if (evt.getClickCount() == 1) {
+            this.rowLS = tbl_loaisach.rowAtPoint(evt.getPoint());
             editLoaiSach();
         }
     }//GEN-LAST:event_tbl_loaisachMousePressed
@@ -1270,7 +1291,7 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnPrevLSActionPerformed
 
     private void btnNextLSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextLSActionPerformed
-        nextLLS();
+        nextLS();
     }//GEN-LAST:event_btnNextLSActionPerformed
 
     private void btnThoatLSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatLSActionPerformed

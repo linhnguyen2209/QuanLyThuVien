@@ -174,8 +174,8 @@
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
                                       <Component id="lblLocTatCa" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                                      <Component id="rdoTatCaCacNam" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="rdoTatCaCacNam" min="-2" pref="136" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
@@ -302,7 +302,7 @@
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="btnGAllYears"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="T&#x1ea5;t c&#x1ea3; theo t&#x1eeb;ng n&#x103;m"/>
+                <Property name="text" type="java.lang.String" value="T&#x1ea5;t c&#x1ea3; c&#xe1;c n&#x103;m"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoTatCaCacNamActionPerformed"/>
@@ -337,7 +337,7 @@
                           <Component id="rdoChuaDenHan" min="-2" pref="98" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="rdoDenHanVaChuaTra" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="41" max="32767" attributes="0"/>
                           <Component id="rdoQuaHanVaChuaTra" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       </Group>
@@ -465,7 +465,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblTongTienPhatCacNam">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="T&#x1ed5;ng ti&#x1ec1;n ph&#x1ea1;t t&#x1eeb;ng n&#x103;m:"/>
+                    <Property name="text" type="java.lang.String" value="T&#x1ed5;ng ti&#x1ec1;n ph&#x1ea1;t t&#x1ea5;t c&#x1ea3; c&#xe1;c n&#x103;m:"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtTongTienPhatTheoNam">

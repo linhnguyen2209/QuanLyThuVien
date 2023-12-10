@@ -248,7 +248,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
         cboThangKetThuc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnGAllYears.add(rdoTatCaCacNam);
-        rdoTatCaCacNam.setText("Tất cả theo từng năm");
+        rdoTatCaCacNam.setText("Tất cả các năm");
         rdoTatCaCacNam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rdoTatCaCacNamActionPerformed(evt);
@@ -292,7 +292,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
                 .addComponent(rdoChuaDenHan, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(rdoDenHanVaChuaTra)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(rdoQuaHanVaChuaTra)
                 .addGap(21, 21, 21))
         );
@@ -322,7 +322,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
 
         lblTongTienPhatTheoNam.setText("Tổng tiền phạt trong năm:");
 
-        lblTongTienPhatCacNam.setText("Tổng tiền phạt từng năm:");
+        lblTongTienPhatCacNam.setText("Tổng tiền phạt tất cả các năm:");
 
         javax.swing.GroupLayout pnlTongTienPhatLayout = new javax.swing.GroupLayout(pnlTongTienPhat);
         pnlTongTienPhat.setLayout(pnlTongTienPhatLayout);
@@ -404,8 +404,8 @@ public class ThongKeJDialog extends javax.swing.JDialog {
                             .addGroup(pnlThongTinLayout.createSequentialGroup()
                                 .addGap(140, 140, 140)
                                 .addComponent(lblLocTatCa)
-                                .addGap(52, 52, 52)
-                                .addComponent(rdoTatCaCacNam))
+                                .addGap(18, 18, 18)
+                                .addComponent(rdoTatCaCacNam, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlThongTinLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnXuatFile))))
