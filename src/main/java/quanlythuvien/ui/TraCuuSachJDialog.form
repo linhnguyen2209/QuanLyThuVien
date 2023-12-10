@@ -65,25 +65,25 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="lblLogo" min="-2" pref="191" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
-                              <Component id="lblTraCuuSach" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
+                              <Component id="lblTraCuuSach" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                               <Component id="cboLuaChon" min="-2" pref="176" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="pnlSearch" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnSearch" min="-2" pref="83" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="pnlDieuHuong" alignment="0" pref="1088" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="pnlDieuHuong" alignment="0" max="32767" attributes="0"/>
                                   <Component id="pnlThongTin" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="pnlDanhSach" max="32767" attributes="0"/>
+                                  <Component id="pnlDanhSach" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -94,10 +94,10 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="lblLogo" min="-2" pref="44" max="-2" attributes="0"/>
                           <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="lblTraCuuSach" alignment="1" min="-2" pref="36" max="-2" attributes="0"/>
                               <Component id="pnlSearch" max="32767" attributes="0"/>
                               <Component id="btnSearch" alignment="0" pref="39" max="32767" attributes="0"/>
-                              <Component id="cboLuaChon" alignment="1" max="32767" attributes="0"/>
+                              <Component id="lblTraCuuSach" alignment="0" min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="cboLuaChon" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -245,8 +245,8 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane4" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jScrollPane4" min="-2" pref="1058" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -400,7 +400,7 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtTieuDe" pref="250" max="32767" attributes="0"/>
+                              <Component id="txtTieuDe" max="32767" attributes="0"/>
                               <Component id="txtSoTrang" max="32767" attributes="0"/>
                               <Component id="txtSoLuongSach" max="32767" attributes="0"/>
                           </Group>
@@ -627,7 +627,7 @@
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="710" y="20" width="110" height="30"/>
+                      <AbsoluteConstraints x="710" y="30" width="110" height="30"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -646,7 +646,7 @@
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="880" y="20" width="100" height="30"/>
+                      <AbsoluteConstraints x="880" y="30" width="100" height="30"/>
                     </Constraint>
                   </Constraints>
                 </Component>
