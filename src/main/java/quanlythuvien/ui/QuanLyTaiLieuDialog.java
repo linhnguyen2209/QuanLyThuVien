@@ -646,23 +646,24 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
             .addGroup(pnlLoaiTimKiemLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(rdoTenSach)
-                .addGap(18, 18, 18)
+                .addGap(38, 38, 38)
                 .addComponent(rdoNXB)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addComponent(rdoTacGia)
-                .addGap(18, 18, 18)
+                .addGap(38, 38, 38)
                 .addComponent(rdoMaLoaiSach)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
         pnlLoaiTimKiemLayout.setVerticalGroup(
             pnlLoaiTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlLoaiTimKiemLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(pnlLoaiTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rdoTenSach)
-                    .addComponent(rdoNXB)
+                    .addComponent(rdoMaLoaiSach)
                     .addComponent(rdoTacGia)
-                    .addComponent(rdoMaLoaiSach))
-                .addGap(0, 22, Short.MAX_VALUE))
+                    .addComponent(rdoNXB)
+                    .addComponent(rdoTenSach))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pnlContain.add(pnlLoaiTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 0, 440, 70));
@@ -1132,12 +1133,12 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(pnlChucNang4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pnlLoaiSach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         tabs.addTab("Quản lí loại sách", pnlQLLoaiSach);
 
-        pnlQLTL.add(tabs, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, 66, 1100, 622));
+        pnlQLTL.add(tabs, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 1100, 620));
 
         lblQLTL.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblQLTL.setForeground(new java.awt.Color(255, 255, 0));
@@ -1152,14 +1153,11 @@ public class QuanLyTaiLieuDialog extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(pnlQLTL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(pnlQLTL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlQLTL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlQLTL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
