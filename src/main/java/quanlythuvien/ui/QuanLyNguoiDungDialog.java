@@ -1,5 +1,11 @@
 package quanlythuvien.ui;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -205,6 +211,14 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         if (!ValidationForm.isSDT(this, txtSoDienThoai, "Số điện thoại")) {
             return false;
         }
+        if (new String(txtMatKhau.getPassword()).equals("")) {
+            MsgBox.alert(this, "Vui lòng nhập mật khẩu!");
+            return false;
+        }
+        if (new String(txtXacNhanMK.getPassword()).equals("")) {
+            MsgBox.alert(this, "Vui lòng nhập mật khẩu xác nhận!");
+            return false;
+        }
         String matKhau_XN = new String(txtXacNhanMK.getPassword());
         if (!matKhau_XN.equals(new String(txtMatKhau.getPassword()))) {
             MsgBox.alert(this, "Xác nhận mật khẩu không chính xác!");
@@ -261,11 +275,39 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
                     this.fillTableNgDung();
                     this.clearForm();
                     MsgBox.alert(this, "Xoá thành công!");
+                    updateLoginInfo(maND); // xóa mã người dùng này nếu có trong file lưu tài khoản
                 }
             } catch (Exception e) {
                 e.printStackTrace();
                 MsgBox.alert(this, "Xoá thất bại!");
             }
+        }
+    }
+
+    public void updateLoginInfo(String maNDDeleted) {
+        List<String> listUserName = new ArrayList<>();
+        String filePath = "src\\main\\resources\\Saved_User_Infor\\logininfo.txt";
+        File file = new File(filePath);
+        //đọc file gán vô list
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            // Đọc từng dòng trong file và add vào list all nd trừ người dùng vừa bị xóa
+            while ((line = reader.readLine()) != null) {
+                if (!maNDDeleted.equals(line)) {
+                    listUserName.add(line);
+                }
+            }
+            // lưu file mới
+            try (PrintWriter writer = new PrintWriter(new FileWriter(file))) {
+                if (listUserName != null) {
+                    for (String username : listUserName) {
+                        writer.println(username);
+                    }
+                }
+            }
+            System.out.println(listUserName.size());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

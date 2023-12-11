@@ -140,7 +140,7 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         }
 
     }
-
+// form thông tin cá nhân.
     void showDetailTTTaiKhoan() {
         NguoiDung nd = Auth.user;
         txtMaND.setText(nd.getMaNguoiDung());
@@ -213,6 +213,7 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         return true;
     }
 
+    //Lịch sửa mượn trả
     void lichSuMuonTra() {
         fillComboBoxNam();
         fillComboBoxThang();
@@ -340,7 +341,7 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         tblPhieuTra.setRowSelectionInterval(row, row);
         showDetailPhieuTra();
     }
-
+// chi tiết phiếu mượn
     void fillTableChiTietPhieuMuon() {
         tblModelPMCT = (DefaultTableModel) tblChiTietPhieuMuon.getModel();
         tblModelPMCT.setRowCount(0);
@@ -400,7 +401,7 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
         tblChiTietPhieuMuon.setRowSelectionInterval(indexPMCT, indexPMCT);
         showDetailPhieuMuonChiTiet();
     }
-
+    
     // form p trả
     void fillTablePhieuTra() {
         DefaultTableModel model = (DefaultTableModel) tblPhieuTra.getModel();
@@ -900,10 +901,10 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 204));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         lblAnh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/a6.jpg"))); // NOI18N
+        lblAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlythuvien/icon/businessman1.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -918,7 +919,7 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 217, Short.MAX_VALUE)
+                .addComponent(lblAnh, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -951,11 +952,9 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
                             .addComponent(txtTen)
                             .addComponent(txtEmail)
                             .addComponent(txtSDT)
-                            .addComponent(btnUpdate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(pnlThongTinCaNhanLayout.createSequentialGroup()
-                                .addComponent(txtMaND, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(txtMatKhau)))
+                            .addComponent(btnUpdate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
+                            .addComponent(txtMatKhau)
+                            .addComponent(txtMaND)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlThongTinCaNhanLayout.createSequentialGroup()
                         .addGap(642, 642, 642)
                         .addComponent(lblDoiMatKhau)))

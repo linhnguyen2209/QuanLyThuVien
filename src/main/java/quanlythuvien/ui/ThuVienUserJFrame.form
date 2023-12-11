@@ -618,12 +618,9 @@
                                       <Component id="txtTen" alignment="0" max="32767" attributes="0"/>
                                       <Component id="txtEmail" alignment="0" max="32767" attributes="0"/>
                                       <Component id="txtSDT" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="btnUpdate" alignment="1" max="32767" attributes="0"/>
-                                      <Group type="102" attributes="0">
-                                          <Component id="txtMaND" min="-2" pref="571" max="-2" attributes="0"/>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      </Group>
+                                      <Component id="btnUpdate" alignment="1" pref="605" max="32767" attributes="0"/>
                                       <Component id="txtMatKhau" max="32767" attributes="0"/>
+                                      <Component id="txtMaND" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
@@ -785,7 +782,7 @@
                 <Container class="javax.swing.JPanel" name="jPanel1">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="cc" green="0" red="0" type="rgb"/>
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                   </Properties>
 
@@ -814,7 +811,7 @@
                       <Properties>
                         <Property name="horizontalAlignment" type="int" value="0"/>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/quanlythuvien/icon/a6.jpg"/>
+                          <Image iconType="3" name="/quanlythuvien/icon/businessman1.png"/>
                         </Property>
                       </Properties>
                     </Component>
