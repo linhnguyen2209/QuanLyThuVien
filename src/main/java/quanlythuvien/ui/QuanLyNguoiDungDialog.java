@@ -199,6 +199,7 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
     }
 
     boolean validateForm() {
+        List<NguoiDung> listND = ngDAO.selectAll();
         if (!ValidationForm.isMa(this, txtMaNgDung, "Mã người dùng")) {
             return false;
         }
@@ -208,8 +209,21 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         if (!ValidationForm.isEmail(this, txtEmail, "Email")) {
             return false;
         }
+        for(NguoiDung ngd: listND){
+            if(txtEmail.getText().equals(ngd.getEmail())){
+                MsgBox.alert(this, "Email này đã tồn tại!");
+                return false;
+            }
+        }
         if (!ValidationForm.isSDT(this, txtSoDienThoai, "Số điện thoại")) {
             return false;
+        }
+        
+        for(NguoiDung ngd: listND){
+            if(txtSoDienThoai.getText().equals(ngd.getSdt())){
+                MsgBox.alert(this, "Số điện thoại đã tồn tại!");
+                return false;
+            }
         }
         if (new String(txtMatKhau.getPassword()).equals("")) {
             MsgBox.alert(this, "Vui lòng nhập mật khẩu!");
