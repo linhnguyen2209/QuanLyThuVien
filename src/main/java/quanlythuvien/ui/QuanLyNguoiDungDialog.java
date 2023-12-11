@@ -29,6 +29,8 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
     LoaiNguoiDungDAO lNDDao = new LoaiNguoiDungDAO();
     List<NguoiDung> list = new ArrayList<>();
     int row = -1;
+    String emailBanDau = "";
+    String sdtBanDau = "";
 
     public QuanLyNguoiDungDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -169,6 +171,8 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
             NguoiDung ngd = ngDAO.selectById(maND);
             if (ngd != null) {
                 setForm(ngd);
+                emailBanDau = ngd.getEmail(); //lưu email ban đầu để ktra update
+                sdtBanDau = ngd.getSdt();// lưu sdt ban đầu để ktra update
                 updateStatus();
             }
         } catch (Exception e) {
@@ -181,6 +185,8 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         txtMaNgDung.setText("");
         txtHoTen.setText("");
         txtEmail.setText("");
+        emailBanDau = "";
+        sdtBanDau = "";
         txtSoDienThoai.setText("");
         txtMatKhau.setText("");
         txtXacNhanMK.setText("");
@@ -209,20 +215,25 @@ public class QuanLyNguoiDungDialog extends javax.swing.JDialog {
         if (!ValidationForm.isEmail(this, txtEmail, "Email")) {
             return false;
         }
-        for(NguoiDung ngd: listND){
-            if(txtEmail.getText().equals(ngd.getEmail())){
-                MsgBox.alert(this, "Email này đã tồn tại!");
-                return false;
+        if (!emailBanDau.equals(txtEmail.getText())) {
+            for (NguoiDung ngd : listND) {
+                if (txtEmail.getText().equals(ngd.getEmail())) {
+                    MsgBox.alert(this, "Email này đã tồn tại!");
+                    return false;
+                }
             }
+
         }
         if (!ValidationForm.isSDT(this, txtSoDienThoai, "Số điện thoại")) {
             return false;
         }
-        
-        for(NguoiDung ngd: listND){
-            if(txtSoDienThoai.getText().equals(ngd.getSdt())){
-                MsgBox.alert(this, "Số điện thoại đã tồn tại!");
-                return false;
+
+        if (!sdtBanDau.equals(txtSoDienThoai.getText())) {
+            for (NguoiDung ngd : listND) {
+                if (txtSoDienThoai.getText().equals(ngd.getSdt())) {
+                    MsgBox.alert(this, "Số điện thoại đã tồn tại!");
+                    return false;
+                }
             }
         }
         if (new String(txtMatKhau.getPassword()).equals("")) {
