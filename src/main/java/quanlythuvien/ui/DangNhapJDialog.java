@@ -88,7 +88,7 @@ public class DangNhapJDialog extends javax.swing.JDialog {
                 // Nếu chưa tồn tại, tạo mới file
                 file.createNewFile();
             } else {
-                readLoginInfo();
+                readLoginInfo(); // pt đọc tất cả username và gán cho listUsername
             }
             if (!listUserName.contains(username)) { // kiểm tra xem username đã có trong file chưa nếu ch có thì thêm
                 // Cập nhật dữ liệu vào file
@@ -103,7 +103,7 @@ public class DangNhapJDialog extends javax.swing.JDialog {
 
     public void readLoginInfo() {
         String filePath = "src\\main\\resources\\Saved_User_Infor\\logininfo.txt";
-        File file = new File(filePath);
+        File file = new File(filePath); 
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;

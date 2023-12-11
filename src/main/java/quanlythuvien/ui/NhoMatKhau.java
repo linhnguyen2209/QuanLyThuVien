@@ -53,7 +53,7 @@ public class NhoMatKhau extends javax.swing.JDialog {
             final int index = i; // phải final mới truyền được vào sự kiện
             NguoiDung nd = dao.selectById(listUserName.get(i));
             JButton btnUser = new JButton(nd.getMaNguoiDung());
-            switch (nd.getMaLoaiNguoiDung()) {
+            switch (nd.getMaLoaiNguoiDung()) { // setIcon theo phân quyền
                 case "LND001":
                     btnUser.setIcon(new ImageIcon("src\\main\\java\\quanlythuvien\\icon\\admin32px.png"));
                     break;

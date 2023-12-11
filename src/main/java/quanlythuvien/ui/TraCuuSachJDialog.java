@@ -36,7 +36,7 @@ public class TraCuuSachJDialog extends javax.swing.JDialog {
     void fillTableSach() {
         tblModel = (DefaultTableModel) tblSach.getModel();
         tblModel.setRowCount(0);
-        switch (cboLuaChon.getSelectedIndex()) {
+        switch (cboLuaChon.getSelectedIndex()) { // để phục vụ cho cbo lựa chọn luôn
             case 0:
                 listSach = dao.selectAll();
                 break;

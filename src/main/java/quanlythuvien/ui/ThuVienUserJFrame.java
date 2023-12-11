@@ -77,10 +77,10 @@ public class ThuVienUserJFrame extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 if (currentIndex == 0) {
-                    checkSlideCuoi = false;
+                    checkSlideCuoi = false; 
                 }
                 if (currentIndex == listPanelTrangChu.size() - 1) {
-                    checkSlideCuoi = true;
+                    checkSlideCuoi = true;// mục đích là dùng biến này để kiểm tra có đg ở cuối trang không để cho slide chạy ngược lại 
                 }
                 updatePanelShow();
                 CheckBtnSlider();

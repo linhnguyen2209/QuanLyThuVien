@@ -42,12 +42,12 @@ public class XacThucJDialog extends javax.swing.JDialog {
         btnTiepTheo2.setContentAreaFilled(false);
         txtTenDangNhap.setBackground(new Color(236, 238, 238, 0));
         txtMaXacThuc.setBackground(new Color(236, 238, 238, 0));
-        if (DangKyJDialog.checkSignUp == true) { // kiểm tra có đang xác thực đăng ký hay khồn
+        if (DangKyJDialog.checkSignUp == true) { // kiểm tra có đang xác thực đăng ký hay không
             pnlXacThuc1.setVisible(false);
             pnlXacThuc2.setVisible(true);
             email = Auth.nguoiDungDangKy.getEmail();
             randomSo();// tạo và gửi mã xác thực
-        } else {
+        } else { // xác thực quên mk
             pnlXacThuc2.setVisible(false);
         }
 
@@ -60,7 +60,6 @@ public class XacThucJDialog extends javax.swing.JDialog {
     void xacThuc1() {
         tenDangNhap = txtTenDangNhap.getText();
         nd = ndDAO.selectById(tenDangNhap);
-        String reTenDangNhap = "^[a-zA-Z0-9_-]{2,10}$";
         if (ValidationForm.isMa(this, txtTenDangNhap, "Tên đăng nhập")) {
             if (nd == null) {
                 MsgBox.alert(this, "Sai tên người dùng!");
@@ -148,13 +147,13 @@ public class XacThucJDialog extends javax.swing.JDialog {
 
         // Tạo phiên làm việc
         s = Session.getInstance(p, new javax.mail.Authenticator() {
-            protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+            protected javax.mail.PasswordAuthentication getPasswordAuthentication() { // xác thực với máy chủ
                 return new javax.mail.PasswordAuthentication("linhli2k4@gmail.com", "kylvjqxjqgrogfcr");
             }
         });
 
         try {
-            // Tạo đối tượng MimeMessage
+            // Tạo đối tượng MimeMessage lưu thông điệp
             MimeMessage mimeMessage = new MimeMessage(s);
 
             // Đặt thông tin người gửi, người nhận, tiêu đề và nội dung email
